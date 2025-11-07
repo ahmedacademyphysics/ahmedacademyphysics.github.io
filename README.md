@@ -1,192 +1,285 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed Academy - GCSE Physics</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Customizing Tailwind to match the new color scheme
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        theme: {
+                            purple: '#4c1d95',
+                            'purple-light': '#6d28d9', 
+                            pink: '#ec4899',
+                            'pink-light': '#f9a8d4',
+                            red: '#ef4444',
+                            'red-light': '#f87171',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        /* Custom styles for the fire theme */
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Deep dark background, like soot */
-            background-color: #111827; 
-            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+        /* === ANIMATED BACKGROUND & SCROLLBAR === */
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animated-gradient {
+            /* Deeper purple/blue gradient */
+            background: linear-gradient(-45deg, #1a0b2e, #2d1b4e, #4a1d6f, #6b2d8f); 
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2; /* Set below the modal and content */
         }
 
-        /* Fiery gradient text */
-        .fire-text {
-            background: linear-gradient(to right, #f97316, #ef4444, #eab308);
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(139, 92, 246, 0.1); /* purple-500/10 */
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(236, 72, 153, 0.3); /* pink-500/30 */
+            transition: all 0.3s ease;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 27, 58, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ec4899, #a855f7);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #f472b6, #c084fc);
+        }
+
+        /* === ANIMATIONS === */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Floating animation for hero section */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); } /* slightly smaller float */
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Glow effect */
+        .glow {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3); /* Pink glow */
+        }
+        
+        .glow-hover:hover {
+            box-shadow: 0 0 40px rgba(236, 72, 153, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* Shake animation for wrong answer */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        /* === PAGE LAYOUT === */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #d8b4fe; /* Purple-200 / Light text color */
+        }
+
+        /* Gradient Text (replaces 'fire-text') */
+        .theme-gradient-text {
+            background: linear-gradient(to right, #ec4899, #6d28d9, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
         }
 
-        /* Fiery button and card hover effect */
-        .fire-card {
-            background-color: #1f2937; /* Dark card background */
-            border: 1px solid #374151;
-            transition: all 0.3s ease;
-        }
-
-        .fire-card:hover {
-            border-color: #f97316;
-            /* A subtle "glow" effect */
-            box-shadow: 0 0 20px 0 rgba(249, 115, 22, 0.5);
-            transform: translateY(-4px);
-        }
-
-        .fire-button {
-            background-color: #f97316; /* Bright orange */
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .fire-button:hover {
-            background-color: #ea580c; /* Darker orange */
-            box-shadow: 0 0 15px 0 rgba(249, 115, 22, 0.7);
-        }
-
-        /* === Algebra Gate Styles === */
+        /* Modal specific styles */
         #gate-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(17, 24, 39, 0.95); /* Dark background with slight transparency */
-            z-index: 100; /* Ensure it's above everything */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #site-content {
-            opacity: 0; /* Initially hidden */
-            transition: opacity 0.5s ease;
+            z-index: 100; 
+            background-color: rgba(17, 24, 39, 0.7); /* Lighter backdrop to blend with gradient */
         }
 
         .content-visible {
             opacity: 1 !important;
         }
+
+        /* Ensure Physics SVG is white */
+        .physics-svg {
+            color: white; 
+        }
+
+        /* Input field style matching the glass theme */
+        .glass-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            border-color: #ec4899; /* pink-500 */
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+
     </style>
 </head>
-<body class="text-gray-200">
+<body class="antialiased">
+    <div class="animated-gradient"></div>
 
     <div id="gate-modal">
-        <div class="bg-gray-900 p-8 md:p-12 rounded-xl border-2 border-orange-500 max-w-lg w-11/12 text-center shadow-2xl">
-            <h2 class="text-3xl md:text-4xl font-black mb-4 fire-text">Access Challenge Required</h2>
-            <p class="text-gray-400 mb-6">Solve this basic math equation to prove you're ready to study Physics!</p>
+        <div class="glass-strong p-8 md:p-12 rounded-2xl max-w-lg w-11/12 text-center shadow-2xl glow fade-in">
+            <h2 class="text-3xl md:text-4xl font-black mb-4 theme-gradient-text">Access Challenge: Physics Entry</h2>
+            <p class="text-purple-200 mb-6">Solve this algebraic equation to unlock the GCSE Physics content.</p>
             
-            <div class="bg-gray-800 p-6 rounded-lg mb-6">
-                <p id="math-question" class="text-4xl font-bold text-white mb-4">
+            <div class="glass rounded-lg p-6 mb-6 min-h-[80px] flex justify-center items-center">
+                <p id="math-question" class="text-4xl font-bold text-white mb-0">
                     Loading Question...
                 </p>
             </div>
 
-            <input type="number" id="answer-input" placeholder="Enter your answer (integer)" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white mb-4 focus:ring-orange-500 focus:border-orange-500 text-center text-xl" required>
+            <input type="number" id="answer-input" placeholder="Enter your answer (integer)" class="glass-input w-full p-3 rounded-lg text-center text-xl mb-4" required>
             
-            <button id="submit-answer-btn" class="fire-button w-full py-3 rounded-lg text-lg font-semibold">
+            <button id="submit-answer-btn" class="bg-gradient-to-r from-theme-pink to-theme-purple-light w-full py-3 rounded-xl text-lg font-semibold text-white transition-all duration-300 hover:scale-[1.01] glow">
                 Unlock Revision
             </button>
 
-            <p id="error-message" class="text-red-400 mt-3 hidden">Incorrect answer. Try again!</p>
+            <p id="error-message" class="text-theme-red-light mt-3 hidden">Incorrect answer. Try again!</p>
         </div>
     </div>
     <div id="site-content">
         
-        <nav class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40 border-b border-gray-700/50">
+        <nav class="glass sticky top-0 z-40 border-b border-purple-500/20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <div class="flex items-center">
-                        <span class="text-2xl font-black fire-text">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block -mt-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill="orange" d="M17.07,7.21C16.68,7.58,16.32,8,16.32,8.61c0,0.42,0.31,1,0.76,1.45c0.45,0.45,1.04,0.76,1.45,0.76 c0.61,0,1.03-0.37,1.4-0.76c0.75-0.75,0.5-2.07-0.42-2.99C19.24,6.23,17.91,6.46,17.07,7.21z M13.68,2.05 C13.68,2.05,13.63,2.56,13.91,3.13C14.19,3.7,14.65,4,15.08,4c0.42,0,1-0.46,1.45-0.91c0.45-0.45,0.76-1.04,0.76-1.45 c0-0.61-0.37-1.03-0.76-1.4C16.14,0.06,14.82,0.3,13.97,1.14C13.84,1.28,13.68,2.05,13.68,2.05z M10,0C10,0,10,0.58,10.42,1.3 c0.42,0.72,1.04,1.17,1.63,1.17c0.58,0,1.3-0.58,1.9-1.17c0.61-0.61,0.92-1.46,0.92-2.17c0-0.72-0.31-1.3-0.92-1.9 C13.37,-2.03,11.75,-1.7,10.63,-0.58C10.63,-0.58,10,0,10,0z M6.32,2.05C6.32,2.05,6.37,2.56,6.09,3.13C5.81,3.7,5.35,4,4.92,4 C4.5,0,3.9,3.54,3.45,3.09c-0.45-0.45-0.76-1.04-0.76-1.45C2.69,1.03,3.06,0.61,3.45,0.22c0.75-0.75,2.07-0.5,2.99,0.42 C6.76,1.28,6.32,2.05,6.32,2.05z M2.93,7.21C3.32,7.58,3.68,8,3.68,8.61c0,0.42-0.31,1-0.76,1.45C2.47,10.5,1.88,10.81,1.47,10.81 c-0.61,0-1.03-0.37-1.4-0.76C-0.68,9.29-0.44,7.97,0.48,7.05C1.41,6.23,2.74,6.46,2.93,7.21z M9.19,8.47 c-0.75,0.94-1.11,2.02-1.11,3.23c0,0.61,0.13,1.19,0.37,1.73c0.23,0.51,0.5,0.95,0.81,1.33c0.32,0.38,0.67,0.7,1.05,0.96 c0.38,0.26,0.78,0.45,1.2,0.56c1.23,0.33,2.56,0.02,3.68-0.89c0.94-0.75,1.63-1.8,1.87-2.99c0.24-1.18-0.1-2.39-0.94-3.29 c-0.84-0.9-2.02-1.38-3.2-1.38C11.23,7.7,10.05,8,9.19,8.47z" transform="scale(0.9) translate(0, 4)"/>
+                        <span class="text-2xl font-black theme-gradient-text flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block physics-svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zM5.04 4.545a1 1 0 011.085-.316l.995.498a1 1 0 11-.776 1.956l-.996-.498a1 1 0 01-.308-1.78zM14.96 4.545a1 1 0 00-1.085-.316l-.995.498a1 1 0 00.776 1.956l.996-.498a1 1 0 00.308-1.78zM3 10a1 1 0 011-1h1a1 1 0 110 2H4a1 1 0 01-1-1zM16 10a1 1 0 00-1-1h-1a1 1 0 000 2h1a1 1 0 001-1zM4.045 14.96a1 1 0 001.78.308l.498-.996a1 1 0 00-1.956-.776l-.498.995a1 1 0 00-.324.469zM15.955 14.96a1 1 0 01-.308 1.78l-.498-.995a1 1 0 011.956-.776l.498.995a1 1 0 01-.324.469zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" />
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd" />
                             </svg>
                             Ahmed Academy
                         </span>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="#topics" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium">Topics</a>
-                        <a href="#content-display" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded-md text-sm font-medium">Revision</a>
+                        <a href="#topics" class="text-purple-200 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-all">Topics</a>
+                        <a href="#content-display" class="bg-gradient-to-r from-theme-pink to-theme-purple-light text-white px-3 py-2 rounded-lg text-sm font-medium hover:from-pink-600 hover:to-purple-700 transition-all glow">Revision</a>
                     </div>
                 </div>
             </div>
         </nav>
 
-        <header class="py-24 sm:py-32">
+        <header class="py-24 sm:py-32 fade-in">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-4">
-                    <span class="fire-text">Ignite</span> Your Physics Knowledge
+                <div class="float mb-8">
+                    <span class="text-6xl md:text-8xl text-pink-400 inline-block">⚛️</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-4 text-white">
+                    <span class="theme-gradient-text">Ignite</span> Your GCSE Physics
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">
-                    Your new home for GCSE Physics revision. Browse topics, review key concepts, and get ready to ace your exams.
+                <p class="text-xl md:text-2xl text-purple-200 max-w-3xl mx-auto font-light">
+                    Your new home for GCSE Physics revision. Explore core topics, master formulas, and get ready to ace your exams.
                 </p>
             </div>
         </header>
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             
-            <section id="topics" class="mb-16">
-                <h2 class="text-3xl font-bold mb-8 border-b-2 border-orange-500 pb-2 inline-block">Explore Topics</h2>
+            <section id="topics" class="mb-20 fade-in">
+                <h2 class="text-3xl font-bold mb-8 pb-2 inline-block theme-gradient-text border-b-2 border-pink-500">Explore Topics</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Energy">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Energy</h3>
-                        <p class="text-gray-400">Energy stores, transfers, conservation, and power. Understand the fuel that runs the universe.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Energy">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Energy</h3>
+                        <p class="text-purple-200">Energy stores, transfers, conservation, and power. Understand the fuel that runs the universe.</p>
                     </div>
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Forces">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Forces</h3>
-                        <p class="text-gray-400">From gravity to friction. Learn about motion, vectors, scalars, and Newton's laws.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Forces">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Forces</h3>
+                        <p class="text-purple-200">From gravity to friction. Learn about motion, vectors, scalars, and Newton's laws.</p>
                     </div>
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Waves">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Waves</h3>
-                        <p class="text-gray-400">Sound, light, and the electromagnetic spectrum. Explore reflection and refraction.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Waves">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Waves</h3>
+                        <p class="text-purple-200">Sound, light, and the electromagnetic spectrum. Explore reflection and refraction.</p>
                     </div>
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Electricity">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Electricity</h3>
-                        <p class="text-gray-400">Circuits, current, potential difference, resistance, and static electricity.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Electricity">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Electricity</h3>
+                        <p class="text-purple-200">Circuits, current, potential difference, resistance, and static electricity.</p>
                     </div>
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Magnetism & Electromagnetism">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Magnetism</h3>
-                        <p class="text-gray-400">Magnetic fields, the motor effect, generators, and transformers.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Magnetism & Electromagnetism">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Magnetism</h3>
+                        <p class="text-purple-200">Magnetic fields, the motor effect, generators, and transformers.</p>
                     </div>
-                    <div class="topic-card fire-card rounded-xl p-6 cursor-pointer" data-topic="Atomic Physics">
-                        <h3 class="text-2xl font-bold mb-2 text-orange-400">Atomic Physics</h3>
-                        <p class="text-gray-400">The structure of the atom, radioactivity, decay, and half-life.</p>
+                    <div class="topic-card glass-strong rounded-2xl p-6 cursor-pointer glow-hover" data-topic="Atomic Physics">
+                        <h3 class="text-2xl font-bold mb-2 text-pink-300">Atomic Physics</h3>
+                        <p class="text-purple-200">The structure of the atom, radioactivity, decay, and half-life.</p>
                     </div>
                 </div>
             </section>
 
-            <section id="content-display" class="py-16">
-                <div id="content-placeholder" class="bg-gray-800 rounded-xl p-8 min-h-[300px] flex justify-center items-center border border-dashed border-gray-600">
-                    <div class="text-center text-gray-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+            <section id="content-display" class="py-16 fade-in">
+                <div id="content-placeholder" class="glass rounded-2xl p-8 min-h-[300px] flex justify-center items-center border border-dashed border-pink-500/30">
+                    <div class="text-center text-purple-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        <h3 class="text-xl font-semibold">Select a topic to begin</h3>
+                        <h3 class="text-xl font-semibold text-white">Select a topic to begin</h3>
                         <p class="mt-1">Your revision content will appear here.</p>
                     </div>
                 </div>
                 
-                <div id="topic-content-area" class="hidden">
+                <div id="topic-content-area" class="hidden glass rounded-2xl p-8">
                     </div>
             </section>
 
         </main>
 
-        <footer class="border-t border-gray-700/50 mt-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500">
-                <p>&copy; 2025 Ahmed Academy. A starting point for your revision journey.</p>
+        <footer class="border-t border-purple-500/20 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-purple-400">
+                <p>&copy; 2025 Ahmed Academy. Powered by the magic of Physics & Algebra.</p>
             </div>
         </footer>
 
     </div>
     <script>
-        // --- Algebra Gate Logic ---
+        // --- Algebra Gate Logic (Updated to use new styles and shake animation) ---
         const gateModal = document.getElementById('gate-modal');
         const siteContent = document.getElementById('site-content');
         const submitBtn = document.getElementById('submit-answer-btn');
@@ -197,24 +290,21 @@
         // Define a list of randomized Year 8/9 level questions and their answers
         const questions = [
             // Two-step equations
-            { q: "If 3x + 4 = 19, what is the value of x?", a: 5 }, // 3x = 15
-            { q: "If 2x - 7 = 11, what is the value of x?", a: 9 },  // 2x = 18
-            { q: "If x / 2 + 3 = 8, what is the value of x?", a: 10 }, // x/2 = 5
-            { q: "If 5x - 1 = 29, what is the value of x?", a: 6 },  // 5x = 30
+            { q: "If 3x + 4 = 19, what is x?", a: 5 }, // 3x = 15
+            { q: "If 2x - 7 = 11, what is x?", a: 9 },  // 2x = 18
+            { q: "If x / 2 + 3 = 8, what is x?", a: 10 }, // x/2 = 5
+            { q: "If 5x - 1 = 29, what is x?", a: 6 },  // 5x = 30
             
-            // Simple equations (kept a couple for variety)
-            { q: "If 4x = 24, what is the value of x?", a: 6 },
-            { q: "If x - 15 = -2, what is the value of x?", a: 13 }
+            // Simple equations
+            { q: "If 4x = 24, what is x?", a: 6 },
+            { q: "If x - 15 = -2, what is x?", a: 13 }
         ];
 
         let currentQuestion = null;
 
         function loadRandomQuestion() {
-            // Select a random question from the array
             const randomIndex = Math.floor(Math.random() * questions.length);
             currentQuestion = questions[randomIndex];
-            
-            // Update the HTML element with the question text
             mathQuestionElement.textContent = currentQuestion.q;
         }
 
@@ -225,63 +315,11 @@
         }
 
         function checkAnswer() {
-            // Parse the input as an integer
             const userAnswer = parseInt(answerInput.value.trim());
 
-            // Check if the input matches the answer of the currently loaded question
             if (userAnswer === currentQuestion.a) {
                 // Correct answer
                 errorMsg.classList.add('hidden');
+                answerInput.classList.remove('shake');
                 unlockSite();
-            } else {
-                // Incorrect answer
-                errorMsg.classList.remove('hidden');
-                answerInput.value = ''; // Clear the input
-                answerInput.focus();
             }
-        }
-
-        // Event listeners for button and Enter key
-        submitBtn.addEventListener('click', checkAnswer);
-        answerInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                checkAnswer();
-            }
-        });
-
-        // Hide main content on load and load the first question
-        document.addEventListener('DOMContentLoaded', () => {
-            loadRandomQuestion(); // Load a random question when the page loads
-            document.body.style.overflow = 'hidden'; 
-
-            // Existing topic card click logic
-            const topicCards = document.querySelectorAll('.topic-card');
-            const contentPlaceholder = document.getElementById('content-placeholder');
-            const topicContentArea = document.getElementById('topic-content-area');
-
-            topicCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const topicName = card.dataset.topic;
-                    contentPlaceholder.style.display = 'none';
-                    topicContentArea.style.display = 'block';
-
-                    topicContentArea.innerHTML = `
-                        <h2 class="text-4xl font-black mb-6 fire-text">${topicName}</h2>
-                        <div class="prose prose-invert lg:prose-xl max-w-none text-gray-300">
-                            <p>All the revision content for <strong>${topicName}</strong> would be displayed here.</p>
-                            <p>This could include:</p>
-                            <ul>
-                                <li>An embedded PowerPoint viewer.</li>
-                                <li>Key concepts extracted from your slides.</li>
-                                <li>Interactive quizzes.</li>
-                                <li>Relevant diagrams and formulas.</li>
-                            </ul>
-                            <p>For now, this is just a placeholder to show how selecting a topic dynamically updates the page.</p>
-                        </div>
-                    `;
-
-                    topicContentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            });
-        });
-    </script>
