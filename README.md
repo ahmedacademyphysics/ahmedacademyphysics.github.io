@@ -51,20 +51,20 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -2; 
+            z-index: -2;
         }
 
         /* Glassmorphism effect */
         .glass {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 255, 255, 0.1); 
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
         
         .glass-strong {
-            background: rgba(30, 28, 83, 0.4); 
+            background: rgba(30, 28, 83, 0.4);
             backdrop-filter: blur(30px);
-            border: 1px solid rgba(0, 206, 209, 0.5); 
+            border: 1px solid rgba(0, 206, 209, 0.5);
             transition: all 0.3s ease;
         }
 
@@ -99,7 +99,7 @@
             animation: float 3s ease-in-out infinite;
         }
         .glow {
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4); 
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
         }
         .glow-hover:hover {
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
@@ -118,8 +118,8 @@
         /* === PAGE LAYOUT === */
         body {
             font-family: 'Inter', sans-serif;
-            color: #b0c4de; 
-            overflow: hidden; 
+            color: #b0c4de;
+            overflow: hidden;
             background-color: #08001a;
         }
 
@@ -133,7 +133,7 @@
 
         /* === MODAL & CONTENT FIXES (ALGEBRA LOCK) === */
         #gate-modal {
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -147,8 +147,8 @@
 
         #site-content {
             /* Essential lock state: invisible and unclickable */
-            opacity: 0; 
-            visibility: hidden; 
+            opacity: 0;
+            visibility: hidden;
             transition: opacity 0.5s ease, visibility 0.5s;
             min-height: 100vh;
         }
@@ -161,13 +161,13 @@
         
         .glass-input {
             background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3); 
+            border: 1px solid rgba(0, 255, 255, 0.3);
             color: #fff;
             transition: all 0.3s ease;
         }
         .glass-input:focus {
-            border-color: #39FF14; 
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5); 
+            border-color: #39FF14;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
         }
 
     </style>
@@ -304,27 +304,18 @@
             "Energy": {
                 title: "Thermodynamics and Energy Systems",
                 submodules: [
-                    { heading: "Thermal Physics", text: "Covers thermal expansion, the definition of specific heat capacity ($E = mc\Delta\\theta$), and latent heat (fusion/vaporisation)." },
-                    { heading: "Heat and Temperature", text: "The difference between temperature (average kinetic energy) and heat (energy transfer). Includes methods of heat transfer: conduction, convection, and radiation. 
-
-[Image of three methods of heat transfer]
-" },
+                    { heading: "Thermal Physics", text: "Covers thermal expansion, the definition of specific heat capacity ($E = mc\\Delta\\theta$), and latent heat (fusion/vaporisation)." },
+                    { heading: "Heat and Temperature", text: "The difference between temperature (average kinetic energy) and heat (energy transfer). Includes methods of heat transfer: conduction, convection, and radiation. " },
                     { heading: "Energy Changes & Efficiency", text: "Energy cannot be created or destroyed (conservation). Efficiency is $\\text{Useful Output} / \\text{Total Input}$. Sankey Diagrams visually represent energy flow and losses." },
                     { heading: "Energy Resources & Payback", text: "Non-renewable (fossil fuels, nuclear) vs. Renewable (solar, wind, hydro). Energy Payback Time is the time required for a system to generate the energy equivalent to that used in its manufacture." },
-                    { heading: "Gases & Kinetic Theory", text: "Explains Brownian Motion (random movement of particles). Includes the Gas Laws: Boyle's Law ($PV = \\text{const}$), Charles' Law, and the Pressure Law. 
-
-[Image of gas molecules in random motion (Brownian Motion)]
-" }
+                    { heading: "Gases & Kinetic Theory", text: "Explains Brownian Motion (random movement of particles). Includes the Gas Laws: Boyle's Law ($PV = \\text{const}$), Charles' Law, and the Pressure Law. " }
                 ]
             },
             "Forces": {
                 title: "Mechanics: Forces, Motion, and Materials",
                 submodules: [
                     { heading: "Forces and Diagrams", text: "Identifying types of force, drawing Free Body Diagrams, calculating Resultant Force, and defining Upthrust." },
-                    { heading: "Pressure and Hydraulics", text: "Pressure in solids ($P = F/A$), liquids ($P = \\rho g h$), and its application in Hydraulics and Atmospheric Pressure. 
-
-[Image of a hydraulic system with pistons]
-" },
+                    { heading: "Pressure and Hydraulics", text: "Pressure in solids ($P = F/A$), liquids ($P = \\rho g h$), and its application in Hydraulics and Atmospheric Pressure. " },
                     { heading: "Dynamics (Motion)", text: "Defining Speed, Velocity, and Acceleration. Interpreting Distance-Time Graphs and Velocity-Time Graphs." },
                     { heading: "Force and Motion (Newton's Laws)", text: "Newtons First Law (Inertia), Second Law ($F = ma$), and Third Law (Action-Reaction). Concepts of Mass, Weight, and Terminal Velocity." },
                     { heading: "Materials", text: "Defining Density ($\\rho = m/V$). Investigating Stretching Materials, Hooke's Law ($F = kx$), and Elastic Energy." },
@@ -336,10 +327,7 @@
             "Waves": {
                 title: "Waves, Optics, and Sound",
                 submodules: [
-                    { heading: "Describing Waves", text: "Understanding Wave Types (Transverse vs. Longitudinal), Wave Properties (Amplitude, Frequency, Wavelength $\\lambda$), and the Wave Speed formula ($v = f\lambda$). 
-
-[Image of transverse and longitudinal waves]
-" },
+                    { heading: "Describing Waves", text: "Understanding Wave Types (Transverse vs. Longitudinal), Wave Properties (Amplitude, Frequency, Wavelength $\\lambda$), and the Wave Speed formula ($v = f\\lambda$). " },
                     { heading: "Electromagnetic Waves (EM)", text: "The complete EM Spectrum (Radio to Gamma) and their corresponding Uses and Dangers. Includes Radio Communications and Imaging with X-Rays." },
                     { heading: "Sound Waves & Ultrasound", text: "Properties of Sound, calculating the Speed of Sound, and the application of high-frequency Ultrasound." },
                     { heading: "Optics (Light)", text: "Principles of Reflection, the use of Curved Mirrors, Refraction of Light, Snell's Law, Total Internal Reflection (critical angle), and the function of Lenses." }
@@ -350,11 +338,8 @@
                 submodules: [
                     { heading: "Charges and Fields", text: "Defining Electric Fields, Static Electricity, and its uses (e.g., spray painting) and dangers. The Gold Leaf Electroscope and Van der Graaf Generator." },
                     { heading: "Circuits Basics", text: "Simple Circuits, defining Voltage ($V$), Current ($I$), and Resistance ($R$). Ohm's Law ($V=IR$). Interpreting Kirchhoffs Laws (Current/Voltage)." },
-                    { heading: "Components and Devices", text: "Understanding Circuit Symbols, Resistive Devices (LDR, Thermistor), the Potential Divider, and I-V Graphs. 
-
-[Image of common electrical circuit symbols]
-" },
-                    { heading: "Domestic Electricity", text: "The National Grid, UK Mains Electricity ($230\text{V}$ AC), structure of Cables and Plugs, and essential Electrical Safety devices (fuse, earth, circuit breaker). Electrical Power ($P = IV$) and calculating the Cost of Electricity." },
+                    { heading: "Components and Devices", text: "Understanding Circuit Symbols, Resistive Devices (LDR, Thermistor), the Potential Divider, and I-V Graphs. " },
+                    { heading: "Domestic Electricity", text: "The National Grid, UK Mains Electricity ($230\\text{V}$ AC), structure of Cables and Plugs, and essential Electrical Safety devices (fuse, earth, circuit breaker). Electrical Power ($P = IV$) and calculating the Cost of Electricity." },
                     { heading: "Electronics", text: "The difference between Analogue and Digital signals, and the use of Logic Circuits (AND, OR, NOT gates)." }
                 ]
             },
@@ -370,28 +355,26 @@
                 title: "Nuclear Physics, Math Skills, and Astronomy",
                 submodules: [
                     { heading: "Mathematical & Measurement Skills", text: "Covers Standard Form, Significant Figures, Scalar vs. Vector quantities, Unit conversion, Rearranging Formulae, S.I. Units, Standard Prefixes, Types of Errors, and Presenting Data." },
-                    { heading: "The Atom and Radiation", text: "Discovery of the Nucleus (Rutherford). Atomic Structure (protons, neutrons, electrons). The three Types of Radiation ($\alpha, \beta, \gamma$), Detecting Radioactivity, and the Properties and Dangers of Radiation." },
+                    { heading: "The Atom and Radiation", text: "Discovery of the Nucleus (Rutherford). Atomic Structure (protons, neutrons, electrons). The three Types of Radiation ($\\alpha, \\beta, \\gamma$), Detecting Radioactivity, and the Properties and Dangers of Radiation." },
                     { heading: "Nuclear Processes", text: "Understanding Half Life, Uses of Radiation (e.g., medical), Nuclear Fission (splitting atoms for energy in Fission Reactors), and Nuclear Fusion (joining atoms in stars)." },
-                    { heading: "Astronomy (Space Physics)", text: "The Solar System, Motion of Earth/Moon, Orbital Speed, Life of Stars (Nebula to Black Hole/Dwarf), and evidence for the Expanding Universe (Hubble's Law, Star Colour). 
-
-[Image of the star life cycle]
-" }
+                    { heading: "Astronomy (Space Physics)", text: "The Solar System, Motion of Earth/Moon, Orbital Speed, Life of Stars (Nebula to Black Hole/Dwarf), and evidence for the Expanding Universe (Hubble's Law, Star Colour). " }
                 ]
             }
         };
 
-        // Global variable to store the correct answer (no longer stored in an array)
+        // Global variable to store the correct answer
         let correctAnswer = null;
 
         // --- Core Lock Functions ---
 
         function loadRandomQuestion() {
-            // Generate random integers for the simple linear equation: ax + b = c
-            const a = Math.floor(Math.random() * 4) + 2;  // Coefficient 'a' (2 to 5)
-            const x = Math.floor(Math.random() * 10) + 3; // Solution 'x' (3 to 12)
-            const b = Math.floor(Math.random() * 7) + 1;  // Constant 'b' (1 to 7)
+            // Generate simple linear equation: ax + b = c
+            // We ensure x is a positive integer between 3 and 10 to keep the math simple
+            const a = Math.floor(Math.random() * 3) + 2;  // Coefficient 'a' (2 to 4)
+            const x = Math.floor(Math.random() * 8) + 3; // Solution 'x' (3 to 10)
+            const b = Math.floor(Math.random() * 5) + 1;  // Constant 'b' (1 to 5)
             
-            // Calculate 'c' based on the intended solution 'x'
+            // Calculate 'c' based on the intended integer solution 'x'
             const c = (a * x) + b;
             
             // Store the correct answer
@@ -403,13 +386,14 @@
         }
 
         function unlockSite() {
-            // FIX: This forces the visibility changes and removes the modal/scroll lock
+            // This forces the visibility changes and removes the modal/scroll lock
             gateModal.style.display = 'none'; // Use inline style to ensure modal is hidden
-            siteContent.classList.add('content-visible'); 
+            siteContent.classList.add('content-visible');
             document.body.style.overflow = 'auto'; // Re-enable scrolling
         }
 
         function checkAnswer() {
+            // Robustly parse the input
             const userAnswer = Number(answerInput.value.trim());
 
             // Check against the dynamically generated global answer
@@ -420,11 +404,11 @@
             } else {
                 errorMsg.classList.remove('hidden');
                 answerInput.classList.add('shake');
-                answerInput.value = ''; 
+                answerInput.value = '';
                 answerInput.focus();
                 
                 // Load a NEW, secure, random question on failure
-                loadRandomQuestion(); 
+                loadRandomQuestion();
                 
                 setTimeout(() => {
                     answerInput.classList.remove('shake');
@@ -440,7 +424,6 @@
         function loadTopicContent(topic) {
             const data = PHYSICS_CONTENT[topic];
             if (!data || !data.submodules) {
-                // Fallback for missing or empty data
                 topicContentArea.innerHTML = `<p class="text-xl text-red-light">Error: No structured content found for this module.</p>`;
                 contentPlaceholder.classList.add('hidden');
                 topicContentArea.classList.remove('hidden');
@@ -466,8 +449,10 @@
         }
 
         // --- Initialization ---
+        // FIX: Call loadRandomQuestion() immediately to display the first question
+        loadRandomQuestion();
+
         window.onload = function() {
-            loadRandomQuestion();
             
             // Algebra Gate Listeners
             submitBtn.addEventListener('click', checkAnswer);
