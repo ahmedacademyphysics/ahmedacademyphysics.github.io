@@ -1,4 +1,3 @@
-#DONT UPDATE LOCK
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -191,29 +190,29 @@
             <section id="topics" class="mb-20 fade-in">
                 <h2 class="text-2xl font-bold mb-8 pb-2 inline-block text-cyber-neon-pink border-b-2 border-cyber-electric-blue font-orbitron">DATA_MODULES_ONLINE</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Energy">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">THERMODYNAMICS_V1.1</h3>
-                        <p class="text-sm text-gray-300 font-mono">Heat, efficiency, gas laws, and energy transfer analysis protocols.</p>
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Thermodynamics">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">THERMO_DYNAMICS_CORE</h3>
+                        <p class="text-sm text-gray-300 font-mono">Heat, energy conservation, efficiency protocols, and gas laws.</p>
                     </div>
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Forces">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">MECHANICS_V2.0</h3>
-                        <p class="text-sm text-gray-300 font-mono">Motion modeling, Newton's principles, pressure systems, and material properties.</p>
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Mechanics">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">MECHANICS_ADVANCED_V3</h3>
+                        <p class="text-sm text-gray-300 font-mono">Forces, pressure, motion dynamics, materials science, and momentum.</p>
                     </div>
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Waves">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">OSCILLATION_V1.5</h3>
-                        <p class="text-sm text-gray-300 font-mono">EM spectrum analysis, sound propagation, reflection, and refraction protocols.</p>
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Waves & Optics">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">OSCILLATION_OPTICS_V2</h3>
+                        <p class="text-sm text-gray-300 font-mono">Wave propagation, EM spectrum, sound, and light reflection/refraction.</p>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Electricity">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">CIRCUIT_LOGIC_V3.1</h3>
-                        <p class="text-sm text-gray-300 font-mono">Current flow, voltage differential, resistance quantification, and power systems.</p>
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">CIRCUITRY_CHARGES_V4</h3>
+                        <p class="text-sm text-gray-300 font-mono">Static electricity, circuits, domestic power systems, and electronic components.</p>
                     </div>
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Magnetism & Electromagnetism">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION_V1.0</h3>
-                        <p class="text-sm text-gray-300 font-mono">Magnetic fields, motor effect, electromagnetic induction, and transformer schematics.</p>
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Magnetics & EM">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION_V1.1</h3>
+                        <p class="text-sm text-gray-300 font-mono">Magnetic fields, motor/generator effects, and AC transformer schematics.</p>
                     </div>
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Atomic Physics">
-                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_CORE_V4.0</h3>
-                        <p class="text-sm text-gray-300 font-mono">Nuclear decay, half-life protocols, core mathematical skills, and cosmology data.</p>
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Nuclear & Astro">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_ASTRO_CORE_V5</h3>
+                        <p class="text-sm text-gray-300 font-mono">Atomic structure, nuclear decay, fusion/fission, and space cosmology data.</p>
                     </div>
                 </div>
             </section>
@@ -242,7 +241,7 @@
                         </button>
                         <p id="lock-message" class="mt-4 text-sm text-red-500 font-mono hidden">// AUTHENTICATION FAILED //</p>
                     </div>
-                    </div>
+                </div>
                 
                 <div id="topic-content-area" class="hidden glass rounded-md p-8">
                     </div>
@@ -271,54 +270,59 @@
         let correctAlgebraAnswer = null;
         let pendingTopic = null;
 
-        // --- Physics Content Data (using LaTeX for formulas) ---
+        // --- UPDATED PHYSICS CONTENT DATA ---
         const PHYSICS_CONTENT = {
-            "Energy": {
-                title: "THERMODYNAMICS & ENERGY SYSTEMS",
+            "Thermodynamics": {
+                title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
                 submodules: [
-                    { heading: "Thermal Physics", text: `Covers thermal expansion, specific heat capacity (Formula: <span class="formula">E = mc\\Delta\\theta</span>), and latent heat (fusion/vaporisation).` },
-                    { heading: "Heat and Temperature", text: `Difference between **temperature** (kinetic energy) and **heat** (energy transfer). Includes **conduction**, **convection**, and **radiation**.` },
-                    { heading: "Energy Changes & Efficiency", text: `Energy **conservation** is absolute. Efficiency is calculated as: <span class="formula">Useful Output / Total Input</span>.` },
-                    { heading: "Gases & Kinetic Theory", text: `**Brownian Motion** (random movement). Includes Boyle's Law: <span class="formula">PV = const</span>.` }
+                    { heading: "Thermal Physics", text: `Covers **Thermal Expansion**, **Heat Capacity** (<span class="formula">E=mc\\Delta\\theta</span>), and **Latent Heat** (fusion/vaporisation). ` },
+                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. ` },
+                    { heading: "Energy Systems", text: `**Energy Stores** (Kinetic, Gravitational, Chemical, etc.). Calculating **Efficiency**: <span class="formula">Useful Output / Total Input</span>. Uses of **Sankey Diagrams**. ` },
+                    { heading: "Gases and States", text: `**Brownian Motion** (random particle movement). Gas laws including **Boyle's Law** (<span class="formula">PV = const</span>), **Charles' Law**, and **Pressure Law**.` }
                 ]
             },
-            "Forces": {
-                title: "MECHANICS: FORCES, MOTION, & MATERIALS",
+            "Mechanics": {
+                title: "MECHANICS & DYNAMICS (MEC-ADV-3)",
                 submodules: [
-                    { heading: "Forces and Diagrams", text: `Calculating **Resultant Force** and defining **Upthrust** using **Free Body Diagrams**.` },
-                    { heading: "Pressure and Hydraulics", text: `Pressure in solids (<span class="formula">P = F/A</span>) and liquids (<span class="formula">P = \\rho g h</span>), and their application in **Hydraulics**.` },
-                    { heading: "Force and Motion (Newton's Laws)", text: `Newton's Second Law is critical: **Force = mass × acceleration** (<span class="formula">F = ma</span>). Covers **Mass**, **Weight**, and **Terminal Velocity**.` },
-                    { heading: "Turning Forces", text: `Concepts of **Centre of Mass** and **Moments** in Equilibrium.` }
+                    { heading: "Forces and Diagrams", text: `Defining **Types of Force** and determining **Resultant Force** using **Free Body Diagrams**. The concept of **Upthrust**.` },
+                    { heading: "Pressure and Materials", text: `Pressure in solids (<span class="formula">P = F/A</span>) and liquids (<span class="formula">P = \\rho g h</span>). Principles of **Hydraulics**, **Atmospheric Pressure**, and **High Pressure Applications**. **Hooke's Law** and **Elastic Energy**. ` },
+                    { heading: "Dynamics (Motion)", text: `**Speed and Velocity**, **Acceleration**, and analyzing motion using **Distance-Time** and **Velocity-Time Graphs**.` },
+                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. ` },
+                    { heading: "Momentum and Turning Forces", text: `Calculating **Momentum** (<span class="formula">p = mv</span>), **Conservation of Momentum**, and **Force** as the rate of change of momentum. **Moments** and **Centre of Mass**.` }
                 ]
             },
-            "Waves": {
-                title: "WAVES, OPTICS, & SOUND",
+            "Waves & Optics": {
+                title: "OSCILLATION, OPTICS, & SOUND (OSC-OPT-2)",
                 submodules: [
-                    { heading: "Describing Waves", text: `Wave Types (**Transverse** vs. **Longitudinal**) and the Wave Speed formula: <span class="formula">v = f\\lambda</span>.` },
-                    { heading: "Electromagnetic Waves (EM)", text: `The complete **EM Spectrum** (Radio to Gamma) including Uses and Dangers.` },
-                    { heading: "Optics (Light)", text: `Principles of **Reflection**, **Refraction**, and **Total Internal Reflection** (critical angle).` }
+                    { heading: "Describing Waves", text: `**Wave Types** (Transverse vs. Longitudinal), **Wave Properties** (Amplitude, Wavelength, Frequency), and **Wave Speed** formula: <span class="formula">v = f\\lambda</span>. ` },
+                    { heading: "Electromagnetic Waves (EM)", text: `The full **EM Spectrum** (Radio to Gamma) including **Uses**, **Dangers**, and **Imaging with X-Rays**.` },
+                    { heading: "Sound Waves", text: `**Properties of Sound**, **Speed of Sound**, and uses of **Ultrasound**.` },
+                    { heading: "Optics (Light)", text: `**Reflection**, **Curved Mirrors**, **Refraction of Light**, **Snell's Law**, **Total Internal Reflection** (used in fiber optics), **Lenses**, and the structure of **The Camera and Eye**. ` }
                 ]
             },
             "Electricity": {
-                title: "ELECTRICAL PRINCIPLES & CIRCUITS",
+                title: "CIRCUITRY, CHARGES, & POWER (ELEC-CIRC-4)",
                 submodules: [
-                    { heading: "Circuits Basics", text: `Voltage (<span class="formula">V</span>), Current (<span class="formula">I</span>), and Resistance (<span class="formula">R</span>). **Ohm's Law**: <span class="formula">V=IR</span>.` },
-                    { heading: "Domestic Electricity", text: `**National Grid**, **UK Mains** (<span class="formula">230V AC</span>), safety devices, and Electrical Power calculation: <span class="formula">P = IV</span>.` }
+                    { heading: "Charges and Static", text: `**Electric Fields**, **Static Electricity**, **Gold Leaf Electroscope**, **Moving Charges**, and the **Van der Graaf Generator**. Includes both **Uses** and **Dangers of Static Electricity**.` },
+                    { heading: "Circuits", text: `**Simple Circuits**, **Electrons, Atoms and Energy**. **Voltage and Current**, **Resistance** (<span class="formula">R=V/I</span>), and **Kirchhoff's Laws**. ` },
+                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). ` },
+                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). ` }
                 ]
             },
-            "Magnetism & Electromagnetism": {
-                title: "MAGNETIC FIELDS & INDUCTION",
+            "Magnetics & EM": {
+                title: "MAGNETIC FIELDS & INDUCTION (MAG-IND-1.1)",
                 submodules: [
-                    { heading: "Motor and Generator Effect", text: `**Motor Effect** (force on a wire) and the **Electric Motor**. **Electromagnetic Induction** (creating a current).` },
-                    { heading: "Transformers", text: `Transformers step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>.` }
+                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. ` },
+                    { heading: "Induction and Transformers", text: `**Electromagnetic Induction** (generating current from motion), and the use of **Transformers** to step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>. ` }
                 ]
             },
-            "Atomic Physics": {
-                title: "NUCLEAR PHYSICS & ASTRO DATA",
+            "Nuclear & Astro": {
+                title: "NUCLEAR PHYSICS & ASTRO DATA (NUC-ASTRO-5)",
                 submodules: [
-                    { heading: "The Atom and Radiation", text: `Atomic Structure. The three Types of Radiation: <span class="formula">\\alpha</span>, <span class="formula">\\beta</span>, and <span class="formula">\\gamma</span>.` },
-                    { heading: "Nuclear Processes", text: `**Half Life**, **Nuclear Fission** (splitting), and **Nuclear Fusion** (joining).` },
-                    { heading: "Astronomy (Space Physics)", text: `**Life Cycle of Stars**, and evidence for the **Expanding Universe**.` }
+                    { heading: "The Atom and Radiation", text: `**Discovery of the Nucleus** (Rutherford), **Atomic Structure**. **Types of Radiation** (<span class="formula">\\alpha, \\beta, \\gamma</span>), **Properties of Radiation**, and **Dangers of Radiation**. ` },
+                    { heading: "Nuclear Processes", text: `**Detecting Radioactivity**, **Nuclear Reactions**. Calculating **Half Life**. **Nuclear Fission** (splitting), **Fission Reactors**, and **Nuclear Fusion** (joining). [Image comparing Nuclear Fission and Nuclear Fusion]` },
+                    { heading: "Astronomy (Solar System)", text: `**Motion of the Earth and Moon**, **Moons and Satellites**, **Bodies of the Solar System**, and calculating **Orbital Speed**.` },
+                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. ` }
                 ]
             }
         };
@@ -327,7 +331,7 @@
         function loadTopicContent(topic) {
             const data = PHYSICS_CONTENT[topic];
             
-            if (!data || !data.submodules) {
+            if (!data || !data.submodules || data.submodules.length === 0) {
                 topicContentArea.innerHTML = `<p class="text-xl text-red-500 font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
                 contentPlaceholder.classList.add('hidden');
                 topicContentArea.classList.remove('hidden');
@@ -352,7 +356,7 @@
             topicContentArea.classList.remove('hidden');
         }
 
-        // --- ALGEBRA LOCK LOGIC ---
+        // --- ALGEBRA LOCK LOGIC (UNTOUCHED) ---
 
         /** Generates a simple random linear equation (e.g., A + B = X). */
         function generateLockProblem() {
