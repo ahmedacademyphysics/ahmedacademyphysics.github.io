@@ -169,6 +169,18 @@
             border-color: #39FF14;
             box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
         }
+        
+        /* === FORMULA STYLING === */
+        .formula {
+            display: inline-block;
+            background-color: rgba(57, 255, 20, 0.1); /* Light green background for formulas */
+            color: #39FF14; /* Vibrant green text */
+            padding: 2px 8px;
+            margin: 0 4px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
 
     </style>
 </head>
@@ -299,71 +311,62 @@
         const contentPlaceholder = document.getElementById('content-placeholder');
         const topicContentArea = document.getElementById('topic-content-area');
 
-        // Physics Content Data (using LaTeX for formulas)
+        // Global variable to store the correct answer
+        let correctAnswer = null;
+        
+        // --- Physics Content Data (using LaTeX for formulas) ---
+        // Note: LaTeX formulas are wrapped in a custom <span class="formula"> for styling
         const PHYSICS_CONTENT = {
             "Energy": {
                 title: "Thermodynamics and Energy Systems",
                 submodules: [
-                    { heading: "Thermal Physics", text: "Covers thermal expansion, the definition of specific heat capacity ($E = mc\\Delta\\theta$), and latent heat (fusion/vaporisation)." },
-                    { heading: "Heat and Temperature", text: "The difference between temperature (average kinetic energy) and heat (energy transfer). Includes methods of heat transfer: conduction, convection, and radiation. " },
-                    { heading: "Energy Changes & Efficiency", text: "Energy cannot be created or destroyed (conservation). Efficiency is $\\text{Useful Output} / \\text{Total Input}$. Sankey Diagrams visually represent energy flow and losses." },
-                    { heading: "Energy Resources & Payback", text: "Non-renewable (fossil fuels, nuclear) vs. Renewable (solar, wind, hydro). Energy Payback Time is the time required for a system to generate the energy equivalent to that used in its manufacture." },
-                    { heading: "Gases & Kinetic Theory", text: "Explains Brownian Motion (random movement of particles). Includes the Gas Laws: Boyle's Law ($PV = \\text{const}$), Charles' Law, and the Pressure Law. " }
+                    { heading: "Thermal Physics", text: `Covers thermal expansion, the definition of **specific heat capacity** (Formula: <span class="formula">E = mc\\Delta\\theta</span>), and latent heat (fusion/vaporisation).` },
+                    { heading: "Heat and Temperature", text: `The difference between **temperature** (average kinetic energy) and **heat** (energy transfer). Includes methods of heat transfer: **conduction**, **convection**, and **radiation**.` },
+                    { heading: "Energy Changes & Efficiency", text: `Energy cannot be created or destroyed (**conservation**). Efficiency is calculated as: <span class="formula">Useful Output / Total Input</span>. Sankey Diagrams visually represent energy flow and losses.` },
+                    { heading: "Gases & Kinetic Theory", text: `Explains **Brownian Motion** (random movement of particles). Includes the Gas Laws, such as Boyle's Law: <span class="formula">PV = const</span>.` }
                 ]
             },
             "Forces": {
                 title: "Mechanics: Forces, Motion, and Materials",
                 submodules: [
-                    { heading: "Forces and Diagrams", text: "Identifying types of force, drawing Free Body Diagrams, calculating Resultant Force, and defining Upthrust." },
-                    { heading: "Pressure and Hydraulics", text: "Pressure in solids ($P = F/A$), liquids ($P = \\rho g h$), and its application in Hydraulics and Atmospheric Pressure. " },
-                    { heading: "Dynamics (Motion)", text: "Defining Speed, Velocity, and Acceleration. Interpreting Distance-Time Graphs and Velocity-Time Graphs." },
-                    { heading: "Force and Motion (Newton's Laws)", text: "Newtons First Law (Inertia), Second Law ($F = ma$), and Third Law (Action-Reaction). Concepts of Mass, Weight, and Terminal Velocity." },
-                    { heading: "Materials", text: "Defining Density ($\\rho = m/V$). Investigating Stretching Materials, Hooke's Law ($F = kx$), and Elastic Energy." },
-                    { heading: "Mechanical Energy", text: "Work Done ($W = Fs$), Kinetic Energy, Gravitational Energy, Elastic Potential Energy, and Mechanical Power." },
-                    { heading: "Momentum", text: "Calculating Momentum, Conservation of Momentum, Elastic Collisions, and the relationship between Force and Momentum." },
-                    { heading: "Turning Forces", text: "Centre of Mass and Stability, Levers, Moments, and Moments in Equilibrium (Principle of Moments)." }
+                    { heading: "Forces and Diagrams", text: `Identifying types of force, drawing **Free Body Diagrams**, calculating **Resultant Force**, and defining **Upthrust**.` },
+                    { heading: "Pressure and Hydraulics", text: `Pressure in solids (Formula: <span class="formula">P = F/A</span>) and liquids (Formula: <span class="formula">P = \\rho g h</span>), and its application in **Hydraulics** and **Atmospheric Pressure**.` },
+                    { heading: "Force and Motion (Newton's Laws)", text: `Newton's Second Law is critical: **Force = mass × acceleration** (<span class="formula">F = ma</span>). Also covers **Mass**, **Weight**, and **Terminal Velocity**.` },
+                    { heading: "Turning Forces", text: `Concepts of **Centre of Mass** and **Stability**, and using **Moments** in Equilibrium (Principle of Moments).` }
                 ]
             },
             "Waves": {
                 title: "Waves, Optics, and Sound",
                 submodules: [
-                    { heading: "Describing Waves", text: "Understanding Wave Types (Transverse vs. Longitudinal), Wave Properties (Amplitude, Frequency, Wavelength $\\lambda$), and the Wave Speed formula ($v = f\\lambda$). " },
-                    { heading: "Electromagnetic Waves (EM)", text: "The complete EM Spectrum (Radio to Gamma) and their corresponding Uses and Dangers. Includes Radio Communications and Imaging with X-Rays." },
-                    { heading: "Sound Waves & Ultrasound", text: "Properties of Sound, calculating the Speed of Sound, and the application of high-frequency Ultrasound." },
-                    { heading: "Optics (Light)", text: "Principles of Reflection, the use of Curved Mirrors, Refraction of Light, Snell's Law, Total Internal Reflection (critical angle), and the function of Lenses." }
+                    { heading: "Describing Waves", text: `Understanding Wave Types (**Transverse** vs. **Longitudinal**), Wave Properties (Amplitude, Frequency, Wavelength <span class="formula">\\lambda</span>), and the Wave Speed formula: <span class="formula">v = f\\lambda</span>.` },
+                    { heading: "Electromagnetic Waves (EM)", text: `The complete **EM Spectrum** (Radio to Gamma) and their corresponding Uses and Dangers.` },
+                    { heading: "Optics (Light)", text: `Principles of **Reflection**, **Refraction**, and **Total Internal Reflection** (critical angle).` }
                 ]
             },
             "Electricity": {
                 title: "Electrical Principles and Domestic Circuits",
                 submodules: [
-                    { heading: "Charges and Fields", text: "Defining Electric Fields, Static Electricity, and its uses (e.g., spray painting) and dangers. The Gold Leaf Electroscope and Van der Graaf Generator." },
-                    { heading: "Circuits Basics", text: "Simple Circuits, defining Voltage ($V$), Current ($I$), and Resistance ($R$). Ohm's Law ($V=IR$). Interpreting Kirchhoffs Laws (Current/Voltage)." },
-                    { heading: "Components and Devices", text: "Understanding Circuit Symbols, Resistive Devices (LDR, Thermistor), the Potential Divider, and I-V Graphs. " },
-                    { heading: "Domestic Electricity", text: "The National Grid, UK Mains Electricity ($230\\text{V}$ AC), structure of Cables and Plugs, and essential Electrical Safety devices (fuse, earth, circuit breaker). Electrical Power ($P = IV$) and calculating the Cost of Electricity." },
-                    { heading: "Electronics", text: "The difference between Analogue and Digital signals, and the use of Logic Circuits (AND, OR, NOT gates)." }
+                    { heading: "Circuits Basics", text: `Defining Voltage (<span class="formula">V</span>), Current (<span class="formula">I</span>), and Resistance (<span class="formula">R</span>). The cornerstone is **Ohm's Law**: <span class="formula">V=IR</span>.` },
+                    { heading: "Domestic Electricity", text: `The **National Grid**, **UK Mains Electricity** (<span class="formula">230V AC</span>), safety devices (fuse, earth, circuit breaker), and Electrical Power calculation: <span class="formula">P = IV</span>.` }
                 ]
             },
             "Magnetism & Electromagnetism": {
                 title: "Magnetic Fields and Induction",
                 submodules: [
-                    { heading: "Magnetism and Effects", text: "Defining Magnetism and Electromagnetism. Uses of Electromagnets (e.g., lifting scrap metal)." },
-                    { heading: "Motor and Generator Effect", text: "The Motor Effect (force on a current-carrying wire in a field) and the Electric Motor. Electromagnetic Induction (creating a current by relative movement between a wire and a field)." },
-                    { heading: "Transformers", text: "Explaining how Transformers use induction to step-up or step-down AC voltage ($V_p/V_s = N_p/N_s$). " }
+                    { heading: "Motor and Generator Effect", text: `The **Motor Effect** (force on a current-carrying wire in a field) and the **Electric Motor**. **Electromagnetic Induction** (creating a current by relative movement).` },
+                    { heading: "Transformers", text: `Explaining how Transformers use induction to step-up or step-down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>.` }
                 ]
             },
             "Atomic Physics": {
                 title: "Nuclear Physics, Math Skills, and Astronomy",
                 submodules: [
-                    { heading: "Mathematical & Measurement Skills", text: "Covers Standard Form, Significant Figures, Scalar vs. Vector quantities, Unit conversion, Rearranging Formulae, S.I. Units, Standard Prefixes, Types of Errors, and Presenting Data." },
-                    { heading: "The Atom and Radiation", text: "Discovery of the Nucleus (Rutherford). Atomic Structure (protons, neutrons, electrons). The three Types of Radiation ($\\alpha, \\beta, \\gamma$), Detecting Radioactivity, and the Properties and Dangers of Radiation." },
-                    { heading: "Nuclear Processes", text: "Understanding Half Life, Uses of Radiation (e.g., medical), Nuclear Fission (splitting atoms for energy in Fission Reactors), and Nuclear Fusion (joining atoms in stars)." },
-                    { heading: "Astronomy (Space Physics)", text: "The Solar System, Motion of Earth/Moon, Orbital Speed, Life of Stars (Nebula to Black Hole/Dwarf), and evidence for the Expanding Universe (Hubble's Law, Star Colour). " }
+                    { heading: "The Atom and Radiation", text: `Atomic Structure (protons, neutrons, electrons). The three Types of Radiation: <span class="formula">\\alpha</span>, <span class="formula">\\beta</span>, and <span class="formula">\\gamma</span>.` },
+                    { heading: "Nuclear Processes", text: `Understanding **Half Life**, **Nuclear Fission** (splitting atoms), and **Nuclear Fusion** (joining atoms in stars).` },
+                    { heading: "Astronomy (Space Physics)", text: `The Solar System, **Life Cycle of Stars**, and evidence for the **Expanding Universe** (Hubble's Law).` }
                 ]
             }
         };
 
-        // Global variable to store the correct answer
-        let correctAnswer = null;
 
         // --- Core Lock Functions ---
 
