@@ -171,7 +171,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block text-cyber-neon-pink" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM5 9a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm3 3a1 1 0 100 2h4a1 1 0 100-2H8z" clip-rule="evenodd" />
                             </svg>
-                            AHMED ACADEMY
+                            ARASAKA DATABASE
                         </span>
                     </div>
                     <div class="flex items-center space-x-4 font-mono">
