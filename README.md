@@ -35,53 +35,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* === NEW HOLOGRAPHIC GRID BACKGROUND (FIXED VENDOR SUPPORT) === */
+        /* === DIGITAL MATRIX RAIN BACKGROUND (NEW ANIMATION) === */
         
-        @keyframes scan-line {
-            0% { transform: translateY(0); opacity: 0.1; } 
-            100% { transform: translateY(100vh); opacity: 0.1; } 
+        /* Define the animation: shifting the background down by 100px */
+        @keyframes matrix-shift {
+            from { background-position: 0 0; }
+            to { background-position: 0 100px; }
         }
         
-        /* Webkit prefix for broader compatibility */
-        @-webkit-keyframes scan-line {
-            0% { -webkit-transform: translateY(0); opacity: 0.1; }
-            100% { -webkit-transform: translateY(100vh); opacity: 0.1; }
-        }
-
-        .holographic-grid {
-            /* Base dark background */
+        /* The new background container class */
+        .matrix-rain {
             background-color: #060318; 
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -2;
+            z-index: -10; 
             overflow: hidden;
-            /* Subtle dotted pattern for the grid base */
-            background-image: radial-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 0);
-            background-size: 30px 30px;
-        }
 
-        .holographic-grid::after {
-            /* Pseudo-element for the animated scan line */
-            content: '';
-            position: absolute;
-            top: 0; 
-            left: 0;
-            width: 100%;
-            height: 50px; /* Thickness of the line */
+            /* Base pattern: a subtle horizontal line with strong green accent */
+            background-image: linear-gradient(
+                to bottom, 
+                rgba(57, 255, 20, 0.2) 1px, 
+                transparent 1px
+            );
+            background-size: 100% 100px; /* The height of the pattern block */
             
-            background: linear-gradient(0deg, transparent, rgba(57, 255, 20, 0.5), transparent); 
-            opacity: 0.1;
-            
-            /* Apply animations with vendor prefixes */
-            animation: scan-line 6s linear infinite;
-            -webkit-animation: scan-line 6s linear infinite;
-            
-            /* Initialize transform to start the line just off the top edge */
-            transform: translateY(-50px);
-            -webkit-transform: translateY(-50px);
+            /* Apply the animation to shift the background position */
+            animation: matrix-shift 0.8s linear infinite; /* Fast, continuous vertical shift */
         }
 
 
@@ -174,7 +156,7 @@
     </style>
 </head>
 <body class="antialiased">
-    <div class="holographic-grid"></div>
+    <div class="matrix-rain"></div>
 
     <div id="site-content">
         
@@ -263,7 +245,7 @@
 
         <footer class="border-t border-theme-blue/20 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-teal-300">
-                <p>&copy; 2025 Ahmed Academy. System integrity checked. Status: Optimal.</p>
+                <p>System integrity checked. Status: Optimal.</p>
             </div>
         </footer>
 
@@ -277,7 +259,6 @@
 
         
         // --- Physics Content Data (using LaTeX for formulas) ---
-        // Note: LaTeX formulas are wrapped in a custom <span class="formula"> for styling
         const PHYSICS_CONTENT = {
             "Energy": {
                 title: "Thermodynamics and Energy Systems",
