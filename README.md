@@ -304,7 +304,7 @@
             "Energy": {
                 title: "Thermodynamics and Energy Systems",
                 submodules: [
-                    { heading: "Thermal Physics", text: "Covers thermal expansion, the definition of specific heat capacity ($E = mc\Delta\theta$), and latent heat (fusion/vaporisation)." },
+                    { heading: "Thermal Physics", text: "Covers thermal expansion, the definition of specific heat capacity ($E = mc\Delta\\theta$), and latent heat (fusion/vaporisation)." },
                     { heading: "Heat and Temperature", text: "The difference between temperature (average kinetic energy) and heat (energy transfer). Includes methods of heat transfer: conduction, convection, and radiation. 
 
 [Image of three methods of heat transfer]
@@ -321,13 +321,13 @@
                 title: "Mechanics: Forces, Motion, and Materials",
                 submodules: [
                     { heading: "Forces and Diagrams", text: "Identifying types of force, drawing Free Body Diagrams, calculating Resultant Force, and defining Upthrust." },
-                    { heading: "Pressure and Hydraulics", text: "Pressure in solids ($P = F/A$), liquids ($P = \rho g h$), and its application in Hydraulics and Atmospheric Pressure. 
+                    { heading: "Pressure and Hydraulics", text: "Pressure in solids ($P = F/A$), liquids ($P = \\rho g h$), and its application in Hydraulics and Atmospheric Pressure. 
 
 [Image of a hydraulic system with pistons]
 " },
                     { heading: "Dynamics (Motion)", text: "Defining Speed, Velocity, and Acceleration. Interpreting Distance-Time Graphs and Velocity-Time Graphs." },
                     { heading: "Force and Motion (Newton's Laws)", text: "Newtons First Law (Inertia), Second Law ($F = ma$), and Third Law (Action-Reaction). Concepts of Mass, Weight, and Terminal Velocity." },
-                    { heading: "Materials", text: "Defining Density ($\rho = m/V$). Investigating Stretching Materials, Hooke's Law ($F = kx$), and Elastic Energy." },
+                    { heading: "Materials", text: "Defining Density ($\\rho = m/V$). Investigating Stretching Materials, Hooke's Law ($F = kx$), and Elastic Energy." },
                     { heading: "Mechanical Energy", text: "Work Done ($W = Fs$), Kinetic Energy, Gravitational Energy, Elastic Potential Energy, and Mechanical Power." },
                     { heading: "Momentum", text: "Calculating Momentum, Conservation of Momentum, Elastic Collisions, and the relationship between Force and Momentum." },
                     { heading: "Turning Forces", text: "Centre of Mass and Stability, Levers, Moments, and Moments in Equilibrium (Principle of Moments)." }
@@ -380,29 +380,26 @@
             }
         };
 
-        const questions = [
-            { q: "If 3x + 4 = 19, what is x?", a: 5 },
-            { q: "If 2x - 7 = 11, what is x?", a: 9 },
-            { q: "If x / 2 + 3 = 8, what is x?", a: 10 },
-            { q: "If 5x - 1 = 29, what is x?", a: 6 },
-            { q: "If 4x = 24, what is x?", a: 6 },
-            { q: "If x - 15 = -2, what is x?", a: 13 }
-        ];
-
-        let currentQuestion = null;
-        let lastQuestionIndex = -1;
+        // Global variable to store the correct answer (no longer stored in an array)
+        let correctAnswer = null;
 
         // --- Core Lock Functions ---
 
         function loadRandomQuestion() {
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * questions.length);
-            } while (randomIndex === lastQuestionIndex);
+            // Generate random integers for the simple linear equation: ax + b = c
+            const a = Math.floor(Math.random() * 4) + 2;  // Coefficient 'a' (2 to 5)
+            const x = Math.floor(Math.random() * 10) + 3; // Solution 'x' (3 to 12)
+            const b = Math.floor(Math.random() * 7) + 1;  // Constant 'b' (1 to 7)
             
-            lastQuestionIndex = randomIndex;
-            currentQuestion = questions[randomIndex];
-            mathQuestionElement.textContent = currentQuestion.q;
+            // Calculate 'c' based on the intended solution 'x'
+            const c = (a * x) + b;
+            
+            // Store the correct answer
+            correctAnswer = x;
+            
+            // Format and display the question
+            const questionText = `Solve for x: If ${a}x + ${b} = ${c}, what is x?`;
+            mathQuestionElement.textContent = questionText;
         }
 
         function unlockSite() {
@@ -415,7 +412,8 @@
         function checkAnswer() {
             const userAnswer = Number(answerInput.value.trim());
 
-            if (!isNaN(userAnswer) && userAnswer === currentQuestion.a) {
+            // Check against the dynamically generated global answer
+            if (!isNaN(userAnswer) && userAnswer === correctAnswer) {
                 errorMsg.classList.add('hidden');
                 answerInput.classList.remove('shake');
                 unlockSite();
@@ -425,6 +423,7 @@
                 answerInput.value = ''; 
                 answerInput.focus();
                 
+                // Load a NEW, secure, random question on failure
                 loadRandomQuestion(); 
                 
                 setTimeout(() => {
