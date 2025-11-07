@@ -35,24 +35,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* === ANIMATED BACKGROUND & SCROLLBAR (Deep Cool Colors) === */
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        /* === NEW HOLOGRAPHIC GRID BACKGROUND (FIXED VENDOR SUPPORT) === */
+        
+        @keyframes scan-line {
+            0% { transform: translateY(0); opacity: 0.1; } 
+            100% { transform: translateY(100vh); opacity: 0.1; } 
         }
         
-        .animated-gradient {
-            /* Deeper, Cooler Gradient: Dark Blue, Deep Violet, Indigo, Midnight */
-            background: linear-gradient(-45deg, #0f0535, #1e0f4e, #1E1C53, #08001a);
-            background-size: 400% 400%;
-            animation: gradient-shift 15s ease infinite;
+        /* Webkit prefix for broader compatibility */
+        @-webkit-keyframes scan-line {
+            0% { -webkit-transform: translateY(0); opacity: 0.1; }
+            100% { -webkit-transform: translateY(100vh); opacity: 0.1; }
+        }
+
+        .holographic-grid {
+            /* Base dark background */
+            background-color: #060318; 
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: -2;
+            overflow: hidden;
+            /* Subtle dotted pattern for the grid base */
+            background-image: radial-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 0);
+            background-size: 30px 30px;
         }
+
+        .holographic-grid::after {
+            /* Pseudo-element for the animated scan line */
+            content: '';
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 50px; /* Thickness of the line */
+            
+            background: linear-gradient(0deg, transparent, rgba(57, 255, 20, 0.5), transparent); 
+            opacity: 0.1;
+            
+            /* Apply animations with vendor prefixes */
+            animation: scan-line 6s linear infinite;
+            -webkit-animation: scan-line 6s linear infinite;
+            
+            /* Initialize transform to start the line just off the top edge */
+            transform: translateY(-50px);
+            -webkit-transform: translateY(-50px);
+        }
+
+
+        /* === GENERAL STYLES & GLASS === */
 
         /* Glassmorphism effect */
         .glass {
@@ -83,7 +116,7 @@
             background: linear-gradient(180deg, #39FF14, #00FFFF);
         }
 
-        /* === ANIMATIONS & SHAKES === */
+        /* === ANIMATIONS & EFFECTS === */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -105,21 +138,12 @@
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
             transform: translateY(-2px);
         }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
         /* End Animations */
 
         /* === PAGE LAYOUT === */
         body {
             font-family: 'Inter', sans-serif;
             color: #b0c4de;
-            overflow: hidden;
             background-color: #08001a;
         }
 
@@ -130,44 +154,9 @@
             background-clip: text;
             color: transparent;
         }
-
-        /* === MODAL & CONTENT FIXES (ALGEBRA LOCK) === */
-        #gate-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            background-color: rgba(6, 0, 15, 0.9);
-        }
-
-        #site-content {
-            /* Essential lock state: invisible and unclickable */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s;
-            min-height: 100vh;
-        }
-
-        .content-visible {
-            /* This class is now critical for overriding the hidden state */
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
         
-        .glass-input {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #fff;
-            transition: all 0.3s ease;
-        }
-        .glass-input:focus {
-            border-color: #39FF14;
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        #site-content {
+            min-height: 100vh;
         }
         
         /* === FORMULA STYLING === */
@@ -185,28 +174,8 @@
     </style>
 </head>
 <body class="antialiased">
-    <div class="animated-gradient"></div>
+    <div class="holographic-grid"></div>
 
-    <div id="gate-modal">
-        <div class="glass-strong p-8 md:p-12 rounded-2xl max-w-lg w-11/12 text-center shadow-2xl glow fade-in">
-            <h2 class="text-3xl md:text-4xl font-black mb-4 theme-gradient-text">ACCESS DENIED: Quantum Lock Active</h2>
-            <p class="text-teal-300 mb-6">Input the correct sequence to stabilize the core and unlock the GCSE Physics content.</p>
-            
-            <div class="glass rounded-lg p-6 mb-6 min-h-[80px] flex justify-center items-center">
-                <p id="math-question" class="text-4xl font-bold text-white mb-0">
-                    Loading Question...
-                </p>
-            </div>
-
-            <input type="number" id="answer-input" placeholder="Enter solution sequence (integer)" class="glass-input w-full p-3 rounded-lg text-center text-xl mb-4" required>
-            
-            <button id="submit-answer-btn" class="bg-gradient-to-r from-theme-teal to-theme-blue w-full py-3 rounded-xl text-lg font-semibold text-theme-indigo transition-all duration-300 hover:scale-[1.01] glow text-black">
-                INITIATE PROTOCOL: UNLOCK
-            </button>
-
-            <p id="error-message" class="text-red-light mt-3 hidden shake">Error in sequence. Recalibrating...</p>
-        </div>
-    </div>
     <div id="site-content">
         
         <nav class="glass sticky top-0 z-40 border-b border-theme-teal/30">
@@ -301,18 +270,11 @@
     </div>
     <script>
         // --- Setup ---
-        const gateModal = document.getElementById('gate-modal');
         const siteContent = document.getElementById('site-content');
-        const submitBtn = document.getElementById('submit-answer-btn');
-        const answerInput = document.getElementById('answer-input');
-        const errorMsg = document.getElementById('error-message');
-        const mathQuestionElement = document.getElementById('math-question');
         const topicCards = document.querySelectorAll('.topic-card');
         const contentPlaceholder = document.getElementById('content-placeholder');
         const topicContentArea = document.getElementById('topic-content-area');
 
-        // Global variable to store the correct answer
-        let correctAnswer = null;
         
         // --- Physics Content Data (using LaTeX for formulas) ---
         // Note: LaTeX formulas are wrapped in a custom <span class="formula"> for styling
@@ -367,59 +329,7 @@
             }
         };
 
-
-        // --- Core Lock Functions ---
-
-        function loadRandomQuestion() {
-            // Generate simple linear equation: ax + b = c
-            // We ensure x is a positive integer between 3 and 10 to keep the math simple
-            const a = Math.floor(Math.random() * 3) + 2;  // Coefficient 'a' (2 to 4)
-            const x = Math.floor(Math.random() * 8) + 3; // Solution 'x' (3 to 10)
-            const b = Math.floor(Math.random() * 5) + 1;  // Constant 'b' (1 to 5)
-            
-            // Calculate 'c' based on the intended integer solution 'x'
-            const c = (a * x) + b;
-            
-            // Store the correct answer
-            correctAnswer = x;
-            
-            // Format and display the question
-            const questionText = `Solve for x: If ${a}x + ${b} = ${c}, what is x?`;
-            mathQuestionElement.textContent = questionText;
-        }
-
-        function unlockSite() {
-            // This forces the visibility changes and removes the modal/scroll lock
-            gateModal.style.display = 'none'; // Use inline style to ensure modal is hidden
-            siteContent.classList.add('content-visible');
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
-        }
-
-        function checkAnswer() {
-            // Robustly parse the input
-            const userAnswer = Number(answerInput.value.trim());
-
-            // Check against the dynamically generated global answer
-            if (!isNaN(userAnswer) && userAnswer === correctAnswer) {
-                errorMsg.classList.add('hidden');
-                answerInput.classList.remove('shake');
-                unlockSite();
-            } else {
-                errorMsg.classList.remove('hidden');
-                answerInput.classList.add('shake');
-                answerInput.value = '';
-                answerInput.focus();
-                
-                // Load a NEW, secure, random question on failure
-                loadRandomQuestion();
-                
-                setTimeout(() => {
-                    answerInput.classList.remove('shake');
-                }, 500);
-            }
-        }
-
-        // --- Revision Content Logic (Updated to handle submodules) ---
+        // --- Revision Content Logic ---
         /**
          * Loads and displays structured revision notes based on the topic.
          * @param {string} topic - The key of the selected topic.
@@ -452,22 +362,15 @@
         }
 
         // --- Initialization ---
-        // FIX: Call loadRandomQuestion() immediately to display the first question
-        loadRandomQuestion();
-
         window.onload = function() {
-            
-            // Algebra Gate Listeners
-            submitBtn.addEventListener('click', checkAnswer);
-            answerInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    checkAnswer();
-                }
-            });
             
             // Topic Card Listeners
             topicCards.forEach(card => {
                 card.addEventListener('click', () => {
+                    // Add a visual indicator to the selected card
+                    topicCards.forEach(c => c.classList.remove('glow', 'shadow-theme-blue'));
+                    card.classList.add('glow', 'shadow-theme-blue');
+                    
                     const topic = card.getAttribute('data-topic');
                     loadTopicContent(topic);
                 });
