@@ -10,7 +10,6 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        // Using a simple serif fallback, but a cyberpunk-like font is linked below
                         sans: ['Orbitron', 'sans-serif'],
                         mono: ['Share Tech Mono', 'monospace'],
                     },
@@ -235,7 +234,22 @@
                         <h3 class="text-xl font-semibold text-white font-orbitron">INITIATE DATA TRANSFER: SELECT MODULE</h3>
                         <p class="mt-1 text-sm">// Output displayed in this terminal_window //</p>
                     </div>
-                </div>
+
+                    <div id="algebra-lock" class="absolute inset-0 bg-cyber-black-ops/90 rounded-md p-8 flex flex-col items-center justify-center hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-cyber-neon-pink neon-glow mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v3h8z" />
+                        </svg>
+                        <p class="text-xl text-cyber-electric-blue font-orbitron mb-4">ACCESS DENIED. INPUT ALGEBRAIC KEY:</p>
+                        <p id="lock-question" class="text-3xl text-cyber-data-green font-mono mb-6"></p>
+                        
+                        <input type="number" id="lock-input" class="w-48 text-center p-3 text-lg font-mono bg-cyber-purple-dark text-white border-2 border-cyber-electric-blue rounded-sm focus:outline-none focus:border-cyber-neon-pink" placeholder="ENTER SOLUTION">
+                        
+                        <button id="lock-submit" class="mt-6 bg-cyber-neon-pink text-cyber-black-ops px-6 py-2 rounded-sm font-bold shadow-lg shadow-cyber-neon-pink/50 transition-all hover:bg-white hover:text-black">
+                            // DECRYPT //
+                        </button>
+                        <p id="lock-message" class="mt-4 text-sm text-red-500 font-mono hidden">// AUTHENTICATION FAILED //</p>
+                    </div>
+                    </div>
                 
                 <div id="topic-content-area" class="hidden glass rounded-md p-8">
                     </div>
@@ -255,8 +269,15 @@
         const topicCards = document.querySelectorAll('.topic-card');
         const contentPlaceholder = document.getElementById('content-placeholder');
         const topicContentArea = document.getElementById('topic-content-area');
+        const algebraLock = document.getElementById('algebra-lock');
+        const lockQuestion = document.getElementById('lock-question');
+        const lockInput = document.getElementById('lock-input');
+        const lockSubmit = document.getElementById('lock-submit');
+        const lockMessage = document.getElementById('lock-message');
 
-        
+        let correctAlgebraAnswer = null;
+        let pendingTopic = null;
+
         // --- Physics Content Data (using LaTeX for formulas) ---
         const PHYSICS_CONTENT = {
             "Energy": {
@@ -309,11 +330,12 @@
             }
         };
 
-        // --- Revision Content Logic ---
+        // --- Core Content Display Function ---
         function loadTopicContent(topic) {
             const data = PHYSICS_CONTENT[topic];
+            // [Content rendering logic is unchanged]
             if (!data || !data.submodules) {
-                topicContentArea.innerHTML = `<p class="text-xl text-red-light font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
+                topicContentArea.innerHTML = `<p class="text-xl text-red-500 font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
                 contentPlaceholder.classList.add('hidden');
                 topicContentArea.classList.remove('hidden');
                 return;
@@ -331,22 +353,77 @@
                 ${submodulesHtml}
             `;
             
+            // Hide lock and placeholder, show content
+            algebraLock.classList.add('hidden');
             contentPlaceholder.classList.add('hidden');
             topicContentArea.classList.remove('hidden');
         }
 
-        // --- Initialization ---
+        // --- ALGEBRA LOCK LOGIC ---
+
+        /** Generates a simple random linear equation (e.g., A + B = X). */
+        function generateLockProblem() {
+            const A = Math.floor(Math.random() * 10) + 5; // 5 to 14
+            const B = Math.floor(Math.random() * 10) + 1; // 1 to 10
+            
+            // Equation format: A + B = X
+            const question = `${A} + ${B} = X`;
+            correctAlgebraAnswer = A + B;
+            
+            lockQuestion.textContent = question;
+            lockInput.value = '';
+            lockMessage.classList.add('hidden');
+        }
+
+        /** Handles the submission of the lock input. */
+        function handleLockSubmission() {
+            const userInput = parseInt(lockInput.value);
+            
+            if (userInput === correctAlgebraAnswer) {
+                // Success! Load the content
+                lockMessage.classList.add('hidden');
+                loadTopicContent(pendingTopic);
+            } else {
+                // Failure! Show error message
+                lockInput.classList.add('border-red-500');
+                lockMessage.textContent = `// AUTHENTICATION FAILED. TRY AGAIN. //`;
+                lockMessage.classList.remove('hidden');
+                
+                // Regenerate question after a wrong answer for security theater
+                setTimeout(() => {
+                    lockInput.classList.remove('border-red-500');
+                    generateLockProblem(); 
+                }, 1000);
+            }
+        }
+        
+        // --- Initialization & Event Listeners ---
         window.onload = function() {
             
-            // Topic Card Listeners
             topicCards.forEach(card => {
                 card.addEventListener('click', () => {
-                    topicCards.forEach(c => c.classList.remove('glow-hover', 'border-4', 'border-cyber-neon-pink/80'));
+                    
+                    // 1. Highlight the selected card
+                    topicCards.forEach(c => c.classList.remove('border-4', 'border-cyber-neon-pink/80'));
                     card.classList.add('border-4', 'border-cyber-neon-pink/80');
                     
-                    const topic = card.getAttribute('data-topic');
-                    loadTopicContent(topic);
+                    // 2. Prepare the lock screen
+                    pendingTopic = card.getAttribute('data-topic');
+                    generateLockProblem(); 
+                    
+                    // 3. Hide previous content/placeholder and show the lock
+                    topicContentArea.classList.add('hidden');
+                    contentPlaceholder.classList.remove('hidden');
+                    algebraLock.classList.remove('hidden');
                 });
+            });
+
+            // Add listeners for the submit button and 'Enter' key
+            lockSubmit.addEventListener('click', handleLockSubmission);
+            lockInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    handleLockSubmission();
+                }
             });
         };
     </script>
