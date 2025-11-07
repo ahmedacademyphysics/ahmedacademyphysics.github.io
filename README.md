@@ -14,7 +14,7 @@
                     },
                     colors: {
                         theme: {
-                            // Deep Space Indigo / Primary Dark
+                            // Deep Space Indigo / Primary Dark (Still used for text/accents)
                             indigo: '#1E1C53',
                             // Electric Blue / Primary Light
                             blue: '#00FFFF',
@@ -35,17 +35,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* === DIGITAL MATRIX RAIN BACKGROUND (NEW ANIMATION) === */
+        /* === RAINBOW SWIRL BACKGROUND (NEW BRIGHT DESIGN) === */
         
-        /* Define the animation: shifting the background down by 100px */
-        @keyframes matrix-shift {
-            from { background-position: 0 0; }
-            to { background-position: 0 100px; }
+        /* Define the rotation animation */
+        @keyframes rotate-bg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
-        /* The new background container class */
-        .matrix-rain {
-            background-color: #060318; 
+        .rainbow-swirl {
+            /* Base background color is very dark, letting the gradient shine */
+            background-color: #00000a; 
             position: fixed;
             width: 100%;
             height: 100%;
@@ -53,33 +53,61 @@
             left: 0;
             z-index: -10; 
             overflow: hidden;
+        }
 
-            /* Base pattern: a subtle horizontal line with strong green accent */
-            background-image: linear-gradient(
-                to bottom, 
-                rgba(57, 255, 20, 0.2) 1px, 
-                transparent 1px
-            );
-            background-size: 100% 100px; /* The height of the pattern block */
+        /* Use a pseudo-element for the animated gradient layer */
+        .rainbow-swirl::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             
-            /* Apply the animation to shift the background position */
-            animation: matrix-shift 0.8s linear infinite; /* Fast, continuous vertical shift */
+            /* Create the vibrant, wide conic gradient */
+            background: conic-gradient(
+                from 0deg, 
+                #ff0000, /* Red */
+                #ff8000, /* Orange */
+                #ffff00, /* Yellow */
+                #00ff00, /* Green */
+                #00ffff, /* Cyan */
+                #0000ff, /* Blue */
+                #8000ff, /* Violet */
+                #ff0000  /* Red (to complete the loop) */
+            );
+            
+            /* Apply the continuous rotation animation */
+            animation: rotate-bg 20s linear infinite;
+        }
+        
+        /* Add a dark overlay to make the foreground text readable */
+        .rainbow-swirl::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Semi-transparent dark blue overlay */
+            background-color: rgba(30, 28, 83, 0.75); 
+            z-index: -9; /* Placed above the swirl but below content */
         }
 
 
-        /* === GENERAL STYLES & GLASS === */
+        /* === GENERAL STYLES & GLASS (Adjusted for brighter background) === */
 
-        /* Glassmorphism effect */
+        /* Glassmorphism effect now needs less dark tinting to show the color */
         .glass {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08); /* Slightly more transparent white */
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
         
         .glass-strong {
-            background: rgba(30, 28, 83, 0.4);
+            background: rgba(30, 28, 83, 0.6); /* Slightly more transparent dark */
             backdrop-filter: blur(30px);
-            border: 1px solid rgba(0, 206, 209, 0.5);
+            border: 1px solid rgba(0, 206, 209, 0.7);
             transition: all 0.3s ease;
         }
 
@@ -126,7 +154,8 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #b0c4de;
-            background-color: #08001a;
+            /* Background color set to black for maximum contrast with swirl */
+            background-color: #00000a; 
         }
 
         .theme-gradient-text {
@@ -156,7 +185,7 @@
     </style>
 </head>
 <body class="antialiased">
-    <div class="matrix-rain"></div>
+    <div class="rainbow-swirl"></div>
 
     <div id="site-content">
         
@@ -259,6 +288,7 @@
 
         
         // --- Physics Content Data (using LaTeX for formulas) ---
+        // Note: LaTeX formulas are wrapped in a custom <span class="formula"> for styling
         const PHYSICS_CONTENT = {
             "Energy": {
                 title: "Thermodynamics and Energy Systems",
