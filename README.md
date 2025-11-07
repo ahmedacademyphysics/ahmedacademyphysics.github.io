@@ -270,13 +270,16 @@
         let correctAlgebraAnswer = null;
         let pendingTopic = null;
 
-        // --- UPDATED PHYSICS CONTENT DATA ---
+        // --- FIXED PHYSICS CONTENT DATA ---
         const PHYSICS_CONTENT = {
             "Thermodynamics": {
                 title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
                 submodules: [
                     { heading: "Thermal Physics", text: `Covers **Thermal Expansion**, **Heat Capacity** (<span class="formula">E=mc\\Delta\\theta</span>), and **Latent Heat** (fusion/vaporisation). ` },
-                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. ` },
+                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. 
+
+[Image of heat transfer methods: conduction, convection, radiation]
+` },
                     { heading: "Energy Systems", text: `**Energy Stores** (Kinetic, Gravitational, Chemical, etc.). Calculating **Efficiency**: <span class="formula">Useful Output / Total Input</span>. Uses of **Sankey Diagrams**. ` },
                     { heading: "Gases and States", text: `**Brownian Motion** (random particle movement). Gas laws including **Boyle's Law** (<span class="formula">PV = const</span>), **Charles' Law**, and **Pressure Law**.` }
                 ]
@@ -285,16 +288,25 @@
                 title: "MECHANICS & DYNAMICS (MEC-ADV-3)",
                 submodules: [
                     { heading: "Forces and Diagrams", text: `Defining **Types of Force** and determining **Resultant Force** using **Free Body Diagrams**. The concept of **Upthrust**.` },
-                    { heading: "Pressure and Materials", text: `Pressure in solids (<span class="formula">P = F/A</span>) and liquids (<span class="formula">P = \\rho g h</span>). Principles of **Hydraulics**, **Atmospheric Pressure**, and **High Pressure Applications**. **Hooke's Law** and **Elastic Energy**. ` },
+                    { heading: "Pressure and Materials", text: `Pressure in solids (<span class="formula">P = F/A</span>) and liquids (<span class="formula">P = \\rho g h</span>). Principles of **Hydraulics**, **Atmospheric Pressure**, and **High Pressure Applications**. **Hooke's Law** and **Elastic Energy**. 
+
+[Image of a hydraulic brake system]
+` },
                     { heading: "Dynamics (Motion)", text: `**Speed and Velocity**, **Acceleration**, and analyzing motion using **Distance-Time** and **Velocity-Time Graphs**.` },
-                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. ` },
+                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. 
+
+[Image of Newton's cradle demonstrating momentum and energy transfer]
+` },
                     { heading: "Momentum and Turning Forces", text: `Calculating **Momentum** (<span class="formula">p = mv</span>), **Conservation of Momentum**, and **Force** as the rate of change of momentum. **Moments** and **Centre of Mass**.` }
                 ]
             },
             "Waves & Optics": {
                 title: "OSCILLATION, OPTICS, & SOUND (OSC-OPT-2)",
                 submodules: [
-                    { heading: "Describing Waves", text: `**Wave Types** (Transverse vs. Longitudinal), **Wave Properties** (Amplitude, Wavelength, Frequency), and **Wave Speed** formula: <span class="formula">v = f\\lambda</span>. ` },
+                    { heading: "Describing Waves", text: `**Wave Types** (Transverse vs. Longitudinal), **Wave Properties** (Amplitude, Wavelength, Frequency), and **Wave Speed** formula: <span class="formula">v = f\\lambda</span>. 
+
+[Image of transverse and longitudinal waves]
+` },
                     { heading: "Electromagnetic Waves (EM)", text: `The full **EM Spectrum** (Radio to Gamma) including **Uses**, **Dangers**, and **Imaging with X-Rays**.` },
                     { heading: "Sound Waves", text: `**Properties of Sound**, **Speed of Sound**, and uses of **Ultrasound**.` },
                     { heading: "Optics (Light)", text: `**Reflection**, **Curved Mirrors**, **Refraction of Light**, **Snell's Law**, **Total Internal Reflection** (used in fiber optics), **Lenses**, and the structure of **The Camera and Eye**. ` }
@@ -304,25 +316,46 @@
                 title: "CIRCUITRY, CHARGES, & POWER (ELEC-CIRC-4)",
                 submodules: [
                     { heading: "Charges and Static", text: `**Electric Fields**, **Static Electricity**, **Gold Leaf Electroscope**, **Moving Charges**, and the **Van der Graaf Generator**. Includes both **Uses** and **Dangers of Static Electricity**.` },
-                    { heading: "Circuits", text: `**Simple Circuits**, **Electrons, Atoms and Energy**. **Voltage and Current**, **Resistance** (<span class="formula">R=V/I</span>), and **Kirchhoff's Laws**. ` },
-                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). ` },
-                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). ` }
+                    { heading: "Circuits", text: `**Simple Circuits**, **Electrons, Atoms and Energy**. **Voltage and Current**, **Resistance** (<span class="formula">R=V/I</span>), and **Kirchhoff's Laws**. 
+
+[Image of a simple series and parallel circuit diagram]
+` },
+                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). 
+
+[Image of a three-pin plug showing safety features]
+` },
+                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). 
+
+[Image of a basic logic gate circuit]
+` }
                 ]
             },
             "Magnetics & EM": {
                 title: "MAGNETIC FIELDS & INDUCTION (MAG-IND-1.1)",
                 submodules: [
-                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. ` },
-                    { heading: "Induction and Transformers", text: `**Electromagnetic Induction** (generating current from motion), and the use of **Transformers** to step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>. ` }
+                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. 
+
+[Image of the Motor Effect using Fleming's Left-Hand Rule]
+` },
+                    { heading: "Induction and Transformers", text: `**Electromagnetic Induction** (generating current from motion), and the use of **Transformers** to step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>. 
+
+[Image of a step-up transformer]
+` }
                 ]
             },
             "Nuclear & Astro": {
                 title: "NUCLEAR PHYSICS & ASTRO DATA (NUC-ASTRO-5)",
                 submodules: [
-                    { heading: "The Atom and Radiation", text: `**Discovery of the Nucleus** (Rutherford), **Atomic Structure**. **Types of Radiation** (<span class="formula">\\alpha, \\beta, \\gamma</span>), **Properties of Radiation**, and **Dangers of Radiation**. ` },
+                    { heading: "The Atom and Radiation", text: `**Discovery of the Nucleus** (Rutherford), **Atomic Structure**. **Types of Radiation** (<span class="formula">\\alpha, \\beta, \\gamma</span>), **Properties of Radiation**, and **Dangers of Radiation**. 
+
+[Image of the Rutherford Gold Foil Experiment]
+` },
                     { heading: "Nuclear Processes", text: `**Detecting Radioactivity**, **Nuclear Reactions**. Calculating **Half Life**. **Nuclear Fission** (splitting), **Fission Reactors**, and **Nuclear Fusion** (joining). [Image comparing Nuclear Fission and Nuclear Fusion]` },
                     { heading: "Astronomy (Solar System)", text: `**Motion of the Earth and Moon**, **Moons and Satellites**, **Bodies of the Solar System**, and calculating **Orbital Speed**.` },
-                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. ` }
+                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. 
+
+[Image of the life cycle of stars: main sequence, red giant/supergiant, white dwarf/supernova]
+` }
                 ]
             }
         };
