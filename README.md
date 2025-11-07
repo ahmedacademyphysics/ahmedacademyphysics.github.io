@@ -63,7 +63,7 @@
             );
             background-size: 100% 100px; 
             
-            animation: grid-shift 12s linear infinite; 
+            animation: grid-shift 6s linear infinite; 
         }
 
         /* === GENERAL STYLES & GLASS === */
