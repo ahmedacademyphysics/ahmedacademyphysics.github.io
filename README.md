@@ -38,14 +38,13 @@
     <style>
         /* === CYBERPUNK BACKGROUND: ANIMATED CITY GRID / DATA STREAM === */
         
-        /* Define the subtle shift animation for the grid/data lines */
         @keyframes grid-shift {
             0% { background-position: 0 0; }
             100% { background-position: 0 -100px; }
         }
         
         .cyber-grid {
-            background-color: #08001A; /* Black Ops Dark */
+            background-color: #08001A;
             position: fixed;
             width: 100%;
             height: 100%;
@@ -54,45 +53,42 @@
             z-index: -10; 
             overflow: hidden;
             
-            /* Background pattern: fine lines of purple and blue data */
             background-image: linear-gradient(
                 to bottom, 
-                rgba(42, 10, 88, 0.8) 1px,  /* Dark Purple Line */
+                rgba(42, 10, 88, 0.8) 1px,
                 transparent 1px, 
                 transparent 20px, 
-                rgba(0, 240, 255, 0.1) 21px, /* Electric Blue line */
+                rgba(0, 240, 255, 0.1) 21px,
                 transparent 22px
             );
             background-size: 100% 100px; 
             
-            /* Apply slow, subtle downward animation */
             animation: grid-shift 12s linear infinite; 
         }
 
         /* === GENERAL STYLES & GLASS === */
 
         body {
-            font-family: 'Share Tech Mono', monospace; /* Use mono for terminal feel */
-            color: #E6E0F5; /* Light purple-white for readability */
+            font-family: 'Share Tech Mono', monospace;
+            color: #E6E0F5;
             background-color: #08001A;
         }
 
-        /* Glassmorphism effect: Dark, high contrast, neon borders */
         .glass {
-            background: rgba(42, 10, 88, 0.4); /* Dark purple transparency */
+            background: rgba(42, 10, 88, 0.4);
             backdrop-filter: blur(15px);
-            border: 2px solid #FF00A6; /* NEON PINK BORDER */
-            box-shadow: 0 0 10px rgba(255, 0, 166, 0.5); /* Neon glow */
+            border: 2px solid #FF00A6;
+            box-shadow: 0 0 10px rgba(255, 0, 166, 0.5);
         }
         
         .glass-strong {
-            background: rgba(42, 10, 88, 0.6); /* Less transparent for cards */
+            background: rgba(42, 10, 88, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid #00F0FF; /* Electric Blue border */
+            border: 1px solid #00F0FF;
             transition: all 0.2s ease;
         }
 
-        /* Custom scrollbar (Neon Pink/Blue) */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -110,7 +106,6 @@
         /* === TEXT & ACCENT STYLES === */
         
         .cyber-title-text {
-            /* Bold, impactful font for titles */
             font-family: 'Orbitron', sans-serif; 
             background: linear-gradient(to right, #FF00A6, #00F0FF, #00FF7F);
             -webkit-background-clip: text;
@@ -129,24 +124,21 @@
         .formula {
             display: inline-block;
             background-color: rgba(0, 255, 127, 0.15); 
-            color: #00FF7F; /* Data Green */
+            color: #00FF7F;
             padding: 2px 8px;
             margin: 0 4px;
-            border-radius: 2px; /* Sharper corners */
+            border-radius: 2px;
             font-family: 'Share Tech Mono', monospace;
             font-weight: bold;
         }
 
-        /* === ANIMATIONS & EFFECTS (Kept simple and fast) === */
+        /* === ANIMATIONS & EFFECTS === */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .fade-in {
             animation: fadeIn 0.4s ease-out;
-        }
-        .float {
-            animation: none; /* Removed the gentle float for an aggressive look */
         }
         .glow-hover:hover {
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 10px rgba(255, 0, 166, 0.6);
@@ -226,7 +218,7 @@
             </section>
 
             <section id="content-display" class="py-16 fade-in">
-                <div id="content-placeholder" class="glass rounded-md p-8 min-h-[300px] flex justify-center items-center border-dashed border-cyber-electric-blue/50">
+                <div id="content-placeholder" class="glass rounded-md p-8 min-h-[300px] flex flex-col items-center justify-center relative border-dashed border-cyber-electric-blue/50">
                     <div class="text-center text-cyber-electric-blue font-mono">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto mb-2 text-cyber-neon-pink neon-glow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -235,7 +227,7 @@
                         <p class="mt-1 text-sm">// Output displayed in this terminal_window //</p>
                     </div>
 
-                    <div id="algebra-lock" class="absolute inset-0 bg-cyber-black-ops/90 rounded-md p-8 flex flex-col items-center justify-center hidden">
+                    <div id="algebra-lock" class="absolute inset-0 bg-cyber-black-ops/95 rounded-md p-8 flex flex-col items-center justify-center hidden z-20">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-cyber-neon-pink neon-glow mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v3h8z" />
                         </svg>
@@ -333,7 +325,7 @@
         // --- Core Content Display Function ---
         function loadTopicContent(topic) {
             const data = PHYSICS_CONTENT[topic];
-            // [Content rendering logic is unchanged]
+            
             if (!data || !data.submodules) {
                 topicContentArea.innerHTML = `<p class="text-xl text-red-500 font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
                 contentPlaceholder.classList.add('hidden');
@@ -363,16 +355,16 @@
 
         /** Generates a simple random linear equation (e.g., A + B = X). */
         function generateLockProblem() {
-            const A = Math.floor(Math.random() * 10) + 5; // 5 to 14
-            const B = Math.floor(Math.random() * 10) + 1; // 1 to 10
+            const A = Math.floor(Math.random() * 10) + 5;
+            const B = Math.floor(Math.random() * 10) + 1;
             
-            // Equation format: A + B = X
             const question = `${A} + ${B} = X`;
             correctAlgebraAnswer = A + B;
             
             lockQuestion.textContent = question;
             lockInput.value = '';
             lockMessage.classList.add('hidden');
+            lockInput.classList.remove('border-red-500');
         }
 
         /** Handles the submission of the lock input. */
@@ -382,16 +374,16 @@
             if (userInput === correctAlgebraAnswer) {
                 // Success! Load the content
                 lockMessage.classList.add('hidden');
+                lockInput.classList.remove('border-red-500');
                 loadTopicContent(pendingTopic);
             } else {
-                // Failure! Show error message
+                // Failure! Show error message and shake effect
                 lockInput.classList.add('border-red-500');
                 lockMessage.textContent = `// AUTHENTICATION FAILED. TRY AGAIN. //`;
                 lockMessage.classList.remove('hidden');
                 
-                // Regenerate question after a wrong answer for security theater
+                // Optional: Regeneration delay for effect
                 setTimeout(() => {
-                    lockInput.classList.remove('border-red-500');
                     generateLockProblem(); 
                 }, 1000);
             }
@@ -411,9 +403,9 @@
                     pendingTopic = card.getAttribute('data-topic');
                     generateLockProblem(); 
                     
-                    // 3. Hide previous content/placeholder and show the lock
-                    topicContentArea.classList.add('hidden');
+                    // 3. Ensure placeholder is visible and show the lock overlay
                     contentPlaceholder.classList.remove('hidden');
+                    topicContentArea.classList.add('hidden'); // Ensure content is hidden
                     algebraLock.classList.remove('hidden');
                 });
             });
