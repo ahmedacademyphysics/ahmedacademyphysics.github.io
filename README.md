@@ -132,12 +132,12 @@
             font-weight: bold;
         }
 
-        /* === INFO EMBED STYLING (Datapad Blips) === */
+        /* The info-embed class is kept for potential future use but is unused in the HTML */
         .info-embed {
             margin-top: 12px;
             padding: 8px;
-            background-color: rgba(0, 240, 255, 0.1); /* Light blue background */
-            border-left: 3px solid #00F0FF; /* Electric blue border */
+            background-color: rgba(0, 240, 255, 0.1);
+            border-left: 3px solid #00F0FF;
             color: #00F0FF;
             font-size: 0.85rem;
             line-height: 1.4;
@@ -204,44 +204,26 @@
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Thermodynamics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">THERMO_DYNAMICS_CORE</h3>
                         <p class="text-sm text-gray-300 font-mono">Heat, energy conservation, efficiency protocols, and gas laws.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: **Specific Heat Capacity** measures the energy needed to change $1 \text{ kg}$ of a substance by $1^\circ\text{C}$.
-                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Mechanics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">MECHANICS_ADVANCED_V3</h3>
                         <p class="text-sm text-gray-300 font-mono">Forces, pressure, motion dynamics, materials science, and momentum.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: **Momentum** is conserved in all collisions and explosions in a closed system.
-                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Waves & Optics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">OSCILLATION_OPTICS_V2</h3>
                         <p class="text-sm text-gray-300 font-mono">Wave propagation, EM spectrum, sound, and light reflection/refraction.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: The **EM Spectrum** is a continuous range of waves, all traveling at the **speed of light** ($3.0 \times 10^8 \text{ m/s}$).
-                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Electricity">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">CIRCUITRY_CHARGES_V4</h3>
                         <p class="text-sm text-gray-300 font-mono">Static electricity, circuits, domestic power systems, and electronic components.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: **Ohm's Law** states that current is directly proportional to voltage, provided temperature remains constant.
-                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Magnetics & EM">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION_V1.1</h3>
                         <p class="text-sm text-gray-300 font-mono">Magnetic fields, motor/generator effects, and AC transformer schematics.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: **Fleming's Left-Hand Rule** predicts the direction of force in the **Motor Effect**.
-                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Nuclear & Astro">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_ASTRO_CORE_V5</h3>
                         <p class="text-sm text-gray-300 font-mono">Atomic structure, nuclear decay, fusion/fission, and space cosmology data.</p>
-                        <div class="info-embed font-mono mt-4">
-                            [DATAPAD] Key Concept: **Redshift** provides strong evidence that the universe is **expanding**.
-                        </div>
                     </div>
                 </div>
             </section>
@@ -301,7 +283,6 @@
         let pendingTopic = null;
 
         // --- Physics Content Data (using LaTeX for formulas) ---
-        // (NOTE: Content remains the same as provided, ensuring the unlocked text is rich)
         const PHYSICS_CONTENT = {
             "Thermodynamics": {
                 title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
