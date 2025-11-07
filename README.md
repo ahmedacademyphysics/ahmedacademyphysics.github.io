@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -196,11 +195,12 @@
 
         // Define a list of randomized questions and their answers
         const questions = [
-            { q: "If **x + 5 = 11**, what is the value of **x**?", a: 6 },
-            { q: "If **x - 3 = 9**, what is the value of **x**?", a: 12 },
-            { q: "If **2x = 14**, what is the value of **x**?", a: 7 },
-            { q: "If **x / 4 = 5**, what is the value of **x**?", a: 20 },
-            { q: "If **x + 8 = 12**, what is the value of **x**?", a: 4 }
+            { q: "If x + 5 = 11, what is the value of x?", a: 6 },
+            { q: "If x - 3 = 9, what is the value of x?", a: 12 },
+            { q: "If 2x = 14, what is the value of x?", a: 7 },
+            { q: "If x / 4 = 5, what is the value of x?", a: 20 },
+            { q: "If x + 8 = 12, what is the value of x?", a: 4 },
+            { q: "If 3x = 18, what is the value of x?", a: 6 } // Added a new question!
         ];
 
         let currentQuestion = null;
@@ -211,7 +211,8 @@
             currentQuestion = questions[randomIndex];
             
             // Update the HTML element with the question text
-            mathQuestionElement.innerHTML = currentQuestion.q;
+            // Note: The 'text-4xl font-bold' class on the <p> element handles the visual emphasis.
+            mathQuestionElement.textContent = currentQuestion.q;
         }
 
         function unlockSite() {
