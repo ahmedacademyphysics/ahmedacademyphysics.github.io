@@ -80,11 +80,11 @@
     <div id="gate-modal">
         <div class="bg-gray-900 p-8 md:p-12 rounded-xl border-2 border-orange-500 max-w-lg w-11/12 text-center shadow-2xl">
             <h2 class="text-3xl md:text-4xl font-black mb-4 fire-text">Access Challenge Required</h2>
-            <p class="text-gray-400 mb-6">Solve this basic GCSE math equation to prove you're ready to study Physics!</p>
+            <p class="text-gray-400 mb-6">Solve this basic math equation to prove you're ready to study Physics!</p>
             
             <div class="bg-gray-800 p-6 rounded-lg mb-6">
-                <p class="text-4xl font-bold text-white mb-4">
-                    If $3x - 5 = 7$, what is the value of $x$?
+                <p id="math-question" class="text-4xl font-bold text-white mb-4">
+                    Loading Question...
                 </p>
             </div>
 
@@ -192,7 +192,27 @@
         const submitBtn = document.getElementById('submit-answer-btn');
         const answerInput = document.getElementById('answer-input');
         const errorMsg = document.getElementById('error-message');
-        const CORRECT_ANSWER = 4; // Solution for 3x - 5 = 7 (3x = 12, x = 4)
+        const mathQuestionElement = document.getElementById('math-question');
+
+        // Define a list of randomized questions and their answers
+        const questions = [
+            { q: "If **x + 5 = 11**, what is the value of **x**?", a: 6 },
+            { q: "If **x - 3 = 9**, what is the value of **x**?", a: 12 },
+            { q: "If **2x = 14**, what is the value of **x**?", a: 7 },
+            { q: "If **x / 4 = 5**, what is the value of **x**?", a: 20 },
+            { q: "If **x + 8 = 12**, what is the value of **x**?", a: 4 }
+        ];
+
+        let currentQuestion = null;
+
+        function loadRandomQuestion() {
+            // Select a random question from the array
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[randomIndex];
+            
+            // Update the HTML element with the question text
+            mathQuestionElement.innerHTML = currentQuestion.q;
+        }
 
         function unlockSite() {
             gateModal.style.display = 'none';
@@ -201,9 +221,11 @@
         }
 
         function checkAnswer() {
+            // Parse the input as an integer
             const userAnswer = parseInt(answerInput.value.trim());
 
-            if (userAnswer === CORRECT_ANSWER) {
+            // Check if the input matches the answer of the currently loaded question
+            if (userAnswer === currentQuestion.a) {
                 // Correct answer
                 errorMsg.classList.add('hidden');
                 unlockSite();
@@ -223,11 +245,12 @@
             }
         });
 
-        // Hide main content on load and prevent scrolling until unlocked
+        // Hide main content on load and load the first question
         document.addEventListener('DOMContentLoaded', () => {
+            loadRandomQuestion(); // Load a random question when the page loads
             document.body.style.overflow = 'hidden'; 
 
-            // Existing topic card click logic (moved inside DOMContentLoaded)
+            // Existing topic card click logic
             const topicCards = document.querySelectorAll('.topic-card');
             const contentPlaceholder = document.getElementById('content-placeholder');
             const topicContentArea = document.getElementById('topic-content-area');
