@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -193,14 +194,17 @@
         const errorMsg = document.getElementById('error-message');
         const mathQuestionElement = document.getElementById('math-question');
 
-        // Define a list of randomized questions and their answers
+        // Define a list of randomized Year 8/9 level questions and their answers
         const questions = [
-            { q: "If x + 5 = 11, what is the value of x?", a: 6 },
-            { q: "If x - 3 = 9, what is the value of x?", a: 12 },
-            { q: "If 2x = 14, what is the value of x?", a: 7 },
-            { q: "If x / 4 = 5, what is the value of x?", a: 20 },
-            { q: "If x + 8 = 12, what is the value of x?", a: 4 },
-            { q: "If 3x = 18, what is the value of x?", a: 6 } // Added a new question!
+            // Two-step equations
+            { q: "If 3x + 4 = 19, what is the value of x?", a: 5 }, // 3x = 15
+            { q: "If 2x - 7 = 11, what is the value of x?", a: 9 },  // 2x = 18
+            { q: "If x / 2 + 3 = 8, what is the value of x?", a: 10 }, // x/2 = 5
+            { q: "If 5x - 1 = 29, what is the value of x?", a: 6 },  // 5x = 30
+            
+            // Simple equations (kept a couple for variety)
+            { q: "If 4x = 24, what is the value of x?", a: 6 },
+            { q: "If x - 15 = -2, what is the value of x?", a: 13 }
         ];
 
         let currentQuestion = null;
@@ -211,7 +215,6 @@
             currentQuestion = questions[randomIndex];
             
             // Update the HTML element with the question text
-            // Note: The 'text-4xl font-bold' class on the <p> element handles the visual emphasis.
             mathQuestionElement.textContent = currentQuestion.q;
         }
 
@@ -282,6 +285,3 @@
             });
         });
     </script>
-
-</body>
-</html>
