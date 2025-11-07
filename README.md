@@ -132,6 +132,17 @@
             font-weight: bold;
         }
 
+        /* === INFO EMBED STYLING (Datapad Blips) === */
+        .info-embed {
+            margin-top: 12px;
+            padding: 8px;
+            background-color: rgba(0, 240, 255, 0.1); /* Light blue background */
+            border-left: 3px solid #00F0FF; /* Electric blue border */
+            color: #00F0FF;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
         /* === ANIMATIONS & EFFECTS === */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -160,7 +171,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block text-cyber-neon-pink" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM5 9a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm3 3a1 1 0 100 2h4a1 1 0 100-2H8z" clip-rule="evenodd" />
                             </svg>
-                            AHMED ACADEMY
+                            ARASAKA DATABASE
                         </span>
                     </div>
                     <div class="flex items-center space-x-4 font-mono">
@@ -193,26 +204,44 @@
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Thermodynamics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">THERMO_DYNAMICS_CORE</h3>
                         <p class="text-sm text-gray-300 font-mono">Heat, energy conservation, efficiency protocols, and gas laws.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: **Specific Heat Capacity** measures the energy needed to change $1 \text{ kg}$ of a substance by $1^\circ\text{C}$.
+                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Mechanics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">MECHANICS_ADVANCED_V3</h3>
                         <p class="text-sm text-gray-300 font-mono">Forces, pressure, motion dynamics, materials science, and momentum.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: **Momentum** is conserved in all collisions and explosions in a closed system.
+                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Waves & Optics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">OSCILLATION_OPTICS_V2</h3>
                         <p class="text-sm text-gray-300 font-mono">Wave propagation, EM spectrum, sound, and light reflection/refraction.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: The **EM Spectrum** is a continuous range of waves, all traveling at the **speed of light** ($3.0 \times 10^8 \text{ m/s}$).
+                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Electricity">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">CIRCUITRY_CHARGES_V4</h3>
                         <p class="text-sm text-gray-300 font-mono">Static electricity, circuits, domestic power systems, and electronic components.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: **Ohm's Law** states that current is directly proportional to voltage, provided temperature remains constant.
+                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Magnetics & EM">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION_V1.1</h3>
                         <p class="text-sm text-gray-300 font-mono">Magnetic fields, motor/generator effects, and AC transformer schematics.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: **Fleming's Left-Hand Rule** predicts the direction of force in the **Motor Effect**.
+                        </div>
                     </div>
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Nuclear & Astro">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_ASTRO_CORE_V5</h3>
                         <p class="text-sm text-gray-300 font-mono">Atomic structure, nuclear decay, fusion/fission, and space cosmology data.</p>
+                        <div class="info-embed font-mono mt-4">
+                            [DATAPAD] Key Concept: **Redshift** provides strong evidence that the universe is **expanding**.
+                        </div>
                     </div>
                 </div>
             </section>
@@ -234,14 +263,14 @@
                         <p class="text-xl text-cyber-electric-blue font-orbitron mb-4">ACCESS DENIED. INPUT ALGEBRAIC KEY:</p>
                         <p id="lock-question" class="text-3xl text-cyber-data-green font-mono mb-6"></p>
                         
-                        <input type="number" id="lock-input" class="w-48 text-center p-3 text-lg font-mono bg-cyber-purple-dark text-white border-2 border-cyber-electric-blue rounded-sm focus:outline-none focus:border-cyber-neon-pink" placeholder="ENTER SOLUTION">
+                        <input type="number" id="lock-input" class="w-48 text-center p-3 text-lg font-mono bg-cyber-purple-dark text-white border-2 border-cyber-electric-blue rounded-sm focus:outline-none focus:border-cyber-neon-pink" placeholder="SOLVE FOR X">
                         
                         <button id="lock-submit" class="mt-6 bg-cyber-neon-pink text-cyber-black-ops px-6 py-2 rounded-sm font-bold shadow-lg shadow-cyber-neon-pink/50 transition-all hover:bg-white hover:text-black">
                             // DECRYPT //
                         </button>
                         <p id="lock-message" class="mt-4 text-sm text-red-500 font-mono hidden">// AUTHENTICATION FAILED //</p>
                     </div>
-                </div>
+                    </div>
                 
                 <div id="topic-content-area" class="hidden glass rounded-md p-8">
                     </div>
@@ -266,20 +295,19 @@
         const lockInput = document.getElementById('lock-input');
         const lockSubmit = document.getElementById('lock-submit');
         const lockMessage = document.getElementById('lock-message');
+        const contentDisplaySection = document.getElementById('content-display');
 
         let correctAlgebraAnswer = null;
         let pendingTopic = null;
 
-        // --- FIXED PHYSICS CONTENT DATA ---
+        // --- Physics Content Data (using LaTeX for formulas) ---
+        // (NOTE: Content remains the same as provided, ensuring the unlocked text is rich)
         const PHYSICS_CONTENT = {
             "Thermodynamics": {
                 title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
                 submodules: [
                     { heading: "Thermal Physics", text: `Covers **Thermal Expansion**, **Heat Capacity** (<span class="formula">E=mc\\Delta\\theta</span>), and **Latent Heat** (fusion/vaporisation). ` },
-                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. 
-
-[Image of heat transfer methods: conduction, convection, radiation]
-` },
+                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. ` },
                     { heading: "Energy Systems", text: `**Energy Stores** (Kinetic, Gravitational, Chemical, etc.). Calculating **Efficiency**: <span class="formula">Useful Output / Total Input</span>. Uses of **Sankey Diagrams**. ` },
                     { heading: "Gases and States", text: `**Brownian Motion** (random particle movement). Gas laws including **Boyle's Law** (<span class="formula">PV = const</span>), **Charles' Law**, and **Pressure Law**.` }
                 ]
@@ -293,10 +321,7 @@
 [Image of a hydraulic brake system]
 ` },
                     { heading: "Dynamics (Motion)", text: `**Speed and Velocity**, **Acceleration**, and analyzing motion using **Distance-Time** and **Velocity-Time Graphs**.` },
-                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. 
-
-[Image of Newton's cradle demonstrating momentum and energy transfer]
-` },
+                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. ` },
                     { heading: "Momentum and Turning Forces", text: `Calculating **Momentum** (<span class="formula">p = mv</span>), **Conservation of Momentum**, and **Force** as the rate of change of momentum. **Moments** and **Centre of Mass**.` }
                 ]
             },
@@ -320,23 +345,14 @@
 
 [Image of a simple series and parallel circuit diagram]
 ` },
-                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). 
-
-[Image of a three-pin plug showing safety features]
-` },
-                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). 
-
-[Image of a basic logic gate circuit]
-` }
+                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). ` },
+                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). ` }
                 ]
             },
             "Magnetics & EM": {
                 title: "MAGNETIC FIELDS & INDUCTION (MAG-IND-1.1)",
                 submodules: [
-                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. 
-
-[Image of the Motor Effect using Fleming's Left-Hand Rule]
-` },
+                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. ` },
                     { heading: "Induction and Transformers", text: `**Electromagnetic Induction** (generating current from motion), and the use of **Transformers** to step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>. 
 
 [Image of a step-up transformer]
@@ -352,10 +368,7 @@
 ` },
                     { heading: "Nuclear Processes", text: `**Detecting Radioactivity**, **Nuclear Reactions**. Calculating **Half Life**. **Nuclear Fission** (splitting), **Fission Reactors**, and **Nuclear Fusion** (joining). [Image comparing Nuclear Fission and Nuclear Fusion]` },
                     { heading: "Astronomy (Solar System)", text: `**Motion of the Earth and Moon**, **Moons and Satellites**, **Bodies of the Solar System**, and calculating **Orbital Speed**.` },
-                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. 
-
-[Image of the life cycle of stars: main sequence, red giant/supergiant, white dwarf/supernova]
-` }
+                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. ` }
                 ]
             }
         };
@@ -389,16 +402,34 @@
             topicContentArea.classList.remove('hidden');
         }
 
-        // --- ALGEBRA LOCK LOGIC (UNTOUCHED) ---
+        // --- ALGEBRA LOCK LOGIC (Y8-Y9 LEVEL) ---
 
-        /** Generates a simple random linear equation (e.g., A + B = X). */
+        /** Generates a random linear equation of the form ax + b = c. */
         function generateLockProblem() {
-            const A = Math.floor(Math.random() * 10) + 5;
-            const B = Math.floor(Math.random() * 10) + 1;
+            // a: Multiplier (2 to 5)
+            const a = Math.floor(Math.random() * 4) + 2; 
             
-            const question = `${A} + ${B} = X`;
-            correctAlgebraAnswer = A + B;
+            // b: Constant term (-9 to 9, excluding 0)
+            let b = Math.floor(Math.random() * 19) - 9;
+            if (b === 0) b = 1; // Avoid trivial problems
             
+            // x: Integer solution (1 to 5)
+            const x = Math.floor(Math.random() * 5) + 1; 
+            
+            // c: Result of the equation (a*x + b)
+            const c = a * x + b;
+            
+            correctAlgebraAnswer = x;
+            
+            let question;
+            if (b < 0) {
+                // e.g., 3x - 5 = 10
+                question = `${a}x - ${Math.abs(b)} = ${c}`;
+            } else {
+                // e.g., 2x + 7 = 15
+                question = `${a}x + ${b} = ${c}`;
+            }
+
             lockQuestion.textContent = question;
             lockInput.value = '';
             lockMessage.classList.add('hidden');
@@ -415,16 +446,24 @@
                 lockInput.classList.remove('border-red-500');
                 loadTopicContent(pendingTopic);
             } else {
-                // Failure! Show error message and shake effect
+                // Failure! Show error message
                 lockInput.classList.add('border-red-500');
                 lockMessage.textContent = `// AUTHENTICATION FAILED. TRY AGAIN. //`;
                 lockMessage.classList.remove('hidden');
                 
-                // Optional: Regeneration delay for effect
+                // Regenerate for effect
                 setTimeout(() => {
                     generateLockProblem(); 
                 }, 1000);
             }
+        }
+        
+        // --- SCROLL FIX FUNCTION ---
+        function scrollToContent() {
+            contentDisplaySection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
         
         // --- Initialization & Event Listeners ---
@@ -433,18 +472,22 @@
             topicCards.forEach(card => {
                 card.addEventListener('click', () => {
                     
-                    // 1. Highlight the selected card
+                    // 1. SCROLL FIX: Move viewport to the content area
+                    scrollToContent();
+
+                    // 2. Highlight the selected card
                     topicCards.forEach(c => c.classList.remove('border-4', 'border-cyber-neon-pink/80'));
                     card.classList.add('border-4', 'border-cyber-neon-pink/80');
                     
-                    // 2. Prepare the lock screen
+                    // 3. Prepare and show the lock screen
                     pendingTopic = card.getAttribute('data-topic');
                     generateLockProblem(); 
                     
-                    // 3. Ensure placeholder is visible and show the lock overlay
+                    // 4. Ensure placeholder is visible and show the lock overlay
                     contentPlaceholder.classList.remove('hidden');
-                    topicContentArea.classList.add('hidden'); // Ensure content is hidden
+                    topicContentArea.classList.add('hidden');
                     algebraLock.classList.remove('hidden');
+                    lockInput.focus(); // Focus on the input field
                 });
             });
 
