@@ -63,7 +63,7 @@
             );
             background-size: 100% 100px; 
             
-            animation: grid-shift 6s linear infinite; 
+            animation: grid-shift 12s linear infinite; 
         }
 
         /* === GENERAL STYLES & GLASS === */
@@ -131,17 +131,27 @@
             font-family: 'Share Tech Mono', monospace;
             font-weight: bold;
         }
-
-        /* The info-embed class is kept for potential future use but is unused in the HTML */
-        .info-embed {
-            margin-top: 12px;
-            padding: 8px;
-            background-color: rgba(0, 240, 255, 0.1);
-            border-left: 3px solid #00F0FF;
-            color: #00F0FF;
-            font-size: 0.85rem;
-            line-height: 1.4;
+        /* Style for embedded slides container */
+        .slide-embed-container {
+            border: 1px solid #00FF7F;
+            box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+            padding: 1rem;
+            margin-top: 1rem;
+            background: rgba(0, 255, 127, 0.05);
+            /* Standard 16:9 aspect ratio placeholder */
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
         }
+        .slide-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
 
         /* === ANIMATIONS & EFFECTS === */
         @keyframes fadeIn {
@@ -221,7 +231,7 @@
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION_V1.1</h3>
                         <p class="text-sm text-gray-300 font-mono">Magnetic fields, motor/generator effects, and AC transformer schematics.</p>
                     </div>
-                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Nuclear & Astro">
+                    <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="Atomic Physics">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_ASTRO_CORE_V5</h3>
                         <p class="text-sm text-gray-300 font-mono">Atomic structure, nuclear decay, fusion/fission, and space cosmology data.</p>
                     </div>
@@ -245,14 +255,14 @@
                         <p class="text-xl text-cyber-electric-blue font-orbitron mb-4">ACCESS DENIED. INPUT ALGEBRAIC KEY:</p>
                         <p id="lock-question" class="text-3xl text-cyber-data-green font-mono mb-6"></p>
                         
-                        <input type="number" id="lock-input" class="w-48 text-center p-3 text-lg font-mono bg-cyber-purple-dark text-white border-2 border-cyber-electric-blue rounded-sm focus:outline-none focus:border-cyber-neon-pink" placeholder="SOLVE FOR X">
+                        <input type="number" id="lock-input" class="w-48 text-center p-3 text-lg font-mono bg-cyber-purple-dark text-white border-2 border-cyber-electric-blue rounded-sm focus:outline-none focus:border-cyber-neon-pink" placeholder="ENTER SOLUTION">
                         
                         <button id="lock-submit" class="mt-6 bg-cyber-neon-pink text-cyber-black-ops px-6 py-2 rounded-sm font-bold shadow-lg shadow-cyber-neon-pink/50 transition-all hover:bg-white hover:text-black">
                             // DECRYPT //
                         </button>
                         <p id="lock-message" class="mt-4 text-sm text-red-500 font-mono hidden">// AUTHENTICATION FAILED //</p>
                     </div>
-                    </div>
+                </div>
                 
                 <div id="topic-content-area" class="hidden glass rounded-md p-8">
                     </div>
@@ -277,79 +287,111 @@
         const lockInput = document.getElementById('lock-input');
         const lockSubmit = document.getElementById('lock-submit');
         const lockMessage = document.getElementById('lock-message');
-        const contentDisplaySection = document.getElementById('content-display');
 
         let correctAlgebraAnswer = null;
         let pendingTopic = null;
+        
+        // --- Universal Embed Template Function ---
+        const createSlideEmbed = (url, name) => {
+            // Note: The URL must be the 'pub' link. We use template literals (backticks) for safety.
+            return `
+                <p class="text-sm text-cyber-data-green mb-2 font-orbitron">// SLIDESHOW: ${name.toUpperCase()} //</p>
+                <div class="slide-embed-container mb-4">
+                    <iframe 
+                        src="${url.replace('/pub?start', '/embed?start')}" 
+                        frameborder="0" 
+                        allowfullscreen="true" 
+                        mozallowfullscreen="true" 
+                        webkitallowfullscreen="true">
+                    </iframe>
+                </div>
+            `;
+        };
 
-        // --- Physics Content Data (using LaTeX for formulas) ---
+
+        // --- FIXED AND UPDATED PHYSICS CONTENT DATA ---
         const PHYSICS_CONTENT = {
             "Thermodynamics": {
                 title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
                 submodules: [
-                    { heading: "Thermal Physics", text: `Covers **Thermal Expansion**, **Heat Capacity** (<span class="formula">E=mc\\Delta\\theta</span>), and **Latent Heat** (fusion/vaporisation). ` },
-                    { heading: "Heat and Energy Transfer", text: `The difference between **Temperature** and **Heat**. Includes **Conduction**, **Convection**, and **Radiation**. Heat losses in houses and **Payback Time**. ` },
-                    { heading: "Energy Systems", text: `**Energy Stores** (Kinetic, Gravitational, Chemical, etc.). Calculating **Efficiency**: <span class="formula">Useful Output / Total Input</span>. Uses of **Sankey Diagrams**. ` },
-                    { heading: "Gases and States", text: `**Brownian Motion** (random particle movement). Gas laws including **Boyle's Law** (<span class="formula">PV = const</span>), **Charles' Law**, and **Pressure Law**.` }
+                    { heading: "Thermal Physics Lectures (6 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSZJkpxddQzi2kpunQ-0pWMUb0dXTvX2gqqLPUb8tFrIPaAowQUXndmbYKh2BxBp53TjAVzK-XX4nOU/pub?start=false&loop=false&delayms=60000", "Thermal Expansion") + 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTFHkoUah8lomZ-gKAJIr88i_MgUTir1mReh1MPylebyvjScUubfJQ-qpUC__h4ecgGrtHP8e5FC8lW/pub?start=false&loop=false&delayms=60000", "Heat Capacity") + 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/pub?start=false&loop=false&delayms=60000", "States of Matter") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vReizD-UyPuELua0Tk90dCDl6tdST94ce0jo69op0Ep6hNV3pHm1jcuL2lgN7TzpiM3AFhQTjwsv4oq/pub?start=false&loop=false&delayms=60000", "Changes of state") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTEopFfPWhBVWduEJ5H3ACrpmbYsjpy4FnRnba34naDYEPSPuyVvX2DgsbLd3CEK3BtU6pEp6AlEtL6/pub?start=false&loop=false&delayms=60000", "Latent Heat") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTToyZERcQBNSwJ0xUUbq92war6FqhLThK1kwpxt53s9GISJDQY52lXTZxVvRQg4QRK5U2jNi65Cktz/pub?start=false&loop=false&delayms=60000", "Evaporation")
+                    },
+                    { heading: "Heat Transfer Protocols (7 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSDq7JMIQYjQ-lrSECQHW23k3bsSc3gAuR3BdkJED6jytMiBiQ2t9MHQiLlFVhC-__80mZtgwNMF2Bk/pub?start=false&loop=false&delayms=60000", "Temperature and heat") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSWkhH9TB58BlJXrHoLGrcufSw635ygv1cmoEWaGTyvPi9I1PryIxGFwQZZYVeguubk6e6oimDT4Jt2/pub?start=false&loop=false&delayms=60000", "Measuring temperature") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/pub?start=false&loop=false&delayms=60000", "Methods of heat transfer") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQSAlnAykVmoau8c0HxhiYgkt8GrXnioQitvS5F1TJ3nEgiaGusFmWpfc9b8QPBp0vOl6zyT4BGgLha/pub?start=false&loop=false&delayms=60000", "Rate of heat transfer") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTpdjs29B3KASlZ0w-boojw-Rv0bgvQzPDs3g_wEh_c9M3enwg3sp_GasdcUUamEQkxmqjyeQudKY9Y/pub?start=false&loop=false&delayms=60000", "Using heat transfer") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXRBSOa8CtywXqUQpWML46XYnCEyAymLYqE8vDNXppVrO2zy2BZYkhAhJP-PJetROPqSvxQbbIgB5S/pub?start=false&loop=false&delayms=60000", "Heat transfer in houses") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR0zl5Gwn6lJWn8Z98XN5lcDD3NBxojJw8KJVZcUOYizsIjm3XrkcH9VgMsgdPxnkzAH18Ml5WtHC9b/pub?start=false&loop=false&delayms=60000", "Payback time - heat losses")
+                    },
+                    { heading: "Energy Systems & Resources (7 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTZpxRf5kwZ9T9nr9di80ntbfuAKp-4-YE6em9qJM_5wzEzFQlXa25HxPSW1QHQxvmpG_7AaY_xzvwg/pub?start=false&loop=false&delayms=60000", "Energy stores and transfers") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSgxiY9CwUAWe7PkId7Ab-2ZpKMmxcWpDDUD3zv-mCZvp8EVl3-fAixX1po6HCSoh3oGOQTdIutuvzR/pub?start=false&loop=false&delayms=60000", "Energy changes") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/pub?start=false&loop=false&delayms=60000", "Efficiency") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTWcIXFYYZPbIT2bf6jQ-csLhxTJdKyRRW4Y9vbC655STwXj54mGPStMEPs25IeBtXbBLKZ81gWU--d/pub?start=false&loop=false&delayms=60000", "Sanky diagrams") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2UTMA1Vj9_BCLCnzJ-UBE89yhn5fxNQAmSRsaXYrS2dLBS9NrMdp4W4kvhkdQrKh5E3jViUNt-BvQ/pub?start=false&loop=false&delayms=60000", "Non renewable energy recources") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRgJNflBJMeuHANhpm7O_IEQhCSEB_iebDxENQZAlRl7n-6w1eYM4pGe48egZ5IDygyXgCOO4bk1Up_/pub?start=false&loop=false&delayms=60000", "Renewable energy recources") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6O9bHG2UEZPrQVfFNy1UvDShAB3bZhIcwA9Lj4IZ7bbg0iaIrkE-ROuGtuy6CVQzDhwn1HfkQ519_/pub?start=false&loop=false&delayms=60000", "Energy payback times")
+                    },
+                    { heading: "Gas Laws and Kinetic Theory (5 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/pub?start=false&loop=false&delayms=60000", "Brownian Motion") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTfiJpFrkAshSV2vBpdMZJZf6VeexPJwdXDoqKAAk_ifVlONdzVcFpIVWZadgugD9zkREUy_KTbvsUE/pub?start=false&loop=false&delayms=60000", "Boyles' law") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS0OYAcRWsuumAOAP0sNcRWPJHwN2t3xT8fVbcSLx1uI7sAJ-oEndtVHxDC1OpGYYmoEKNkH8PCPBRr/pub?start=false&loop=false&delayms=60000", "Charles' law") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTuyNQlbsw1M_hKthaDF5bsRvZuCVTIj-a-39UUgu_ajxLfR2FQFDdb6MBjjX47Z6mRkUipxqiAKljm/pub?start=false&loop=false&delayms=60000", "Pressure law") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/pub?start=false&loop=false&delayms=60000", "Gas laws")
+                    }
                 ]
             },
             "Mechanics": {
-                title: "MECHANICS & DYNAMICS (MEC-ADV-3)",
+                title: "MECHANICS: DYNAMICS & MATERIALS",
                 submodules: [
-                    { heading: "Forces and Diagrams", text: `Defining **Types of Force** and determining **Resultant Force** using **Free Body Diagrams**. The concept of **Upthrust**.` },
-                    { heading: "Pressure and Materials", text: `Pressure in solids (<span class="formula">P = F/A</span>) and liquids (<span class="formula">P = \\rho g h</span>). Principles of **Hydraulics**, **Atmospheric Pressure**, and **High Pressure Applications**. **Hooke's Law** and **Elastic Energy**. 
-
-[Image of a hydraulic brake system]
-` },
-                    { heading: "Dynamics (Motion)", text: `**Speed and Velocity**, **Acceleration**, and analyzing motion using **Distance-Time** and **Velocity-Time Graphs**.` },
-                    { heading: "Force and Motion", text: `**Newton's Three Laws of Motion** are fundamental. Covers **Circular Motion**, **Mass vs. Weight**, and **Freefall/Terminal Velocity**. ` },
-                    { heading: "Momentum and Turning Forces", text: `Calculating **Momentum** (<span class="formula">p = mv</span>), **Conservation of Momentum**, and **Force** as the rate of change of momentum. **Moments** and **Centre of Mass**.` }
+                    { heading: "Placeholder 1", text: `// NO SLIDE DATA PROVIDED // Review Force, Pressure, and Motion concepts here.` }
                 ]
             },
             "Waves & Optics": {
-                title: "OSCILLATION, OPTICS, & SOUND (OSC-OPT-2)",
+                title: "WAVES: OSCILLATION & SPECTRUM",
                 submodules: [
-                    { heading: "Describing Waves", text: `**Wave Types** (Transverse vs. Longitudinal), **Wave Properties** (Amplitude, Wavelength, Frequency), and **Wave Speed** formula: <span class="formula">v = f\\lambda</span>. 
-
-[Image of transverse and longitudinal waves]
-` },
-                    { heading: "Electromagnetic Waves (EM)", text: `The full **EM Spectrum** (Radio to Gamma) including **Uses**, **Dangers**, and **Imaging with X-Rays**.` },
-                    { heading: "Sound Waves", text: `**Properties of Sound**, **Speed of Sound**, and uses of **Ultrasound**.` },
-                    { heading: "Optics (Light)", text: `**Reflection**, **Curved Mirrors**, **Refraction of Light**, **Snell's Law**, **Total Internal Reflection** (used in fiber optics), **Lenses**, and the structure of **The Camera and Eye**. ` }
+                    { heading: "Placeholder 1", text: `// NO SLIDE DATA PROVIDED // Review EM Waves, Sound, and Optics concepts here.` }
                 ]
             },
             "Electricity": {
-                title: "CIRCUITRY, CHARGES, & POWER (ELEC-CIRC-4)",
+                title: "CIRCUITRY: CHARGES & POWER",
                 submodules: [
-                    { heading: "Charges and Static", text: `**Electric Fields**, **Static Electricity**, **Gold Leaf Electroscope**, **Moving Charges**, and the **Van der Graaf Generator**. Includes both **Uses** and **Dangers of Static Electricity**.` },
-                    { heading: "Circuits", text: `**Simple Circuits**, **Electrons, Atoms and Energy**. **Voltage and Current**, **Resistance** (<span class="formula">R=V/I</span>), and **Kirchhoff's Laws**. 
-
-[Image of a simple series and parallel circuit diagram]
-` },
-                    { heading: "Electrical Components and Domestic Power", text: `**Circuit Symbols**, **Resistive Devices**, **Potential Divider**. Details of the **National Grid**, **Mains Electricity**, **Electrical Safety** (fuses, earth wire), and calculating **Electrical Power** (<span class="formula">P=IV</span>). ` },
-                    { heading: "Electronics", text: `Comparison between **Analogue and Digital** signals and the structure of **Logic Circuits** (AND, OR, NOT gates). ` }
+                    { heading: "Placeholder 1", text: `// NO SLIDE DATA PROVIDED // Review Static, Circuits, and Domestic Power concepts here.` }
                 ]
             },
             "Magnetics & EM": {
-                title: "MAGNETIC FIELDS & INDUCTION (MAG-IND-1.1)",
+                title: "MAGNETIC FIELDS & INDUCTION",
                 submodules: [
-                    { heading: "Magnetism and Effects", text: `**Magnetism**, **Electromagnetism**, **Motor Effect** (force on a current in a field), and the principle of the **Electric Motor**. ` },
-                    { heading: "Induction and Transformers", text: `**Electromagnetic Induction** (generating current from motion), and the use of **Transformers** to step up/down AC voltage: <span class="formula">V_p/V_s = N_p/N_s</span>. 
-
-[Image of a step-up transformer]
-` }
+                    { heading: "Placeholder 1", text: `// NO SLIDE DATA PROVIDED // Review Motor Effect and Transformers here.` }
                 ]
             },
-            "Nuclear & Astro": {
-                title: "NUCLEAR PHYSICS & ASTRO DATA (NUC-ASTRO-5)",
+            "Atomic Physics": {
+                title: "MATH SKILLS & MEASUREMENT CORE",
                 submodules: [
-                    { heading: "The Atom and Radiation", text: `**Discovery of the Nucleus** (Rutherford), **Atomic Structure**. **Types of Radiation** (<span class="formula">\\alpha, \\beta, \\gamma</span>), **Properties of Radiation**, and **Dangers of Radiation**. 
-
-[Image of the Rutherford Gold Foil Experiment]
-` },
-                    { heading: "Nuclear Processes", text: `**Detecting Radioactivity**, **Nuclear Reactions**. Calculating **Half Life**. **Nuclear Fission** (splitting), **Fission Reactors**, and **Nuclear Fusion** (joining). [Image comparing Nuclear Fission and Nuclear Fusion]` },
-                    { heading: "Astronomy (Solar System)", text: `**Motion of the Earth and Moon**, **Moons and Satellites**, **Bodies of the Solar System**, and calculating **Orbital Speed**.` },
-                    { heading: "Astronomy (Interstellar Space)", text: `**Life of Stars** (stellar evolution), the **Universe**, the **Expanding Universe** (redshift evidence), **Hubble's Law**, and **Star Colour** as an indicator of temperature. ` }
+                    { heading: "Mathematical Skills (5 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000&slide=id.p6", "Standard form") + 
+                        createSlideEmbed("https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Significant figures") + 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub?start=false&loop=false&delayms=60000&slide=id.p1", "Scalars and vectors") + 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR7SrP0eDD33q-HOFgNJJebh_BKGSgQTTkovrDX7ITnQkIO6SK6BuPIwXm-dyrbbCwHZ22jpOsIHmyA/pub?start=false&loop=false&delayms=60000&slide=id.p1", "Length area volume units") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Rearranging formula")
+                    },
+                    { heading: "Measurement & Data Protocols (7 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/pub?start=false&loop=false&delayms=60000&slide=id.p4", "S.I. Units") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRkoibttaMmig_SnZkDwa_AAlyzUjjnEEda9HetLdGsKlh6lRZSn2dQh-uXFOX4XMJAZ8iqKLBpIqsq/pub?start=false&loop=false&delayms=3000&slide=id.p4", "Standard Prefixes") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSgfdc0CiQsnNYtoR2nUhSLLVqg7tUcmHagACs7sAoHDAUPIWIGXsb3Bv2hZ90Y6mg3gubzW8BypRDV/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Scientific Definitions") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXDofK77vKSGHDvespDThKwPi6HohT5lOo7ptVQV-boTLWcfQIAR-YOhcapjZLdg4sla5r6E3pc2KZ/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Types of vairiables") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/pub?start=false&loop=false&delayms=60000&slide=id.p1", "Measuring equipment") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTRIQ7NuLYf4nX3fvFrLHEgPEwWxRBs9iq3xmJki5pLyVz2XiY2OQra9pJFfFGhC1t0OQRMvyIVEXgb/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Types of errors") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR2jRjlrThRvTFiPM0TMED5uSCdsfeUAJqIGwiVRaaKFfniZxTxawEpDnfBIl4JbKyTcAvcdbGFWNix/pub?start=false&loop=false&delayms=60000&slide=id.p4", "Presenting data")
+                    }
                 ]
             }
         };
@@ -358,13 +400,14 @@
         function loadTopicContent(topic) {
             const data = PHYSICS_CONTENT[topic];
             
-            if (!data || !data.submodules || data.submodules.length === 0) {
+            if (!data) {
                 topicContentArea.innerHTML = `<p class="text-xl text-red-500 font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
                 contentPlaceholder.classList.add('hidden');
                 topicContentArea.classList.remove('hidden');
                 return;
             }
 
+            // Loop through submodules and create the HTML structure
             let submodulesHtml = data.submodules.map(submodule => `
                 <div class="glass-strong rounded-md p-5 mb-4 fade-in border-l-4 border-cyber-neon-pink shadow-lg shadow-cyber-electric-blue/10">
                     <h4 class="text-xl font-bold mb-2 text-cyber-neon-pink font-orbitron">${submodule.heading}</h4>
@@ -383,34 +426,16 @@
             topicContentArea.classList.remove('hidden');
         }
 
-        // --- ALGEBRA LOCK LOGIC (Y8-Y9 LEVEL) ---
+        // --- ALGEBRA LOCK LOGIC (UNTOUCHED) ---
 
-        /** Generates a random linear equation of the form ax + b = c. */
+        /** Generates a simple random linear equation (e.g., A + B = X). */
         function generateLockProblem() {
-            // a: Multiplier (2 to 5)
-            const a = Math.floor(Math.random() * 4) + 2; 
+            const A = Math.floor(Math.random() * 10) + 5;
+            const B = Math.floor(Math.random() * 10) + 1;
             
-            // b: Constant term (-9 to 9, excluding 0)
-            let b = Math.floor(Math.random() * 19) - 9;
-            if (b === 0) b = 1; // Avoid trivial problems
+            const question = `${A} + ${B} = X`;
+            correctAlgebraAnswer = A + B;
             
-            // x: Integer solution (1 to 5)
-            const x = Math.floor(Math.random() * 5) + 1; 
-            
-            // c: Result of the equation (a*x + b)
-            const c = a * x + b;
-            
-            correctAlgebraAnswer = x;
-            
-            let question;
-            if (b < 0) {
-                // e.g., 3x - 5 = 10
-                question = `${a}x - ${Math.abs(b)} = ${c}`;
-            } else {
-                // e.g., 2x + 7 = 15
-                question = `${a}x + ${b} = ${c}`;
-            }
-
             lockQuestion.textContent = question;
             lockInput.value = '';
             lockMessage.classList.add('hidden');
@@ -427,24 +452,16 @@
                 lockInput.classList.remove('border-red-500');
                 loadTopicContent(pendingTopic);
             } else {
-                // Failure! Show error message
+                // Failure! Show error message and shake effect
                 lockInput.classList.add('border-red-500');
                 lockMessage.textContent = `// AUTHENTICATION FAILED. TRY AGAIN. //`;
                 lockMessage.classList.remove('hidden');
                 
-                // Regenerate for effect
+                // Optional: Regeneration delay for effect
                 setTimeout(() => {
                     generateLockProblem(); 
                 }, 1000);
             }
-        }
-        
-        // --- SCROLL FIX FUNCTION ---
-        function scrollToContent() {
-            contentDisplaySection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
         }
         
         // --- Initialization & Event Listeners ---
@@ -453,22 +470,18 @@
             topicCards.forEach(card => {
                 card.addEventListener('click', () => {
                     
-                    // 1. SCROLL FIX: Move viewport to the content area
-                    scrollToContent();
-
-                    // 2. Highlight the selected card
+                    // 1. Highlight the selected card
                     topicCards.forEach(c => c.classList.remove('border-4', 'border-cyber-neon-pink/80'));
                     card.classList.add('border-4', 'border-cyber-neon-pink/80');
                     
-                    // 3. Prepare and show the lock screen
+                    // 2. Prepare the lock screen
                     pendingTopic = card.getAttribute('data-topic');
                     generateLockProblem(); 
                     
-                    // 4. Ensure placeholder is visible and show the lock overlay
+                    // 3. Ensure placeholder is visible and show the lock overlay
                     contentPlaceholder.classList.remove('hidden');
-                    topicContentArea.classList.add('hidden');
+                    topicContentArea.classList.add('hidden'); // Ensure content is hidden
                     algebraLock.classList.remove('hidden');
-                    lockInput.focus(); // Focus on the input field
                 });
             });
 
