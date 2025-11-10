@@ -363,7 +363,7 @@
                     { heading: "Energy Systems & Resources (7 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTZpxRf5kwZ9T9nr9di80ntbfuAKp-4-YE6em9qJM_5wzEzFQlXa25HxPSW1QHQxvmpG_7AaY_xzvwg/pub?start=false&loop=false&delayms=60000", "Energy stores and transfers") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSgxiY9CwUAWe7PkId7Ab-2ZpKMmxcWpDDUD3zv-mCZvp8EVl3-fAixX1po6HCSoh3oGOQTdIutuvzR/pub?start=false&loop=false&delayms=60000", "Energy changes") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/pub?start=false&loop=false&delayms=60000", "Efficiency") +
+GET-               createSlideEmbed("https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/pub?start=false&loop=false&delayms=60000", "Efficiency") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTWcIXFYYZPbIT2bf6jQ-csLhxTJdKyRRW4Y9vbC655STwXj54mGPStMEPs25IeBtXbBLKZ81gWU--d/pub?start=false&loop=false&delayms=60000", "Sanky diagrams") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2UTMA1Vj9_BCLCnzJ-UBE89yhn5fxNQAmSRsaXYrS2dLBS9NrMdp4W4kvhkdQrKh5E3jViUNt-BvQ/pub?start=false&loop=false&delayms=60000", "Non renewable energy recources") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRgJNflBJMeuHANhpm7O_IEQhCSEB_iebDxENQZAlRl7n-6w1eYM4pGe48egZ5IDygyXgCOO4bk1Up_/pub?start=false&loop=false&delayms=60000", "Renewable energy recources") +
@@ -420,7 +420,7 @@
                     },
                     { heading: "Sound Waves & Applications (4 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTySU8H7j1EClectftqyJkVL-0DmnoyrJ0ylDVydyBHe0Fg22QO-21TAGJfocRjuyvn60Bb6mygOI3R/pub?start=false&loop=false&delayms=60000", "Properties of Sound") +
-                        createSlideEmbed("httpss://docs.google.com/presentation/d/e/2PACX-1vQHBG0_dul4OTat9jjFA2YNm0ExcsF1bHdWaYYPVux2qFV1Qjs87t24CXfZTBwOoAhprjuUyOkFPsFN/pub?start=false&loop=false&delayms=60000", "Speed of Sound") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQHBG0_dul4OTat9jjFA2YNm0ExcsF1bHdWaYYPVux2qFV1Qjs87t24CXfZTBwOoAhprjuUyOkFPsFN/pub?start=false&loop=false&delayms=60000", "Speed of Sound") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRlDuranJ6QdfqKm-zJ3twUemUz0aEeW40vZ4CCmKkxS33LLB8NtA-wk5uLX7u7t1Gd4Li9BGQ_IdgF/pub?start=false&loop=false&delayms=60000", "Measuring Sound") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQIgM2MYV9BR_eb357hyqg71b4q4Fb4DMgCZkhZia8pnlid9HCCu8inUdQ-D5_8QBs53BwpHF9q4JSl/pub?start=false&loop=false&delayms=60000", "Ultrasound")
                     },
@@ -454,14 +454,14 @@
                     { heading: "Dynamics (4 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT3h_VrofUlSpEsqBjUlueFhOFI5p7Q7hPsRYSWkDFRpWu-37wp-lyrZPvtujX_Yp_5rXXLX4IBbV-r/pub?start=false&loop=false&delayms=60000", "Speed and Velocity") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ9vDC9ksNDLvjLYlRo8ZqVBMrQT8Dqby5fYn6xHk8tuCWZrPHx9gsCBR77yfrj4OCE0BKI6ganvPId/pub?start=false&loop=false&delayms=60000", "Acceleration") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ1PZ8-LnKs02PiBi70F-uz5iiixJb0xormiQk6qJBDXLsPN59zNkOrEPXW4yhOdVM_wrQXfUco30uY/pub?start=false&loop=false&delayms=60000", "Distance-Time Graphs") +
+WELCOME-           createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ1PZ8-LnKs02PiBi70F-uz5iiixJb0xormiQk6qJBDXLsPN59zNkOrEPXW4yhOdVM_wrQXfUco30uY/pub?start=false&loop=false&delayms=60000", "Distance-Time Graphs") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQnVYFtq6mv0xc3Sj_Sq9lYmKagA3OQ9t2PaDbga90mN8zsvTw1NaJDyhXoRtimanEck_AZNE2Uuj7t/pub?start=false&loop=false&delayms=60000", "Velocity-Time Graphs")
                     },
                     { heading: "Force and Motion (7 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTOz3Zx9MQrlE_06bWrsF7w3bToZH8NvyC51gefKRYvClWWOFiqqjS0SCIx3GMutLVunW0Rsg3nWsdY/pub?start=false&loop=false&delayms=60000", "Newtons First Law") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSjWyISZxuhjzPX8l9Ta58ilj44f6DHrOFxUjj_yJTInBDuPUzNSNZiEU2q0FHkft3a86-uXfNk6pyQ/pub?start=false&loop=false&delayms=60000", "Newtons Second Law") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vROAh15onHZAhRg4Hx2BxhKZRxKFBua78bBCqEAV8PTFQ4iYqVYznPc28P3E1Qm5_pZhTrt6H35jKz9/pub?start=false&loop=false&delayms=60000", "Newtons Third Law") +
-I-                createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQOi-jWgRLU-4Ec_NQVOXR7SlJnwoLCR_9jeaWlJTs3Rf03tuLv0tn6uC9s9UTmlC3dXC9P2FAgMYn0/pub?start=false&loop=false&delayms=60000", "Circular Motion") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQOi-jWgRLU-4Ec_NQVOXR7SlJnwoLCR_9jeaWlJTs3Rf03tuLv0tn6uC9s9UTmlC3dXC9P2FAgMYn0/pub?start=false&loop=false&delayms=60000", "Circular Motion") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vStNV6x1lf2P0zKQ5sU-3z92Vg5Ok-u4y4JhTd1O1__hONdCi_xQvhc6M9H_eMU_gSmY-gZ2kViAoRL/pub?start=false&loop=false&delayms=60000", "Mass, Weight and Inertia") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRTablNCgElvGx5XHvvpSg2nBjNWWfq53XUa_9xL9ZlIkKSBvp9KLI5mNur8CECL4jFC_3rfk-xfsYS/pub?start=false&loop=false&delayms=60000", "Freefall and Terminal Velocity") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT33JPfqpnDkr5Up0F34n3ccW_5ybtIFpEfvILsP7gz4OQlJDmMoiDu_NT94_Ydqq5kKIj0dMrPGAsF/pub?start=false&loop=false&delayms=60000", "Forces on the Road")
@@ -475,7 +475,6 @@ I-                createSlideEmbed("https://docs.google.com/presentation/d/e/2PA
                     { heading: "Mechanical Energy (5 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRs1i7O87KQom0Z7s6kJ1XUUFaZv6yAgnNrQwYHKwVco1Co31NQaCo4CwI26cYydfKF3yirNKXoKjMG/pub?start=false&loop=false&delayms=60000", "Work Done") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSSrjHY6Rlc64XVv1QcXe0edd-K0VPYflDyPXjlZVd_0j-aPnmk9Nyo-nGDNpj383blXAiQQW2buZl_/pub?start=false&loop=false&delayms=60000", "Kinetic Energy") +
-What is this?
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQCZwQs6FBS_qoM6lzNrge3R5eiHn1fs2Sx0vc1sLLsaNe6tTMeKKkl1ttyWcmAUJEYpCM7rlHnAsEb/pub?start=false&loop=false&delayms=60000", "Gravitational Energy") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSiMTegRO4yDWaYUG7sXf0G8M-priLiFRUrOTvg3MWtaJaOUk60HTQ0PQwcgSXrMPUPmrDRT2bVG4CN/pub?start=false&loop=false&delayms=60000", "Elastic Potential Energy") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTu8Ti16emdU5mvU_ZqNrL523z-svzWFuGZuFeIvemXBgKuudCiL1FUxNs0FRY8NYU7BJ8iB9q_2eSE/pub?start=false&loop=false&delayms=60000", "Mechanical Power")
@@ -493,7 +492,7 @@ What is this?
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS42M-9Hm1uNjD9rTkIulMPcvuBn7Qr7FnRE2woB3DYJSwjkf0wIIa7gLXEjLbWEfjFIMZjDfb9HhhF/pub?start=false&loop=false&delayms=60000", "Levers") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQnlYJyu3_lV_7n3D6yRqsh1J3xJXUO8JFNnSfb7xJb1JqDuecLttibLEtTN-cnwmhFx3YS1twwmOS4/pub?start=false&loop=false&delayms=60000", "Moments") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQfVz2F9_CfvGM9vZZp7r59Lo98ncuyWnNBzxdyCxJ3d9uIpOZinbRAUT08FhwK_oLHTmZn10l2UZBL/pub?start=false&loop=false&delayms=60000", "Moments in Equilibrium") +
-                        createSlideEmbed("httpsds://docs.google.com/presentation/d/e/2PACX-1vRkXMurpcTcvuO5o3geuikpz2hJbsViJYuKtGmR5uWj_T-fQHq7ETvggCF8wjydJbJJD9MBR6wT_bBK/pub?start=false&loop=false&delayms=60000", "Moments and Gears")
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRkXMurpcTcvuO5o3geuikpz2hJbsViJYuKtGmR5uWj_T-fQHq7ETvggCF8wjydJbJJD9MBR6wT_bBK/pub?start=false&loop=false&delayms=60000", "Moments and Gears")
                     }
                 ]
             },
@@ -522,8 +521,7 @@ What is this?
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQse0bvJFxlmYuiWLVYGaShquAi0h8wlxWYvluEhCCreLrxofNiHD9_jORG33xaOCGvi54RTkKnUr8x/pub?start=false&loop=false&delayms=60000", "Circuit Symbols") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSLN0dzoVbASobQUhIxYKN2lN94wkDMguobprYQ2LjYgS5UNLneQP_kf7e1OxnRVKPLOl_QtCTsSvUD/pub?start=false&loop=false&delayms=60000", "Resistive Devices") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSE3UxqysKi05eXkWxEANBH9_LL0qYaOmJct2Ib_mFpeUkUAOTjs4wWMhzvvCTJ6QwpuKyJr0-VGo31/pub?start=false&loop=false&delayms=60000", "Potential Divider") +
-                        createSlideEmbed("httpsWhat is this?
-docs.google.com/presentation/d/e/2PACX-1vS-vKNtMYCNv5yX9ZSiII_RUQomxsaPRihQ0z1c81z0c0Opb7kUIis2BNBvC7EferRmHMoz0TiInLIw/pub?start=false&loop=false&delayms=60000", "Relay Switch") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS-vKNtMYCNv5yX9ZSiII_RUQomxsaPRihQ0z1c81z0c0Opb7kUIis2BNBvC7EferRmHMoz0TiInLIw/pub?start=false&loop=false&delayms=60000", "Relay Switch") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQdCVq8y46dKmikEHRLqClQangsKJ7Ce4l--NP0GhKKcMZJdioJyteedciE5At161hlAxFP62MqLkKG/pub?start=false&loop=false&delayms=60000", "I-V Graphs")
                     },
                     { heading: "Domestic Electricity (7 Slides)", text: 
@@ -531,8 +529,7 @@ docs.google.com/presentation/d/e/2PACX-1vS-vKNtMYCNv5yX9ZSiII_RUQomxsaPRihQ0z1c8
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQpf1vE6PTcIpasTwB8OKwTK-uVlrgPKgTIVozie6OOW42_AUJDOyXxPPaXx11dYFOVkZdXeal1j_3d/pub?start=false&loop=false&delayms=60000", "Mains Electricity") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRdHt7_jZwTiyTX8XksOvK26vPcwcT8aWtWibEZkapiTfaewIuRBSNPOcKfMC5Dl1Actlq8FmuEUvTF/pub?start=false&loop=false&delayms=60000", "Measuring Alternating Current") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRmGNIVa6_v1nUGtnzCUwMMxWH-aH4oyGCF8o68koAfnj1kySrLDVxO3X0jsvkASilEY3PE2KTOm_AI/pub?start=false&loop=false&delayms=60000", "Cables and Plugs") +
-                        createSlideEmbed("httpsDo you know this?
-docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qzUDrctgyqkZdkmoDziLvlFTVzu3gjuA3uKvsweR8/pub?start=false&loop=false&delayms=60000", "Electrical Safety") +
+SAVE-           createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qzUDrctgyqkZdkmoDziLvlFTVzu3gjuA3uKvsweR8/pub?start=false&loop=false&delayms=60000", "Electrical Safety") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQRNTZw4sWwUMy_k06hfAW2JfD5OP3lrf7UU3zarIf9DdjqFc4XnkK13kPM2JzWn2Nflw0cBn4Mcx0R/pub?start=false&loop=false&delayms=60000", "Electrical Power") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQz9nXHX-HtoABkv8t_oS3unm9_WTFeHkFjhYcNAOH0Lx7WuTx67GzP8MKtJLQ9oXc9aUGHYohwAQjd/pub?start=false&loop=false&delayms=60000", "Cost of Electricity")
                     },
@@ -548,6 +545,7 @@ docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qz
                     { heading: "Magnetism & Electromagnetism (7 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTtPX-6p4l2wYQ/pub?start=false&loop=false&delayms=60000", "Magnetism") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQe4Mb8Uqj9rygNt6NM2hWdtUjr9gXkCTrSBJN1gOuBN6ANx_5exkkOt0QYdXs07gcMr2XjQWTQcKba/pub?start=false&loop=false&delayms=60000", "Electromagnetism") +
+SERVICE_CONTENT
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQk747rr8cAJTrBwAbs19I2H5KkAj31Sx8d6WOhAeAQF8B-Soj7-vEtnjESYNzDwnEJtZBp4knA2BFr/pub?start=false&loop=false&delayms=60000", "Using Electromagnets") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTM7opCnC5VzTss_zAjxQ1_983Y892oqcrbouE6lAqvC0oZIpGCIzCKQ4x43y39iKGEDwRYUynyrhyQ/pub?start=false&loop=false&delayms=60000", "Motor Effect") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTfDn1_Ck6zHhVbqyyBrXi_BDxYrcfCBAtLe287v8k8TZ3OLT1Yxb4hnUdyxy1nrkx4Q7L_rMAMHm_7/pub?start=false&loop=false&delayms=60000", "Electric Motor") +
@@ -562,8 +560,7 @@ docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qz
                     { heading: "Solar System (5 Slides)", text: 
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000", "Motion of the Earth") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub?start=false&loop=false&delayms=60000", "Motion of the Moon") +
-                        createSlideEmbed("httpsWhy is this?
-docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub?start=false&loop=false&delayms=60000", "Moons and Satellites") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub?start=false&loop=false&delayms=60000", "Moons and Satellites") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub?start=false&loop=false&delayms=60000", "Bodies of the Solar System") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/pub?start=false&loop=false&delayms=60000", "Orbital Speed")
                     },
@@ -571,7 +568,7 @@ docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtn
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub?start=false&loop=false&delayms=60000", "Looking into Space") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub?start=false&loop=false&delayms=60000", "Life of Stars") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTbH2hEDwCPE55IxoO6ysJDYhomq2XvV5c_M8OYKRfiC9rMDC19gqHgUTuZ4TGyg2mlFP-0W3LftfqA/pub?start=false&loop=false&delayms=60000", "Universe") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub?start=false&loop=false&delayms=60000", "Expanding Universe") +
+Remember-          createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub?start=false&loop=false&delayms=60000", "Expanding Universe") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQZUkxEIiI0cRXxBp2MVrIv4f4QGG3Kw04nd0FGKxth2BJho3lQVXV8X5tUAUaRwofM4Q0G1ehVUpiy/pub?start=false&loop=false&delayms=60000", "Hubble's Law") +
                         createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ9d6pEG4OM9UqJdYZeQQeaHgc-x2acf3iNThsGV64w3LTs8LKhLVMHSiUWz2FqeOyA7-551bpNhDSO/pub?start=false&loop=false&delayms=60000", "Star Colour")
                     }
