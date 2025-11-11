@@ -235,9 +235,23 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             
+            <!-- Level Tabs -->
+            <section class="mb-12 fade-in">
+                <div class="flex justify-center gap-4">
+                    <button id="gcse-tab" class="level-tab active bg-cyber-neon-pink text-cyber-black-ops px-8 py-3 rounded-sm text-lg font-bold shadow-lg shadow-cyber-neon-pink/50 transition-all hover:shadow-cyber-electric-blue/50 font-orbitron">
+                        GCSE_LEVEL
+                    </button>
+                    <button id="alevel-tab" class="level-tab bg-cyber-purple-dark text-cyber-electric-blue px-8 py-3 rounded-sm text-lg font-bold border-2 border-cyber-electric-blue transition-all hover:bg-cyber-electric-blue/20 font-orbitron">
+                        A-LEVEL
+                    </button>
+                </div>
+            </section>
+            
             <section id="topics" class="mb-20 fade-in">
                 <h2 class="text-2xl font-bold mb-8 pb-2 inline-block text-cyber-neon-pink border-b-2 border-cyber-electric-blue font-orbitron">DATA_MODULES_ONLINE</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- GCSE Topics -->
+                <div id="gcse-topics" class="topics-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="PHYSICS 101">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">PHYSICS_101_CORE</h3>
                         <p class="text-sm text-gray-300 font-mono">Core mathematical skills, S.I. units, measurement, and data presentation.</p>
