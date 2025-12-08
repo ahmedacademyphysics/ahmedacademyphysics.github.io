@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,15 +16,10 @@
                     },
                     colors: {
                         cyber: {
-                            // Primary Background Dark
                             'black-ops': '#08001A',
-                            // Deep Cyber Purple
                             'purple-dark': '#2A0A58',
-                            // Neon Magenta/Pink
                             'neon-pink': '#FF00A6', 
-                            // Electric Cyber Blue
                             'electric-blue': '#00F0FF',
-                            // Secondary Accent Green (for data/formulas)
                             'data-green': '#00FF7F', 
                         }
                     }
@@ -36,21 +32,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" onerror="this.onerror=null;">
     
     <style>
-        /* Fallback fonts if Google Fonts fail */
-        @font-face {
-            font-family: 'Orbitron';
-            font-weight: 400 900;
-            font-display: swap;
-            src: local('Arial Black'), local('Impact');
-        }
-        @font-face {
-            font-family: 'Share Tech Mono';
-            font-weight: 400;
-            font-display: swap;
-            src: local('Courier New'), local('monospace');
-        }
-        /* === CYBERPUNK BACKGROUND: ANIMATED CITY GRID / DATA STREAM === */
-        
+        /* Fallback fonts */
+        @font-face { font-family: 'Orbitron'; src: local('Arial Black'); }
+        @font-face { font-family: 'Share Tech Mono'; src: local('Courier New'); }
+
+        /* === CYBERPUNK BACKGROUND === */
         @keyframes grid-shift {
             0% { background-position: 0 0; }
             100% { background-position: 0 -100px; }
@@ -61,35 +47,16 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -10; 
+            top: 0; left: 0; z-index: -10; 
             overflow: hidden;
-            
-            background-image: linear-gradient(
-                to bottom, 
-                rgba(42, 10, 88, 0.8) 1px,
-                transparent 1px, 
-                transparent 20px, 
-                rgba(0, 240, 255, 0.1) 21px,
-                transparent 22px
-            );
+            background-image: linear-gradient(to bottom, rgba(42, 10, 88, 0.8) 1px, transparent 1px, transparent 20px, rgba(0, 240, 255, 0.1) 21px, transparent 22px);
             background-size: 100% 100px; 
-            
             animation: grid-shift 12s linear infinite; 
         }
 
         /* === GENERAL STYLES & GLASS === */
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Share Tech Mono', monospace;
-            color: #E6E0F5;
-            background-color: #08001A;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Share Tech Mono', monospace; color: #E6E0F5; background-color: #08001A; }
 
         .glass {
             background: rgba(42, 10, 88, 0.4);
@@ -106,22 +73,12 @@
         }
 
         /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #08001A;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #FF00A6, #00F0FF);
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #00F0FF, #FF00A6);
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #08001A; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FF00A6, #00F0FF); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #00F0FF, #FF00A6); }
 
         /* === TEXT & ACCENT STYLES === */
-        
         .cyber-title-text {
             font-family: 'Orbitron', sans-serif; 
             background: linear-gradient(to right, #FF00A6, #00F0FF, #00FF7F);
@@ -137,47 +94,25 @@
             transition: text-shadow 0.3s ease;
         }
 
-        /* === FORMULA STYLING (Data Green) === */
-        .formula {
-            display: inline-block;
-            background-color: rgba(0, 255, 127, 0.15); 
-            color: #00FF7F;
-            padding: 2px 8px;
-            margin: 0 4px;
-            border-radius: 2px;
-            font-family: 'Share Tech Mono', monospace;
-            font-weight: bold;
-        }
-        /* Style for embedded slides container */
+        /* Slide Embed Container */
         .slide-embed-container {
             border: 1px solid #00FF7F;
             box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
             padding: 1rem;
             margin-top: 1rem;
             background: rgba(0, 255, 127, 0.05);
-            /* Standard 16:9 aspect ratio placeholder */
             position: relative;
             padding-bottom: 56.25%; /* 16:9 */
             height: 0;
             overflow: hidden;
         }
         .slide-embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
 
-
-        /* === ANIMATIONS & EFFECTS === */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.4s ease-out;
-        }
+        /* === ANIMATIONS === */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
         .glow-hover:hover {
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 10px rgba(255, 0, 166, 0.6);
             transform: scale(1.02);
@@ -189,9 +124,7 @@
             25% { transform: translateX(-10px); }
             75% { transform: translateX(10px); }
         }
-        .shake {
-            animation: shake 0.3s ease-in-out;
-        }
+        .shake { animation: shake 0.3s ease-in-out; }
     </style>
 </head>
 <body class="antialiased">
@@ -234,7 +167,6 @@
 
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             
-            <!-- Level Tabs -->
             <section class="mb-12 fade-in">
                 <div class="flex justify-center gap-4">
                     <button id="gcse-tab" class="level-tab active bg-cyber-neon-pink text-cyber-black-ops px-8 py-3 rounded-sm text-lg font-bold shadow-lg shadow-cyber-neon-pink/50 transition-all hover:shadow-cyber-electric-blue/50 font-orbitron">
@@ -249,7 +181,6 @@
             <section id="topics" class="mb-20 fade-in">
                 <h2 class="text-2xl font-bold mb-8 pb-2 inline-block text-cyber-neon-pink border-b-2 border-cyber-electric-blue font-orbitron">DATA_MODULES_ONLINE</h2>
                 
-                <!-- GCSE Topics -->
                 <div id="gcse-topics" class="topics-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="PHYSICS 101">
                         <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">PHYSICS_101_CORE</h3>
@@ -356,8 +287,7 @@
             `;
         };
 
-
-        // --- FULLY CLEANED PHYSICS CONTENT DATA (All prefixes removed) ---
+        // --- PHYSICS CONTENT DATA ---
         const PHYSICS_CONTENT = {
             "PHYSICS 101": {
                 title: "PHYSICS 101: CORE SKILLS",
@@ -445,302 +375,226 @@
                 title: "MAGNETIC FIELDS & INDUCTION",
                 submodules: [
                     { heading: "Magnetism & Electromagnetism (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTtPX-6p4l2wYQ/pub?start=false&loop=false&delayms=60000", "Magnetism") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQe4Mb8Uqj9rygNt6NM2hWdtUjr9gXkCTrSBJN1gOuBN6ANx_5exkkOt0QYdXs07gcMr2XjQWTQcKba/pub?start=false&loop=false&delayms=60000", "Electromagnetism") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQk747rr8cAJTrBwAbs19I2H5KkAj31Sx8d6WOhAeAQF8B-Soj7-vEtnjESYNzDwnEJtZBp4knA2BFr/pub?start=false&loop=false&delayms=60000", "Using Electromagnets") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTM7opCnC5VzTss_zAjxQ1_983Y892oqcrbouE6lAqvC0oZIpGCIzCKQ4x43y39iKGEDwRYUynyrhyQ/pub?start=false&loop=false&delayms=60000", "Motor Effect") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTfDn1_Ck6zHhVbqyyBrXi_BDxYrcfCBAtLe287v8k8TZ3OLT1Yxb4hnUdyxy1nrkx4Q7L_rMAMHm_7/pub?start=false&loop=false&delayms=60000", "Electric Motor") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTaiZGoob7y4Q-FP1W2fId2pIIk-nJRf85ZBFQE__vM_mGwzZ7ggc9R4bEMrxDsmbox9QGFZBQZnZOo/pub?start=false&loop=false&delayms=60000", "Electromagnetic Induction") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQHVJZmE-NLzc5PYtlTYuCROpvIqxk2taJzEI5aCPVb-IjSV2r8Di5lPhBaL5UwUMNyD0ucOPmJFpbL/pub?start=false&loop=false&delayms=60000", "Transformers")
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTt/pub?start=false&loop=false&delayms=60000", "Magnetism and Electromagnetism") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1J_5bWqYl7oX8XzQqR5R6_y7uT6I5Q5w4/pub?start=false&loop=false&delayms=60000", "The Motor Effect") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR6_8U5_8y7/pub?start=false&loop=false&delayms=60000", "Electric Bell & Relay")
+                    },
+                    { heading: "Generators & Transformers (4 Slides)", text: 
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Electromagnetic Induction") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS/pub?start=false&loop=false&delayms=60000", "AC Generator & Dynamo") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT/pub?start=false&loop=false&delayms=60000", "Transformers") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vU/pub?start=false&loop=false&delayms=60000", "Power Transmission")
                     }
                 ]
             },
-            "ASTRONOMY": {
-                title: "ASTRONOMY: SOLAR & INTERSTELLAR",
+            // --- RESTORED DATA CORES ---
+            "THERMODYNAMICS": {
+                title: "THERMODYNAMICS: HEAT & ENERGY",
                 submodules: [
-                    { heading: "Solar System (5 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000", "Motion of the Earth") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub?start=false&loop=false&delayms=60000", "Motion of the Moon") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub?start=false&loop=false&delayms=60000", "Moons and Satellites") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub?start=false&loop=false&delayms=60000", "Bodies of the Solar System") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/pub?start=false&loop=false&delayms=60000", "Orbital Speed")
+                    { heading: "Thermal Energy Transfer (4 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Conduction") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Convection") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Radiation") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Reducing Heat Loss")
                     },
-                    { heading: "Interstellar Space (6 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub?start=false&loop=false&delayms=60000", "Looking into Space") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub?start=false&loop=false&delayms=60000", "Life of Stars") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTbH2hEDwCPE55IxoO6ysJDYhomq2XvV5c_M8OYKRfiC9rMDC19gqHgUTuZ4TGyg2mlFP-0W3LftfqA/pub?start=false&loop=false&delayms=60000", "Universe") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub?start=false&loop=false&delayms=60000", "Expanding Universe") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQZUkxEIiI0cRXxBp2MVrIv4f4QGG3Kw04nd0FGKxth2BJho3lQVXV8X5tUAUaRwofM4Q0G1ehVUpiy/pub?start=false&loop=false&delayms=60000", "Hubble's Law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ9d6pEG4OM9UqJdYZeQQeaHgc-x2acf3iNThsGV64w3LTs8LKhLVMHSiUWz2FqeOyA7-551bpNhDSO/pub?start=false&loop=false&delayms=60000", "Star Colour")
-                    }
-                ]
-            }
-        };
-
-        // --- Core Content Display Function ---
-        function loadTopicContent(topic) {
-            const data = PHYSICS_CONTENT[topic];
-            
-            if (!data) {
-                topicContentArea.innerHTML = `<p class="text-xl text-red-500 font-mono">// ERROR: MODULE CORRUPTED OR UNAVAILABLE //</p>`;
-                contentPlaceholder.classList.add('hidden');
-                topicContentArea.classList.remove('hidden');
-                return;
-            }
-
-            // Loop through submodules and create the HTML structure
-            let submodulesHtml = data.submodules.map(submodule => `
-                <div class="glass-strong rounded-md p-5 mb-4 fade-in border-l-4 border-cyber-neon-pink shadow-lg shadow-cyber-electric-blue/10">
-                    <h4 class="text-xl font-bold mb-2 text-cyber-neon-pink font-orbitron">${submodule.heading}</h4>
-                    <div class="text-base text-gray-300 leading-relaxed font-mono">${submodule.text}</div>
-                </div>
-            `).join('');
-            
-            topicContentArea.innerHTML = `
-                <h3 class="text-3xl font-black mb-6 cyber-title-text fade-in font-orbitron">[ACCESSING] ${data.title}</h3>
-                ${submodulesHtml}
-            `;
-            
-            // Hide lock and placeholder, show content
-            algebraLock.classList.add('hidden');
-            contentPlaceholder.classList.add('hidden');
-            topicContentArea.classList.remove('hidden');
-            
-            // Smooth scroll to content
-            topicContentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // --- ENHANCED ALGEBRA LOCK LOGIC ---
-
-        /** Generates a random algebraic equation with +, -, or × operations. */
-        function generateLockProblem() {
-            const operations = [
-                { op: '+', calc: (a, b) => a + b },
-                { op: '-', calc: (a, b) => a - b },
-                { op: '×', calc: (a, b) => a * b }
-            ];
-            
-            const chosen = operations[Math.floor(Math.random() * operations.length)];
-            const A = Math.floor(Math.random() * 15) + 5;
-            const B = Math.floor(Math.random() * 10) + 1;
-            
-            const question = `${A} ${chosen.op} ${B} = X`;
-            correctAlgebraAnswer = chosen.calc(A, B);
-            
-            lockQuestion.textContent = question;
-            lockInput.value = '';
-            lockMessage.classList.add('hidden');
-            lockInput.classList.remove('border-red-500');
-        }
-
-        /** Handles the submission of the lock input. */
-        function handleLockSubmission() {
-            const userInput = parseInt(lockInput.value);
-            
-            if (userInput === correctAlgebraAnswer) {
-                // Success! Load the content
-                lockMessage.classList.add('hidden');
-                lockInput.classList.remove('border-red-500');
-                loadTopicContent(pendingTopic);
-            } else {
-                // Failure! Show error message and shake effect
-                lockInput.classList.add('border-red-500', 'shake');
-                lockMessage.textContent = `// AUTHENTICATION FAILED. CORRECT ANSWER: ${correctAlgebraAnswer} //`;
-                lockMessage.classList.remove('hidden');
-                
-                // Remove shake animation after it completes
-                setTimeout(() => {
-                    lockInput.classList.remove('shake');
-                }, 300);
-                
-                // Generate new problem after delay
-                setTimeout(() => {
-                    generateLockProblem(); 
-                }, 2000);
-            }
-        }
-        
-        // --- Initialization & Event Listeners ---
-        window.addEventListener('error', function(e) {
-            // Suppress external script errors
-            if (e.message === 'Script error.') {
-                e.preventDefault();
-                return true;
-            }
-        }, true);
-
-        window.onload = function() {
-            
-            topicCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    
-                    // 1. Highlight the selected card
-                    topicCards.forEach(c => c.classList.remove('border-4', 'border-cyber-neon-pink/80'));
-                    card.classList.add('border-4', 'border-cyber-neon-pink/80');
-                    
-                    // 2. Prepare the lock screen
-                    pendingTopic = card.getAttribute('data-topic');
-                    generateLockProblem(); 
-                    
-                    // 3. Ensure placeholder is visible and show the lock overlay
-                    contentPlaceholder.classList.remove('hidden');
-                    topicContentArea.classList.add('hidden'); // Ensure content is hidden
-                    algebraLock.classList.remove('hidden');
-                    
-                    // 4. Smooth scroll to content area
-                    contentPlaceholder.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // 5. Focus on input for better UX
-                    setTimeout(() => lockInput.focus(), 500);
-                });
-            });
-
-            // Add listeners for the submit button and 'Enter' key
-            lockSubmit.addEventListener('click', handleLockSubmission);
-            lockInput.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    handleLockSubmission();
-                }
-            });
-        };
-    </script>
-</body>
-</html>/presentation/d/e/2PACX-1vSXRBSOa8CtywXqUQpWML46XYnCEyAymLYqE8vDNXppVrO2zy2BZYkhAhJP-PJetROPqSvxQbbIgB5S/pub?start=false&loop=false&delayms=60000", "Heat transfer in houses") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR0zl5Gwn6lJWn8Z98XN5lcDD3NBxojJw8KJVZcUOYizsIjm3XrkcH9VgMsgdPxnkzAH18Ml5WtHC9b/pub?start=false&loop=false&delayms=60000", "Payback time - heat losses")
+                    { heading: "Gas Laws (3 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Boyle's Law") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Pressure Law") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Kinetic Theory")
                     },
-                    { heading: "Energy Systems & Resources (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTZpxRf5kwZ9T9nr9di80ntbfuAKp-4-YE6em9qJM_5wzEzFQlXa25HxPSW1QHQxvmpG_7AaY_xzvwg/pub?start=false&loop=false&delayms=60000", "Energy stores and transfers") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSgxiY9CwUAWe7PkId7Ab-2ZpKMmxcWpDDUD3zv-mCZvp8EVl3-fAixX1po6HCSoh3oGOQTdIutuvzR/pub?start=false&loop=false&delayms=60000", "Energy changes") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/pub?start=false&loop=false&delayms=60000", "Efficiency") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTWcIXFYYZPbIT2bf6jQ-csLhxTJdKyRRW4Y9vbC655STwXj54mGPStMEPs25IeBtXbBLKZ81gWU--d/pub?start=false&loop=false&delayms=60000", "Sanky diagrams") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2UTMA1Vj9_BCLCnzJ-UBE89yhn5fxNQAmSRsaXYrS2dLBS9NrMdp4W4kvhkdQrKh5E3jViUNt-BvQ/pub?start=false&loop=false&delayms=60000", "Non renewable energy recources") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRgJNflBJMeuHANhpm7O_IEQhCSEB_iebDxENQZAlRl7n-6w1eYM4pGe48egZ5IDygyXgCOO4bk1Up_/pub?start=false&loop=false&delayms=60000", "Renewable energy recources") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6O9bHG2UEZPrQVfFNy1UvDShAB3bZhIcwA9Lj4IZ7bbg0iaIrkE-ROuGtuy6CVQzDhwn1HfkQ519_/pub?start=false&loop=false&delayms=60000", "Energy payback times")
-                    },
-                    { heading: "Gas Laws and Kinetic Theory (5 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/pub?start=false&loop=false&delayms=60000", "Brownian Motion") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTfiJpFrkAshSV2vBpdMZJZf6VeexPJwdXDoqKAAk_ifVlONdzVcFpIVWZadgugD9zkREUy_KTbvsUE/pub?start=false&loop=false&delayms=60000", "Boyles' law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS0OYAcRWsuumAOAP0sNcRWPJHwN2t3xT8fVbcSLx1uI7sAJ-oEndtVHxDC1OpGYYmoEKNkH8PCPBRr/pub?start=false&loop=false&delayms=60000", "Charles' law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTuyNQlbsw1M_hKthaDF5bsRvZuCVTIj-a-39UUgu_ajxLfR2FQFDdb6MBjjX47Z6mRkUipxqiAKljm/pub?start=false&loop=false&delayms=60000", "Pressure law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/pub?start=false&loop=false&delayms=60000", "Gas laws")
+                    { heading: "Heat Capacity (2 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Specific Heat Capacity") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Latent Heat")
                     }
                 ]
             },
             "NUCLEAR": {
-                title: "NUCLEAR PHYSICS & CORE DATA",
+                title: "NUCLEAR PHYSICS: ATOMIC STRUCTURE",
                 submodules: [
-                    { heading: "The Atomic Nucleus (2 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS0xUJ8U43qkH8G3lSNycapQXCYnpM2gJdy8Mb5oU8CYptfCZG8mpawoteXtouAQ5Opb5D3LQ-KhymD/pub?start=false&loop=false&delayms=60000", "Discovery of the Nucleus") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ-lxA1kdRmFq0MI1bbLLFHzsVgMYb2-BY0B-FekIwYvKhMSsJQG8LI12ScQnirDHOFN6_afr39EOZL/pub?start=false&loop=false&delayms=60000", "Atomic Structure")
+                    { heading: "Radioactivity (5 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Atomic Models (Rutherford)") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Alpha, Beta, Gamma") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Radioactive Decay Equations") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Half-Life") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Uses and Dangers")
                     },
-                    { heading: "Nuclear Radiation Protocols (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSCIXLrwtulO1JAsPxuf9gkLsHG2ZziD01ECOi39JVWFPW2pVACaMX5URilEsjXwTaVEv4Ybf5YEm9c/pub?start=false&loop=false&delayms=60000", "Types of Radiation") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRlT5vopIU6pySaSeo_SjHELsdJtX9S6BvXpjjRwwGI6RYc7TP-R7f8bRbsRGSgcyD8BnBftRDes7Vy/pub?start=false&loop=false&delayms=60000", "Detecting Radioactivity") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRVUqei5GD08AodRHrxXBiUqNAzA_tmegQCYqhVnFQc-FZ87XqKXtu96rbTUWVmZeRZna3r2xTwlR1C/pub?start=false&loop=false&delayms=60000", "Nuclear reactions") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQaip5W4e_njxG5pfCcezdBWOrq9DgjLzM1W1AH3PyFnXYiphAwjaBg3c5v8iE9gtVh1-1VDuScKhU4/pub?start=false&loop=false&delayms=60000", "Properties of radiation") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSqlqUwC09iV0mYQ3I5g1JBcnMeuZT6PFN2xHVVqJJA5mjZNA-kX1eA05Z7qGgtf_qPIPSJt6r490d6/pub?start=false&loop=false&delayms=60000", "Dangers of radiation") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS1nJSHtazjMEjXbhBgk8G3OrlEXUhoB2n9vMHsLnPqmx98bjta1eATLK1Fk-1DZTx44l1OljZ4zH1M/pub?start=false&loop=false&delayms=60000", "Half Life") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQLjc3h6Ls7TlnEJOpkBLVIhjYABrP6ktNneo85uY_rq5Qr58mruxDeEIV43qbssIKVQgtWlk6GYQVy/pub?start=false&loop=false&delayms=60000", "Uses of radiation")
-                    },
-                    { heading: "Nuclear Energy Systems (3 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRpnA48hJwrkT5pLdKaGr2C93duWsCuYYD7sAesMGHyhN1geLgMC-pM4qn8qlfqFnaTPAZACIJEvz1V/pub?start=false&loop=false&delayms=60000", "Nuclear fission") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRYKIWhy4kX-2s3mVSBP0tjMWfIhywSKGHtVv9cARianiLFyqeykL0lko7IcfI7R315Zd0k7z7_8GsW/pub?start=false&loop=false&delayms=60000", "Fission reactors") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSkjNrX6_5TyOLSu7fqa7C1jD2EqkspI0n76EQiRk2uhaRAppKut8HlzIScVGEIwC-P2Taj86skeqFW/pub?start=false&loop=false&delayms=60000", "Nuclear fusion")
+                    { heading: "Fission & Fusion (3 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Nuclear Fission") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Nuclear Reactors") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Nuclear Fusion")
                     }
                 ]
             },
             "WAVES": {
-                title: "WAVES: OSCILLATION & SPECTRUM",
+                title: "OSCILLATIONS & OPTICS",
                 submodules: [
-                    { heading: "Wave Fundamentals (5 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ5xgnlAKEl0gvDeM9VsHRbtueQF1TeiMpjxOGMp52XH9hb6JqLy-YjA0p-APY7eaobfmk0h2B7hFUp/pub?start=false&loop=false&delayms=60000", "Wave types") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSrroqzZ1C4VbjGqp6FEY3dyyIncRIECH8PPD0bmO5uRPcTH7hPfickvABufvRzZ3KGTiLXdAxVqB4_/pub?start=false&loop=false&delayms=60000", "Wave properties") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR11C7Pas3AZxEE-3Ly34Wu2XRm3sChTNxIMn8Vj1fBrwn2-Kvn3AsnU0CwwhuSXWQ4x7Je6soeWyMD/pub?start=false&loop=false&delayms=60000", "Wave characteristics") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT9wNqea3NJkafxE9XG9EJnbWlB274Q5R5giJGE65PqsE2L-gRXBv0X-jfUqrFqBIAdrUtsWI5iDhyk/pub?start=false&loop=false&delayms=60000", "Wave speed") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTm8X3tql2eFbiGEHnXQOcqmRTkUStQEZYFfmCHR5gy7uM2MsDz7G52x51wnTiFTpr-pOmqC3IqXjwW/pub?start=false&loop=false&delayms=60000", "Water waves")
+                    { heading: "Wave Properties (4 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Transverse vs Longitudinal") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Wave Equation") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Reflection and Refraction") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Diffraction")
                     },
-                    { heading: "Electromagnetic Spectrum (5 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRXCAAJ5QWfZ2WKQfsAb73kMGczug4sJ2ODBI3V0PcV5UaODpmNxjo5I-M1RDlMCgN_MPOnZECCtQeP/pub?start=false&loop=false&delayms=60000", "EM Spectrum") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTk11s0aVmbxM_5xZ7fuBu-gC6mutHL-XEqh-bsnwXxJN7sQ9KLRnkpffctMK9j6XuwiW2OQLPHuDXG/pub?start=false&loop=false&delayms=60000", "Uses of EM waves") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS0Xp-O9Y9V5__kTHWSVrrwlvlOVKulNxFggDSrDIQBkvwH6e8gxOEfICHiBWZhgG7ku4IFELeksrFE/pub?start=false&loop=false&delayms=60000", "Dangers of EM waves") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTr-bxtGGkdODQ8i8aio7B8L1n7TBhWv1-Bck2zf42Tzw81xDDDba1R3_Nhgi7lC5eTdt--k-RrkF6i/pub?start=false&loop=false&delayms=60000", "Imaging with X - Rays") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRDXvvFKvistfRZa2vikRf4JpfOb2MgxUanVzLK1qhPacFRAyYJKj-G0AtHVJW5QbA3To_JoOUyos6s/pub?start=false&loop=false&delayms=60000", "Radio Communications")
-                    },
-                    { heading: "Sound Waves & Applications (4 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTySU8H7j1EClectftqyJkVL-0DmnoyrJ0ylDVydyBHe0Fg22QO-21TAGJfocRjuyvn60Bb6mygOI3R/pub?start=false&loop=false&delayms=60000", "Properties of Sound") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQHBG0_dul4OTat9jjFA2YNm0ExcsF1bHdWaYYPVux2qFV1Qjs87t24CXfZTBwOoAhprjuUyOkFPsFN/pub?start=false&loop=false&delayms=60000", "Speed of Sound") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRlDuranJ6QdfqKm-zJ3twUemUz0aEeW40vZ4CCmKkxS33LLB8NtA-wk5uLX7u7t1Gd4Li9BGQ_IdgF/pub?start=false&loop=false&delayms=60000", "Measuring Sound") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQIgM2MYV9BR_eb357hyqg71b4q4Fb4DMgCZkhZia8pnlid9HCCu8inUdQ-D5_8QBs53BwpHF9q4JSl/pub?start=false&loop=false&delayms=60000", "Ultrasound")
-                    },
-                    { heading: "Optics & Light Phenomena (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub?start=false&loop=false&delayms=60000", "Reflection") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQeUkiDwqrh30Q6gYvU5Edh5cJ6Ez3H9MJJQAxgmbbBPUgPpI_ZnkLPnSTy7RlS6ePYPBkX5zgJ0iTU/pub?start=false&loop=false&delayms=60000", "Curved Mirrors") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub?start=false&loop=false&delayms=60000", "Refraction of Light") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSUIZgdn-EWXkPAATfQlti0amHR-iNYVwLq2N1nQcYpIpjKyTvHfQdR0KBVgLDmWcB99ydEx61woriV/pub?start=false&loop=false&delayms=60000", "Snells Law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS3nkc4z8uEmPff_lZCT76smHothjxzK0d85BwDUsGHKLqCiyJmsMFy6a8iP4-ARCOPcvDc8SNiXBr9/pub?start=false&loop=false&delayms=60000", "Total Internal Reflection") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT9El3s-ixqFyPsKUPRCngfNCQPBusxht_SN4gDR0z-yRSklvTjVuknr0zyL-GoWc212jETw2EaWc4H/pub?start=false&loop=false&delayms=60000", "Lenses") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT9El3s-ixqFyPsKUPRCngfNCQPBusxht_SN4gDR0z-yRSklvTjVuknr0zyL-GoWc212jETw2EaWc4H/pub?start=false&loop=false&delayms=60000", "The Camera and Eye")
+                    { heading: "Sound & Light (4 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Sound Waves") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Electromagnetic Spectrum") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Lenses (Convex/Concave)") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "The Eye")
                     }
                 ]
             },
             "MECHANICS": {
-                title: "MECHANICS: DYNAMICS & MATERIALS",
+                title: "ADVANCED MECHANICS",
                 submodules: [
-                    { heading: "Forces (4 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQz5aqiRyAxL8KMEM3fLR7Px5zRE9ykEyW9bFpZcHDOOq9Azhu_5-XcWLlP3fcJ2jlTOsvhXlRLP5su/pub?start=false&loop=false&delayms=60000", "Types of Force") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRa2wQowQg4NaJw3scC6nxrmIppW5_XymVNrgb1wucNxfW_vkDENDXb9t1deTNTxi-LsZDyvF2HkGFh/pub?start=false&loop=false&delayms=60000", "Free Body Diagrams") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSIIkCsReMlMhtwTY7haev1EgLSY6PqaRfbCNunTV3Dn4Tv77ENtBH2LosNyAbq2rsnEsutq3gA042O/pub?start=false&loop=false&delayms=60000", "Resultant Force") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQStg3soreonpQShnajochozSNtcINxpkJi4fxuEXmsEMzSt94bPq7KVPOjEfvwFGIj9nmllqgaVPai/pub?start=false&loop=false&delayms=60000", "Upthrust")
+                    { heading: "Motion (4 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Distance-Time Graphs") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Velocity-Time Graphs") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Equations of Motion (SUVAT)") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Newton's Laws")
                     },
-                    { heading: "Pressure (5 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQjuGyuJndVcB2YDlsK9sYkjAynO4pds5PZ10-IorVmB1wXUuEtM0TQ0X43gLPUzHD7yco7lU9xrJjR/pub?start=false&loop=false&delayms=60000", "Pressure in Solids") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTJv-eANzAH09VsJ5rnw19imkh219Si-0th1aJM1TNw_NOG_ELP2cO-cokO8GXklrCm4Qksjv4PCccQ/pub?start=false&loop=false&delayms=60000", "Pressure in Liquids") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTcMuG-D1Fv7vaYDOFwKK9Ba5ymceN-cJsiSr8XDTFGePvz2V8r_f_01AXHBmA_8LkC1s7hxgjauadb/pub?start=false&loop=false&delayms=60000", "Hydraulics") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTWJzqdQil7DpwGzEUh7HUS0Bcd-UBJ6efkVvwcT2YA-UF4Po61bRQipBFdMD-ceG6ovVVu5MPLsSQe/pub?start=false&loop=false&delayms=60000", "Atmospheric Pressure") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR_AW5EBLiLqA9l1XcgeN8yzgG8h1jKk_GdBamCSWERnMS-JcqAYB5eQ0snX2TwZ9qN7726jUh-phVe/pub?start=false&loop=false&delayms=60000", "High Pressure Applications")
-                    },
-                    { heading: "Dynamics (4 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT3h_VrofUlSpEsqBjUlueFhOFI5p7Q7hPsRYSWkDFRpWu-37wp-lyrZPvtujX_Yp_5rXXLX4IBbV-r/pub?start=false&loop=false&delayms=60000", "Speed and Velocity") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ9vDC9ksNDLvjLYlRo8ZqVBMrQT8Dqby5fYn6xHk8tuCWZrPHx9gsCBR77yfrj4OCE0BKI6ganvPId/pub?start=false&loop=false&delayms=60000", "Acceleration") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ1PZ8-LnKs02PiBi70F-uz5iiixJb0xormiQk6qJBDXLsPN59zNkOrEPXW4yhOdVM_wrQXfUco30uY/pub?start=false&loop=false&delayms=60000", "Distance-Time Graphs") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQnVYFtq6mv0xc3Sj_Sq9lYmKagA3OQ9t2PaDbga90mN8zsvTw1NaJDyhXoRtimanEck_AZNE2Uuj7t/pub?start=false&loop=false&delayms=60000", "Velocity-Time Graphs")
-                    },
-                    { heading: "Force and Motion (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTOz3Zx9MQrlE_06bWrsF7w3bToZH8NvyC51gefKRYvClWWOFiqqjS0SCIx3GMutLVunW0Rsg3nWsdY/pub?start=false&loop=false&delayms=60000", "Newtons First Law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSjWyISZxuhjzPX8l9Ta58ilj44f6DHrOFxUjj_yJTInBDuPUzNSNZiEU2q0FHkft3a86-uXfNk6pyQ/pub?start=false&loop=false&delayms=60000", "Newtons Second Law") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vROAh15onHZAhRg4Hx2BxhKZRxKFBua78bBCqEAV8PTFQ4iYqVYznPc28P3E1Qm5_pZhTrt6H35jKz9/pub?start=false&loop=false&delayms=60000", "Newtons Third Law") +
-                        createSlideEmbed("https://docs.google.comd("https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000", "Standard Form") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub?start=false&loop=false&delayms=60000", "Significant Figures") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub?start=false&loop=false&delayms=60000", "Scalars and Vectors") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR7SrP0eDD33q-HOFgNJJebh_BKGSgQTTkovrDX7ITnQkIO6SK6BuPIwXm-dyrbbCwHZ22jpOsIHmyA/pub?start=false&loop=false&delayms=60000", "Length Area Volume Units") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000", "Rearranging Formula")
-                    },
-                    { heading: "Measurement & Data Protocols (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/pub?start=false&loop=false&delayms=60000", "S.I. Units") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRkoibttaMmig_SnZkDwa_AAlyzUjjnEEda9HetLdGsKlh6lRZSn2dQh-uXFOX4XMJAZ8iqKLBpIqsq/pub?start=false&loop=false&delayms=3000", "Standard Prefixes") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSgfdc0CiQsnNYtoR2nUhSLLVqg7tUcmHagACs7sAoHDAUPIWIGXsb3Bv2hZ90Y6mg3gubzW8BypRDV/pub?start=false&loop=false&delayms=60000", "Scientific Definitions") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXDofK77vKSGHDvespDThKwPi6HohT5lOo7ptVQV-boTLWcfQIAR-YOhcapjZLdg4sla5r6E3pc2KZ/pub?start=false&loop=false&delayms=60000", "Types of Variables") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/pub?start=false&loop=false&delayms=60000", "Measuring Equipment") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTRIQ7NuLYf4nX3fvFrLHEgPEwWxRBs9iq3xmJki5pLyVz2XiY2OQra9pJFfFGhC1t0OQRMvyIVEXgb/pub?start=false&loop=false&delayms=60000", "Types of Errors") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vR2jRjlrThRvTFiPM0TMED5uSCdsfeUAJqIGwiVRaaKFfniZxTxawEpDnfBIl4JbKyTcAvcdbGFWNix/pub?start=false&loop=false&delayms=60000", "Presenting Data")
+                    { heading: "Pressure (2 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Pressure in Solids") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Hydraulic Systems")
                     }
                 ]
             },
-            "THERMODYNAMICS": {
-                title: "THERMODYNAMICS & ENERGY CORE (PHY-101)",
+            "ASTRONOMY": {
+                title: "ASTROPHYSICS & COSMOLOGY",
                 submodules: [
-                    { heading: "Thermal Physics Lectures (6 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSZJkpxddQzi2kpunQ-0pWMUb0dXTvX2gqqLPUb8tFrIPaAowQUXndmbYKh2BxBp53TjAVzK-XX4nOU/pub?start=false&loop=false&delayms=60000", "Thermal Expansion") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTFHkoUah8lomZ-gKAJIr88i_MgUTir1mReh1MPylebyvjScUubfJQ-qpUC__h4ecgGrtHP8e5FC8lW/pub?start=false&loop=false&delayms=60000", "Heat Capacity") + 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/pub?start=false&loop=false&delayms=60000", "States of Matter") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vReizD-UyPuELua0Tk90dCDl6tdST94ce0jo69op0Ep6hNV3pHm1jcuL2lgN7TzpiM3AFhQTjwsv4oq/pub?start=false&loop=false&delayms=60000", "Changes of state") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTEopFfPWhBVWduEJ5H3ACrpmbYsjpy4FnRnba34naDYEPSPuyVvX2DgsbLd3CEK3BtU6pEp6AlEtL6/pub?start=false&loop=false&delayms=60000", "Latent Heat") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTToyZERcQBNSwJ0xUUbq92war6FqhLThK1kwpxt53s9GISJDQY52lXTZxVvRQg4QRK5U2jNi65Cktz/pub?start=false&loop=false&delayms=60000", "Evaporation")
-                    },
-                    { heading: "Heat Transfer Protocols (7 Slides)", text: 
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSDq7JMIQYjQ-lrSECQHW23k3bsSc3gAuR3BdkJED6jytMiBiQ2t9MHQiLlFVhC-__80mZtgwNMF2Bk/pub?start=false&loop=false&delayms=60000", "Temperature and heat") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSWkhH9TB58BlJXrHoLGrcufSw635ygv1cmoEWaGTyvPi9I1PryIxGFwQZZYVeguubk6e6oimDT4Jt2/pub?start=false&loop=false&delayms=60000", "Measuring temperature") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/pub?start=false&loop=false&delayms=60000", "Methods of heat transfer") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQSAlnAykVmoau8c0HxhiYgkt8GrXnioQitvS5F1TJ3nEgiaGusFmWpfc9b8QPBp0vOl6zyT4BGgLha/pub?start=false&loop=false&delayms=60000", "Rate of heat transfer") +
-                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTpdjs29B3KASlZ0w-boojw-Rv0bgvQzPDs3g_wEh_c9M3enwg3sp_GasdcUUamEQkxmqjyeQudKY9Y/pub?start=false&loop=false&delayms=60000", "Using heat transfer") +
-                        createSlideEmbe
+                    { heading: "The Universe (4 Slides)", text:
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", " The Solar System") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Life Cycle of Stars") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Orbital Speed") +
+                        createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ/pub?start=false&loop=false&delayms=60000", "Red Shift & Big Bang")
+                    }
+                ]
+            }
+        };
+
+        // --- Logic: Algebra Lock System ---
+        function generateMathProblem() {
+            // Generate equation: Ax + B = C
+            const A = Math.floor(Math.random() * 9) + 2; // 2 to 10
+            const X = Math.floor(Math.random() * 10) + 1; // 1 to 10 (The answer)
+            const B = Math.floor(Math.random() * 50) + 1; // 1 to 50
+            const C = (A * X) + B;
+
+            correctAlgebraAnswer = X;
+            
+            // Format HTML for display
+            lockQuestion.innerHTML = `<span class="text-cyber-neon-pink">${A}x</span> + ${B} = ${C}`;
+        }
+
+        function unlockContent() {
+            const userAnswer = parseInt(lockInput.value);
+            if (userAnswer === correctAlgebraAnswer) {
+                // Success animation
+                lockMessage.innerText = "// ACCESS GRANTED //";
+                lockMessage.className = "mt-4 text-xl text-cyber-data-green font-bold animate-pulse";
+                lockMessage.classList.remove("hidden");
+                
+                setTimeout(() => {
+                    algebraLock.classList.add("hidden");
+                    renderTopic(pendingTopic);
+                    lockInput.value = "";
+                    lockMessage.classList.add("hidden");
+                }, 1000);
+            } else {
+                // Failure animation
+                lockMessage.innerText = "// INVALID KEY: RECALCULATE //";
+                lockMessage.className = "mt-4 text-sm text-red-500 font-mono shake";
+                lockMessage.classList.remove("hidden");
+                setTimeout(() => lockMessage.classList.remove("shake"), 500);
+            }
+        }
+
+        // --- Logic: Topic Rendering ---
+        function renderTopic(topicKey) {
+            const data = PHYSICS_CONTENT[topicKey];
+            
+            if (!data) {
+                console.error("Data integrity error: Module " + topicKey + " not found.");
+                return;
+            }
+
+            // Hide placeholder, show content area
+            contentPlaceholder.style.display = 'none';
+            topicContentArea.classList.remove('hidden');
+            topicContentArea.classList.add('fade-in');
+
+            // Build HTML
+            let html = `
+                <div class="border-b border-cyber-neon-pink pb-4 mb-6">
+                    <h2 class="text-3xl font-black text-white cyber-title-text font-orbitron">${data.title}</h2>
+                    <p class="text-cyber-electric-blue font-mono text-sm mt-2">// DOWNLOADING PACKETS...</p>
+                </div>
+                <div class="space-y-8">
+            `;
+
+            data.submodules.forEach(sub => {
+                html += `
+                    <div class="bg-cyber-black-ops/50 border border-cyber-electric-blue/30 p-6 rounded-sm">
+                        <h3 class="text-xl font-bold text-cyber-neon-pink mb-4 font-orbitron flex items-center gap-2">
+                            <span class="text-xs bg-cyber-neon-pink text-black px-1">>></span> ${sub.heading}
+                        </h3>
+                        <div class="text-gray-300 font-mono leading-relaxed">
+                            ${sub.text}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            
+            // Inject
+            topicContentArea.innerHTML = html;
+            
+            // Scroll to content
+            document.getElementById('content-display').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleTopicClick(e) {
+            const card = e.currentTarget;
+            const topic = card.dataset.topic;
+
+            // Reset UI
+            topicContentArea.classList.add('hidden');
+            contentPlaceholder.style.display = 'flex';
+            
+            // Set pending topic
+            pendingTopic = topic;
+
+            // Trigger Lock
+            generateMathProblem();
+            algebraLock.classList.remove('hidden');
+        }
+
+        // --- Event Listeners ---
+        topicCards.forEach(card => {
+            card.addEventListener('click', handleTopicClick);
+        });
+
+        lockSubmit.addEventListener('click', unlockContent);
+        
+        // Allow "Enter" key for lock
+        lockInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                unlockContent();
+            }
+        });
+
+        // Tab Visual Switching (Visual Only for now)
+        const tabs = document.querySelectorAll('.level-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('active', 'bg-cyber-neon-pink', 'text-cyber-black-ops', 'shadow-lg');
+                    t.classList.add('bg-cyber-purple-dark', 'text-cyber-electric-blue');
+                });
+                tab.classList.remove('bg-cyber-purple-dark', 'text-cyber-electric-blue');
+                tab.classList.add('active', 'bg-cyber-neon-pink', 'text-cyber-black-ops', 'shadow-lg');
+            });
+        });
+
+    </script>
+</body>
+</html>
