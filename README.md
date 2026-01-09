@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arasaka Academy - Physics Database</title>
+    <title>Ahmed Academy - Physics Database</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -95,7 +95,7 @@
 
     <nav class="glass sticky top-0 z-40 border-b border-cyber-neon-pink/50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-            <span class="text-2xl md:text-3xl font-black cyber-title-text font-orbitron">ARASAKA DATABASE</span>
+            <span class="text-2xl md:text-3xl font-black cyber-title-text font-orbitron">AHMED ACADEMY</span>
             <div class="flex items-center space-x-6 font-mono">
                 <a href="#diagnostics" class="hidden md:block text-xs text-gray-500 hover:text-white">SYS_DIAGNOSTICS</a>
                 <a href="#topics" class="bg-cyber-neon-pink text-cyber-black-ops px-3 py-1 text-xs font-bold shadow-sm">RELOAD_CORE</a>
@@ -168,7 +168,6 @@
     <script>
         const formatLink = (url) => {
             if (!url) return '';
-            // Ensure ID-based links are embeddable
             let clean = url.replace(/\/pub.*$/, '/embed').replace(/\/edit.*$/, '/embed');
             if (!clean.includes('/embed')) clean += '/embed';
             return clean;
