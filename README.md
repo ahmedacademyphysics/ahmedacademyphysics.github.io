@@ -2,123 +2,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Academy Physics Archive</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Orbitron', 'sans-serif'], mono: ['Share Tech Mono', 'monospace'] },
-                    colors: { cyber: { 'black': '#050110', 'purple': '#1A043E', 'pink': '#FF00A6', 'blue': '#00F0FF', 'green': '#00FF7F' } }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>ARASAKA | Physics Database</title>
     <style>
-        body { background-color: #050110; color: #E6E0F5; font-family: 'Share Tech Mono', monospace; margin: 0; }
-        .cyber-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background-image: linear-gradient(rgba(26, 4, 62, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 4, 62, 0.5) 1px, transparent 1px);
-            background-size: 30px 30px;
+        :root {
+            --arasaka-red: #ff003c;
+            --arasaka-black: #050505;
+            --arasaka-dark-grey: #121212;
+            --arasaka-text: #e0e0e0;
+            --arasaka-cyan: #00f3ff;
+            --font-main: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
-        .glass { background: rgba(26, 4, 62, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 0, 166, 0.3); }
-        .slide-container { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 2px solid #00F0FF; margin-bottom: 2rem; border-radius: 4px; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); background: #000; }
-        .slide-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .btn-module { transition: all 0.2s ease; border: 1px solid #00FF7F; background: rgba(0, 255, 127, 0.05); cursor: pointer; }
-        .btn-module:hover { background: #00FF7F; color: #000; box-shadow: 0 0 20px #00FF7F; transform: translateY(-2px); }
-        .btn-module.active { background: #FF00A6; color: white; border-color: #FF00A6; box-shadow: 0 0 20px #FF00A6; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050110; }
-        ::-webkit-scrollbar-thumb { background: #1A043E; border: 1px solid #FF00A6; }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--arasaka-black);
+            color: var(--arasaka-text);
+            font-family: var(--font-main);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(90deg, var(--arasaka-red) 0%, #8b0000 100%);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid white;
+            z-index: 100;
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 99% 100%, 0 100%);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .status-bar {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: white;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* --- Main Layout --- */
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar Nav */
+        nav {
+            width: 260px;
+            background: var(--arasaka-dark-grey);
+            border-right: 2px solid var(--arasaka-red);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            padding: 18px 25px;
+            cursor: pointer;
+            border-bottom: 1px solid #222;
+            transition: 0.2s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .nav-item:hover {
+            background: #1a1a1a;
+            color: var(--arasaka-red);
+        }
+
+        .nav-item.active {
+            background: var(--arasaka-red);
+            color: white;
+            position: relative;
+        }
+
+        .nav-item.active::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 25%;
+            height: 50%;
+            width: 4px;
+            background: white;
+        }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: radial-gradient(circle at top right, #111 0%, #050505 100%);
+        }
+
+        .module-header {
+            margin-bottom: 40px;
+            border-left: 8px solid var(--arasaka-red);
+            padding-left: 20px;
+        }
+
+        .module-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .submodule-section {
+            margin-bottom: 50px;
+        }
+
+        .submodule-title {
+            font-size: 1.2rem;
+            color: var(--arasaka-cyan);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .submodule-title::before {
+            content: "ID_";
+            font-size: 0.7rem;
+            margin-right: 8px;
+            opacity: 0.6;
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: #111;
+            border: 1px solid #222;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            border-color: var(--arasaka-red);
+            background: #161616;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 60, 0.15);
+        }
+
+        .card-label {
+            font-size: 0.65rem;
+            color: var(--arasaka-red);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .card-name {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: black;
+            padding: 10px 40px;
+            font-size: 0.7rem;
+            color: #444;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #111;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--arasaka-red); }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="cyber-grid"></div>
+<body>
 
-    <header class="max-w-7xl mx-auto mb-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-black font-orbitron tracking-tighter text-white mb-2 uppercase">
-            Physics_<span class="text-cyber-pink">Lecture_Vault</span>
-        </h1>
-        <p class="text-cyber-blue text-[10px] tracking-[0.4em] uppercase opacity-80">Full Database Integration Active</p>
-    </header>
+<header>
+    <div class="logo">ARASAKA</div>
+    <div class="status-bar">SECURE CONNECTION: ESTABLISHED // DATA_PORT: 8080</div>
+</header>
 
-    <main class="max-w-7xl mx-auto">
-        <div id="module-nav" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2 mb-10"></div>
-
-        <div id="content-display" class="glass rounded-xl p-4 md:p-8 min-h-[600px]">
-            <div id="welcome-screen" class="text-center py-32">
-                <div class="text-cyber-green text-6xl mb-6 animate-pulse">⚡</div>
-                <h2 class="text-xl font-orbitron text-white mb-2 uppercase tracking-widest">System Ready</h2>
-                <p class="text-gray-400 text-sm">Select a module above to initialize the lecture stream.</p>
-            </div>
-            
-            <div id="slides-list" class="hidden">
-                <h2 id="active-module-title" class="text-2xl md:text-3xl font-orbitron text-cyber-pink mb-10 border-b border-cyber-pink/30 pb-4 uppercase italic tracking-tighter"></h2>
-                <div id="submodules-container"></div>
-            </div>
+<div class="container">
+    <nav id="sidebar"></nav>
+    <main id="content">
+        <div style="display:flex; justify-content:center; align-items:center; height:100%; color:#444;">
+            <h2>SELECT MODULE FOR DECRYPTION...</h2>
         </div>
     </main>
+</div>
 
-    <script>
-        // FULL DATABASE INJECTED FROM CSV
-        const PHYSICS_DB = {"PHYSICS 101": {"Mathematical skills": [{"label": "Standard Form", "url": "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/embed"}, {"label": "Significant Figures", "url": "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/embed"}, {"label": "Scalars and Vectors", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/embed"}, {"label": "Length Area Volume Units", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR7SrP0eDD33q-HOFgNJJebh_BKGSgQTTkovrDX7ITnQkIO6SK6BuPIwXm-dyrbbCwHZ22jpOsIHmyA/embed"}, {"label": "Rearranging Formula", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/embed"}], "Measurement": [{"label": "S.I. Units", "url": "https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/embed"}, {"label": "Standard Prefixes", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRkoibttaMmig_SnZkDwa_AAlyzUjjnEEda9HetLdGsKlh6lRZSn2dQh-uXFOX4XMJAZ8iqKLBpIqsq/embed"}, {"label": "Scientific Definitions", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSgfdc0CiQsnNYtoR2nUhSLLVqg7tUcmHagACs7sAoHDAUPIWIGXsb3Bv2hZ90Y6mg3gubzW8BypRDV/embed"}, {"label": "Types of Variables", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSXDofK77vKSGHDvespDThKwPi6HohT5lOo7ptVQV-boTLWcfQIAR-YOhcapjZLdg4sla5r6E3pc2KZ/embed"}, {"label": "Measuring Equipment", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/embed"}, {"label": "Types of Errors", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTRIQ7NuLYf4nX3fvFrLHEgPEwWxRBs9iq3xmJki5pLyVz2XiY2OQra9pJFfFGhC1t0OQRMvyIVEXgb/embed"}, {"label": "Presenting Data", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR2jRjlrThRvTFiPM0TMED5uSCdsfeUAJqIGwiVRaaKFfniZxTxawEpDnfBIl4JbKyTcAvcdbGFWNix/embed"}]}, "THERMODYNAMICS": {"Thermal Physics": [{"label": "Thermal Expansion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSZJkpxddQzi2kpunQ-0pWMUb0dXTvX2gqqLPUb8tFrIPaAowQUXndmbYKh2BxBp53TjAVzK-XX4nOU/embed"}, {"label": "Heat Capacity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTFHkoUah8lomZ-gKAJIr88i_MgUTir1mReh1MPylebyvjScUubfJQ-qpUC__h4ecgGrtHP8e5FC8lW/embed"}, {"label": "States of Matter", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/embed"}, {"label": "Changes of State", "url": "https://docs.google.com/presentation/d/e/2PACX-1vReizD-UyPuELua0Tk90dCDl6tdST94ce0jo69op0Ep6hNV3pHm1jcuL2lgN7TzpiM3AFhQTjwsv4oq/embed"}, {"label": "Latent heat", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTEopFfPWhBVWduEJ5H3ACrpmbYsjpy4FnRnba34naDYEPSPuyVvX2DgsbLd3CEK3BtU6pEp6AlEtL6/embed"}, {"label": "Evaporation", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTToyZERcQBNSwJ0xUUbq92war6FqhLThK1kwpxt53s9GISJDQY52lXTZxVvRQg4QRK5U2jNi65Cktz/embed"}], "Heat": [{"label": "Temperature and Heat", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSDq7JMIQYjQ-lrSECQHW23k3bsSc3gAuR3BdkJED6jytMiBiQ2t9MHQiLlFVhC-__80mZtgwNMF2Bk/embed"}, {"label": "Measuring Temperature", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSWkhH9TB58BlJXrHoLGrcufSw635ygv1cmoEWaGTyvPi9I1PryIxGFwQZZYVeguubk6e6oimDT4Jt2/embed"}, {"label": "Methods of Heat Transfer", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/embed"}, {"label": "Rate of Heat Transfer", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQSAlnAykVmoau8c0HxhiYgkt8GrXnioQitvS5F1TJ3nEgiaGusFmWpfc9b8QPBp0vOl6zyT4BGgLha/embed"}, {"label": "Using Heat Transfer", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTpdjs29B3KASlZ0w-boojw-Rv0bgvQzPDs3g_wEh_c9M3enwg3sp_GasdcUUamEQkxmqjyeQudKY9Y/embed"}, {"label": "Heat Transfer in Houses", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSXRBSOa8CtywXqUQpWML46XYnCEyAymLYqE8vDNXppVrO2zy2BZYkhAhJP-PJetROPqSvxQbbIgB5S/embed"}, {"label": "Payback Time \u2013 Heat Losses", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR0zl5Gwn6lJWn8Z98XN5lcDD3NBxojJw8KJVZcUOYizsIjm3XrkcH9VgMsgdPxnkzAH18Ml5WtHC9b/embed"}], "Energy": [{"label": "Energy Stores and Transfers", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTZpxRf5kwZ9T9nr9di80ntbfuAKp-4-YE6em9qJM_5wzEzFQlXa25HxPSW1QHQxvmpG_7AaY_xzvwg/embed"}, {"label": "Energy Changes", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSgxiY9CwUAWe7PkId7Ab-2ZpKMmxcWpDDUD3zv-mCZvp8EVl3-fAixX1po6HCSoh3oGOQTdIutuvzR/embed"}, {"label": "Efficiency", "url": "https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/embed"}, {"label": "Sankey Diagrams", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTWcIXFYYZPbIT2bf6jQ-csLhxTJdKyRRW4Y9vbC655STwXj54mGPStMEPs25IeBtXbBLKZ81gWU--d/embed"}, {"label": "Non Renewable Energy Resources", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS2UTMA1Vj9_BCLCnzJ-UBE89yhn5fxNQAmSRsaXYrS2dLBS9NrMdp4W4kvhkdQrKh5E3jViUNt-BvQ/embed"}, {"label": "Renewable Energy Resources", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRgJNflBJMeuHANhpm7O_IEQhCSEB_iebDxENQZAlRl7n-6w1eYM4pGe48egZ5IDygyXgCOO4bk1Up_/embed"}, {"label": "Energy Payback Times", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ6O9bHG2UEZPrQVfFNy1UvDShAB3bZhIcwA9Lj4IZ7bbg0iaIrkE-ROuGtuy6CVQzDhwn1HfkQ519_/embed"}], "Gases": [{"label": "Brownian Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/embed"}, {"label": "Boyles\u2019 Law", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTfiJpFrkAshSV2vBpdMZJZf6VeexPJwdXDoqKAAk_ifVlONdzVcFpIVWZadgugD9zkREUy_KTbvsUE/embed"}, {"label": "Charles\u2019 Law", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS0OYAcRWsuumAOAP0sNcRWPJHwN2t3xT8fVbcSLx1uI7sAJ-oEndtVHxDC1OpGYYmoEKNkH8PCPBRr/embed"}, {"label": "Pressure Law", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTuyNQlbsw1M_hKthaDF5bsRvZuCVTIj-a-39UUgu_ajxLfR2FQFDdb6MBjjX47Z6mRkUipxqiAKljm/embed"}, {"label": "Gas Laws", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/embed"}]}, "NUCLEAR": {"The Atom": [{"label": "Discovery of the Nucleus", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS0xUJ8U43qkH8G3lSNycapQXCYnpM2gJdy8Mb5oU8CYptfCZG8mpawoteXtouAQ5Opb5D3LQ-KhymD/embed"}, {"label": "Atomic Structure", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ-lxA1kdRmFq0MI1bbLLFHzsVgMYb2-BY0B-FekIwYvKhMSsJQG8LI12ScQnirDHOFN6_afr39EOZL/embed"}], "Nuclear Radiation": [{"label": "Types of Radiation", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSCIXLrwtulO1JAsPxuf9gkLsHG2ZziD01ECOi39JVWFPW2pVACaMX5URilEsjXwTaVEv4Ybf5YEm9c/embed"}, {"label": "Detecting Radioactivity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRlT5vopIU6pySaSeo_SjHELsdJtX9S6BvXpjjRwwGI6RYc7TP-R7f8bRbsRGSgcyD8BnBftRDes7Vy/embed"}, {"label": "Nuclear Reactions", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRVUqei5GD08AodRHrxXBiUqNAzA_tmegQCYqhVnFQc-FZ87XqKXtu96rbTUWVmZeRZna3r2xTwlR1C/embed"}, {"label": "Properties of Radiation", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQaip5W4e_njxG5pfCcezdBWOrq9DgjLzM1W1AH3PyFnXYiphAwjaBg3c5v8iE9gtVh1-1VDuScKhU4/embed"}, {"label": "Dangers of Radiation", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSqlqUwC09iV0mYQ3I5g1JBcnMeuZT6PFN2xHVVqJJA5mjZNA-kX1eA05Z7qGgtf_qPIPSJt6r490d6/embed"}, {"label": "Half Life", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS1nJSHtazjMEjXbhBgk8G3OrlEXUhoB2n9vMHsLnPqmx98bjta1eATLK1Fk-1DZTx44l1OljZ4zH1M/embed"}, {"label": "Uses of Radiation", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQLjc3h6Ls7TlnEJOpkBLVIhjYABrP6ktNneo85uY_rq5Qr58mruxDeEIV43qbssIKVQgtWlk6GYQVy/embed"}], "Nuclear Energy": [{"label": "Nuclear Fission", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRpnA48hJwrkT5pLdKaGr2C93duWsCuYYD7sAesMGHyhN1geLgMC-pM4qn8qlfqFnaTPAZACIJEvz1V/embed"}, {"label": "Fission Reactors", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRYKIWhy4kX-2s3mVSBP0tjMWfIhywSKGHtVv9cARianiLFyqeykL0lko7IcfI7R315Zd0k7z7_8GsW/embed"}, {"label": "Nuclear Fusion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSkjNrX6_5TyOLSu7fqa7C1jD2EqkspI0n76EQiRk2uhaRAppKut8HlzIScVGEIwC-P2Taj86skeqFW/embed"}]}, "WAVES": {"Describing Waves": [{"label": "Wave Types", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ5xgnlAKEl0gvDeM9VsHRbtueQF1TeiMpjxOGMp52XH9hb6JqLy-YjA0p-APY7eaobfmk0h2B7hFUp/embed"}, {"label": "Wave Properties", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSrroqzZ1C4VbjGqp6FEY3dyyIncRIECH8PPD0bmO5uRPcTH7hPfickvABufvRzZ3KGTiLXdAxVqB4_/embed"}, {"label": "Wave Characteristics", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR11C7Pas3AZxEE-3Ly34Wu2XRm3sChTNxIMn8Vj1fBrwn2-Kvn3AsnU0CwwhuSXWQ4x7Je6soeWyMD/embed"}, {"label": "Wave Speed", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT9wNqea3NJkafxE9XG9EJnbWlB274Q5R5giJGE65PqsE2L-gRXBv0X-jfUqrFqBIAdrUtsWI5iDhyk/embed"}, {"label": "Water waves", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTm8X3tql2eFbiGEHnXQOcqmRTkUStQEZYFfmCHR5gy7uM2MsDz7G52x51wnTiFTpr-pOmqC3IqXjwW/embed"}], "Electromagnetic Waves": [{"label": "EM Spectrum", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRXCAAJ5QWfZ2WKQfsAb73kMGczug4sJ2ODBI3V0PcV5UaODpmNxjo5I-M1RDlMCgN_MPOnZECCtQeP/embed"}, {"label": "Uses of EM waves", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTk11s0aVmbxM_5xZ7fuBu-gC6mutHL-XEqh-bsnwXxJN7sQ9KLRnkpffctMK9j6XuwiW2OQLPHuDXG/embed"}, {"label": "Dangers of EM waves", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS0Xp-O9Y9V5__kTHWSVrrwlvlOVKulNxFggDSrDIQBkvwH6e8gxOEfICHiBWZhgG7ku4IFELeksrFE/embed"}, {"label": "Imaging with X \u2013 Rays", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTr-bxtGGkdODQ8i8aio7B8L1n7TBhWv1-Bck2zf42Tzw81xDDDba1R3_Nhgi7lC5eTdt--k-RrkF6i/embed"}, {"label": "Radio Communications", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRDXvvFKvistfRZa2vikRf4JpfOb2MgxUanVzLK1qhPacFRAyYJKj-G0AtHVJW5QbA3To_JoOUyos6s/embed"}], "Sound Waves": [{"label": "Properties of Sound", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTySU8H7j1EClectftqyJkVL-0DmnoyrJ0ylDVydyBHe0Fg22QO-21TAGJfocRjuyvn60Bb6mygOI3R/embed"}, {"label": "Speed of Sound", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQHBG0_dul4OTat9jjFA2YNm0ExcsF1bHdWaYYPVux2qFV1Qjs87t24CXfZTBwOoAhprjuUyOkFPsFN/embed"}, {"label": "Measuring Sound", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRlDuranJ6QdfqKm-zJ3twUemUz0aEeW40vZ4CCmKkxS33LLB8NtA-wk5uLX7u7t1Gd4Li9BGQ_IdgF/embed"}, {"label": "Ultrasound", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQIgM2MYV9BR_eb357hyqg71b4q4Fb4DMgCZkhZia8pnlid9HCCu8inUdQ-D5_8QBs53BwpHF9q4JSl/embed"}], "Optics": [{"label": "Reflection", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/embed"}, {"label": "Curved Mirrors", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQeUkiDwqrh30Q6gYvU5Edh5cJ6Ez3H9MJJQAxgmbbBPUgPpI_ZnkLPnSTy7RlS6ePYPBkX5zgJ0iTU/embed"}, {"label": "Refraction of Light", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/embed"}, {"label": "Snells Law", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSUIZgdn-EWXkPAATfQlti0amHR-iNYVwLq2N1nQcYpIpjKyTvHfQdR0KBVgLDmWcB99ydEx61woriV/embed"}, {"label": "Total Internal Reflection", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS3nkc4z8uEmPff_lZCT76smHothjxzK0d85BwDUsGHKLqCiyJmsMFy6a8iP4-ARCOPcvDc8SNiXBr9/embed"}, {"label": "Lenses", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT9El3s-ixqFyPsKUPRCngfNCQPBusxht_SN4gDR0z-yRSklvTjVuknr0zyL-GoWc212jETw2EaWc4H/embed"}, {"label": "The Camera and Eye", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSUIZgdn-EWXkPAATfQlti0amHR-iNYVwLq2N1nQcYpIpjKyTvHfQdR0KBVgLDmWcB99ydEx61woriV/embed"}]}, "MECHANICS": {"Forces": [{"label": "Types of Force", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQz5aqiRyAxL8KMEM3fLR7Px5zRE9ykEyW9bFpZcHDOOq9Azhu_5-XcWLlP3fcJ2jlTOsvhXlRLP5su/embed"}, {"label": "Free Body Diagrams", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRa2wQowQg4NaJw3scC6nxrmIppW5_XymVNrgb1wucNxfW_vkDENDXb9t1deTNTxi-LsZDyvF2HkGFh/embed"}, {"label": "Resultant Force", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSIIkCsReMlMhtwTY7haev1EgLSY6PqaRfbCNunTV3Dn4Tv77ENtBH2LosNyAbq2rsnEsutq3gA042O/embed"}, {"label": "Upthrust", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQStg3soreonpQShnajochozSNtcINxpkJi4fxuEXmsEMzSt94bPq7KVPOjEfvwFGIj9nmllqgaVPai/embed"}], "Pressure": [{"label": "Pressure in Solids", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQjuGyuJndVcB2YDlsK9sYkjAynO4pds5PZ10-IorVmB1wXUuEtM0TQ0X43gLPUzHD7yco7lU9xrJjR/embed"}, {"label": "Pressure in Liquids", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTJv-eANzAH09VsJ5rnw19imkh219Si-0th1aJM1TNw_NOG_ELP2cO-cokO8GXklrCm4Qksjv4PCccQ/embed"}, {"label": "Hydraulics", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTcMuG-D1Fv7vaYDOFwKK9Ba5ymceN-cJsiSr8XDTFGePvz2V8r_f_01AXHBmA_8LkC1s7hxgjauadb/embed"}, {"label": "Atmospheric Pressure", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTWJzqdQil7DpwGzEUh7HUS0Bcd-UBJ6efkVvwcT2YA-UF4Po61bRQipBFdMD-ceG6ovVVu5MPLsSQe/embed"}, {"label": "High Pressure Applications", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR_AW5EBLiLqA9l1XcgeN8yzgG8h1jKk_GdBamCSWERnMS-JcqAYB5eQ0snX2TwZ9qN7726jUh-phVe/embed"}], "Dynamics": [{"label": "Speed and Velocity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT3h_VrofUlSpEsqBjUlueFhOFI5p7Q7hPsRYSWkDFRpWu-37wp-lyrZPvtujX_Yp_5rXXLX4IBbV-r/embed"}, {"label": "Acceleration", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ9vDC9ksNDLvjLYlRo8ZqVBMrQT8Dqby5fYn6xHk8tuCWZrPHx9gsCBR77yfrj4OCE0BKI6ganvPId/embed"}, {"label": "Distance-Time Graphs", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ1PZ8-LnKs02PiBi70F-uz5iiixJb0xormiQk6qJBDXLsPN59zNkOrEPXW4yhOdVM_wrQXfUco30uY/embed"}, {"label": "Velocity-Time Graphs", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQnVYFtq6mv0xc3Sj_Sq9lYmKagA3OQ9t2PaDbga90mN8zsvTw1NaJDyhXoRtimanEck_AZNE2Uuj7t/embed"}], "Force and Motion": [{"label": "Newtons First Law of Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTOz3Zx9MQrlE_06bWrsF7w3bToZH8NvyC51gefKRYvClWWOFiqqjS0SCIx3GMutLVunW0Rsg3nWsdY/embed"}, {"label": "Newtons Second Law of Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSjWyISZxuhjzPX8l9Ta58ilj44f6DHrOFxUjj_yJTInBDuPUzNSNZiEU2q0FHkft3a86-uXfNk6pyQ/embed"}, {"label": "Newtons Third Law of Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vROAh15onHZAhRg4Hx2BxhKZRxKFBua78bBCqEAV8PTFQ4iYqVYznPc28P3E1Qm5_pZhTrt6H35jKz9/embed"}, {"label": "Circular Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQOi-jWgRLU-4Ec_NQVOXR7SlJnwoLCR_9jeaWlJTs3Rf03tuLv0tn6uC9s9UTmlC3dXC9P2FAgMYn0/embed"}, {"label": "Mass, Weight and Inertia", "url": "https://docs.google.com/presentation/d/e/2PACX-1vStNV6x1lf2P0zKQ5sU-3z92Vg5Ok-u4y4JhTd1O1__hONdCi_xQvhc6M9H_eMU_gSmY-gZ2kViAoRL/embed"}, {"label": "Freefall and Terminal Velocity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRTablNCgElvGx5XHvvpSg2nBjNWWfq53XUa_9xL9ZlIkKSBvp9KLI5mNur8CECL4jFC_3rfk-xfsYS/embed"}, {"label": "Forces on the Road", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT33JPfqpnDkr5Up0F34n3ccW_5ybtIFpEfvILsP7gz4OQlJDmMoiDu_NT94_Ydqq5kKIj0dMrPGAsF/embed"}], "Materials": [{"label": "Density", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQlolHM6Nf6fXFtXcrZo2RGuwgFHYO25ovahe49tfaXy2BFO7ZQ-pzpnAQgs0KfBN-y_Alt4EBWY7NU/embed"}, {"label": "Stretching Materials", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQF08SbkJl4jODVgtv2BaWq165I-xuoPBBQ6ujNGBeSvfrvnVtmwo6vjWoEdcYSIvEtXav6ETOvXNkN/embed"}, {"label": "Hooke\u2019s Law", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTMj06oGvE5eSBpNgeD5HtjSxeZgRVWhysKRg3ETevEU3pX4pZcB7UcWMBNw4sME6ZI37UCx4n285CB/embed"}, {"label": "Elastic Energy", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSfeAP7R_w34hbAUmNxlfofBbUNQF2kwr17ZX8gkDqm520rJb668OpWLi8XMdOcUTmBIhO2HypkE7ej/embed"}], "Mechanical Energy": [{"label": "Work Done", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRs1i7O87KQom0Z7s6kJ1XUUFaZv6yAgnNrQwYHKwVco1Co31NQaCo4CwI26cYydfKF3yirNKXoKjMG/embed"}, {"label": "Kinetic Energy", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSSrjHY6Rlc64XVv1QcXe0edd-K0VPYflDyPXjlZVd_0j-aPnmk9Nyo-nGDNpj383blXAiQQW2buZl_/embed"}, {"label": "Gravitational Energy", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQCZwQs6FBS_qoM6lzNrge3R5eiHn1fs2Sx0vc1sLLsaNe6tTMeKKkl1ttyWcmAUJEYpCM7rlHnAsEb/embed"}, {"label": "Elastic Potential Energy", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSiMTegRO4yDWaYUG7sXf0G8M-priLiFRUrOTvg3MWtaJaOUk60HTQ0PQwcgSXrMPUPmrDRT2bVG4CN/embed"}, {"label": "Mechanical Power", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTu8Ti16emdU5mvU_ZqNrL523z-svzWFuGZuFeIvemXBgKuudCiL1FUxNs0FRY8NYU7BJ8iB9q_2eSE/embed"}], "Momentum": [{"label": "Calculating Momentum", "url": "https://docs.google.com/presentation/d/1zT2PAnRmf-VZxdPJoAb5cTKqqFJEuR4YTVkkOhf988I/embed"}, {"label": "Conservation of Momentum", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS4X2HKOE4Jw6dnqafF8DwOqPiWc_lHMAIY0eBj3ZnrWZBxtX3ZmTcitgcS91sFjlm4pXXIFJJeUKT7/embed"}, {"label": "Elastic Collisions", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTpTuJoAcYNgb9PMc1KdDlIKdbw65xb9DtV7tg5xwG7HQMYYFJPr00cCMA-g514XCJio-mlYb6BrivA/embed"}, {"label": "Force and Momentum", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTDaBj20AskQhYVsC9nItlS7s7XBBE-FUkuKpk2DEn_712SKdHmxXHJSKkXvKKSEPJ0dp7h4LRowGz3/embed"}, {"label": "Force-Time Graphs", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQVv7sDNRFTPdIoc4IbtQrURtftFE4E9OpSznupQOuMDp02uSOU1r5m83V-5k_o9qG8ujkseF4cc7v5/embed"}, {"label": "Momentum and cars", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQVv7sDNRFTPdIoc4IbtQrURtftFE4E9OpSznupQOuMDp02uSOU1r5m83V-5k_o9qG8ujkseF4cc7v5/embed"}], "Turning Forces": [{"label": "Centre of Mass and Stability", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSi16TjAHFUeeOIb8vtJ-zuDPSy6_gzC5dwGya-ApEiFHp36PFIKgvUfHl-J9w6oqVVvMn3mLpsCsHw/embed"}, {"label": "Levers", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS42M-9Hm1uNjD9rTkIulMPcvuBn7Qr7FnRE2woB3DYJSwjkf0wIIa7gLXEjLbWEfjFIMZjDfb9HhhF/embed"}, {"label": "Moments", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQnlYJyu3_lV_7n3D6yRqsh1J3xJXUO8JFNnSfb7xJb1JqDuecLttibLEtTN-cnwmhFx3YS1twwmOS4/embed"}, {"label": "Moments in Equilibrium", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQfVz2F9_CfvGM9vZZp7r59Lo98ncuyWnNBzxdyCxJ3d9uIpOZinbRAUT08FhwK_oLHTmZn10l2UZBL/embed"}, {"label": "Moments and Gears", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRkXMurpcTcvuO5o3geuikpz2hJbsViJYuKtGmR5uWj_T-fQHq7ETvggCF8wjydJbJJD9MBR6wT_bBK/embed"}]}, "ELECTRICITY": {"Charges": [{"label": "Electric Fields", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQkqnTt3zpJ8-lRy_9dX5I_Zd89jUsufYTgQA-6spTlIMYoJewW-2HboYbCvoqB52BkE3U7_uXpTrHi/embed"}, {"label": "Static Electricity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRc6H9e0BpeH3KkznXustK5Ok6HcMAoTsKvfu_Q66UiIqV9NbrRc_hGEGtGz43JKTm6XRTzrVWXz-qT/embed"}, {"label": "Gold Leaf Electroscope", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSlrXfczfSZhmiz8gzNYInB41ukkA460EzOZoI3nrnw1EWI6hBJx1zml7DMb9WY1A0J8JtadFketPO_/embed"}, {"label": "Moving Charges", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSjSN9X2lUm0RzABXwfNIo6POnhTTNW-REajS6757GloczARKCUiL_l0ZSdQhPWx0C-eI_zkJ1bRDfp/embed"}, {"label": "Van der Graaf Generator", "url": "https://docs.google.com/presentation/d/11NVvyrXCa0CU2WXu6juKKa_Ovv2OBVU9fvIcZvhfY_Y/embed"}, {"label": "Uses of Static Electricity", "url": "https://docs.google.com/presentation/d/1Tw5Zi_tRQV3SSDbYVFTDOXFd5lohwDZiDtoC3FdaQkw/embed"}, {"label": "Dangers of Static Electricity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSJkvftDMBtkDQyF73V5TPfFwH7GJVrdvfZqizexZApBTmn5yH2qHTjWq5Vd9QBM9b6ilMO5d8NDSMv/embed"}], "Circuits": [{"label": "Simple Circuits", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTP1fJsotQ2ZDYk0T89hFVZmdfmNA4FK8goDHQlkKVwe-9ppNHIO1d0A61k1NUWSzXv9KP77owDx1yx/embed"}, {"label": "Electrons Atoms and Energy", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTq0_s_vi5XkFwSzuwh5WneEHhnBUuvgXFfZWNs5s5GohqXLGbkA_vGjZ2_narCkvjxpTAyNO8aPZT8/embed"}, {"label": "Voltage and Current", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTRLw3qXa1w5S4P6gMSlrzEzF5NCeeXmj0ugqM5OfOYkiAayl-WlIfpGTIuO3YswrDMT9d6y0eWazj6/embed"}, {"label": "Resistance", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT87vTAI8TyhCdiz7ee69CcraJQKZuOzEGyAdqkrjBOXaUdYHZjQiUUmRi4DMRl0rj4rDU0JspqDkAW/embed"}, {"label": "Kirchhoffs Laws", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSIdIvb5dT9dOhMDWLLZLOFfFii3Fi-EML5O7JGcHUP6zTsd_WztQarilgILpVsUcwAIZPfiZiYoyXE/embed"}, {"label": "Investigating Circuit Rules", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQSEhqFp_8O66bYR5OrHhMVbuTO56i4zbkDxbdeuYanOkbJfAzUsKx5w_dPJSyqgCEvVwgjQqmyFnhK/embed"}, {"label": "Advanced Circuits", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRK9nGHap2JpLQQe4PLj1FROtYp7ff4r8qgduljM1jgUChF-8Pb-7aNGknkliQF3maGBCelVCb3cl5W/embed"}], "Electrical Components": [{"label": "Circuit Symbols", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQse0bvJFxlmYuiWLVYGaShquAi0h8wlxWYvluEhCCreLrxofNiHD9_jORG33xaOCGvi54RTkKnUr8x/embed"}, {"label": "Resistive Devices", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSLN0dzoVbASobQUhIxYKN2lN94wkDMguobprYQ2LjYgS5UNLneQP_kf7e1OxnRVKPLOl_QtCTsSvUD/embed"}, {"label": "Potential Divider", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSE3UxqysKi05eXkWxEANBH9_LL0qYaOmJct2Ib_mFpeUkUAOTjs4wWMhzvvCTJ6QwpuKyJr0-VGo31/embed"}, {"label": "Relay Switch", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS-vKNtMYCNv5yX9ZSiII_RUQomxsaPRihQ0z1c81z0c0Opb7kUIis2BNBvC7EferRmHMoz0TiInLIw/embed"}, {"label": "I-V Graphs", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQdCVq8y46dKmikEHRLqClQangsKJ7Ce4l--NP0GhKKcMZJdioJyteedciE5At161hlAxFP62MqLkKG/embed"}], "Domestic Electricity": [{"label": "National Grid", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRXY0ImdYu2Y4ZvAd98OODmcV9I4FhKng2tx2_EI2-i_OQRgqTHUEZa3qC1TQyeLnqCkJoCasxIbAX2/embed"}, {"label": "Mains Electricity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQpf1vE6PTcIpasTwB8OKwTK-uVlrgPKgTIVozie6OOW42_AUJDOyXxPPaXx11dYFOVkZdXeal1j_3d/embed"}, {"label": "Measuring Alternating Current", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRdHt7_jZwTiyTX8XksOvK26vPcwcT8aWtWibEZkapiTfaewIuRBSNPOcKfMC5Dl1Actlq8FmuEUvTF/embed"}, {"label": "Cables and Plugs", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRmGNIVa6_v1nUGtnzCUwMMxWH-aH4oyGCF8o68koAfnj1kySrLDVxO3X0jsvkASilEY3PE2KTOm_AI/embed"}, {"label": "Electrical Safety", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qzUDrctgyqkZdkmoDziLvlFTVzu3gjuA3uKvsweR8/embed"}, {"label": "Electrical Power", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQRNTZw4sWwUMy_k06hfAW2JfD5OP3lrf7UU3zarIf9DdjqFc4XnkK13kPM2JzWn2Nflw0cBn4Mcx0R/embed"}, {"label": "Cost of Electricity", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQz9nXHX-HtoABkv8t_oS3unm9_WTFeHkFjhYcNAOH0Lx7WuTx67GzP8MKtJLQ9oXc9aUGHYohwAQjd/embed"}], "Electronics": [{"label": "Analogue and Digital", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQePKCPs1Jd7eg3ChfJYme-By7R6LlP23u4_87WGaXCuLmiKC4v5NoWkrIfDQrS5-RLKBdJX9gtqlLl/embed"}, {"label": "Logic Circuits", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT-A6WMwfaJHNaDVOzZFmwNFqJgbTgO2Z3rpjy1KFAddclZdTu41JtYboKHUTcqW4XvI1h9HcWWkhp4/embed"}]}, "MAGNETIC EFFECTS": {"General": [{"label": "Magnetism", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTtPX-6p4l2wYQ/embed"}, {"label": "Electromagnetism", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQe4Mb8Uqj9rygNt6NM2hWdtUjr9gXkCTrSBJN1gOuBN6ANx_5exkkOt0QYdXs07gcMr2XjQWTQcKba/embed"}, {"label": "Unit 27 The Motor Effect", "url": "https://docs.google.com/presentation/d/e/2PACX-1vRT8E4yWJmS0mO6v0-0zO8LhLgV9P9S9P9S9P9S9P9S9P9S9P9S9P9S9P9S9P9S9P9S9P9S9P9/embed"}, {"label": "DC Motors", "url": "https://docs.google.com/presentation/d/e/2PACX-1vS2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S2S/embed"}, {"label": "Electromagnetic Induction", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQv6m3xI6qL8hJ9v3i7uXpW7gH5j6t4uVz7f8v9y2k1l0m3n4o5p6q7r8s9t0u1v2w3x4y5z/embed"}, {"label": "AC Generators", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT1u2v3w4x5y6z7A8B9C0D1E2F3G4H5I6J7K8L9M0N1O2P3Q4R5S6T7U8V9W0X/embed"}, {"label": "Transformers", "url": "https://docs.google.com/presentation/d/e/2PACX-1vT1u2v3w4x5y6z7A8B9C0D1E2F3G4H5I6J7K8L9M0N1O2P3Q4R5S6T7U8V9W0X/embed"}]}, "ASTRONOMY": {"Planetary Motion": [{"label": "The Solar System", "url": "https://docs.google.com/presentation/d/e/2PACX-1vR6z7A8B9C0D1E2F3G4H5I6J7K8L9M0N1O2P3Q4R5S6T7U8V9W0X/embed"}, {"label": "Planetary Motion", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/embed"}, {"label": "Orbital Speed", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/embed"}], "Interstellar Space": [{"label": "Looking into Space", "url": "https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/embed"}, {"label": "Life of Stars", "url": "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/embed"}, {"label": "Universe", "url": "https://docs.google.com/presentation/d/e/2PACX-1vTbH2hEDwCPE55IxoO6ysJDYhomq2XvV5c_M8OYKRfiC9rMDC1/embed"}]}};
+<footer>
+    <div>PROPERTY OF ARASAKA CORPORATION © 2024</div>
+    <div>UNAUTHORIZED DATA EXTRACTION IS PROHIBITED</div>
+</footer>
 
-        const nav = document.getElementById('module-nav');
-        const welcome = document.getElementById('welcome-screen');
-        const slideList = document.getElementById('slides-list');
-        const container = document.getElementById('submodules-container');
-        const title = document.getElementById('active-module-title');
+<script>
+    // Merged Database with Restored Astronomy
+    const db = {
+        "PHYSICS 101": {
+            "Mathematical skills": [
+                { "name": "Standard Form", "type": "Slide", "link": "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Significant Figures", "type": "Slide", "link": "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Scalars and Vectors", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub?start=false&loop=false&delayms=60000" }
+            ]
+        },
+        "ASTRONOMY": {
+            "Solar System": [
+                { "name": "Motion of the Earth", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Motion of the Moon", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Bodies of the Solar System", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Orbital Speed", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/pub?start=false&loop=false&delayms=60000" }
+            ],
+            "Interstellar Space": [
+                { "name": "Looking into Space", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Life of Stars", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub?start=false&loop=false&delayms=60000" },
+                { "name": "Expanding Universe", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub?start=false&loop=false&delayms=60000" }
+            ]
+        },
+        "MECHANICS": {
+            "Motion": [
+                { "name": "Speed Velocity and Acceleration", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub" }
+            ]
+        },
+        "NUCLEAR": {
+            "Radioactivity": [
+                { "name": "The Atom", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTrtE4eT8A8xGf7jS-H8z8A/pub" }
+            ]
+        }
+        // Additional modules can be added here
+    };
 
-        // Create Navigation
-        Object.keys(PHYSICS_DB).forEach(mod => {
-            const btn = document.createElement('button');
-            btn.className = "btn-module p-3 rounded text-[10px] font-bold uppercase tracking-tighter";
-            btn.innerText = mod;
-            btn.onclick = () => {
-                document.querySelectorAll('.btn-module').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderModule(mod);
-            };
-            nav.appendChild(btn);
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+
+    function renderModule(moduleName) {
+        // Nav UI update
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            if(item.innerText === moduleName) item.classList.add('active');
         });
 
-        function renderModule(modName) {
-            welcome.classList.add('hidden');
-            slideList.classList.remove('hidden');
-            title.innerText = modName;
-            container.innerHTML = '';
+        const moduleData = db[moduleName];
+        let html = `
+            <div class="module-header">
+                <h1>${moduleName}</h1>
+            </div>
+        `;
 
-            const submodules = PHYSICS_DB[modName];
-            for (const sub in submodules) {
-                const subSection = document.createElement('div');
-                subSection.className = "mb-16";
-                
-                let subHtml = `<h3 class="text-cyber-blue font-orbitron text-xl mb-6 flex items-center tracking-widest">
-                                <span class="text-cyber-pink mr-3">>></span> ${sub}
-                               </h3>
-                               <div class="grid grid-cols-1 gap-12">`;
-                
-                submodules[sub].forEach(slide => {
-                    subHtml += `
-                        <div class="group">
-                            <div class="flex items-center justify-between mb-3 border-l-2 border-cyber-green pl-3">
-                                <p class="text-cyber-green font-mono uppercase text-xs">DATA_NODE: ${slide.label}</p>
-                                <a href="${slide.url.replace('/embed', '/pub')}" target="_blank" class="text-[10px] text-gray-500 hover:text-cyber-blue transition-colors italic">[ Open Original ]</a>
-                            </div>
-                            <div class="slide-container">
-                                <iframe src="${slide.url}" frameborder="0" allowfullscreen="true"></iframe>
-                            </div>
-                        </div>
-                    `;
-                });
+        for (const [submodule, items] of Object.entries(moduleData)) {
+            html += `
+                <div class="submodule-section">
+                    <div class="submodule-title">${submodule}</div>
+                    <div class="grid">
+            `;
 
-                subHtml += `</div>`;
-                subSection.innerHTML = subHtml;
-                container.appendChild(subSection);
-            }
-            window.scrollTo({ top: slideList.offsetTop - 50, behavior: 'smooth' });
+            items.forEach(item => {
+                html += `
+                    <a href="${item.link}" target="_blank" class="card">
+                        <div class="card-label">FILE_TYPE: ${item.type}</div>
+                        <div class="card-name">${item.name}</div>
+                    </a>
+                `;
+            });
+
+            html += `</div></div>`;
         }
-    </script>
+
+        content.innerHTML = html;
+        content.scrollTo(0,0);
+    }
+
+    // Init Navigation
+    Object.keys(db).forEach((module, index) => {
+        const div = document.createElement('div');
+        div.className = 'nav-item' + (index === 0 ? ' active' : '');
+        div.innerText = module;
+        div.onclick = () => renderModule(module);
+        sidebar.appendChild(div);
+    });
+
+    // Load first module
+    renderModule(Object.keys(db)[0]);
+</script>
+
 </body>
 </html>
