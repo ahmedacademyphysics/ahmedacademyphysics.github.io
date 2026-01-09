@@ -1,320 +1,270 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARASAKA | Physics Database</title>
+    <title>ARASAKA | Secure Physics Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --arasaka-red: #ff003c;
             --arasaka-black: #050505;
-            --arasaka-dark-grey: #121212;
-            --arasaka-text: #e0e0e0;
             --arasaka-cyan: #00f3ff;
-            --font-main: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            --arasaka-dark: #111111;
         }
-
-        * { box-sizing: border-box; }
 
         body {
             background-color: var(--arasaka-black);
-            color: var(--arasaka-text);
-            font-family: var(--font-main);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            color: #e0e0e0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* --- Header --- */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* Arasaka Header */
         header {
             background: linear-gradient(90deg, var(--arasaka-red) 0%, #8b0000 100%);
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid white;
-            z-index: 100;
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 99% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 98% 100%, 0 100%);
+            border-bottom: 2px solid white;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 6px;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .status-bar {
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: white;
-            background: rgba(0,0,0,0.3);
-            padding: 5px 10px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        /* --- Main Layout --- */
-        .container {
-            display: flex;
-            flex: 1;
+        /* Sidebar & Cards */
+        .topic-card {
+            background: var(--arasaka-dark);
+            border: 1px solid #333;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
             overflow: hidden;
         }
 
-        /* Sidebar Nav */
-        nav {
-            width: 260px;
-            background: var(--arasaka-dark-grey);
-            border-right: 2px solid var(--arasaka-red);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .nav-item {
-            padding: 18px 25px;
-            cursor: pointer;
-            border-bottom: 1px solid #222;
-            transition: 0.2s;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        .nav-item:hover {
-            background: #1a1a1a;
-            color: var(--arasaka-red);
-        }
-
-        .nav-item.active {
-            background: var(--arasaka-red);
-            color: white;
-            position: relative;
-        }
-
-        .nav-item.active::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 25%;
-            height: 50%;
-            width: 4px;
-            background: white;
-        }
-
-        /* Main Content Area */
-        main {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-            background: radial-gradient(circle at top right, #111 0%, #050505 100%);
-        }
-
-        .module-header {
-            margin-bottom: 40px;
-            border-left: 8px solid var(--arasaka-red);
-            padding-left: 20px;
-        }
-
-        .module-header h1 {
-            font-size: 3rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .submodule-section {
-            margin-bottom: 50px;
-        }
-
-        .submodule-title {
-            font-size: 1.2rem;
-            color: var(--arasaka-cyan);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .submodule-title::before {
-            content: "ID_";
-            font-size: 0.7rem;
-            margin-right: 8px;
-            opacity: 0.6;
-        }
-
-        /* Cards Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .card {
-            background: #111;
-            border: 1px solid #222;
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
+        .topic-card:hover {
             border-color: var(--arasaka-red);
-            background: #161616;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 0, 60, 0.15);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
-        .card-label {
-            font-size: 0.65rem;
-            color: var(--arasaka-red);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            font-weight: bold;
+        .topic-card.active {
+            border-left: 5px solid var(--arasaka-red);
+            background: #1a1a1a;
         }
 
-        .card-name {
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.4;
+        /* Algebra Lock Styling */
+        #algebra-lock {
+            background: rgba(10, 10, 10, 0.95);
+            border: 2px solid var(--arasaka-red);
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
         }
 
-        /* --- Footer --- */
-        footer {
-            background: black;
-            padding: 10px 40px;
-            font-size: 0.7rem;
-            color: #444;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #111;
+        .slide-embed-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 1px solid #444;
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--arasaka-red); }
+        .slide-embed-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+        @keyframes shake {
+            10, 90% { transform: translate3d(-1px, 0, 0); }
+            20, 80% { transform: translate3d(2px, 0, 0); }
+            30, 50, 70% { transform: translate3d(-4px, 0, 0); }
+            40, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .text-cyber-neon-pink { color: var(--arasaka-red); }
+        .text-cyber-electric-blue { color: var(--arasaka-cyan); }
     </style>
 </head>
-<body>
+<body class="min-h-screen">
 
-<header>
-    <div class="logo">ARASAKA</div>
-    <div class="status-bar">SECURE CONNECTION: ESTABLISHED // DATA_PORT: 8080</div>
+<header class="p-6">
+    <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-4xl font-black tracking-tighter font-orbitron text-white">ARASAKA</h1>
+        <div class="text-xs font-mono text-white opacity-70">
+            SYSTEM_STATUS: SECURE // DATABASE_v4.2.1
+        </div>
+    </div>
 </header>
 
-<div class="container">
-    <nav id="sidebar"></nav>
-    <main id="content">
-        <div style="display:flex; justify-content:center; align-items:center; height:100%; color:#444;">
-            <h2>SELECT MODULE FOR DECRYPTION...</h2>
+<div class="container mx-auto flex flex-col md:flex-row gap-8 p-6">
+    
+    <aside class="w-full md:w-1/3 space-y-4">
+        <h2 class="text-xl font-bold mb-4 border-b border-gray-800 pb-2 font-orbitron">MODULE_INDEX</h2>
+        <div id="sidebar-nav" class="space-y-2">
+            </div>
+    </aside>
+
+    <main class="w-full md:w-2/3 min-h-[600px] relative">
+        
+        <div id="content-placeholder" class="h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center">
+            <div class="text-5xl mb-4 opacity-20">◢◤</div>
+            <p class="text-gray-500 font-mono">WAITING FOR MODULE SELECTION...</p>
         </div>
+
+        <div id="algebra-lock" class="hidden absolute inset-0 z-50 flex flex-col items-center justify-center p-8 rounded-lg">
+            <h3 class="text-2xl font-bold mb-6 font-orbitron text-white tracking-widest">ENCRYPTION_KEY_REQUIRED</h3>
+            <p class="text-gray-400 mb-2 font-mono text-sm">SOLVE TO DECRYPT DATA STREAM:</p>
+            <div id="lock-question" class="text-4xl font-black mb-8 text-cyber-electric-blue font-orbitron">X = ?</div>
+            
+            <div class="flex flex-col gap-4 w-64">
+                <input type="number" id="lock-input" class="bg-black border-2 border-gray-700 p-4 text-center text-2xl font-bold focus:border-cyber-neon-pink outline-none transition" placeholder="ENTER X">
+                <button id="lock-submit" class="bg-cyber-neon-pink text-white font-black py-4 font-orbitron hover:bg-red-700 transition active:scale-95">DECRYPT_NOW</button>
+            </div>
+            <p id="lock-message" class="hidden text-red-500 mt-4 font-bold animate-pulse">ACCESS_DENIED: INCORRECT KEY</p>
+        </div>
+
+        <div id="topic-content-area" class="hidden bg-[#0a0a0a] p-8 border border-gray-800">
+            </div>
+
     </main>
 </div>
 
-<footer>
-    <div>PROPERTY OF ARASAKA CORPORATION © 2024</div>
-    <div>UNAUTHORIZED DATA EXTRACTION IS PROHIBITED</div>
+<footer class="mt-20 border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600">
+    <p>© 2024 ARASAKA CORPORATION. ALL RIGHTS RESERVED. SECURE TERMINAL #8821-X</p>
 </footer>
 
 <script>
-    // Merged Database with Restored Astronomy
-    const db = {
+    // --- Universal Embed Template ---
+    const createSlideEmbed = (url, name) => {
+        const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
+        return `
+            <div class="mb-8 group">
+                <p class="text-sm text-cyan-400 mb-2 font-orbitron opacity-70 group-hover:opacity-100 transition">// DATA_STREAM: ${name.toUpperCase()} //</p>
+                <div class="slide-embed-container">
+                    <iframe src="${embedUrl}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
+                </div>
+            </div>
+        `;
+    };
+
+    // --- FULL RESTORED DATABASE ---
+    const PHYSICS_CONTENT = {
         "PHYSICS 101": {
-            "Mathematical skills": [
-                { "name": "Standard Form", "type": "Slide", "link": "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Significant Figures", "type": "Slide", "link": "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Scalars and Vectors", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub?start=false&loop=false&delayms=60000" }
+            title: "PHYSICS 101: CORE FOUNDATIONS",
+            submodules: [
+                { heading: "Mathematical Skills", text: createSlideEmbed("https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub", "Standard Form") + createSlideEmbed("https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub", "Significant Figures") },
+                { heading: "Vectors", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub", "Scalars and Vectors") }
             ]
         },
         "ASTRONOMY": {
-            "Solar System": [
-                { "name": "Motion of the Earth", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Motion of the Moon", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Bodies of the Solar System", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Orbital Speed", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/pub?start=false&loop=false&delayms=60000" }
-            ],
-            "Interstellar Space": [
-                { "name": "Looking into Space", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Life of Stars", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub?start=false&loop=false&delayms=60000" },
-                { "name": "Expanding Universe", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub?start=false&loop=false&delayms=60000" }
+            title: "ASTRONOMY: DEEP SPACE DATA",
+            submodules: [
+                { heading: "Solar System", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub", "Motion of the Earth") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub", "Bodies of the Solar System") },
+                { heading: "Interstellar Space", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub", "Looking into Space") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub", "Life of Stars") }
             ]
         },
         "MECHANICS": {
-            "Motion": [
-                { "name": "Speed Velocity and Acceleration", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub" }
+            title: "MECHANICS: DYNAMICS & KINEMATICS",
+            submodules: [
+                { heading: "Motion", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub", "Speed & Acceleration") },
+                { heading: "Forces", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSuA2RzC6z0f0Z_y9N5Q-F/pub", "Effects of Forces") }
+            ]
+        },
+        "ELECTRICITY": {
+            title: "ELECTRICITY: CIRCUITRY & CHARGE",
+            submodules: [
+                { heading: "Fundamentals", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRWj8XpD-C9v_z9/pub", "Electric Charge") }
             ]
         },
         "NUCLEAR": {
-            "Radioactivity": [
-                { "name": "The Atom", "type": "Slide", "link": "https://docs.google.com/presentation/d/e/2PACX-1vTrtE4eT8A8xGf7jS-H8z8A/pub" }
+            title: "NUCLEAR CORE: RADIOACTIVITY",
+            submodules: [
+                { heading: "Atomic Structure", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTrtE4eT8A8xGf7jS-H8z8A/pub", "The Atom") }
             ]
         }
-        // Additional modules can be added here
     };
 
-    const sidebar = document.getElementById('sidebar');
-    const content = document.getElementById('content');
+    // --- Interaction Logic ---
+    const sidebarNav = document.getElementById('sidebar-nav');
+    const contentPlaceholder = document.getElementById('content-placeholder');
+    const topicContentArea = document.getElementById('topic-content-area');
+    const algebraLock = document.getElementById('algebra-lock');
+    const lockQuestion = document.getElementById('lock-question');
+    const lockInput = document.getElementById('lock-input');
+    const lockSubmit = document.getElementById('lock-submit');
+    const lockMessage = document.getElementById('lock-message');
 
-    function renderModule(moduleName) {
-        // Nav UI update
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-            if(item.innerText === moduleName) item.classList.add('active');
+    let correctAlgebraAnswer = null;
+    let pendingTopic = null;
+
+    // 1. Build Navigation
+    Object.keys(PHYSICS_CONTENT).forEach(key => {
+        const card = document.createElement('div');
+        card.className = 'topic-card p-4 rounded-md font-bold text-sm tracking-wider uppercase';
+        card.innerText = key;
+        card.setAttribute('data-topic', key);
+        card.addEventListener('click', () => {
+            // Remove active from others
+            document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            
+            pendingTopic = key;
+            initiateLock();
         });
-
-        const moduleData = db[moduleName];
-        let html = `
-            <div class="module-header">
-                <h1>${moduleName}</h1>
-            </div>
-        `;
-
-        for (const [submodule, items] of Object.entries(moduleData)) {
-            html += `
-                <div class="submodule-section">
-                    <div class="submodule-title">${submodule}</div>
-                    <div class="grid">
-            `;
-
-            items.forEach(item => {
-                html += `
-                    <a href="${item.link}" target="_blank" class="card">
-                        <div class="card-label">FILE_TYPE: ${item.type}</div>
-                        <div class="card-name">${item.name}</div>
-                    </a>
-                `;
-            });
-
-            html += `</div></div>`;
-        }
-
-        content.innerHTML = html;
-        content.scrollTo(0,0);
-    }
-
-    // Init Navigation
-    Object.keys(db).forEach((module, index) => {
-        const div = document.createElement('div');
-        div.className = 'nav-item' + (index === 0 ? ' active' : '');
-        div.innerText = module;
-        div.onclick = () => renderModule(module);
-        sidebar.appendChild(div);
+        sidebarNav.appendChild(card);
     });
 
-    // Load first module
-    renderModule(Object.keys(db)[0]);
+    // 2. The Algebra Lock (Cyberpunk Decryption)
+    function initiateLock() {
+        const a = Math.floor(Math.random() * 15) + 5;
+        const b = Math.floor(Math.random() * 15) + 5;
+        correctAlgebraAnswer = a + b;
+        
+        lockQuestion.innerText = `X = ${a} + ${b}`;
+        algebraLock.classList.remove('hidden');
+        topicContentArea.classList.add('hidden');
+        lockInput.value = '';
+        lockInput.focus();
+    }
+
+    // 3. Decrypt Button
+    lockSubmit.addEventListener('click', () => {
+        if (parseInt(lockInput.value) === correctAlgebraAnswer) {
+            revealContent();
+        } else {
+            lockMessage.classList.remove('hidden');
+            contentPlaceholder.classList.add('shake');
+            setTimeout(() => {
+                lockMessage.classList.add('hidden');
+                contentPlaceholder.classList.remove('shake');
+            }, 1000);
+        }
+    });
+
+    // Allow Enter key to submit
+    lockInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') lockSubmit.click();
+    });
+
+    function revealContent() {
+        const data = PHYSICS_CONTENT[pendingTopic];
+        if (!data) return;
+
+        algebraLock.classList.add('hidden');
+        contentPlaceholder.classList.add('hidden');
+        topicContentArea.classList.remove('hidden');
+
+        let html = `<h2 class="text-4xl font-black mb-10 text-cyber-neon-pink font-orbitron border-b-2 border-red-900 pb-4">${data.title}</h2>`;
+        data.submodules.forEach(sub => {
+            html += `
+                <div class="mb-12 border-l-4 border-cyber-electric-blue pl-6">
+                    <h3 class="text-2xl font-bold mb-6 text-cyber-electric-blue font-orbitron tracking-tight">${sub.heading}</h3>
+                    <div class="space-y-4">${sub.text}</div>
+                </div>
+            `;
+        });
+        
+        topicContentArea.innerHTML = html;
+        topicContentArea.scrollIntoView({ behavior: 'smooth' });
+    }
 </script>
 
 </body>
