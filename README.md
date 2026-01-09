@@ -49,13 +49,7 @@
         .topic-card.active {
             border-left: 5px solid var(--arasaka-red);
             background: #1a1a1a;
-        }
-
-        /* Algebra Lock Styling */
-        #algebra-lock {
-            background: rgba(10, 10, 10, 0.95);
-            border: 2px solid var(--arasaka-red);
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            color: var(--arasaka-red);
         }
 
         .slide-embed-container {
@@ -64,6 +58,7 @@
             height: 0;
             overflow: hidden;
             border: 1px solid #444;
+            background: #000;
         }
 
         .slide-embed-container iframe {
@@ -71,25 +66,22 @@
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        .shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
-        @keyframes shake {
-            10, 90% { transform: translate3d(-1px, 0, 0); }
-            20, 80% { transform: translate3d(2px, 0, 0); }
-            30, 50, 70% { transform: translate3d(-4px, 0, 0); }
-            40, 60% { transform: translate3d(4px, 0, 0); }
-        }
-
         .text-cyber-neon-pink { color: var(--arasaka-red); }
         .text-cyber-electric-blue { color: var(--arasaka-cyan); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: var(--arasaka-red); }
     </style>
 </head>
 <body class="min-h-screen">
 
-<header class="p-6">
+<header class="p-6 sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-4xl font-black tracking-tighter font-orbitron text-white">ARASAKA</h1>
         <div class="text-xs font-mono text-white opacity-70">
-            SYSTEM_STATUS: SECURE // DATABASE_v4.2.1
+            SYSTEM_STATUS: OPEN_ACCESS // DB_DECRYPTED_v4.5
         </div>
     </div>
 </header>
@@ -97,7 +89,7 @@
 <div class="container mx-auto flex flex-col md:flex-row gap-8 p-6">
     
     <aside class="w-full md:w-1/3 space-y-4">
-        <h2 class="text-xl font-bold mb-4 border-b border-gray-800 pb-2 font-orbitron">MODULE_INDEX</h2>
+        <h2 class="text-xl font-bold mb-4 border-b border-gray-800 pb-2 font-orbitron text-gray-400">SELECT_MODULE</h2>
         <div id="sidebar-nav" class="space-y-2">
             </div>
     </aside>
@@ -106,29 +98,17 @@
         
         <div id="content-placeholder" class="h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center">
             <div class="text-5xl mb-4 opacity-20">◢◤</div>
-            <p class="text-gray-500 font-mono">WAITING FOR MODULE SELECTION...</p>
+            <p class="text-gray-500 font-mono">ESTABLISHING UPLINK... SELECT MODULE TO BEGIN.</p>
         </div>
 
-        <div id="algebra-lock" class="hidden absolute inset-0 z-50 flex flex-col items-center justify-center p-8 rounded-lg">
-            <h3 class="text-2xl font-bold mb-6 font-orbitron text-white tracking-widest">ENCRYPTION_KEY_REQUIRED</h3>
-            <p class="text-gray-400 mb-2 font-mono text-sm">SOLVE TO DECRYPT DATA STREAM:</p>
-            <div id="lock-question" class="text-4xl font-black mb-8 text-cyber-electric-blue font-orbitron">X = ?</div>
-            
-            <div class="flex flex-col gap-4 w-64">
-                <input type="number" id="lock-input" class="bg-black border-2 border-gray-700 p-4 text-center text-2xl font-bold focus:border-cyber-neon-pink outline-none transition" placeholder="ENTER X">
-                <button id="lock-submit" class="bg-cyber-neon-pink text-white font-black py-4 font-orbitron hover:bg-red-700 transition active:scale-95">DECRYPT_NOW</button>
-            </div>
-            <p id="lock-message" class="hidden text-red-500 mt-4 font-bold animate-pulse">ACCESS_DENIED: INCORRECT KEY</p>
-        </div>
-
-        <div id="topic-content-area" class="hidden bg-[#0a0a0a] p-8 border border-gray-800">
+        <div id="topic-content-area" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg">
             </div>
 
     </main>
 </div>
 
 <footer class="mt-20 border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600">
-    <p>© 2024 ARASAKA CORPORATION. ALL RIGHTS RESERVED. SECURE TERMINAL #8821-X</p>
+    <p>© 2024 ARASAKA CORPORATION. ALL RIGHTS RESERVED. GLOBAL PHYSICS ARCHIVE ACCESS.</p>
 </footer>
 
 <script>
@@ -136,49 +116,97 @@
     const createSlideEmbed = (url, name) => {
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         return `
-            <div class="mb-8 group">
-                <p class="text-sm text-cyan-400 mb-2 font-orbitron opacity-70 group-hover:opacity-100 transition">// DATA_STREAM: ${name.toUpperCase()} //</p>
-                <div class="slide-embed-container">
+            <div class="mb-10 group">
+                <p class="text-xs text-cyan-500 mb-2 font-orbitron opacity-60 group-hover:opacity-100 transition tracking-widest">// DATA_STREAM: ${name.toUpperCase()} //</p>
+                <div class="slide-embed-container shadow-2xl">
                     <iframe src="${embedUrl}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
                 </div>
             </div>
         `;
     };
 
-    // --- FULL RESTORED DATABASE ---
-    const PHYSICS_CONTENT = {
+    // --- FULL DEDUPLICATED DATABASE ---
+    const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: CORE FOUNDATIONS",
-            submodules: [
-                { heading: "Mathematical Skills", text: createSlideEmbed("https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub", "Standard Form") + createSlideEmbed("https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub", "Significant Figures") },
-                { heading: "Vectors", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub", "Scalars and Vectors") }
-            ]
+            sections: {
+                "Mathematical Skills": [
+                    { name: "Standard Form", link: "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub" },
+                    { name: "Significant Figures", link: "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub" },
+                    { name: "Scalars and Vectors", link: "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub" },
+                    { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub" }
+                ],
+                "Measurement": [
+                    { name: "S.I. Units", link: "https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/pub" },
+                    { name: "Measuring Equipment", link: "https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/pub" }
+                ]
+            }
         },
         "ASTRONOMY": {
-            title: "ASTRONOMY: DEEP SPACE DATA",
-            submodules: [
-                { heading: "Solar System", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub", "Motion of the Earth") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub", "Bodies of the Solar System") },
-                { heading: "Interstellar Space", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSXAbQsRixlZ_CC8BiNSZXWainNWTeBx3Rka69rYBEqDk66sz_WI4jZGrc5q1kbcxyAOjJnq5neEVQF/pub", "Looking into Space") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub", "Life of Stars") }
-            ]
+            title: "ASTRONOMY: COSMOLOGY & STARS",
+            sections: {
+                "Solar System": [
+                    { name: "Motion of the Earth", link: "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub" },
+                    { name: "Motion of the Moon", link: "https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub" },
+                    { name: "Moons and Satellites", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub" },
+                    { name: "Bodies of the Solar System", link: "https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub" }
+                ],
+                "Interstellar Space": [
+                    { name: "Life of Stars", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub" },
+                    { name: "Hubble's Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vQZUkxEIiI0cRXxBp2MVrIv4f4QGG3Kw04nd0FGKxth2BJho3lQVXV8X5tUAUaRwofM4Q0G1ehVUpiy/pub" },
+                    { name: "Expanding Universe", link: "https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub" }
+                ]
+            }
+        },
+        "THERMODYNAMICS": {
+            title: "THERMODYNAMICS: THERMAL PHYSICS",
+            sections: {
+                "Thermal Energy": [
+                    { name: "States of Matter", link: "https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/pub" },
+                    { name: "Methods of Heat Transfer", link: "https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/pub" }
+                ],
+                "Gases": [
+                    { name: "Gas Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/pub" },
+                    { name: "Brownian Motion", link: "https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/pub" }
+                ]
+            }
         },
         "MECHANICS": {
-            title: "MECHANICS: DYNAMICS & KINEMATICS",
-            submodules: [
-                { heading: "Motion", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub", "Speed & Acceleration") },
-                { heading: "Forces", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSuA2RzC6z0f0Z_y9N5Q-F/pub", "Effects of Forces") }
-            ]
+            title: "MECHANICS: FORCES & MOTION",
+            sections: {
+                "Kinematics": [
+                    { name: "Speed & Acceleration", link: "https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub" }
+                ],
+                "Dynamics": [
+                    { name: "Effects of Forces", link: "https://docs.google.com/presentation/d/e/2PACX-1vSuA2RzC6z0f0Z_y9N5Q-F/pub" }
+                ]
+            }
         },
-        "ELECTRICITY": {
-            title: "ELECTRICITY: CIRCUITRY & CHARGE",
-            submodules: [
-                { heading: "Fundamentals", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRWj8XpD-C9v_z9/pub", "Electric Charge") }
-            ]
+        "WAVES": {
+            title: "WAVES: OPTICS & SOUND",
+            sections: {
+                "Wave Properties": [
+                    { name: "Wave Types", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ5xgnlAKEl0gvDeM9VsHRbtueQF1TeiMpjxOGMp52XH9hb6JqLy-YjA0p-APY7eaobfmk0h2B7hFUp/pub" },
+                    { name: "EM Spectrum", link: "https://docs.google.com/presentation/d/e/2PACX-1vRXCAAJ5QWfZ2WKQfsAb73kMGczug4sJ2ODBI3V0PcV5UaODpmNxjo5I-M1RDlMCgN_MPOnZECCtQeP/pub" }
+                ],
+                "Optics": [
+                    { name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub" },
+                    { name: "Refraction of Light", link: "https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub" }
+                ]
+            }
         },
         "NUCLEAR": {
             title: "NUCLEAR CORE: RADIOACTIVITY",
-            submodules: [
-                { heading: "Atomic Structure", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTrtE4eT8A8xGf7jS-H8z8A/pub", "The Atom") }
-            ]
+            sections: {
+                "Atomic Structure": [
+                    { name: "Atomic Structure", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ-lxA1kdRmFq0MI1bbLLFHzsVgMYb2-BY0B-FekIwYvKhMSsJQG8LI12ScQnirDHOFN6_afr39EOZL/pub" },
+                    { name: "The Nucleus", link: "https://docs.google.com/presentation/d/e/2PACX-1vS0xUJ8U43qkH8G3lSNycapQXCYnpM2gJdy8Mb5oU8CYptfCZG8mpawoteXtouAQ5Opb5D3LQ-KhymD/pub" }
+                ],
+                "Radioactivity": [
+                    { name: "Types of Radiation", link: "https://docs.google.com/presentation/d/e/2PACX-1vSCIXLrwtulO1JAsPxuf9gkLsHG2ZziD01ECOi39JVWFPW2pVACaMX5URilEsjXwTaVEv4Ybf5YEm9c/pub" },
+                    { name: "Nuclear Fusion", link: "https://docs.google.com/presentation/d/e/2PACX-1vSkjNrX6_5TyOLSu7fqa7C1jD2EqkspI0n76EQiRk2uhaRAppKut8HlzIScVGEIwC-P2Taj86skeqFW/pub" }
+                ]
+            }
         }
     };
 
@@ -186,84 +214,58 @@
     const sidebarNav = document.getElementById('sidebar-nav');
     const contentPlaceholder = document.getElementById('content-placeholder');
     const topicContentArea = document.getElementById('topic-content-area');
-    const algebraLock = document.getElementById('algebra-lock');
-    const lockQuestion = document.getElementById('lock-question');
-    const lockInput = document.getElementById('lock-input');
-    const lockSubmit = document.getElementById('lock-submit');
-    const lockMessage = document.getElementById('lock-message');
-
-    let correctAlgebraAnswer = null;
-    let pendingTopic = null;
 
     // 1. Build Navigation
-    Object.keys(PHYSICS_CONTENT).forEach(key => {
+    Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        card.className = 'topic-card p-4 rounded-md font-bold text-sm tracking-wider uppercase';
-        card.innerText = key;
+        card.className = 'topic-card p-4 rounded-md font-bold text-sm tracking-widest uppercase border border-gray-800';
+        card.innerHTML = `<span class="opacity-50 mr-2">◢</span> ${key}`;
         card.setAttribute('data-topic', key);
         card.addEventListener('click', () => {
-            // Remove active from others
+            // Remove active state from all
             document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
             card.classList.add('active');
             
-            pendingTopic = key;
-            initiateLock();
+            // Immediate Reveal (No Lock)
+            revealContent(key);
         });
         sidebarNav.appendChild(card);
     });
 
-    // 2. The Algebra Lock (Cyberpunk Decryption)
-    function initiateLock() {
-        const a = Math.floor(Math.random() * 15) + 5;
-        const b = Math.floor(Math.random() * 15) + 5;
-        correctAlgebraAnswer = a + b;
-        
-        lockQuestion.innerText = `X = ${a} + ${b}`;
-        algebraLock.classList.remove('hidden');
-        topicContentArea.classList.add('hidden');
-        lockInput.value = '';
-        lockInput.focus();
-    }
-
-    // 3. Decrypt Button
-    lockSubmit.addEventListener('click', () => {
-        if (parseInt(lockInput.value) === correctAlgebraAnswer) {
-            revealContent();
-        } else {
-            lockMessage.classList.remove('hidden');
-            contentPlaceholder.classList.add('shake');
-            setTimeout(() => {
-                lockMessage.classList.add('hidden');
-                contentPlaceholder.classList.remove('shake');
-            }, 1000);
-        }
-    });
-
-    // Allow Enter key to submit
-    lockInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') lockSubmit.click();
-    });
-
-    function revealContent() {
-        const data = PHYSICS_CONTENT[pendingTopic];
+    // 2. Reveal Function
+    function revealContent(topicKey) {
+        const data = DATABASE[topicKey];
         if (!data) return;
 
-        algebraLock.classList.add('hidden');
+        // Visual transitions
         contentPlaceholder.classList.add('hidden');
         topicContentArea.classList.remove('hidden');
+        topicContentArea.innerHTML = `<div class="animate-pulse text-cyber-electric-blue font-mono mb-4">ACCESSING_ENCRYPTED_FILES...</div>`;
 
-        let html = `<h2 class="text-4xl font-black mb-10 text-cyber-neon-pink font-orbitron border-b-2 border-red-900 pb-4">${data.title}</h2>`;
-        data.submodules.forEach(sub => {
-            html += `
-                <div class="mb-12 border-l-4 border-cyber-electric-blue pl-6">
-                    <h3 class="text-2xl font-bold mb-6 text-cyber-electric-blue font-orbitron tracking-tight">${sub.heading}</h3>
-                    <div class="space-y-4">${sub.text}</div>
+        setTimeout(() => {
+            let html = `
+                <div class="mb-8 border-b border-red-900 pb-6">
+                    <h2 class="text-4xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
+                    <p class="text-xs font-mono text-gray-500 mt-2 uppercase tracking-widest">ARASAKA ARCHIVE // SECURE_CLEARANCE_ENABLED</p>
                 </div>
             `;
-        });
-        
-        topicContentArea.innerHTML = html;
-        topicContentArea.scrollIntoView({ behavior: 'smooth' });
+
+            for (const [sectionName, items] of Object.entries(data.sections)) {
+                html += `
+                    <div class="mb-14 border-l-2 border-cyber-electric-blue pl-6">
+                        <h3 class="text-2xl font-bold mb-8 text-white font-orbitron tracking-tight flex items-center">
+                            <span class="text-cyber-electric-blue mr-3 text-sm">▶</span> ${sectionName.toUpperCase()}
+                        </h3>
+                        <div class="space-y-6">
+                            ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            topicContentArea.innerHTML = html;
+            topicContentArea.scrollIntoView({ behavior: 'smooth' });
+        }, 300); // Small delay for "hacker" feel
     }
 </script>
 
