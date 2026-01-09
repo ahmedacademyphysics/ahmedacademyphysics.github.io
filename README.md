@@ -38,29 +38,27 @@
         .cyber-grid {
             background-color: #08001A;
             position: fixed;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             top: 0; left: 0; z-index: -10; 
             background-image: linear-gradient(to bottom, rgba(42, 10, 88, 0.8) 1px, transparent 1px, transparent 20px, rgba(0, 240, 255, 0.1) 21px, transparent 22px);
             background-size: 100% 100px; 
             animation: grid-shift 12s linear infinite; 
         }
 
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Share Tech Mono', monospace; color: #E6E0F5; background-color: #08001A; overflow-x: hidden; }
+        body { font-family: 'Share Tech Mono', monospace; color: #E6E0F5; background-color: #08001A; scroll-behavior: smooth; }
 
         .glass {
             background: rgba(42, 10, 88, 0.4);
             backdrop-filter: blur(15px);
             border: 2px solid #FF00A6;
-            box-shadow: 0 0 10px rgba(255, 0, 166, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 166, 0.3);
         }
         
         .glass-strong {
             background: rgba(42, 10, 88, 0.6);
             backdrop-filter: blur(20px);
             border: 1px solid #00F0FF;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .cyber-title-text {
@@ -73,25 +71,22 @@
         
         .neon-glow { text-shadow: 0 0 8px #FF00A6, 0 0 15px #00F0FF; }
 
-        .slide-embed-container {
+        .slide-frame {
             border: 1px solid #00FF7F;
-            box-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
-            background: rgba(0, 255, 127, 0.05);
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.3);
+            background: #000;
+            aspect-ratio: 16 / 9;
+            width: 100%;
             margin-bottom: 2rem;
         }
-        .slide-embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        .fade-in { animation: fadeIn 0.4s ease-out; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .glow-hover:hover {
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 10px rgba(255, 0, 166, 0.6);
-            transform: scale(1.02);
-            border: 1px solid #FF00A6;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+            transform: translateY(-5px);
+            border-color: #FF00A6;
         }
     </style>
 </head>
@@ -100,162 +95,165 @@
 
     <nav class="glass sticky top-0 z-40 border-b border-cyber-neon-pink/50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
-            <span class="text-3xl font-black cyber-title-text font-orbitron">ARASAKA DATABASE</span>
-            <div class="flex items-center space-x-4 font-mono">
-                <a href="#topics" class="text-cyber-electric-blue hover:text-white px-3 py-2 text-sm neon-glow">MODULES_LIST</a>
-                <a href="#content-display" class="bg-cyber-neon-pink text-cyber-black-ops px-4 py-2 text-sm font-bold shadow-lg shadow-cyber-neon-pink/50">ACCESS_TERMINAL</a>
+            <span class="text-2xl md:text-3xl font-black cyber-title-text font-orbitron">ARASAKA DATABASE</span>
+            <div class="hidden md:flex items-center space-x-6 font-mono">
+                <a href="#topics" class="text-cyber-electric-blue hover:text-white neon-glow">MODULES</a>
+                <span class="text-cyber-neon-pink">|</span>
+                <span class="text-cyber-data-green">ACCESS: GRANTED</span>
             </div>
         </div>
     </nav>
 
-    <header class="py-24 text-center fade-in">
-        <div class="mb-8"><span class="text-7xl text-cyber-data-green neon-glow font-orbitron">| ></span></div>
-        <h1 class="text-5xl md:text-7xl font-black tracking-widest mb-4 text-white font-orbitron">
-            <span class="cyber-title-text">SYNTHESIZE</span> PHYSICS DATA
+    <header class="py-20 text-center fade-in">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4 text-white font-orbitron">
+            <span class="cyber-title-text">PHYSICS</span> CORE_REVISION
         </h1>
-        <p class="text-lg md:text-xl text-cyber-electric-blue max-w-4xl mx-auto font-mono neon-glow">Instant bypass active. Secure terminal access granted.</p>
+        <p class="text-lg text-cyber-electric-blue font-mono neon-glow">Terminal bypass active. All security locks disabled.</p>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
-        <section id="topics" class="mb-20 fade-in">
-            <h2 class="text-2xl font-bold mb-8 pb-2 inline-block text-cyber-neon-pink border-b-2 border-cyber-electric-blue font-orbitron">DATA_MODULES_ONLINE</h2>
+    <main class="max-w-7xl mx-auto px-4 pb-24">
+        <section id="topics" class="mb-16">
+            <h2 class="text-xl font-bold mb-8 text-cyber-neon-pink border-l-4 border-cyber-neon-pink pl-4 font-orbitron uppercase">Select Data Module</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="PHYSICS 101">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">PHYSICS_101</h3>
-                    <p class="text-sm text-gray-300 font-mono">Math skills, scalars, and vectors.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="PHYSICS 101">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">GENERAL_PHYSICS</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Forces, Moments, and Math Skills.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="THERMODYNAMICS">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">THERMO_DYNAMICS</h3>
-                    <p class="text-sm text-gray-300 font-mono">Heat transfer and gas laws.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="THERMODYNAMICS">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">THERMAL_PHYSICS</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Thermal properties and Gas Laws.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="NUCLEAR">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">NUCLEAR_CORE</h3>
-                    <p class="text-sm text-gray-300 font-mono">Radiation and atomic decay.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="NUCLEAR">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">NUCLEAR_DATA</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Atomic structure and Radioactivity.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="WAVES">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">OSCILLATION_WAVES</h3>
-                    <p class="text-sm text-gray-300 font-mono">Optics and EM spectrum.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="WAVES">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">WAVE_MECHANICS</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Light, Sound, and EM Spectrum.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="MECHANICS">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">MECHANICS_ADV</h3>
-                    <p class="text-sm text-gray-300 font-mono">Forces and momentum.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="MECHANICS">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">ADV_MECHANICS</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Momentum, Energy, and Work.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="ELECTRICITY">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">CIRCUITRY_V4</h3>
-                    <p class="text-sm text-gray-300 font-mono">Static and circuits.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="ELECTRICITY">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">ELECTRIC_CIRCUITS</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Static, Resistance, and Circuits.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="MAGNETIC EFFECTS">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">FIELD_INDUCTION</h3>
-                    <p class="text-sm text-gray-300 font-mono">Motors and transformers.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="MAGNETISM">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">ELECTROMAGNETISM</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Induction and Magnetic Fields.</p>
                 </div>
-                <div class="topic-card glass-strong rounded-md p-6 cursor-pointer glow-hover" data-topic="ASTRONOMY">
-                    <h3 class="text-xl font-bold mb-2 text-cyber-data-green font-orbitron">ASTRONOMY_DATA</h3>
-                    <p class="text-sm text-gray-300 font-mono">Orbits and cosmology.</p>
+                <div class="topic-card glass-strong p-6 cursor-pointer glow-hover" data-topic="ASTRONOMY">
+                    <h3 class="text-xl font-bold text-cyber-data-green font-orbitron">ASTRONOMY_CORE</h3>
+                    <p class="text-xs mt-2 text-gray-400 font-mono">Cosmology and Orbital Motion.</p>
                 </div>
             </div>
         </section>
 
-        <section id="content-display" class="py-16 fade-in">
-            <div id="content-placeholder" class="glass rounded-md p-8 min-h-[400px] flex flex-col items-center justify-center border-dashed border-cyber-electric-blue/50">
-                <div class="text-center text-cyber-electric-blue font-mono">
-                    <h3 class="text-xl font-semibold text-white font-orbitron">SYSTEM STANDBY</h3>
-                    <p class="mt-1 text-sm">// Select a module to initialize data transfer //</p>
-                </div>
+        <section id="content-display">
+            <div id="placeholder-msg" class="glass p-12 text-center rounded-lg border-dashed border-cyber-electric-blue/30">
+                <p class="text-cyber-electric-blue font-mono animate-pulse">>> WAITING FOR MODULE SELECTION...</p>
             </div>
             
-            <div id="topic-content-area" class="hidden glass rounded-md p-8"></div>
+            <div id="content-area" class="hidden glass p-6 md:p-10 rounded-lg">
+                </div>
         </section>
     </main>
 
     <script>
-        const topicCards = document.querySelectorAll('.topic-card');
-        const contentPlaceholder = document.getElementById('content-placeholder');
-        const topicContentArea = document.getElementById('topic-content-area');
-
-        const createSlideEmbed = (url, name) => `
-            <div class="mb-8">
-                <p class="text-sm text-cyber-data-green mb-2 font-orbitron">// DECRYPTED_SLIDE: ${name.toUpperCase()} //</p>
-                <div class="slide-embed-container">
-                    <iframe src="${url.replace('/pub?start', '/embed?start')}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
-                </div>
-            </div>`;
+        // Helper to format Google Slides links correctly for iframes
+        const formatLink = (url) => {
+            if (!url) return '';
+            // Replaces /pub? or /edit with /embed
+            return url.replace(/\/pub.*$/, '/embed').replace(/\/edit.*$/, '/embed');
+        };
 
         const PHYSICS_CONTENT = {
             "PHYSICS 101": {
-                title: "PHYSICS 101: CORE SKILLS",
-                submodules: [
-                    { heading: "Mathematical Skills", text: createSlideEmbed("https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub", "Standard Form") + createSlideEmbed("https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub", "Significant Figures") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub", "Scalars and Vectors") }
-                ]
-            },
-            "THERMODYNAMICS": {
-                title: "THERMODYNAMICS: THERMAL DATA",
-                submodules: [
-                    { heading: "Heat Transfer", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT1J_5bWqYl7oX8XzQqR5R6_y7uT6I5Q5w4/pub", "Conduction and Convection") }
-                ]
-            },
-            "NUCLEAR": {
-                title: "NUCLEAR CORE: ATOMIC DECAY",
-                submodules: [
-                    { heading: "Radiation Types", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS_Iu_pUnUdQ-D5_8QBs53BwpHF9q4JSl/pub", "Decay Processes") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTDaBj20AskQhYVsC9nItlS7s7XBBE-FUkuKpk2DEn_712SKdHmxXHJSKkXvKKSEPJ0dp7h4LRowGz3/pub", "Fission and Fusion") }
-                ]
-            },
-            "WAVES": {
-                title: "OSCILLATION & OPTICS",
-                submodules: [
-                    { heading: "Light & Wave Motion", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub", "Reflection") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub", "Refraction") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQeUkiDwqrh30Q6gYvU5Edh5cJ6Ez3H9MJJQAxgmbbBPUgPpI_ZnkLPnSTy7RlS6ePYPBkX5zgJ0iTU/pub", "Curved Mirrors") }
+                title: "GENERAL PHYSICS & CORE SKILLS",
+                slides: [
+                    { label: "Kinematics & Terminal Velocity", url: "https://docs.google.com/presentation/d/e/2PACX-1vRTablNCgElvGx5XHvvpSg2nBjNWWfq53XUa_9xL9ZlIkKSBvp9KLI5mNur8CECL4jFC_3rfk-xfsYS/pub" },
+                    { label: "Road Forces", url: "https://docs.google.com/presentation/d/e/2PACX-1vT33JPfqpnDkr5Up0F34n3ccW_5ybtIFpEfvILsP7gz4OQlJDmMoiDu_NT94_Ydqq5kKIj0dMrPGAsF/pub" },
+                    { label: "Moments & Turning Effects", url: "https://docs.google.com/presentation/d/e/2PACX-1vQnlYJyu3_lV_7n3D6yRqsh1J3xJXUO8JFNnSfb7xJb1JqDuecLttibLEtTN-cnwmhFx3YS1twwmOS4/pub" }
                 ]
             },
             "MECHANICS": {
-                title: "MECHANICS: DYNAMICS & ENERGY",
-                submodules: [
-                    { heading: "Motion & Momentum", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTablNCgElvGx5XHvvpSg2nBjNWWfq53XUa_9xL9ZlIkKSBvp9KLI5mNur8CECL4jFC_3rfk-xfsYS/pub", "Terminal Velocity") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vT33JPfqpnDkr5Up0F34n3ccW_5ybtIFpEfvILsP7gz4OQlJDmMoiDu_NT94_Ydqq5kKIj0dMrPGAsF/pub", "Road Forces") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS4X2HKOE4Jw6dnqafF8DwOqPiWc_lHMAIY0eBj3ZnrWZBxtX3ZmTcitgcS91sFjlm4pXXIFJJeUKT7/pub", "Momentum Conservation") }
+                title: "ADVANCED MECHANICS & ENERGY",
+                slides: [
+                    { label: "Work Done & Energy", url: "https://docs.google.com/presentation/d/e/2PACX-1vRs1i7O87KQom0Z7s6kJ1XUUFaZv6yAgnNrQwYHKwVco1Co31NQaCo4CwI26cYydfKF3yirNKXoKjMG/pub" },
+                    { label: "Momentum", url: "https://docs.google.com/presentation/d/e/2PACX-1vS4X2HKOE4Jw6dnqafF8DwOqPiWc_lHMAIY0eBj3ZnrWZBxtX3ZmTcitgcS91sFjlm4pXXIFJJeUKT7/pub" }
                 ]
             },
             "ELECTRICITY": {
-                title: "CIRCUITRY: CHARGES & POWER",
-                submodules: [
-                    { heading: "Static & Power", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vRc6H9e0BpeH3KkznXustK5Ok6HcMAoTsKvfu_Q66UiIqV9NbrRc_hGEGtGz43JKTm6XRTzrVWXz-qT/pub", "Static Electricity") + createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vTP1fJsotQ2ZDYk0T89hFVZmdfmNA4FK8goDHQlkKVwe-9ppNHIO1d0A61k1NUWSzXv9KP77owDx1yx/pub", "Circuit Diagrams") }
+                title: "ELECTRIC CIRCUITS & POWER",
+                slides: [
+                    { label: "Circuit Diagrams", url: "https://docs.google.com/presentation/d/e/2PACX-1vTP1fJsotQ2ZDYk0T89hFVZmdfmNA4FK8goDHQlkKVwe-9ppNHIO1d0A61k1NUWSzXv9KP77owDx1yx/pub" },
+                    { label: "Static Electricity", url: "https://docs.google.com/presentation/d/e/2PACX-1vRc6H9e0BpeH3KkznXustK5Ok6HcMAoTsKvfu_Q66UiIqV9NbrRc_hGEGtGz43JKTm6XRTzrVWXz-qT/pub" }
                 ]
             },
-            "MAGNETIC EFFECTS": {
-                title: "FIELDS & INDUCTION",
-                submodules: [
-                    { heading: "Electromagnetism", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTt/pub", "The Motor Effect") }
+            "MAGNETISM": {
+                title: "ELECTROMAGNETISM",
+                slides: [
+                    { label: "Magnetic Induction", url: "https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTt/pub" }
+                ]
+            },
+            "THERMODYNAMICS": {
+                title: "THERMAL PHYSICS",
+                slides: [
+                    { label: "Conduction & Convection", url: "https://docs.google.com/presentation/d/e/2PACX-1vT1J_5bWqYl7oX8XzQqR5R6_y7uT6I5Q5w4/pub" }
+                    // Add more Thermo links here
+                ]
+            },
+            "NUCLEAR": {
+                title: "NUCLEAR CORE",
+                slides: [
+                    { label: "Radioactivity", url: "https://docs.google.com/presentation/d/e/2PACX-1vS_Iu_pUnUdQ-D5_8QBs53BwpHF9q4JSl/pub" },
+                    { label: "Fission & Fusion", url: "https://docs.google.com/presentation/d/e/2PACX-1vTDaBj20AskQhYVsC9nItlS7s7XBBE-FUkuKpk2DEn_712SKdHmxXHJSKkXvKKSEPJ0dp7h4LRowGz3/pub" }
+                ]
+            },
+            "WAVES": {
+                title: "WAVES & OPTICS",
+                slides: [
+                    { label: "Refraction", url: "https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub" },
+                    { label: "Reflection", url: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub" }
                 ]
             },
             "ASTRONOMY": {
-                title: "ASTRONOMY DATA CORE",
-                submodules: [
-                    { heading: "Cosmology", text: createSlideEmbed("https://docs.google.com/presentation/d/e/2PACX-1vQnlYJyu3_lV_7n3D6yRqsh1J3xJXUO8JFNnSfb7xJb1JqDuecLttibLEtTN-cnwmhFx3YS1twwmOS4/pub", "Orbital Motion") }
+                title: "ASTRONOMY & COSMOLOGY",
+                slides: [
+                    { label: "Cosmology Intro", url: "REPLACE_WITH_YOUR_LINK" }
                 ]
             }
         };
 
-        topicCards.forEach(card => {
+        const cards = document.querySelectorAll('.topic-card');
+        const contentArea = document.getElementById('content-area');
+        const placeholder = document.getElementById('placeholder-msg');
+
+        cards.forEach(card => {
             card.addEventListener('click', () => {
                 const topicKey = card.getAttribute('data-topic');
                 const data = PHYSICS_CONTENT[topicKey];
-                
+
                 if (!data) return;
 
-                // Toggle visibility
-                contentPlaceholder.classList.add('hidden');
-                topicContentArea.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+                contentArea.classList.remove('hidden');
+                contentArea.classList.add('fade-in');
 
-                // Generate Content
-                let html = `<div class="fade-in">
-                    <h2 class="text-3xl font-black mb-6 text-cyber-neon-pink font-orbitron">${data.title}</h2>`;
+                let html = `<h2 class="text-3xl font-black mb-8 text-cyber-neon-pink font-orbitron border-b border-cyber-neon-pink pb-4 uppercase tracking-widest">${data.title}</h2>`;
                 
-                data.submodules.forEach(sub => {
-                    html += `<div class="mb-10 border-l-4 border-cyber-electric-blue pl-6">
-                        <h3 class="text-xl font-bold mb-4 text-cyber-electric-blue font-orbitron uppercase tracking-widest">${sub.heading}</h3>
-                        <div>${sub.text}</div>
-                    </div>`;
+                data.slides.forEach(slide => {
+                    html += `
+                        <div class="mb-12">
+                            <h3 class="text-lg font-bold text-cyber-electric-blue mb-4 font-mono">>> ${slide.label}</h3>
+                            <iframe class="slide-frame" src="${formatLink(slide.url)}" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                        </div>
+                    `;
                 });
-                
-                html += `</div>`;
-                topicContentArea.innerHTML = html;
-                topicContentArea.scrollIntoView({ behavior: 'smooth' });
+
+                contentArea.innerHTML = html;
+                contentArea.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
