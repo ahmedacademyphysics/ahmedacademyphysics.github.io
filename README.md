@@ -86,6 +86,7 @@
             padding: 15px;
             transition: all 0.2s;
             cursor: pointer;
+            color: #d1d5db; /* Explicit gray-300 */
         }
         .quiz-option:hover {
             background: #1a1a1a;
@@ -131,11 +132,11 @@
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<header class="p-6 sticky top-0 z-40">
-    <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect">AHMED ACADEMY - PHYSICS</h1>
-        <div class="text-xs font-mono text-white opacity-70 hidden md:block">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.0
+<header class="p-4 md:p-6 sticky top-0 z-40">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
+        <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.1
         </div>
     </div>
 </header>
@@ -164,9 +165,9 @@
         <div id="topic-content-area" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg">
         </div>
 
-        <div id="quiz-interface" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg h-full relative">
+        <div id="quiz-interface" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg h-full relative flex flex-col">
             
-            <div id="quiz-stage-select" class="text-center h-full flex flex-col justify-center">
+            <div id="quiz-stage-select" class="text-center flex-1 flex flex-col justify-center">
                 <h2 class="text-3xl font-orbitron text-white mb-8">SELECT CLEARANCE LEVEL</h2>
                 <div class="grid grid-cols-1 gap-4 max-w-md mx-auto w-full">
                     <button onclick="selectStage('KS3')" class="quiz-btn p-6 text-xl font-bold text-cyber-neon-pink">LEVEL 1: KS3</button>
@@ -175,7 +176,7 @@
                 </div>
             </div>
 
-            <div id="quiz-topic-select" class="hidden text-center h-full flex flex-col justify-center">
+            <div id="quiz-topic-select" class="hidden text-center flex-1 flex flex-col justify-center">
                 <h2 class="text-2xl font-orbitron text-white mb-2">TARGET SUBJECT</h2>
                 <p id="selected-stage-display" class="text-xs text-gray-500 mb-8 font-mono"></p>
                 <div id="quiz-topic-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -183,11 +184,11 @@
                 <button onclick="resetQuizUI()" class="mt-8 text-xs text-red-500 hover:text-white uppercase font-mono tracking-widest">[ ABORT ]</button>
             </div>
 
-            <div id="quiz-active-area" class="hidden">
+            <div id="quiz-active-area" class="hidden flex-1 flex flex-col">
                 <div class="flex justify-between items-end border-b border-gray-800 pb-4 mb-6">
                     <div>
                         <h3 class="text-xs font-mono text-cyan-500 mb-1">LIVE_EXAM_SESSION</h3>
-                        <div class="text-2xl font-orbitron font-bold text-white" id="quiz-topic-title"></div>
+                        <div class="text-2xl font-orbitron font-bold text-white" id="quiz-topic-title">TOPIC_NAME</div>
                     </div>
                     <div class="text-right">
                         <div class="text-3xl font-black text-gray-700" id="question-counter">01<span class="text-sm">/40</span></div>
@@ -195,8 +196,8 @@
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <p id="question-text" class="text-lg md:text-xl font-bold leading-relaxed text-gray-200"></p>
+                <div class="mb-8 flex-grow">
+                    <p id="question-text" class="text-lg md:text-xl font-bold leading-relaxed text-white"></p>
                 </div>
 
                 <div id="answer-options" class="grid grid-cols-1 gap-3 mb-8">
@@ -209,7 +210,7 @@
                 </button>
             </div>
 
-            <div id="quiz-results" class="hidden text-center h-full flex flex-col justify-center items-center">
+            <div id="quiz-results" class="hidden text-center flex-1 flex flex-col justify-center items-center">
                 <div class="text-6xl mb-4">🏁</div>
                 <h2 class="text-3xl font-orbitron text-white mb-2">SESSION COMPLETE</h2>
                 <p class="text-gray-500 font-mono mb-8">UPLOADING RESULTS TO SERVER...</p>
@@ -235,31 +236,96 @@
     // --- AUDIO ---
     const clickSound = document.getElementById('ui-click-sound');
     function playClickSound() {
-        clickSound.currentTime = 0;
-        clickSound.volume = 0.3; 
-        clickSound.play().catch(e => {});
+        if(clickSound) {
+            clickSound.currentTime = 0;
+            clickSound.volume = 0.3; 
+            clickSound.play().catch(e => {});
+        }
     }
 
-    // --- MAIN DATABASE (VIDEOS/SLIDES) ---
+    // --- FULL DEDUPLICATED DATABASE ---
+    // Added back: Thermodynamics, Mechanics, Waves, Nuclear
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: CORE FOUNDATIONS",
             sections: {
                 "Mathematical Skills": [
+                    { name: "Standard Form", link: "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub" },
+                    { name: "Significant Figures", link: "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub" },
                     { name: "Scalars and Vectors", link: "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub" },
                     { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub" }
+                ],
+                "Measurement": [
+                    { name: "S.I. Units", link: "https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/pub" },
+                    { name: "Measuring Equipment", link: "https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/pub" }
+                ]
+            }
+        },
+        "ASTRONOMY": {
+            title: "ASTRONOMY: COSMOLOGY & STARS",
+            sections: {
+                "Solar System": [
+                    { name: "Motion of the Earth", link: "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub" },
+                    { name: "Motion of the Moon", link: "https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub" },
+                    { name: "Moons and Satellites", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub" },
+                    { name: "Bodies of the Solar System", link: "https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub" }
+                ],
+                "Interstellar Space": [
+                    { name: "Life of Stars", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub" },
+                    { name: "Hubble's Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vQZUkxEIiI0cRXxBp2MVrIv4f4QGG3Kw04nd0FGKxth2BJho3lQVXV8X5tUAUaRwofM4Q0G1ehVUpiy/pub" },
+                    { name: "Expanding Universe", link: "https://docs.google.com/presentation/d/e/2PACX-1vQXaF3TaR3g9Kej7xQCrAC6xiq4GW_Pf_d-1IUl0Zbp-T15BgHuTIZF6R-uD1jOJuMGu6r-wjSy_R6Q/pub" }
+                ]
+            }
+        },
+        "THERMODYNAMICS": {
+            title: "THERMODYNAMICS: THERMAL PHYSICS",
+            sections: {
+                "Thermal Energy": [
+                    { name: "States of Matter", link: "https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/pub" },
+                    { name: "Methods of Heat Transfer", link: "https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/pub" }
+                ],
+                "Gases": [
+                    { name: "Gas Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/pub" },
+                    { name: "Brownian Motion", link: "https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/pub" }
                 ]
             }
         },
         "MECHANICS": {
             title: "MECHANICS: FORCES & MOTION",
             sections: {
-                "Dynamics": [ { name: "Effects of Forces", link: "https://docs.google.com/presentation/d/e/2PACX-1vSuA2RzC6z0f0Z_y9N5Q-F/pub" } ]
+                "Kinematics": [
+                    { name: "Speed & Acceleration", link: "https://docs.google.com/presentation/d/e/2PACX-1vSCk_U8N-7j8y0HOnu9K50uS82y-uYk-1P9P99k0P-A/pub" }
+                ],
+                "Dynamics": [
+                    { name: "Effects of Forces", link: "https://docs.google.com/presentation/d/e/2PACX-1vSuA2RzC6z0f0Z_y9N5Q-F/pub" }
+                ]
             }
         },
-        "ASTRONOMY": {
-            title: "ASTRONOMY",
-            sections: { "Space": [ { name: "Life of Stars", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ6xSLxKodzJexFXvcGTr6ppDkgMbMmm6nZUSkIFYRB3XmGSgpo557XrmcAy4iJHQO9Zn2ZYPp8zodz/pub" } ] }
+        "WAVES": {
+            title: "WAVES: OPTICS & SOUND",
+            sections: {
+                "Wave Properties": [
+                    { name: "Wave Types", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ5xgnlAKEl0gvDeM9VsHRbtueQF1TeiMpjxOGMp52XH9hb6JqLy-YjA0p-APY7eaobfmk0h2B7hFUp/pub" },
+                    { name: "EM Spectrum", link: "https://docs.google.com/presentation/d/e/2PACX-1vRXCAAJ5QWfZ2WKQfsAb73kMGczug4sJ2ODBI3V0PcV5UaODpmNxjo5I-M1RDlMCgN_MPOnZECCtQeP/pub" }
+                ],
+                "Optics": [
+                    { name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub" },
+                    { name: "Refraction of Light", link: "https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub" }
+                ]
+            }
+        },
+        "NUCLEAR": {
+            title: "NUCLEAR CORE: RADIOACTIVITY",
+            sections: {
+                "Atomic Structure": [
+                    { name: "Atomic Structure", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ-lxA1kdRmFq0MI1bbLLFHzsVgMYb2-BY0B-FekIwYvKhMSsJQG8LI12ScQnirDHOFN6_afr39EOZL/pub" },
+                    { name: "The Nucleus", link: "https://docs.google.com/presentation/d/e/2PACX-1vS0xUJ8U43qkH8G3lSNycapQXCYnpM2gJdy8Mb5oU8CYptfCZG8mpawoteXtouAQ5Opb5D3LQ-KhymD/pub" }
+                ],
+                "Radioactivity": [
+                    { name: "Types of Radiation", link: "https://docs.google.com/presentation/d/e/2PACX-1vSCIXLrwtulO1JAsPxuf9gkLsHG2ZziD01ECOi39JVWFPW2pVACaMX5URilEsjXwTaVEv4Ybf5YEm9c/pub" },
+                    { name: "Nuclear Fusion", link: "https://docs.google.com/presentation/d/e/2PACX-1vSkjNrX6_5TyOLSu7fqa7C1jD2EqkspI0n76EQiRk2uhaRAppKut8HlzIScVGEIwC-P2Taj86skeqFW/pub" }
+                ]
+            }
         }
     };
 
@@ -270,35 +336,37 @@
         "KS5": ["Particles", "Quantum Physics", "Fields", "Thermodynamics"]
     };
 
-    // --- QUESTION GENERATOR ENGINE ---
-    // Generates 40 randomized questions
+    // --- ROBUST QUESTION GENERATOR ---
     function generateQuestions(stage, topic) {
         let questions = [];
         
         for(let i=1; i<=40; i++) {
-            // Generate random numbers for math questions
             let n1 = Math.floor(Math.random() * 20) + 1;
             let n2 = Math.floor(Math.random() * 10) + 1;
-            let ans, qText, options;
-
+            
+            let qText = "";
+            let rawOptions = [];
+            
+            // Cycle through 4 question types
             const type = i % 4; 
 
             if (type === 0) {
                 // Force Equation (F=ma)
                 let m = n1, a = n2;
-                ans = m * a;
+                let ans = m * a;
                 qText = `Q${i}: An object has a mass of ${m}kg and accelerates at ${a}m/s². Calculate the resultant force.`;
-                options = [ans, ans+n2, ans-n1, ans*2].map(n => `${n} N`);
+                rawOptions = [ans, ans+n2, ans-n1, ans*2].map(n => `${n} N`);
             } else if (type === 1) {
                 // Speed Equation (v=d/t)
                 let d = n1 * 10, t = n2;
-                ans = (d / t).toFixed(1);
+                let ans = (d / t).toFixed(1);
                 qText = `Q${i}: A vehicle travels ${d}m in ${t}s. What is its average speed?`;
-                options = [ans, (ans*1.5).toFixed(1), (ans/2).toFixed(1), (ans-1).toFixed(1)].map(n => `${n} m/s`);
+                // Use numbers for calculation, strings for display
+                rawOptions = [ans, (parseFloat(ans)*1.5).toFixed(1), (parseFloat(ans)/2).toFixed(1), (parseFloat(ans)+5).toFixed(1)].map(n => `${n} m/s`);
             } else if (type === 2) {
                 // Conceptual
                 qText = `Q${i}: Regarding ${topic}, which of the following statements is TRUE?`;
-                options = [
+                rawOptions = [
                     `${topic} is conserved in closed systems.`,
                     `${topic} decreases as velocity increases.`,
                     `${topic} is measured in Watts.`,
@@ -307,14 +375,14 @@
             } else {
                 // Density (p=m/v)
                 let m = n1 * 5, v = n2;
-                ans = (m / v).toFixed(2);
+                let ans = (m / v).toFixed(2);
                 qText = `Q${i}: A block of material has mass ${m}kg and volume ${v}m³. Calculate density.`;
-                options = [ans, (ans*2).toFixed(2), (ans/3).toFixed(2), (ans+5).toFixed(2)].map(n => `${n} kg/m³`);
+                rawOptions = [ans, (parseFloat(ans)*2).toFixed(2), (parseFloat(ans)/3).toFixed(2), (parseFloat(ans)+5).toFixed(2)].map(n => `${n} kg/m³`);
             }
 
             // Shuffle options
-            let correctOptionIndex = 0; 
-            let finalOptions = options.map((opt, idx) => ({ txt: opt, isCorrect: idx === 0 }));
+            let finalOptions = rawOptions.map((opt, idx) => ({ txt: opt, isCorrect: idx === 0 }));
+            
             // Fisher-Yates Shuffle
             for (let j = finalOptions.length - 1; j > 0; j--) {
                 const k = Math.floor(Math.random() * (j + 1));
@@ -337,9 +405,10 @@
         const card = document.createElement('div');
         card.className = 'topic-card p-4 rounded-md font-bold text-sm tracking-widest uppercase border border-gray-800';
         card.innerHTML = `<span class="opacity-50 mr-2">◢</span> ${key}`;
+        card.setAttribute('data-key', key);
         card.addEventListener('click', () => {
             playClickSound();
-            hideQuiz(); // Switch back to learning mode
+            hideQuiz(); 
             document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
             card.classList.add('active');
             revealContent(key);
@@ -407,6 +476,7 @@
         contentPlaceholder.classList.add('hidden');
         topicContentArea.classList.add('hidden');
         quizInterface.classList.remove('hidden');
+        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
         resetQuizUI();
     });
 
@@ -432,7 +502,6 @@
         const list = document.getElementById('quiz-topic-list');
         list.innerHTML = '';
         
-        // Populate topics based on stage
         (QUIZ_TOPICS[stage] || []).forEach(topic => {
             const btn = document.createElement('button');
             btn.className = 'quiz-btn p-4 text-white font-bold border border-gray-600 hover:border-cyan-500';
@@ -449,7 +518,7 @@
         
         document.getElementById('quiz-topic-title').innerText = `${stage} // ${topic.toUpperCase()}`;
         
-        // GENERATE THE 40 QUESTIONS HERE
+        // Generate Questions
         currentQuizData = generateQuestions(stage, topic);
         currentQuestionIndex = 0;
         score = 0;
@@ -461,14 +530,20 @@
     function loadQuestion() {
         const qData = currentQuizData[currentQuestionIndex];
         
+        if (!qData) {
+            console.error("No question data found");
+            return;
+        }
+
         // Update counters
         document.getElementById('question-counter').innerHTML = 
             `${String(currentQuestionIndex + 1).padStart(2, '0')}<span class="text-sm text-gray-500">/40</span>`;
             
-        // Set Text
-        document.getElementById('question-text').innerText = qData.question;
+        // Set Text (using textContent for safety)
+        const qTextEl = document.getElementById('question-text');
+        qTextEl.textContent = qData.question;
         
-        // Clear previous state
+        // Clear previous options
         const optsContainer = document.getElementById('answer-options');
         optsContainer.innerHTML = '';
         document.getElementById('next-btn').classList.add('hidden');
@@ -477,15 +552,15 @@
         // Create Buttons
         qData.options.forEach(opt => {
             const btn = document.createElement('div');
-            btn.className = 'quiz-option text-gray-300 font-mono text-sm';
-            btn.innerText = opt.txt;
+            btn.className = 'quiz-option text-lg font-mono'; // Increased text size
+            btn.textContent = opt.txt;
             btn.onclick = () => handleAnswer(btn, opt.isCorrect);
             optsContainer.appendChild(btn);
         });
     }
 
     function handleAnswer(btnElement, isCorrect) {
-        // Disable all options
+        // Disable interaction
         const allOpts = document.querySelectorAll('.quiz-option');
         allOpts.forEach(b => b.style.pointerEvents = 'none');
 
@@ -496,11 +571,11 @@
             btnElement.classList.add('correct');
             score++;
             document.getElementById('current-score').innerText = score;
-            feedback.innerHTML = "STATUS: <span class='text-green-500'>CORRECT</span> // DATA VERIFIED";
+            feedback.innerHTML = "STATUS: <span class='text-green-500 font-bold'>CORRECT</span> // DATA VERIFIED";
             feedback.className = "p-4 mb-4 font-mono text-sm text-center border border-green-900 bg-green-900/20";
         } else {
             btnElement.classList.add('incorrect');
-            feedback.innerHTML = "STATUS: <span class='text-red-500'>ERROR</span> // DATA MISMATCH";
+            feedback.innerHTML = "STATUS: <span class='text-red-500 font-bold'>ERROR</span> // DATA MISMATCH";
             feedback.className = "p-4 mb-4 font-mono text-sm text-center border border-red-900 bg-red-900/20";
         }
 
