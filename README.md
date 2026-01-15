@@ -86,7 +86,7 @@
             padding: 15px;
             transition: all 0.2s;
             cursor: pointer;
-            color: #d1d5db; /* Explicit gray-300 */
+            color: #d1d5db;
         }
         .quiz-option:hover {
             background: #1a1a1a;
@@ -124,8 +124,6 @@
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: var(--theme-red); }
 
-        .cursor-blink { animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body class="min-h-screen">
@@ -136,7 +134,7 @@
     <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
         <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.1
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.3
         </div>
     </div>
 </header>
@@ -243,8 +241,7 @@
         }
     }
 
-    // --- FULL DEDUPLICATED DATABASE ---
-    // Added back: Thermodynamics, Mechanics, Waves, Nuclear
+    // --- FULL SLIDE DATABASE ---
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: CORE FOUNDATIONS",
@@ -336,48 +333,150 @@
         "KS5": ["Particles", "Quantum Physics", "Fields", "Thermodynamics"]
     };
 
-    // --- ROBUST QUESTION GENERATOR ---
+    // --- REASSURING PATOIS MESSAGES ---
+    const PATOIS_REASSURANCE = [
+        "Nuh worry yuhself, man. You got dis next time!",
+        "Small ting! Shake it off and gwaan.",
+        "Jus a likkle stumble, don't pree it.",
+        "No vibes lost, bredren. Try di next one.",
+        "Everything criss, jus focus up.",
+        "Chambley! But yuh head good, gwaan again.",
+        "Ah so it go sometimes. Pick yuhself up."
+    ];
+
+    // --- ROBUST SPECIFIC QUESTION GENERATOR ---
     function generateQuestions(stage, topic) {
         let questions = [];
         
         for(let i=1; i<=40; i++) {
             let n1 = Math.floor(Math.random() * 20) + 1;
-            let n2 = Math.floor(Math.random() * 10) + 1;
+            let n2 = Math.floor(Math.random() * 10) + 2;
+            let n3 = Math.floor(Math.random() * 5) + 1;
             
             let qText = "";
             let rawOptions = [];
-            
-            // Cycle through 4 question types
-            const type = i % 4; 
+            let ans = 0;
 
-            if (type === 0) {
-                // Force Equation (F=ma)
-                let m = n1, a = n2;
-                let ans = m * a;
-                qText = `Q${i}: An object has a mass of ${m}kg and accelerates at ${a}m/s². Calculate the resultant force.`;
-                rawOptions = [ans, ans+n2, ans-n1, ans*2].map(n => `${n} N`);
-            } else if (type === 1) {
-                // Speed Equation (v=d/t)
-                let d = n1 * 10, t = n2;
-                let ans = (d / t).toFixed(1);
-                qText = `Q${i}: A vehicle travels ${d}m in ${t}s. What is its average speed?`;
-                // Use numbers for calculation, strings for display
-                rawOptions = [ans, (parseFloat(ans)*1.5).toFixed(1), (parseFloat(ans)/2).toFixed(1), (parseFloat(ans)+5).toFixed(1)].map(n => `${n} m/s`);
-            } else if (type === 2) {
-                // Conceptual
-                qText = `Q${i}: Regarding ${topic}, which of the following statements is TRUE?`;
-                rawOptions = [
-                    `${topic} is conserved in closed systems.`,
-                    `${topic} decreases as velocity increases.`,
-                    `${topic} is measured in Watts.`,
-                    `${topic} is a vector quantity only.`
-                ];
-            } else {
-                // Density (p=m/v)
-                let m = n1 * 5, v = n2;
-                let ans = (m / v).toFixed(2);
-                qText = `Q${i}: A block of material has mass ${m}kg and volume ${v}m³. Calculate density.`;
-                rawOptions = [ans, (parseFloat(ans)*2).toFixed(2), (parseFloat(ans)/3).toFixed(2), (parseFloat(ans)+5).toFixed(2)].map(n => `${n} kg/m³`);
+            // --- KS3 LOGIC ---
+            if (stage === "KS3") {
+                if (topic === "Forces") {
+                    if (i % 3 === 0) { // Weight W = mg (g=10)
+                        ans = n1 * 10;
+                        qText = `Q${i}: Calculate the weight of a ${n1}kg box on Earth (g=10N/kg).`;
+                        rawOptions = [ans, ans+10, n1, ans*2].map(n => `${n} N`);
+                    } else if (i % 3 === 1) { // Speed v = d/t
+                        ans = (n1*10 / n2).toFixed(1);
+                        qText = `Q${i}: A car travels ${n1*10}m in ${n2}s. What is the speed?`;
+                        rawOptions = [ans, (ans*2).toFixed(1), (n1*10).toFixed(1), (n2).toFixed(1)].map(n => `${n} m/s`);
+                    } else { // Hooke's Law F = ke
+                        ans = n1 * n2;
+                        qText = `Q${i}: A spring has constant ${n1}N/m and extends ${n2}m. Calculate Force.`;
+                        rawOptions = [ans, ans+5, n1, n2].map(n => `${n} N`);
+                    }
+                } 
+                else if (topic === "Energy") {
+                    if (i % 3 === 0) { // GPE = mgh
+                        ans = n1 * 10 * n2;
+                        qText = `Q${i}: Mass ${n1}kg is lifted ${n2}m high. Calculate GPE (g=10).`;
+                        rawOptions = [ans, ans*2, ans+50, n1*n2].map(n => `${n} J`);
+                    } else if (i % 3 === 1) { // Conservation
+                        qText = `Q${i}: Energy cannot be created or destroyed, only...`;
+                        rawOptions = ["Transferred", "Deleted", "Multiplied", "Reduced"].map(n => n);
+                    } else { // Efficiency
+                        let total = n1 * 10;
+                        let useful = n1 * 5;
+                        qText = `Q${i}: Input energy is ${total}J, useful output is ${useful}J. Efficiency?`;
+                        rawOptions = ["50%", "100%", "25%", "75%"];
+                    }
+                }
+                else if (topic === "Electricity") {
+                    if (i % 2 === 0) { // V = IR
+                        ans = n1 * n2;
+                        qText = `Q${i}: Current is ${n1}A, Resistance is ${n2}Ω. Calculate Voltage.`;
+                        rawOptions = [ans, ans+2, n1, n2].map(n => `${n} V`);
+                    } else { // P = IV
+                        ans = n1 * n3;
+                        qText = `Q${i}: Current is ${n1}A, Voltage is ${n3}V. Calculate Power.`;
+                        rawOptions = [ans, ans*2, n1+n3, n3].map(n => `${n} W`);
+                    }
+                }
+                else { // Matter
+                    ans = (n1*10 / n2).toFixed(1);
+                    qText = `Q${i}: Mass is ${n1*10}g, Volume is ${n2}cm³. Calculate Density.`;
+                    rawOptions = [ans, (ans*2).toFixed(1), (ans/2).toFixed(1), (n1+n2).toFixed(1)].map(n => `${n} g/cm³`);
+                }
+            }
+
+            // --- KS4 LOGIC (GCSE) ---
+            else if (stage === "KS4") {
+                if (topic === "Motion") {
+                    if (i % 3 === 0) { // a = (v-u)/t
+                        let u = n1, v = n1 + (n2 * n3);
+                        ans = n2; 
+                        qText = `Q${i}: Velocity increases from ${u}m/s to ${v}m/s in ${n3}s. Calculate acceleration.`;
+                        rawOptions = [ans, ans*2, ans+5, 1].map(n => `${n} m/s²`);
+                    } else if (i % 3 === 1) { // KE = 0.5mv^2
+                        ans = 0.5 * n1 * (n2*n2);
+                        qText = `Q${i}: Mass ${n1}kg moves at ${n2}m/s. Calculate Kinetic Energy.`;
+                        rawOptions = [ans, ans*2, ans/2, n1*n2].map(n => `${n} J`);
+                    } else {
+                         qText = `Q${i}: Which is a vector quantity?`;
+                         rawOptions = ["Velocity", "Speed", "Mass", "Energy"];
+                    }
+                }
+                else if (topic === "Waves") {
+                    let f = n1 * 10;
+                    let lam = n2;
+                    ans = f * lam;
+                    qText = `Q${i}: Frequency is ${f}Hz, Wavelength is ${lam}m. Calculate Wave Speed.`;
+                    rawOptions = [ans, ans/2, f, lam].map(n => `${n} m/s`);
+                }
+                else if (topic === "Radioactivity") {
+                    if (i % 2 === 0) { // Half Life
+                         qText = `Q${i}: A sample drops from 800bq to 100bq in 3 hours. What is the half-life?`;
+                         rawOptions = ["1 hour", "3 hours", "30 mins", "1.5 hours"];
+                    } else {
+                        qText = `Q${i}: Alpha particles consist of...`;
+                        rawOptions = ["2 Protons, 2 Neutrons", "1 Electron", "EM Wave", "1 Neutron"];
+                    }
+                }
+                else { // Electromagnetism
+                    qText = `Q${i}: Which device uses a split-ring commutator?`;
+                    rawOptions = ["DC Motor", "Transformer", "AC Generator", "Loudspeaker"];
+                }
+            }
+
+            // --- KS5 LOGIC (A-LEVEL) ---
+            else if (stage === "KS5") {
+                if (topic === "Particles") {
+                    if(i % 2 === 0) { // E = hf
+                        qText = `Q${i}: Calculate energy of photon with freq ${n1}x10¹⁴ Hz (h=6.63x10⁻³⁴).`;
+                        rawOptions = [`${(n1*6.63).toFixed(1)} x10⁻²⁰ J`, `${(n1*3).toFixed(1)} x10⁻²⁰ J`, "Zero", "Infinite"];
+                    } else {
+                        qText = `Q${i}: Specific Charge is defined as...`;
+                        rawOptions = ["Charge / Mass", "Mass / Charge", "Charge x Mass", "Energy / Mass"];
+                    }
+                }
+                else if (topic === "Thermodynamics") {
+                    if(i % 2 === 0) { // Ideal Gas
+                        qText = `Q${i}: In PV = nRT, what is T measured in?`;
+                        rawOptions = ["Kelvin", "Celsius", "Fahrenheit", "Rankine"];
+                    } else { // Q = mcT
+                        ans = n1 * 4200 * 10;
+                        qText = `Q${i}: Energy to heat ${n1}kg water by 10°C? (c=4200).`;
+                        rawOptions = [ans, ans/2, n1*10, 4200].map(n => `${n} J`);
+                    }
+                }
+                else {
+                     qText = `Q${i}: Generic A-Level Physics question regarding ${topic} #${i}.`;
+                     rawOptions = ["Correct Answer", "Wrong A", "Wrong B", "Wrong C"];
+                }
+            }
+
+            // Fallback if logic misses
+            if(qText === "") {
+                qText = `Q${i}: General Physics Question on ${topic}.`;
+                rawOptions = ["True", "False", "Maybe", "Unknown"];
             }
 
             // Shuffle options
@@ -574,8 +673,11 @@
             feedback.innerHTML = "STATUS: <span class='text-green-500 font-bold'>CORRECT</span> // DATA VERIFIED";
             feedback.className = "p-4 mb-4 font-mono text-sm text-center border border-green-900 bg-green-900/20";
         } else {
+            // Pick random reassuring patois message
+            const patoisMsg = PATOIS_REASSURANCE[Math.floor(Math.random() * PATOIS_REASSURANCE.length)];
+
             btnElement.classList.add('incorrect');
-            feedback.innerHTML = "STATUS: <span class='text-red-500 font-bold'>ERROR</span> // DATA MISMATCH";
+            feedback.innerHTML = `STATUS: <span class='text-red-500 font-bold'>INCORRECT</span> // <span class='text-white italic'>"${patoisMsg}"</span>`;
             feedback.className = "p-4 mb-4 font-mono text-sm text-center border border-red-900 bg-red-900/20";
         }
 
