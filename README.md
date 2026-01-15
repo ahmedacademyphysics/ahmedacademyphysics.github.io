@@ -457,6 +457,37 @@
                         rawOptions = ["Charge / Mass", "Mass / Charge", "Charge x Mass", "Energy / Mass"];
                     }
                 }
+                else if (topic === "Quantum Physics") {
+                    // NEW: Quantum Physics specific logic
+                    if (i % 3 === 0) { // Photon Energy (simplified math)
+                        let f = n1; // x10^14 Hz
+                        ans = (f * 6.63).toFixed(1);
+                        qText = `Q${i}: Calculate the energy of a photon with frequency ${n1} x 10¹⁴ Hz. (h=6.63x10⁻³⁴)`;
+                        rawOptions = [`${ans} x 10⁻²⁰ J`, `${(ans/2).toFixed(1)} x 10⁻²⁰ J`, `${(ans*2).toFixed(1)} x 10⁻²⁰ J`, `${n1} J`];
+                    } else if (i % 3 === 1) { // Work Function Concept
+                        qText = `Q${i}: The minimum energy required to remove an electron from a metal surface is called the...`;
+                        rawOptions = ["Work Function", "Threshold Frequency", "Stopping Potential", "Ionisation Energy"];
+                    } else { // De Broglie
+                        qText = `Q${i}: According to de Broglie, if a particle's momentum doubles, its wavelength...`;
+                        rawOptions = ["Halves", "Doubles", "Quadruples", "Remains constant"];
+                    }
+                }
+                else if (topic === "Fields") {
+                    // NEW: Fields specific logic
+                    if (i % 3 === 0) { // Gravitational Inverse Square
+                        qText = `Q${i}: If the distance between two masses is tripled, the gravitational force becomes...`;
+                        rawOptions = ["1/9th", "1/3rd", "3x larger", "9x larger"];
+                    } else if (i % 3 === 1) { // Electric Field E = F/Q
+                        let F = n1 * 10;
+                        let Q = 2;
+                        ans = F / Q;
+                        qText = `Q${i}: A charge of ${Q}C experiences a force of ${F}N. Calculate Electric Field Strength.`;
+                        rawOptions = [`${ans} N/C`, `${ans*2} N/C`, `${F} N/C`, `${Q} N/C`];
+                    } else { // Capacitor Basics
+                        qText = `Q${i}: The area under a Charge (Q) vs Voltage (V) graph represents...`;
+                        rawOptions = ["Energy Stored", "Capacitance", "Power", "Current"];
+                    }
+                }
                 else if (topic === "Thermodynamics") {
                     if(i % 2 === 0) { // Ideal Gas
                         qText = `Q${i}: In PV = nRT, what is T measured in?`;
