@@ -132,16 +132,16 @@
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
 <header class="p-4 sticky top-0 z-50 shadow-lg">
-    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <div class="w-full max-w-[95%] mx-auto flex flex-col md:flex-row justify-between items-center">
         <h1 class="text-2xl md:text-3xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.4
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.5
         </div>
     </div>
 </header>
 
 <nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[72px] z-40 overflow-x-auto">
-    <div class="container mx-auto p-4 flex gap-4 items-center min-w-max">
+    <div class="w-full max-w-[95%] mx-auto p-4 flex gap-4 items-center min-w-max">
         <div id="module-nav-container" class="flex gap-4">
             </div>
         
@@ -153,7 +153,7 @@
     </div>
 </nav>
 
-<div class="container mx-auto p-6 z-30 relative flex-grow">
+<div class="w-full max-w-[95%] mx-auto p-6 z-30 relative flex-grow">
     
     <main class="w-full min-h-[600px] relative">
         
@@ -573,7 +573,7 @@
                         ${sectionName.toUpperCase()}
                     </h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
@@ -586,7 +586,7 @@
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         return `
             <div class="group flex flex-col h-full">
-                <p class="text-[10px] text-cyan-500 mb-1 font-orbitron font-bold tracking-wider truncate" title="${name}">
+                <p class="text-[12px] text-cyan-500 mb-2 font-orbitron font-bold tracking-wider truncate" title="${name}">
                    // ${name.toUpperCase()}
                 </p>
                 <div class="slide-embed-container shadow-xl flex-grow border border-[#333] group-hover:border-red-500 transition">
