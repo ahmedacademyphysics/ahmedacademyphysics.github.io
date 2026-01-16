@@ -135,7 +135,7 @@
     <div class="w-full max-w-[95%] mx-auto flex flex-col md:flex-row justify-between items-center">
         <h1 class="text-2xl md:text-3xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.6
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.7
         </div>
     </div>
 </header>
@@ -573,7 +573,7 @@
                         ${sectionName.toUpperCase()}
                     </h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
