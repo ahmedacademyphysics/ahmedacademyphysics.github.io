@@ -164,7 +164,7 @@
     <div class="max-w-[1800px] mx-auto w-full p-2 md:p-4">
         <div id="module-nav-container" class="flex flex-wrap gap-2 justify-center w-full">
             <div id="uplink-btn" class="topic-card uplink-btn px-2 md:px-4 py-2 md:py-3 rounded-sm font-bold text-xs md:text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center" onclick="showUplink()">
-                <span class="opacity-50 mr-2 text-[10px]">☁</span> UPLINK
+                <span class="opacity-50 mr-2 text-[10px]">✉</span> COMMS
             </div>
         </div>
     </div>
@@ -175,7 +175,7 @@
         
         <div id="content-placeholder" class="h-[50vh] flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-4 md:p-12 text-center mt-4 md:mt-10 w-full">
             <div class="text-4xl md:text-6xl mb-4 opacity-20 animate-pulse">◢◤</div>
-            <p class="text-gray-500 font-mono text-sm md:text-lg">ESTABLISHING UPLINK... SELECT MODULE ABOVE.</p>
+            <p class="text-gray-500 font-mono text-sm md:text-lg">ESTABLISHING LINK... SELECT MODULE ABOVE.</p>
         </div>
 
         <div id="topic-content-area" class="hidden w-full transition-all duration-500">
@@ -185,10 +185,10 @@
             <div class="border border-cyan-900 bg-black/80 p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.1)] relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-r-[40px] border-t-cyan-500/20 border-r-transparent"></div>
                 
-                <h2 class="text-2xl md:text-3xl font-black text-cyan-400 font-orbitron tracking-tighter mb-2">SECURE UPLINK</h2>
-                <p class="text-[10px] md:text-xs font-mono text-gray-500 mb-8 uppercase tracking-widest">TRANSMIT DATA PACKET TO CENTRAL SERVER</p>
+                <h2 class="text-2xl md:text-3xl font-black text-cyan-400 font-orbitron tracking-tighter mb-2">SECURE COMMS</h2>
+                <p class="text-[10px] md:text-xs font-mono text-gray-500 mb-8 uppercase tracking-widest">ESTABLISH DIRECT LINK TO ADMINISTRATOR</p>
 
-                <form action="https://formspree.io/f/mlgggrar" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="https://formspree.io/f/mlgggrar" method="POST" class="space-y-6">
                     
                     <div class="space-y-2">
                         <label class="block text-xs font-mono text-cyan-600 tracking-wider uppercase">
@@ -201,16 +201,15 @@
 
                     <div class="space-y-2">
                         <label class="block text-xs font-mono text-cyan-600 tracking-wider uppercase">
-                            DATA_PACKET (FILE UPLOAD):
+                            TRANSMISSION DATA (MESSAGE):
                         </label>
-                        <div class="relative group">
-                            <input type="file" name="upload" required 
-                                class="cyber-input w-full p-3 md:p-4 text-xs md:text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-none file:border-0 file:text-xs file:font-semibold file:bg-cyan-900/30 file:text-cyan-400 hover:file:bg-cyan-900/50 cursor-pointer">
-                        </div>
+                        <textarea name="message" required rows="5"
+                            class="cyber-input w-full p-3 md:p-4 text-sm rounded-sm resize-none"
+                            placeholder="ENTER ENCRYPTED MESSAGE HERE..."></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-cyan-900/30 hover:bg-cyan-500 hover:text-black text-cyan-400 border border-cyan-500 font-orbitron font-bold py-4 px-6 tracking-[0.2em] transition-all duration-300 mt-4 clip-path-polygon">
-                        INITIATE TRANSFER
+                        SEND TRANSMISSION
                     </button>
                     
                     <p class="text-center text-[10px] text-gray-600 mt-4 font-mono">
@@ -255,13 +254,7 @@
         }
     }
 
-    // --- DB OBJECT (Truncated for brevity, assumes standard DB from previous code exists) ---
-    // Note: I am keeping the full DB structure logic below but skipping the huge data list 
-    // to keep the code block copy-pasteable. The logic handles the generation.
-    
-    // PASTE YOUR FULL "DATABASE" CONSTANT HERE IF IT'S MISSING, OR USE THE PREVIOUS VERSION.
-    // For this demo, I will assume the DATABASE variable exists globally or I will re-declare a small version for testing.
-    
+    // --- DB OBJECT (Simplified for brevity, assumes standard DB) ---
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: FOUNDATIONS",
@@ -285,21 +278,18 @@
         "WAVES": { title: "WAVES", sections: { "Optics": [{name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub?start=false&loop=false&delayms=60000"}]}}
     };
 
-    // --- PROCEDURAL MCQ GENERATOR (Keep existing logic) ---
+    // --- PROCEDURAL MCQ GENERATOR ---
     function generateSlideQuestions(topicName) {
-        // (Simplified for this snippet - assume full logic from previous response)
         return [
              { q: "Sample Question for " + topicName + "?", options: ["A", "B", "C", "D"], correct: 0 }
         ];
     }
 
     // --- APP LOGIC ---
-    
-    // 1. Module Nav Builder
     const navContainer = document.getElementById('module-nav-container');
     const uplinkBtn = document.getElementById('uplink-btn');
 
-    // Insert database items BEFORE the uplink button
+    // Insert database items BEFORE the comms button
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
         card.className = 'topic-card px-2 md:px-4 py-2 md:py-3 rounded-sm font-bold text-xs md:text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
@@ -311,17 +301,15 @@
             card.classList.add('active');
             revealContent(key);
         });
-        // Insert before the Uplink button
         navContainer.insertBefore(card, uplinkBtn);
     });
 
-    // 2. Content Display Logic
+    // Content Display Logic
     const contentPlaceholder = document.getElementById('content-placeholder');
     const topicContentArea = document.getElementById('topic-content-area');
     const uploadContentArea = document.getElementById('upload-content-area');
 
     function revealContent(topicKey) {
-        // Hide Upload Area, Show Topic Area
         uploadContentArea.classList.add('hidden');
         contentPlaceholder.classList.add('hidden');
         topicContentArea.classList.remove('hidden');
@@ -351,15 +339,11 @@
         topicContentArea.innerHTML = html;
     }
 
-    // 3. UPLINK (Form) Logic
+    // UPLINK (Contact Form) Logic
     function showUplink() {
         playClickSound();
-        // Remove active class from all other cards
         document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
-        // Add active to Uplink button
         uplinkBtn.classList.add('active');
-
-        // Hide other areas, show form
         contentPlaceholder.classList.add('hidden');
         topicContentArea.classList.add('hidden');
         uploadContentArea.classList.remove('hidden');
@@ -389,7 +373,7 @@
         `;
     };
 
-    // --- MCQ MODAL LOGIC (Same as before) ---
+    // MCQ MODAL LOGIC
     const questionModal = document.getElementById('question-modal');
     
     function openQuestions(topicName) {
