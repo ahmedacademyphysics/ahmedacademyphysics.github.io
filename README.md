@@ -17,7 +17,7 @@
             background-color: var(--theme-black);
             color: #e0e0e0;
             font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
             width: 100%;
         }
 
@@ -35,24 +35,9 @@
 
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* GLITCH ANIMATION */
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 var(--theme-red), -2px 0 var(--theme-cyan); }
-            25% { text-shadow: -2px 0 var(--theme-red), 2px 0 var(--theme-cyan); }
-            50% { text-shadow: 2px 0 var(--theme-red), -2px 0 var(--theme-cyan); }
-            75% { text-shadow: -2px 0 var(--theme-red), 2px 0 var(--theme-cyan); }
-            100% { text-shadow: 2px 0 var(--theme-red), -2px 0 var(--theme-cyan); }
-        }
-
-        .glitch-effect:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            cursor: default;
-        }
-
         /* HEADER - FULL WIDTH */
         header {
             background: linear-gradient(90deg, var(--theme-red) 0%, #8b0000 100%);
-            /* Simplified clip-path to ensure it looks good full width */
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
             border-bottom: 2px solid white;
             width: 100%;
@@ -68,7 +53,7 @@
             overflow: hidden;
             z-index: 60;
             white-space: nowrap;
-            flex-grow: 1; /* Auto fill space */
+            flex-grow: 1;
             text-align: center;
         }
 
@@ -100,10 +85,32 @@
             top: 0; left: 0; width: 100%; height: 100%;
         }
 
-        /* MODAL */
+        /* MODAL STYLES */
         #question-modal {
             backdrop-filter: blur(5px);
             background-color: rgba(0, 0, 0, 0.85);
+        }
+
+        /* MCQ ANSWER BUTTONS */
+        .mcq-option {
+            transition: all 0.2s;
+            cursor: pointer;
+            text-align: left;
+        }
+        .mcq-option:hover {
+            background-color: rgba(0, 243, 255, 0.1);
+            border-color: var(--theme-cyan);
+        }
+        .mcq-correct {
+            background-color: rgba(34, 197, 94, 0.2) !important;
+            border-color: #22c55e !important;
+            color: #4ade80 !important;
+        }
+        .mcq-wrong {
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            border-color: #ef4444 !important;
+            color: #f87171 !important;
+            opacity: 0.6;
         }
 
         /* SCROLLBAR */
@@ -119,9 +126,9 @@
 
 <header class="p-6 sticky top-0 z-50 shadow-lg w-full">
     <div class="w-full flex flex-col md:flex-row justify-between items-center px-4">
-        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
+        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v6.0
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v6.1
         </div>
     </div>
 </header>
@@ -151,18 +158,18 @@
 <div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
     <div class="bg-black border-2 border-cyan-500 w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
         
-        <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center">
+        <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
             <div>
-                <h2 class="text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
+                <h2 class="text-xl md:text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
                 <div class="h-1 w-20 bg-cyan-500 mt-1"></div>
             </div>
             <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition">✕</button>
         </div>
 
-        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm md:text-base text-gray-300 space-y-4" id="modal-content">
+        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm md:text-base text-gray-300 space-y-8" id="modal-content">
             </div>
 
-        <div class="p-4 border-t border-gray-800 bg-gray-900 flex justify-end">
+        <div class="p-4 border-t border-gray-800 bg-gray-900 flex justify-end flex-shrink-0">
              <button onclick="closeQuestions()" class="text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-6 py-3 font-bold transition rounded-sm">Close Terminal</button>
         </div>
     </div>
@@ -431,129 +438,144 @@
         }
     };
 
-    // --- PROCEDURAL QUESTION GENERATOR (FIXED FOR CONSISTENCY) ---
+    // --- PROCEDURAL MCQ GENERATOR ---
     function generateSlideQuestions(topicName) {
         let questions = [];
         let t = topicName.toLowerCase();
-        
-        // 1. DENSITY / MASS / VOLUME
-        if (t.includes('density') || t.includes('matter')) {
+
+        // 1. MATHS & STANDARD FORM
+        if (t.includes('standard') || t.includes('significant') || t.includes('rearranging') || t.includes('algebra')) {
             questions = [
-                "Define 'Density' and state its SI unit.",
-                "Calculate the density if Mass = 100g and Volume = 20cm³.",
-                "How does the density of a solid compare to a gas?",
-                "Explain how to measure the volume of an irregular stone.",
-                "Why does ice float on water?",
-                "Convert 5 g/cm³ into kg/m³.",
-                "What happens to the density of a gas when it is heated in a fixed volume?",
-                "Calculate the mass of a block with Density = 8g/cm³ and Volume = 5cm³.",
-                "Draw the particle arrangement for a solid, liquid, and gas.",
-                "Explain why gases are easy to compress."
+                { q: "Convert 4500 into Standard Form.", options: ["4.5 x 10³", "4.5 x 10²", "45 x 10²", "0.45 x 10⁴"], correct: 0 },
+                { q: "How many significant figures in 0.00340?", options: ["2", "3", "4", "5"], correct: 1 },
+                { q: "Rearrange F = ma to find a.", options: ["a = F/m", "a = m/F", "a = F - m", "a = F x m"], correct: 0 },
+                { q: "What is 3.2 x 10² multiplied by 2?", options: ["6.4 x 10²", "6.4 x 10³", "3.2 x 10⁴", "6400"], correct: 0 },
+                { q: "Round 5.678 to 2 significant figures.", options: ["5.6", "5.7", "5.68", "6.0"], correct: 1 },
+                { q: "Convert 250 mA to Amps.", options: ["25 A", "2.5 A", "0.25 A", "0.025 A"], correct: 2 },
+                { q: "Which of these is a Scalar quantity?", options: ["Velocity", "Force", "Displacement", "Mass"], correct: 3 },
+                { q: "Calculate (2 x 10³) + (3 x 10³).", options: ["5 x 10⁶", "5 x 10³", "6 x 10³", "500"], correct: 1 },
+                { q: "Rearrange V = IR to find R.", options: ["R = V/I", "R = I/V", "R = V x I", "R = V - I"], correct: 0 },
+                { q: "What is the standard prefix for 10⁻³?", options: ["Kilo", "Micro", "Milli", "Nano"], correct: 2 }
             ];
         }
-        // 2. FORCES / NEWTON / WEIGHT
-        else if (t.includes('force') || t.includes('newton') || t.includes('weight') || t.includes('elastic') || t.includes('hooke')) {
+        // 2. DENSITY & MATTER
+        else if (t.includes('density') || t.includes('matter') || t.includes('states') || t.includes('particle')) {
             questions = [
-                "State Newton's First Law of Motion.",
-                "Calculate the Resultant Force if Mass = 50kg and Acceleration = 2m/s².",
-                "What is the difference between Mass and Weight?",
-                "Calculate the weight of a 70kg astronaut on Earth (g=10N/kg).",
-                "State Hooke's Law.",
-                "What does the limit of proportionality mean?",
-                "Define 'Inertia'.",
-                "If forces are balanced, what is the acceleration of the object?",
-                "Calculate the spring constant if Force = 10N and Extension = 0.5m.",
-                "State Newton's Third Law with an example."
+                { q: "What is the formula for Density?", options: ["Density = Mass / Volume", "Density = Volume / Mass", "Density = Mass x Volume", "Density = Weight / Volume"], correct: 0 },
+                { q: "Which state of matter has fixed shape and volume?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 0 },
+                { q: "What happens to the density of a gas if volume decreases (mass constant)?", options: ["Increases", "Decreases", "Stays the same", "Becomes zero"], correct: 0 },
+                { q: "What is the unit of Density?", options: ["kg/m³", "N/m²", "J/kg", "m/s²"], correct: 0 },
+                { q: "Why does ice float on water?", options: ["Ice is less dense than water", "Ice is heavier than water", "Ice has more volume", "Ice is colder"], correct: 0 },
+                { q: "Which method measures the volume of an irregular solid?", options: ["Displacement can", "Ruler", "Balance", "Thermometer"], correct: 0 },
+                { q: "What is Sublimation?", options: ["Solid to Gas directly", "Gas to Liquid", "Liquid to Solid", "Solid to Liquid"], correct: 0 },
+                { q: "Particles in a liquid are...", options: ["Close together but random", "Far apart and fast", "Regularly arranged", "Stationary"], correct: 0 },
+                { q: "Calculate mass if Density=5g/cm³ and Volume=10cm³.", options: ["50 g", "2 g", "0.5 g", "15 g"], correct: 0 },
+                { q: "What causes gas pressure?", options: ["Particles colliding with walls", "Particles hitting each other", "Heat energy", "Gravity"], correct: 0 }
             ];
         }
-        // 3. ENERGY / WORK / POWER
-        else if (t.includes('energy') || t.includes('work') || t.includes('power') || t.includes('heat') || t.includes('efficien')) {
+        // 3. FORCES & MOTION
+        else if (t.includes('force') || t.includes('newton') || t.includes('velocity') || t.includes('acceleration')) {
             questions = [
-                "State the Principle of Conservation of Energy.",
-                "Calculate Kinetic Energy if Mass = 10kg and Velocity = 4m/s.",
-                "Calculate Gravitational Potential Energy if Mass = 5kg, g = 10, Height = 10m.",
-                "Define 'Work Done' and give its unit.",
-                "Calculate Power if Work Done = 1000J and Time = 20s.",
-                "What is the formula for Efficiency?",
-                "Name three renewable energy resources.",
-                "Explain how conduction transfers heat.",
-                "What colour is the best absorber of thermal radiation?",
-                "Calculate the efficiency if Input Energy = 200J and Useful Output = 50J."
+                { q: "What is the unit of Force?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 0 },
+                { q: "What is Newton's First Law?", options: ["Objects stay at rest unless acted on", "F = ma", "Action = Reaction", "Gravity pulls down"], correct: 0 },
+                { q: "Calculate Force if m=10kg and a=2m/s².", options: ["20 N", "5 N", "12 N", "0.2 N"], correct: 0 },
+                { q: "What is the difference between Speed and Velocity?", options: ["Velocity has direction", "Speed has direction", "They are the same", "Velocity is always faster"], correct: 0 },
+                { q: "What is the gradient of a Distance-Time graph?", options: ["Speed", "Acceleration", "Force", "Distance"], correct: 0 },
+                { q: "Terminal velocity occurs when...", options: ["Weight equals Air Resistance", "Weight is greater than Air Resistance", "There is no Air Resistance", "Acceleration is maximum"], correct: 0 },
+                { q: "Hooke's Law states that Force is proportional to...", options: ["Extension", "Length", "Mass", "Spring Constant"], correct: 0 },
+                { q: "What is the unit of Acceleration?", options: ["m/s²", "m/s", "N/kg", "kg m/s"], correct: 0 },
+                { q: "Which force opposes motion?", options: ["Friction", "Thrust", "Weight", "Tension"], correct: 0 },
+                { q: "Weight is calculated by...", options: ["Mass x Gravity", "Mass / Gravity", "Mass + Gravity", "Gravity / Mass"], correct: 0 }
             ];
         }
-        // 4. ELECTRICITY / CIRCUITS
-        else if (t.includes('circuit') || t.includes('electric') || t.includes('voltage') || t.includes('current') || t.includes('resistance')) {
+        // 4. ENERGY & THERMAL
+        else if (t.includes('energy') || t.includes('heat') || t.includes('thermal') || t.includes('work')) {
             questions = [
-                "State Ohm's Law.",
-                "Calculate Voltage if Current = 2A and Resistance = 10Ω.",
-                "What is the difference between a Series and Parallel circuit?",
-                "What happens to current in a series circuit?",
-                "Draw the circuit symbol for a variable resistor.",
-                "Calculate Electrical Power if Voltage = 230V and Current = 5A.",
-                "What is the function of a fuse?",
-                "Define 'Alternating Current' (AC).",
-                "Calculate Charge if Current = 5A and Time = 10s.",
-                "Explain the I-V characteristic of a diode."
+                { q: "What is the unit of Energy?", options: ["Joule", "Newton", "Watt", "Ampere"], correct: 0 },
+                { q: "Which energy store is in a moving object?", options: ["Kinetic", "Gravitational", "Elastic", "Thermal"], correct: 0 },
+                { q: "Calculate Work Done if Force=10N and Distance=5m.", options: ["50 J", "2 J", "15 J", "0.5 J"], correct: 0 },
+                { q: "Conduction mainly happens in...", options: ["Solids", "Liquids", "Gases", "Vacuum"], correct: 0 },
+                { q: "Dark matt surfaces are good...", options: ["Absorbers of radiation", "Reflectors of radiation", "Conductors", "Insulators"], correct: 0 },
+                { q: "Formula for Efficiency?", options: ["Useful Output / Total Input", "Total Input / Useful Output", "Input x Output", "Output - Input"], correct: 0 },
+                { q: "Power is defined as...", options: ["Rate of doing work", "Force x Distance", "Energy x Time", "Voltage x Resistance"], correct: 0 },
+                { q: "Gravitational Potential Energy depends on...", options: ["Mass, Gravity, Height", "Mass, Speed", "Force, Distance", "Spring Constant"], correct: 0 },
+                { q: "Which is a renewable energy source?", options: ["Wind", "Coal", "Gas", "Nuclear"], correct: 0 },
+                { q: "Conservation of Energy means...", options: ["Energy cannot be created or destroyed", "Energy is always lost", "Energy increases over time", "Energy equals Mass"], correct: 0 }
             ];
         }
-        // 5. WAVES / LIGHT / SOUND
-        else if (t.includes('wave') || t.includes('sound') || t.includes('light') || t.includes('optic') || t.includes('spectrum')) {
+        // 5. ELECTRICITY
+        else if (t.includes('circuit') || t.includes('current') || t.includes('voltage') || t.includes('resistance')) {
             questions = [
-                "Define 'Frequency' and state its unit.",
-                "Calculate Wave Speed if Frequency = 50Hz and Wavelength = 2m.",
-                "What is the difference between Transverse and Longitudinal waves?",
-                "List the Electromagnetic Spectrum in order of increasing frequency.",
-                "Which EM wave is used for satellite communication?",
-                "State the Law of Reflection.",
-                "What happens to light when it enters a denser medium?",
-                "What is the critical angle?",
-                "What range of frequencies can humans hear?",
-                "Explain how Ultrasound is used for imaging."
+                { q: "What is the unit of Current?", options: ["Ampere", "Volt", "Ohm", "Coulomb"], correct: 0 },
+                { q: "State Ohm's Law formula.", options: ["V = I x R", "I = V x R", "R = V x I", "V = I / R"], correct: 0 },
+                { q: "In a Series circuit, Current is...", options: ["The same everywhere", "Split between components", "Zero", "Double the voltage"], correct: 0 },
+                { q: "What measures Potential Difference?", options: ["Voltmeter", "Ammeter", "Resistor", "Fuse"], correct: 0 },
+                { q: "What is the colour of the Live wire?", options: ["Brown", "Blue", "Green/Yellow", "Black"], correct: 0 },
+                { q: "Calculate Power if V=10V and I=2A.", options: ["20 W", "5 W", "12 W", "0.2 W"], correct: 0 },
+                { q: "The function of a fuse is to...", options: ["Melt if current is too high", "Regulate voltage", "Store charge", "Increase resistance"], correct: 0 },
+                { q: "Resistance is measured in...", options: ["Ohms", "Watts", "Amps", "Volts"], correct: 0 },
+                { q: "In parallel circuits, Voltage is...", options: ["The same across each branch", "Split between branches", "Zero", "Dependent on current"], correct: 0 },
+                { q: "AC stands for...", options: ["Alternating Current", "Anti Current", "Active Current", "Ampere Current"], correct: 0 }
             ];
         }
-        // 6. SPACE / ASTRONOMY
-        else if (t.includes('space') || t.includes('solar') || t.includes('star') || t.includes('orbit') || t.includes('universe')) {
+        // 6. WAVES & LIGHT
+        else if (t.includes('wave') || t.includes('light') || t.includes('sound') || t.includes('spectrum')) {
             questions = [
-                "List the planets in our solar system in order from the Sun.",
-                "What force keeps planets in orbit?",
-                "Describe the life cycle of a star similar to our Sun.",
-                "What is a 'Light Year'?",
-                "Explain what 'Red Shift' tells us about the Universe.",
-                "What is the Big Bang Theory?",
-                "What is the difference between a geostationary and polar orbit?",
-                "Why do we have seasons?",
-                "What is a nebula?",
-                "How is a black hole formed?"
+                { q: "What is the wave equation?", options: ["v = f x λ", "v = f / λ", "f = v x λ", "λ = v x f"], correct: 0 },
+                { q: "Sound waves are...", options: ["Longitudinal", "Transverse", "Electromagnetic", "Radio"], correct: 0 },
+                { q: "Which EM wave has the highest frequency?", options: ["Gamma Rays", "Radio Waves", "Visible Light", "X-Rays"], correct: 0 },
+                { q: "Light bending when entering glass is called...", options: ["Refraction", "Reflection", "Diffraction", "Incidence"], correct: 0 },
+                { q: "The angle of incidence is equal to...", options: ["The angle of reflection", "The angle of refraction", "90 degrees", "The critical angle"], correct: 0 },
+                { q: "Frequency is measured in...", options: ["Hertz (Hz)", "Meters (m)", "Seconds (s)", "Decibels (dB)"], correct: 0 },
+                { q: "What type of wave is Light?", options: ["Transverse", "Longitudinal", "Mechanical", "Sonic"], correct: 0 },
+                { q: "Which colour has the longest wavelength?", options: ["Red", "Violet", "Blue", "Green"], correct: 0 },
+                { q: "Ultrasound is sound above...", options: ["20,000 Hz", "20 Hz", "2,000 Hz", "200 Hz"], correct: 0 },
+                { q: "The Critical Angle is related to...", options: ["Total Internal Reflection", "Diffraction", "Interference", "Dispersion"], correct: 0 }
             ];
         }
-        // 7. RADIOACTIVITY
-        else if (t.includes('radio') || t.includes('atom') || t.includes('nuclear') || t.includes('fusion')) {
+        // 7. SPACE
+        else if (t.includes('space') || t.includes('star') || t.includes('orbit') || t.includes('planet')) {
             questions = [
-                "Describe the structure of an atom.",
-                "What is an Isotope?",
-                "List the three types of nuclear radiation.",
-                "Which radiation is stopped by a sheet of paper?",
-                "Which radiation is the most ionising?",
-                "Define 'Half-Life'.",
-                "If a sample has a count rate of 100, what is it after 2 half-lives?",
-                "What is Nuclear Fission?",
-                "What is Nuclear Fusion?",
-                "Name a safety precaution when handling radioactive sources."
+                { q: "Which galaxy is our Solar System in?", options: ["Milky Way", "Andromeda", "Triangulum", "Sombrero"], correct: 0 },
+                { q: "The force keeping planets in orbit is...", options: ["Gravity", "Magnetism", "Friction", "Tension"], correct: 0 },
+                { q: "What is a Light Year measuring?", options: ["Distance", "Time", "Speed", "Brightness"], correct: 0 },
+                { q: "The Big Bang theory explains...", options: ["The origin of the Universe", "The death of stars", "Formation of planets", "Black holes"], correct: 0 },
+                { q: "What is the fuel for stars?", options: ["Hydrogen", "Oxygen", "Iron", "Carbon"], correct: 0 },
+                { q: "Red Shift provides evidence for...", options: ["Expanding Universe", "Shrinking Universe", "Static Universe", "Spinning Universe"], correct: 0 },
+                { q: "Which planet is closest to the Sun?", options: ["Mercury", "Venus", "Mars", "Earth"], correct: 0 },
+                { q: "A geostationary satellite...", options: ["Orbits every 24 hours", "Orbits every 90 mins", "Stays at the North Pole", "Orbits the Moon"], correct: 0 },
+                { q: "What is a Supernova?", options: ["Explosion of a massive star", "Birth of a star", "Collision of planets", "A black hole"], correct: 0 },
+                { q: "Our Sun is currently a...", options: ["Main Sequence Star", "Red Giant", "White Dwarf", "Neutron Star"], correct: 0 }
             ];
         }
-        // FALLBACK (If no keyword match)
+        // 8. RADIOACTIVITY
+        else if (t.includes('radio') || t.includes('nuclear') || t.includes('atom')) {
+            questions = [
+                { q: "What are Alpha particles?", options: ["Helium nuclei", "Electrons", "EM waves", "Neutrons"], correct: 0 },
+                { q: "Which radiation is most penetrating?", options: ["Gamma", "Beta", "Alpha", "Infrared"], correct: 0 },
+                { q: "What is an Isotope?", options: ["Same protons, different neutrons", "Same neutrons, different protons", "Different electrons", "Different element"], correct: 0 },
+                { q: "Beta particles are...", options: ["High speed electrons", "Protons", "Neutrons", "Waves"], correct: 0 },
+                { q: "What is Half-Life?", options: ["Time for activity to halve", "Half the total time", "Time to decay completely", "Half the mass"], correct: 0 },
+                { q: "Which device detects radiation?", options: ["Geiger-Muller Tube", "Voltmeter", "Barometer", "Thermometer"], correct: 0 },
+                { q: "Nuclear Fission involves...", options: ["Splitting a nucleus", "Joining nuclei", "Burning atoms", "Chemical reaction"], correct: 0 },
+                { q: "Nuclear Fusion powers...", options: ["The Sun", "Nuclear power stations", "Batteries", "X-ray machines"], correct: 0 },
+                { q: "Background radiation comes from...", options: ["Rocks and Space", "Only hospitals", "Only power plants", "Only microwaves"], correct: 0 },
+                { q: "The unit of Activity is...", options: ["Becquerel (Bq)", "Sievert (Sv)", "Count", "Hertz (Hz)"], correct: 0 }
+            ];
+        }
+        // DEFAULT FALLBACK
         else {
             questions = [
-                `Define the key terms associated with ${topicName}.`,
-                "What are the standard units used in this topic?",
-                "Describe an experiment to investigate this concept.",
-                "Draw a diagram representing the main concept.",
-                "Explain how this concept applies to real life.",
-                "What safety precautions should be taken here?",
-                "Summarise the main points of the slide.",
-                "What equations are relevant to this section?",
-                "Create a calculation question based on this topic.",
-                "Explain this concept to a non-scientist."
+                { q: "Which variable goes on the x-axis?", options: ["Independent", "Dependent", "Control", "Random"], correct: 0 },
+                { q: "What is an anomaly?", options: ["A result that doesn't fit the pattern", "The correct result", "The average", "A prediction"], correct: 0 },
+                { q: "How do you improve reliability?", options: ["Repeat and average", "Use better equipment", "Change the method", "Guess"], correct: 0 },
+                { q: "What is the SI unit for Time?", options: ["Seconds", "Minutes", "Hours", "Days"], correct: 0 },
+                { q: "Which line is the line of best fit?", options: ["Smooth curve/line through points", "Dot to dot", "Zig zag", "Straight line only"], correct: 0 },
+                { q: "What is precision?", options: ["Closeness to the mean", "Closeness to true value", "Correctness", "Zero error"], correct: 0 },
+                { q: "What is accuracy?", options: ["Closeness to true value", "Smallest scale division", "Repeated results", "No errors"], correct: 0 },
+                { q: "A hypothesis is...", options: ["A scientific prediction", "A fact", "A conclusion", "A graph"], correct: 0 },
+                { q: "What is the SI unit for Mass?", options: ["Kilogram", "Gram", "Pound", "Tonne"], correct: 0 },
+                { q: "To measure liquid volume accurately use a...", options: ["Measuring Cylinder", "Beaker", "Flask", "Test tube"], correct: 0 }
             ];
         }
 
@@ -566,7 +588,6 @@
     const navContainer = document.getElementById('module-nav-container');
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        // Removed fixed widths, added flex-grow for auto scale
         card.className = 'topic-card px-4 py-3 rounded-sm font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
         card.innerHTML = `<span class="opacity-50 mr-2 text-xs">◢</span> ${key}`;
         card.setAttribute('data-key', key);
@@ -611,7 +632,7 @@
         topicContentArea.innerHTML = html;
     }
 
-    // UPDATED: Slide Embed with Question Button
+    // Embed Creator
     const createSlideEmbed = (url, name) => {
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         const safeName = name.replace(/'/g, "\\'");
@@ -635,7 +656,7 @@
         `;
     };
 
-    // --- QUESTION MODAL LOGIC ---
+    // --- MCQ MODAL LOGIC ---
     const questionModal = document.getElementById('question-modal');
     
     function openQuestions(topicName) {
@@ -646,14 +667,48 @@
         const contentDiv = document.getElementById('modal-content');
         contentDiv.innerHTML = '';
         
-        questions.forEach((q, idx) => {
-            const row = document.createElement('div');
-            row.className = "flex gap-4 p-3 border-b border-gray-800 hover:bg-gray-900/50 transition rounded-sm";
-            row.innerHTML = `
-                <span class="text-cyan-600 font-bold font-orbitron select-none text-lg">0${idx+1}</span>
-                <p class="text-gray-300 leading-relaxed font-semibold">${q}</p>
-            `;
-            contentDiv.appendChild(row);
+        questions.forEach((qObj, idx) => {
+            // Create container for one question
+            const qDiv = document.createElement('div');
+            qDiv.className = "border-b border-gray-800 pb-6 last:border-0";
+            
+            // Question Text
+            const qTitle = document.createElement('h3');
+            qTitle.className = "text-white font-bold mb-3 flex gap-2 font-orbitron";
+            qTitle.innerHTML = `<span class="text-cyan-500">0${idx+1}</span> ${qObj.q}`;
+            qDiv.appendChild(qTitle);
+            
+            // Options Container
+            const optContainer = document.createElement('div');
+            optContainer.className = "grid grid-cols-1 md:grid-cols-2 gap-2";
+            
+            qObj.options.forEach((optText, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = "mcq-option p-3 bg-gray-900 border border-gray-700 rounded-sm text-sm text-gray-300 font-mono";
+                btn.innerText = optText;
+                
+                // Click Event
+                btn.onclick = function() {
+                    // Disable all buttons in this question group
+                    const siblings = optContainer.querySelectorAll('button');
+                    siblings.forEach(b => b.disabled = true);
+                    
+                    // Check Answer
+                    if(optIdx === qObj.correct) {
+                        btn.classList.add('mcq-correct');
+                        btn.innerHTML += " ✓";
+                    } else {
+                        btn.classList.add('mcq-wrong');
+                        btn.innerHTML += " ✕";
+                        // Highlight correct one
+                        siblings[qObj.correct].classList.add('mcq-correct');
+                    }
+                };
+                optContainer.appendChild(btn);
+            });
+            
+            qDiv.appendChild(optContainer);
+            contentDiv.appendChild(qDiv);
         });
         
         questionModal.classList.remove('hidden');
