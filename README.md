@@ -145,6 +145,9 @@
 
     </style>
 </head>
+<div class="commentbox"></div>
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>commentBox(5648901201723392-proj)</script>
 <body class="min-h-screen flex flex-col w-full">
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
