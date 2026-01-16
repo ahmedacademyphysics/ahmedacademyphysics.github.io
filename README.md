@@ -135,7 +135,7 @@
     <div class="w-full max-w-[95%] mx-auto flex flex-col md:flex-row justify-between items-center">
         <h1 class="text-2xl md:text-3xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.5
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.6
         </div>
     </div>
 </header>
@@ -586,9 +586,9 @@
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         return `
             <div class="group flex flex-col h-full">
-                <p class="text-[12px] text-cyan-500 mb-2 font-orbitron font-bold tracking-wider truncate" title="${name}">
-                   // ${name.toUpperCase()}
-                </p>
+                <a href="${url}" target="_blank" class="text-[12px] text-cyan-500 mb-2 font-orbitron font-bold tracking-wider truncate hover:underline hover:text-white transition-colors block" title="OPEN SLIDES: ${name}">
+                   // ${name.toUpperCase()} ↗
+                </a>
                 <div class="slide-embed-container shadow-xl flex-grow border border-[#333] group-hover:border-red-500 transition">
                     <iframe src="${embedUrl}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
                 </div>
