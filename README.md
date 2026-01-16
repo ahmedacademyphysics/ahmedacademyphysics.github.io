@@ -157,7 +157,28 @@
 
 <div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
     <div class="bg-black border-2 border-cyan-500 w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
+        <section class="w-full max-w-4xl mx-auto px-4 py-10 relative z-40">
+    <div class="border border-cyan-900 bg-black/80 p-6 shadow-[0_0_30px_rgba(0,255,255,0.15)]">
+        <h2 class="text-2xl font-orbitron text-cyan-400 tracking-widest mb-6 border-b border-cyan-800 pb-2">
+            > USER_FEEDBACK_LOOP
+        </h2>
         
+        <div class="bg-gray-900 p-4 border border-gray-700">
+            <div class="commentbox"></div>
+        </div>
+    </div>
+</section>
+
+<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+<script>
+    commentBox('5648901201723392-proj', {
+        className: 'commentbox', 
+        defaultColor: '#00f3ff',
+        backgroundColor: '#050505',
+        textColor: '#e0e0e0',
+        subTextColor: '#888888',
+    });
+</script>
         <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
             <div>
                 <h2 class="text-xl md:text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
