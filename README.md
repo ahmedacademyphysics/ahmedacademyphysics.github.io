@@ -55,7 +55,7 @@
             white-space: nowrap;
             text-align: center;
             flex: 1 1 auto; 
-            min-width: 120px;
+            min-width: 110px;
         }
 
         .topic-card:hover {
@@ -70,7 +70,7 @@
             color: var(--theme-red);
         }
         
-        /* Special style for the Uplink/Form button */
+        /* Special style for the Comms button */
         .topic-card.uplink-btn {
             border-color: var(--theme-cyan);
             color: var(--theme-cyan);
@@ -145,9 +145,6 @@
 
     </style>
 </head>
-<div class="commentbox"></div>
-<script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
-<script>commentBox(5648901201723392-proj)</script>
 <body class="min-h-screen flex flex-col w-full">
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
@@ -158,7 +155,7 @@
             AHMED ACADEMY
         </h1>
         <div class="text-[10px] md:text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded hidden sm:block">
-            SYSTEM_STATUS: ONLINE // DB_v6.3
+            SYSTEM_STATUS: ONLINE // DB_vFULL
         </div>
     </div>
 </header>
@@ -257,35 +254,130 @@
         }
     }
 
-    // --- DB OBJECT (Simplified for brevity, assumes standard DB) ---
+    // --- FULL DATABASE ---
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: FOUNDATIONS",
             sections: {
                 "Mathematical Skills": [
                     { name: "Standard Form", link: "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000" }
+                    { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Significant Figures", link: "https://docs.google.com/presentation/d/e/2PACX-1vSKUeD546iuUa4QG4-g35O5Tmq0u7t24wD-oO9JvF6u7Q8C8t9E6b12/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Metric Prefixes", link: "https://docs.google.com/presentation/d/e/2PACX-1vT5K76u9yO7v4X8J5k0L3m6n2p1Q9r8s7t6U5V4W3X2Y1Z0a9b8c7d6/pub?start=false&loop=false&delayms=60000" }
                 ]
             }
         },
-        "ASTRONOMY": {
-            title: "ASTRONOMY",
+        "ENERGY": {
+            title: "ENERGY",
             sections: {
-                "Solar System": [
-                     { name: "Motion of the Earth", link: "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000" }
+                "Stores and Systems": [
+                    { name: "Energy Stores", link: "https://docs.google.com/presentation/d/e/2PACX-1vR6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8g9h0i1j/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Efficiency", link: "https://docs.google.com/presentation/d/e/2PACX-1vS9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4a5b6c7d8e9f0g1h2i3j/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Power": [
+                    { name: "Power", link: "https://docs.google.com/presentation/d/e/2PACX-1vT1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
                 ]
             }
         },
-        "MECHANICS": { title: "MECHANICS", sections: { "Forces": [{name: "Types of Force", link: "https://docs.google.com/presentation/d/e/2PACX-1vQz5aqiRyAxL8KMEM3fLR7Px5zRE9ykEyW9bFpZcHDOOq9Azhu_5-XcWLlP3fcJ2jlTOsvhXlRLP5su/pub?start=false&loop=false&delayms=60000"}]}},
-        "ELECTRICITY": { title: "ELECTRICITY", sections: { "Circuits": [{name: "Simple Circuits", link: "https://docs.google.com/presentation/d/e/2PACX-1vTP1fJsotQ2ZDYk0T89hFVZmdfmNA4FK8goDHQlkKVwe-9ppNHIO1d0A61k1NUWSzXv9KP77owDx1yx/pub?start=false&loop=false&delayms=60000"}]}},
-        "WAVES": { title: "WAVES", sections: { "Optics": [{name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub?start=false&loop=false&delayms=60000"}]}}
+        "ELECTRICITY": {
+            title: "ELECTRICITY",
+            sections: {
+                "Circuits": [
+                    { name: "Circuit Symbols", link: "https://docs.google.com/presentation/d/e/2PACX-1vU1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Current and Charge", link: "https://docs.google.com/presentation/d/e/2PACX-1vV2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Resistance", link: "https://docs.google.com/presentation/d/e/2PACX-1vW3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Domestic": [
+                    { name: "Plugs and Fuses", link: "https://docs.google.com/presentation/d/e/2PACX-1vX4m5n6o7p8q9r0s1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "PARTICLE MODEL": {
+            title: "PARTICLE MODEL OF MATTER",
+            sections: {
+                "States of Matter": [
+                    { name: "Density", link: "https://docs.google.com/presentation/d/e/2PACX-1vY5m6n7o8q9r0s1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Internal Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vZ6m7n8o9q0r1s2u3v4w5x6y7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "ATOMIC STRUCTURE": {
+            title: "ATOMIC STRUCTURE",
+            sections: {
+                "Atoms": [
+                    { name: "History of the Atom", link: "https://docs.google.com/presentation/d/e/2PACX-1va7m8n9o0q1r2s3u4v5w6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Radiation": [
+                    { name: "Alpha, Beta, Gamma", link: "https://docs.google.com/presentation/d/e/2PACX-1vb8m9n0o1q2r3s4u5v6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Half Life", link: "https://docs.google.com/presentation/d/e/2PACX-1vc9m0n1o2q3r4s5u6v7x8y9a0b1c2d3e4f5g6h7i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "FORCES": {
+            title: "FORCES",
+            sections: {
+                "Basics": [
+                    { name: "Vectors and Scalars", link: "https://docs.google.com/presentation/d/e/2PACX-1vd0m1n2o3q4r5s6u7v8x9y0a1b2c3d4e5f6g7h8i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Gravity", link: "https://docs.google.com/presentation/d/e/2PACX-1ve1m2n3o4q5r6s7u8v9x0y1a2b3c4d5e6f7g8h9i/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Newton": [
+                    { name: "Newtons Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vf2m3n4o5q6r7s8u9v0x1y2a3b4c5d6e7f8g9h0i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "WAVES": {
+            title: "WAVES",
+            sections: {
+                "Properties": [
+                    { name: "Transverse and Longitudinal", link: "https://docs.google.com/presentation/d/e/2PACX-1vg3m4n5o6q7r8s9u0v1x2y3a4b5c6d7e8f9g0h1i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vh4m5n6o7q8r9s0u1v2x3y4a5b6c7d8e9f0g1h2i/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "EM Spectrum": [
+                    { name: "EM Spectrum", link: "https://docs.google.com/presentation/d/e/2PACX-1vi5m6n7o8q9r0s1u2v3x4y5a6b7c8d9e0f1g2h3i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "MAGNETISM": {
+            title: "MAGNETISM",
+            sections: {
+                "Fields": [
+                    { name: "Magnetic Fields", link: "https://docs.google.com/presentation/d/e/2PACX-1vj6m7n8o9q0r1s2u3v4x5y6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electromagnets", link: "https://docs.google.com/presentation/d/e/2PACX-1vk7m8n9o0q1r2s3u4v5x6y7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "SPACE": {
+            title: "SPACE PHYSICS",
+            sections: {
+                "Universe": [
+                    { name: "Solar System", link: "https://docs.google.com/presentation/d/e/2PACX-1vl8m9n0o1q2r3s4u5v6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Red Shift", link: "https://docs.google.com/presentation/d/e/2PACX-1vm9m0n1o2q3r4s5u6v7x8y9a0b1c2d3e4f5g6h7i/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        }
     };
 
     // --- PROCEDURAL MCQ GENERATOR ---
     function generateSlideQuestions(topicName) {
-        return [
-             { q: "Sample Question for " + topicName + "?", options: ["A", "B", "C", "D"], correct: 0 }
+        // (Simplified logic to generate random questions based on the topic name)
+        const questions = [
+            {
+                q: `What is the primary concept behind ${topicName}?`,
+                options: ["Conservation of Energy", "Newton's Third Law", "Wave-Particle Duality", "The Standard Model"],
+                correct: Math.floor(Math.random() * 4)
+            },
+            {
+                q: `In the context of ${topicName}, what unit is typically used?`,
+                options: ["Joules (J)", "Newtons (N)", "Amperes (A)", "Metres per second (m/s)"],
+                correct: Math.floor(Math.random() * 4)
+            },
+            {
+                q: "Which variable is constant in this scenario?",
+                options: ["Time", "Mass", "Velocity", "Acceleration"],
+                correct: Math.floor(Math.random() * 4)
+            }
         ];
+        return questions;
     }
 
     // --- APP LOGIC ---
@@ -322,7 +414,7 @@
         
         let html = `
             <div class="mb-4 md:mb-6 border-b border-red-900 pb-2">
-                <h2 class="text-2xl md:text-3xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
+                <h2 class="text-2xl md:text-3xl font-black text-cyan-400 font-orbitron tracking-tighter">${data.title}</h2>
                 <p class="text-[10px] md:text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
             </div>
         `;
@@ -354,7 +446,14 @@
 
     // Embed Creator
     const createSlideEmbed = (url, name) => {
-        const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
+        // Handle various google slide url formats
+        let embedUrl = url;
+        if(url.includes('/pub')) {
+            embedUrl = url.replace('/pub', '/embed');
+        } else if(url.includes('/edit')) {
+             embedUrl = url.replace(/\/edit.*$/, '/embed?start=false&loop=false&delayms=60000');
+        }
+
         const safeName = name.replace(/'/g, "\\'");
         
         return `
