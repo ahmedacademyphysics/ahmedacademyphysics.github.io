@@ -164,13 +164,23 @@
         </h2>
         
         <div class="bg-gray-900 p-4 border border-gray-700">
-            <div class="commentbox"></div>
+            <div class="commentbox" id="commentbox">Loading encrypted communication channel...</div>
         </div>
     </div>
 </section>
 
 <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        commentBox('5648901201723392-proj', {
+            className: 'commentbox', 
+            defaultColor: '#00f3ff',
+            backgroundColor: '#050505',
+            textColor: '#e0e0e0',
+            subTextColor: '#888888',
+        });
+    });
+</script>
     commentBox('5648901201723392-proj', {
         className: 'commentbox', 
         defaultColor: '#00f3ff',
