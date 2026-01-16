@@ -56,7 +56,7 @@
             border-bottom: 2px solid white;
         }
 
-        /* SIDEBAR & CARDS */
+        /* NAV & CARDS */
         .topic-card, .quiz-btn {
             background: var(--theme-dark);
             border: 1px solid #333;
@@ -65,16 +65,17 @@
             position: relative;
             overflow: hidden;
             z-index: 60;
+            white-space: nowrap;
         }
 
         .topic-card:hover, .quiz-btn:hover {
             border-color: var(--theme-red);
-            transform: scale(1.02);
+            transform: translateY(-2px);
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
         }
 
         .topic-card.active {
-            border-left: 5px solid var(--theme-red);
+            border-bottom: 3px solid var(--theme-red);
             background: #1a1a1a;
             color: var(--theme-red);
         }
@@ -107,7 +108,7 @@
         /* EMBEDS */
         .slide-embed-container {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
             border: 1px solid #444;
@@ -120,54 +121,55 @@
         }
 
         /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: var(--theme-red); }
 
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col">
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<header class="p-4 md:p-6 sticky top-0 z-40">
+<header class="p-4 sticky top-0 z-50 shadow-lg">
     <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
+        <h1 class="text-2xl md:text-3xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
         <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.3
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.4
         </div>
     </div>
 </header>
 
-<div class="container mx-auto flex flex-col md:flex-row gap-8 p-6 z-30 relative">
-    
-    <aside class="w-full md:w-1/3 space-y-4">
-        <h2 class="text-xl font-bold mb-4 border-b border-gray-800 pb-2 font-orbitron text-gray-400">SELECT_MODULE</h2>
-        <div id="sidebar-nav" class="space-y-2">
+<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[72px] z-40 overflow-x-auto">
+    <div class="container mx-auto p-4 flex gap-4 items-center min-w-max">
+        <div id="module-nav-container" class="flex gap-4">
             </div>
         
-        <div class="border-t border-gray-800 my-4 pt-4">
-             <div id="quiz-trigger" class="quiz-btn p-4 rounded-md font-bold text-sm tracking-widest uppercase text-cyan-500 border border-cyan-900">
-                <span class="mr-2">⚠</span> TACTICAL EXAMS
-             </div>
-        </div>
-    </aside>
+        <div class="h-6 w-px bg-gray-700 mx-2"></div>
 
-    <main class="w-full md:w-2/3 min-h-[600px] relative">
+        <div id="quiz-trigger" class="quiz-btn px-6 py-2 rounded-md font-bold text-sm tracking-widest uppercase text-cyan-500 border border-cyan-900 hover:bg-cyan-900/20">
+            <span class="mr-2">⚠</span> TACTICAL EXAMS
+        </div>
+    </div>
+</nav>
+
+<div class="container mx-auto p-6 z-30 relative flex-grow">
+    
+    <main class="w-full min-h-[600px] relative">
         
-        <div id="content-placeholder" class="h-full flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center">
+        <div id="content-placeholder" class="h-96 flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center mt-10">
             <div class="text-5xl mb-4 opacity-20">◢◤</div>
-            <p class="text-gray-500 font-mono">ESTABLISHING UPLINK... SELECT MODULE TO BEGIN.</p>
+            <p class="text-gray-500 font-mono">ESTABLISHING UPLINK... SELECT MODULE FROM TOP BAR.</p>
         </div>
 
-        <div id="topic-content-area" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg">
-        </div>
+        <div id="topic-content-area" class="hidden w-full">
+            </div>
 
-        <div id="quiz-interface" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg h-full relative flex flex-col">
+        <div id="quiz-interface" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg h-full relative flex flex-col mt-4">
             
             <div id="quiz-stage-select" class="text-center flex-1 flex flex-col justify-center">
                 <h2 class="text-3xl font-orbitron text-white mb-8">SELECT CLEARANCE LEVEL</h2>
-                <div class="grid grid-cols-1 gap-4 max-w-md mx-auto w-full">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto w-full">
                     <button onclick="selectStage('KS3')" class="quiz-btn p-6 text-xl font-bold text-cyber-neon-pink">LEVEL 1: KS3</button>
                     <button onclick="selectStage('KS4')" class="quiz-btn p-6 text-xl font-bold text-cyber-electric-blue">LEVEL 2: KS4 (GCSE)</button>
                     <button onclick="selectStage('KS5')" class="quiz-btn p-6 text-xl font-bold text-white">LEVEL 3: KS5 (A-LEVEL)</button>
@@ -177,12 +179,12 @@
             <div id="quiz-topic-select" class="hidden text-center flex-1 flex flex-col justify-center">
                 <h2 class="text-2xl font-orbitron text-white mb-2">TARGET SUBJECT</h2>
                 <p id="selected-stage-display" class="text-xs text-gray-500 mb-8 font-mono"></p>
-                <div id="quiz-topic-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div id="quiz-topic-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
                     </div>
                 <button onclick="resetQuizUI()" class="mt-8 text-xs text-red-500 hover:text-white uppercase font-mono tracking-widest">[ ABORT ]</button>
             </div>
 
-            <div id="quiz-active-area" class="hidden flex-1 flex flex-col">
+            <div id="quiz-active-area" class="hidden flex-1 flex flex-col max-w-4xl mx-auto w-full">
                 <div class="flex justify-between items-end border-b border-gray-800 pb-4 mb-6">
                     <div>
                         <h3 class="text-xs font-mono text-cyan-500 mb-1">LIVE_EXAM_SESSION</h3>
@@ -226,7 +228,7 @@
     </main>
 </div>
 
-<footer class="mt-20 border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30">
+<footer class="mt-auto border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30">
     <p>© 2024 AHMED ACADEMY. ALL RIGHTS RESERVED.</p>
 </footer>
 
@@ -529,12 +531,12 @@
 
     // --- APP LOGIC ---
     
-    // 1. Sidebar Builder
-    const sidebarNav = document.getElementById('sidebar-nav');
+    // 1. Module Nav Builder (Horizontal)
+    const navContainer = document.getElementById('module-nav-container');
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        card.className = 'topic-card p-4 rounded-md font-bold text-sm tracking-widest uppercase border border-gray-800';
-        card.innerHTML = `<span class="opacity-50 mr-2">◢</span> ${key}`;
+        card.className = 'topic-card px-4 py-2 rounded-md font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center';
+        card.innerHTML = `<span class="opacity-50 mr-2 text-xs">◢</span> ${key}`;
         card.setAttribute('data-key', key);
         card.addEventListener('click', () => {
             playClickSound();
@@ -543,7 +545,7 @@
             card.classList.add('active');
             revealContent(key);
         });
-        sidebarNav.appendChild(card);
+        navContainer.appendChild(card);
     });
 
     // 2. Learning Mode (Slides)
@@ -557,18 +559,21 @@
         topicContentArea.classList.remove('hidden');
         
         let html = `
-            <div class="mb-8 border-b border-red-900 pb-6">
-                <h2 class="text-4xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
-                <p class="text-xs font-mono text-gray-500 mt-2 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
+            <div class="mb-6 border-b border-red-900 pb-2">
+                <h2 class="text-3xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
+                <p class="text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
             </div>
         `;
+        
+        // Loop through sections (Submodules)
         for (const [sectionName, items] of Object.entries(data.sections)) {
             html += `
-                <div class="mb-14 border-l-2 border-cyber-electric-blue pl-6">
-                    <h3 class="text-2xl font-bold mb-8 text-white font-orbitron tracking-tight flex items-center">
-                        <span class="text-cyber-electric-blue mr-3 text-sm">▶</span> ${sectionName.toUpperCase()}
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyber-electric-blue pl-3">
+                        ${sectionName.toUpperCase()}
                     </h3>
-                    <div class="space-y-6">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
@@ -580,9 +585,11 @@
     const createSlideEmbed = (url, name) => {
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         return `
-            <div class="mb-10 group">
-                <p class="text-xs text-cyan-500 mb-2 font-orbitron opacity-60 group-hover:opacity-100 transition tracking-widest">// DATA_STREAM: ${name.toUpperCase()} //</p>
-                <div class="slide-embed-container shadow-2xl">
+            <div class="group flex flex-col h-full">
+                <p class="text-[10px] text-cyan-500 mb-1 font-orbitron font-bold tracking-wider truncate" title="${name}">
+                   // ${name.toUpperCase()}
+                </p>
+                <div class="slide-embed-container shadow-xl flex-grow border border-[#333] group-hover:border-red-500 transition">
                     <iframe src="${embedUrl}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
                 </div>
             </div>
@@ -682,7 +689,7 @@
         // Create Buttons
         qData.options.forEach(opt => {
             const btn = document.createElement('div');
-            btn.className = 'quiz-option text-lg font-mono'; // Increased text size
+            btn.className = 'quiz-option text-lg font-mono'; 
             btn.textContent = opt.txt;
             btn.onclick = () => handleAnswer(btn, opt.isCorrect);
             optsContainer.appendChild(btn);
