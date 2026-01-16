@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AHMED ACADEMY | Physics Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
         body::before {
             content: " ";
             display: block;
-            position: fixed;
+            position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 50;
@@ -35,7 +35,7 @@
 
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* HEADER */
+        /* HEADER - FULL WIDTH */
         header {
             background: linear-gradient(90deg, var(--theme-red) 0%, #8b0000 100%);
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -53,9 +53,8 @@
             overflow: hidden;
             z-index: 60;
             white-space: nowrap;
+            flex-grow: 1;
             text-align: center;
-            flex: 1 1 auto; 
-            min-width: 110px;
         }
 
         .topic-card:hover {
@@ -69,18 +68,8 @@
             background: #1a1a1a;
             color: var(--theme-red);
         }
-        
-        /* Special style for the Comms button */
-        .topic-card.uplink-btn {
-            border-color: var(--theme-cyan);
-            color: var(--theme-cyan);
-        }
-        .topic-card.uplink-btn.active {
-            background: rgba(0, 243, 255, 0.1);
-            border-bottom: 3px solid var(--theme-cyan);
-        }
 
-        /* EMBEDS */
+        /* EMBEDS - RESPONSIVE 16:9 */
         .slide-embed-container {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -102,20 +91,6 @@
             background-color: rgba(0, 0, 0, 0.85);
         }
 
-        /* FORM INPUTS */
-        .cyber-input {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            color: #fff;
-            font-family: 'Orbitron', sans-serif;
-            transition: 0.3s;
-        }
-        .cyber-input:focus {
-            outline: none;
-            border-color: var(--theme-cyan);
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
-        }
-        
         /* MCQ ANSWER BUTTONS */
         .mcq-option {
             transition: all 0.2s;
@@ -149,98 +124,59 @@
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<header class="p-4 md:p-6 sticky top-0 z-50 shadow-lg w-full">
-    <div class="max-w-[1800px] mx-auto w-full flex flex-col md:flex-row justify-between items-center px-2 md:px-4">
-        <h1 class="text-xl md:text-3xl lg:text-4xl font-black tracking-tighter font-orbitron text-white text-center md:text-left truncate w-full md:w-auto">
-            AHMED ACADEMY
-        </h1>
-        <div class="text-[10px] md:text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded hidden sm:block">
-            SYSTEM_STATUS: ONLINE // DB_vFULL
+<header class="p-6 sticky top-0 z-50 shadow-lg w-full">
+    <div class="w-full flex flex-col md:flex-row justify-between items-center px-4">
+        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
+        <div class="text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded">
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v6.1
         </div>
     </div>
 </header>
 
-<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[70px] md:top-[88px] z-40 w-full shadow-2xl">
-    <div class="max-w-[1800px] mx-auto w-full p-2 md:p-4">
+<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[88px] z-40 w-full shadow-2xl">
+    <div class="w-full p-4">
         <div id="module-nav-container" class="flex flex-wrap gap-2 justify-center w-full">
-            <div id="uplink-btn" class="topic-card uplink-btn px-2 md:px-4 py-2 md:py-3 rounded-sm font-bold text-xs md:text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center" onclick="showUplink()">
-                <span class="opacity-50 mr-2 text-[10px]">✉</span> COMMS
             </div>
-        </div>
     </div>
 </nav>
 
-<div class="w-full flex-grow relative z-30">
-    <main class="w-full max-w-[1800px] mx-auto px-3 md:px-6 py-6 min-h-[600px]">
+<div class="w-full px-4 md:px-8 py-6 z-30 relative flex-grow">
+    
+    <main class="w-full min-h-[600px] relative">
         
-        <div id="content-placeholder" class="h-[50vh] flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-4 md:p-12 text-center mt-4 md:mt-10 w-full">
-            <div class="text-4xl md:text-6xl mb-4 opacity-20 animate-pulse">◢◤</div>
-            <p class="text-gray-500 font-mono text-sm md:text-lg">ESTABLISHING LINK... SELECT MODULE ABOVE.</p>
+        <div id="content-placeholder" class="h-96 flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center mt-10 w-full">
+            <div class="text-5xl mb-4 opacity-20">◢◤</div>
+            <p class="text-gray-500 font-mono text-lg">ESTABLISHING UPLINK... SELECT MODULE ABOVE.</p>
         </div>
 
         <div id="topic-content-area" class="hidden w-full transition-all duration-500">
             </div>
 
-        <div id="upload-content-area" class="hidden w-full max-w-2xl mx-auto mt-8">
-            <div class="border border-cyan-900 bg-black/80 p-6 md:p-10 shadow-[0_0_30px_rgba(0,243,255,0.1)] relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-r-[40px] border-t-cyan-500/20 border-r-transparent"></div>
-                
-                <h2 class="text-2xl md:text-3xl font-black text-cyan-400 font-orbitron tracking-tighter mb-2">SECURE COMMS</h2>
-                <p class="text-[10px] md:text-xs font-mono text-gray-500 mb-8 uppercase tracking-widest">ESTABLISH DIRECT LINK TO ADMINISTRATOR</p>
-
-                <form action="https://formspree.io/f/mlgggrar" method="POST" class="space-y-6">
-                    
-                    <div class="space-y-2">
-                        <label class="block text-xs font-mono text-cyan-600 tracking-wider uppercase">
-                            USER_ID (EMAIL ADDRESS):
-                        </label>
-                        <input type="email" name="email" required 
-                            class="cyber-input w-full p-3 md:p-4 text-sm rounded-sm"
-                            placeholder="OPERATOR@EXAMPLE.COM">
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="block text-xs font-mono text-cyan-600 tracking-wider uppercase">
-                            TRANSMISSION DATA (MESSAGE):
-                        </label>
-                        <textarea name="message" required rows="5"
-                            class="cyber-input w-full p-3 md:p-4 text-sm rounded-sm resize-none"
-                            placeholder="ENTER ENCRYPTED MESSAGE HERE..."></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-cyan-900/30 hover:bg-cyan-500 hover:text-black text-cyan-400 border border-cyan-500 font-orbitron font-bold py-4 px-6 tracking-[0.2em] transition-all duration-300 mt-4 clip-path-polygon">
-                        SEND TRANSMISSION
-                    </button>
-                    
-                    <p class="text-center text-[10px] text-gray-600 mt-4 font-mono">
-                        ENCRYPTION PROTOCOL: TLS_v1.3 // STATUS: SECURE
-                    </p>
-                </form>
-            </div>
-        </div>
-
     </main>
 </div>
 
-<div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-2 md:p-4">
-    <div class="bg-black border-2 border-cyan-500 w-[98%] md:w-3/4 max-w-5xl h-[90vh] md:max-h-[85vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
-        <div class="bg-cyan-900/40 p-4 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
-            <div class="overflow-hidden">
-                <h2 class="text-lg md:text-2xl font-orbitron text-white tracking-widest truncate" id="modal-title">CLASSIFIED</h2>
+<div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+    <div class="bg-black border-2 border-cyan-500 w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
+        
+        <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
+            <div>
+                <h2 class="text-xl md:text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
                 <div class="h-1 w-20 bg-cyan-500 mt-1"></div>
             </div>
-            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center font-bold text-xl transition ml-2">✕</button>
+            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition">✕</button>
         </div>
-        <div class="p-4 md:p-6 overflow-y-auto flex-grow font-mono text-xs md:text-sm text-gray-300 space-y-6 md:space-y-8" id="modal-content">
-        </div>
-        <div class="p-3 md:p-4 border-t border-gray-800 bg-gray-900 flex justify-end flex-shrink-0">
-             <button onclick="closeQuestions()" class="text-[10px] md:text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-4 md:px-6 py-2 md:py-3 font-bold transition rounded-sm">Close Terminal</button>
+
+        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm md:text-base text-gray-300 space-y-8" id="modal-content">
+            </div>
+
+        <div class="p-4 border-t border-gray-800 bg-gray-900 flex justify-end flex-shrink-0">
+             <button onclick="closeQuestions()" class="text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-6 py-3 font-bold transition rounded-sm">Close Terminal</button>
         </div>
     </div>
 </div>
 
-<footer class="mt-auto border-t border-gray-900 p-6 md:p-8 text-center text-[10px] md:text-xs font-mono text-gray-600 relative z-30 w-full">
-    <p>© 2025 AHMED ACADEMY. SCALABLE VECTOR GRAPHICS.</p>
+<footer class="mt-auto border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30 w-full">
+    <p>© 2025 AHMED ACADEMY. ALL RIGHTS RESERVED.</p>
 </footer>
 
 <script>
@@ -254,104 +190,26 @@
         }
     }
 
-    // --- FULL DATABASE ---
+    // --- FULL SLIDE DATABASE ---
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: FOUNDATIONS",
             sections: {
                 "Mathematical Skills": [
                     { name: "Standard Form", link: "https://docs.google.com/presentation/d/1CIkWTdsdQl3816BpT52jsqClIbAl5UnOO6RoQVVe8-M/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Significant Figures", link: "https://docs.google.com/presentation/d/e/2PACX-1vSKUeD546iuUa4QG4-g35O5Tmq0u7t24wD-oO9JvF6u7Q8C8t9E6b12/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Metric Prefixes", link: "https://docs.google.com/presentation/d/e/2PACX-1vT5K76u9yO7v4X8J5k0L3m6n2p1Q9r8s7t6U5V4W3X2Y1Z0a9b8c7d6/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "ENERGY": {
-            title: "ENERGY",
-            sections: {
-                "Stores and Systems": [
-                    { name: "Energy Stores", link: "https://docs.google.com/presentation/d/e/2PACX-1vR6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8g9h0i1j/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Efficiency", link: "https://docs.google.com/presentation/d/e/2PACX-1vS9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4a5b6c7d8e9f0g1h2i3j/pub?start=false&loop=false&delayms=60000" }
+                    { name: "Significant Figures", link: "https://docs.google.com/presentation/d/1ZM-HSk1KKH8tsz3pxaw6OIwRh5tE_xto_b-IkR7OUws/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Scalars and Vectors", link: "https://docs.google.com/presentation/d/e/2PACX-1vSz6gScmBT2oW7--gsoF8oiPusB-sia_i0-T3LL_tW3RwLcWJVT_M7NHTt9eu0GVwT1PdfOv5PTVeL9/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Length Area Volume Units", link: "https://docs.google.com/presentation/d/e/2PACX-1vR7SrP0eDD33q-HOFgNJJebh_BKGSgQTTkovrDX7ITnQkIO6SK6BuPIwXm-dyrbbCwHZ22jpOsIHmyA/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Rearranging Formula", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ_gjQq9XtINs8g3DU_-jdt6KAN1zmebr6uBRizzRp2wcqCjWDPANCvcHCESzAthBh5uKqrbXYs6HiL/pub?start=false&loop=false&delayms=60000" }
                 ],
-                "Power": [
-                    { name: "Power", link: "https://docs.google.com/presentation/d/e/2PACX-1vT1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "ELECTRICITY": {
-            title: "ELECTRICITY",
-            sections: {
-                "Circuits": [
-                    { name: "Circuit Symbols", link: "https://docs.google.com/presentation/d/e/2PACX-1vU1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Current and Charge", link: "https://docs.google.com/presentation/d/e/2PACX-1vV2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Resistance", link: "https://docs.google.com/presentation/d/e/2PACX-1vW3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
-                ],
-                "Domestic": [
-                    { name: "Plugs and Fuses", link: "https://docs.google.com/presentation/d/e/2PACX-1vX4m5n6o7p8q9r0s1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "PARTICLE MODEL": {
-            title: "PARTICLE MODEL OF MATTER",
-            sections: {
-                "States of Matter": [
-                    { name: "Density", link: "https://docs.google.com/presentation/d/e/2PACX-1vY5m6n7o8q9r0s1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Internal Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vZ6m7n8o9q0r1s2u3v4w5x6y7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "ATOMIC STRUCTURE": {
-            title: "ATOMIC STRUCTURE",
-            sections: {
-                "Atoms": [
-                    { name: "History of the Atom", link: "https://docs.google.com/presentation/d/e/2PACX-1va7m8n9o0q1r2s3u4v5w6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" }
-                ],
-                "Radiation": [
-                    { name: "Alpha, Beta, Gamma", link: "https://docs.google.com/presentation/d/e/2PACX-1vb8m9n0o1q2r3s4u5v6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Half Life", link: "https://docs.google.com/presentation/d/e/2PACX-1vc9m0n1o2q3r4s5u6v7x8y9a0b1c2d3e4f5g6h7i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "FORCES": {
-            title: "FORCES",
-            sections: {
-                "Basics": [
-                    { name: "Vectors and Scalars", link: "https://docs.google.com/presentation/d/e/2PACX-1vd0m1n2o3q4r5s6u7v8x9y0a1b2c3d4e5f6g7h8i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Gravity", link: "https://docs.google.com/presentation/d/e/2PACX-1ve1m2n3o4q5r6s7u8v9x0y1a2b3c4d5e6f7g8h9i/pub?start=false&loop=false&delayms=60000" }
-                ],
-                "Newton": [
-                    { name: "Newtons Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vf2m3n4o5q6r7s8u9v0x1y2a3b4c5d6e7f8g9h0i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "WAVES": {
-            title: "WAVES",
-            sections: {
-                "Properties": [
-                    { name: "Transverse and Longitudinal", link: "https://docs.google.com/presentation/d/e/2PACX-1vg3m4n5o6q7r8s9u0v1x2y3a4b5c6d7e8f9g0h1i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vh4m5n6o7q8r9s0u1v2x3y4a5b6c7d8e9f0g1h2i/pub?start=false&loop=false&delayms=60000" }
-                ],
-                "EM Spectrum": [
-                    { name: "EM Spectrum", link: "https://docs.google.com/presentation/d/e/2PACX-1vi5m6n7o8q9r0s1u2v3x4y5a6b7c8d9e0f1g2h3i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "MAGNETISM": {
-            title: "MAGNETISM",
-            sections: {
-                "Fields": [
-                    { name: "Magnetic Fields", link: "https://docs.google.com/presentation/d/e/2PACX-1vj6m7n8o9q0r1s2u3v4x5y6a7b8c9d0e1f2g3h4i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Electromagnets", link: "https://docs.google.com/presentation/d/e/2PACX-1vk7m8n9o0q1r2s3u4v5x6y7a8b9c0d1e2f3g4h5i/pub?start=false&loop=false&delayms=60000" }
-                ]
-            }
-        },
-        "SPACE": {
-            title: "SPACE PHYSICS (OLD)",
-            sections: {
-                "Universe": [
-                    { name: "Solar System", link: "https://docs.google.com/presentation/d/e/2PACX-1vl8m9n0o1q2r3s4u5v6x7y8a9b0c1d2e3f4g5h6i/pub?start=false&loop=false&delayms=60000" },
-                    { name: "Red Shift", link: "https://docs.google.com/presentation/d/e/2PACX-1vm9m0n1o2q3r4s5u6v7x8y9a0b1c2d3e4f5g6h7i/pub?start=false&loop=false&delayms=60000" }
+                "Measurement": [
+                    { name: "S.I. Units", link: "https://docs.google.com/presentation/d/1-pR_mVK2_rw_dlI27L_s9v88MEmpxo-mlYjK2rpkHPo/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Standard Prefixes", link: "https://docs.google.com/presentation/d/e/2PACX-1vRkoibttaMmig_SnZkDwa_AAlyzUjjnEEda9HetLdGsKlh6lRZSn2dQh-uXFOX4XMJAZ8iqKLBpIqsq/pub?start=false&loop=false&delayms=3000" },
+                    { name: "Scientific Definitions", link: "https://docs.google.com/presentation/d/e/2PACX-1vSgfdc0CiQsnNYtoR2nUhSLLVqg7tUcmHagACs7sAoHDAUPIWIGXsb3Bv2hZ90Y6mg3gubzW8BypRDV/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Types of Variables", link: "https://docs.google.com/presentation/d/e/2PACX-1vSXDofK77vKSGHDvespDThKwPi6HohT5lOo7ptVQV-boTLWcfQIAR-YOhcapjZLdg4sla5r6E3pc2KZ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Measuring Equipment", link: "https://docs.google.com/presentation/d/e/2PACX-1vRMovpKlDzIvFeM34828EqAipKLwtiqQgSOnWwUcxt8B0Wj4Ll4fzFTCpm_TQ96mdB55jPJNTNImCVe/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Types of Errors", link: "https://docs.google.com/presentation/d/e/2PACX-1vTRIQ7NuLYf4nX3fvFrLHEgPEwWxRBs9iq3xmJki5pLyVz2XiY2OQra9pJFfFGhC1t0OQRMvyIVEXgb/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Presenting Data", link: "https://docs.google.com/presentation/d/e/2PACX-1vR2jRjlrThRvTFiPM0TMED5uSCdsfeUAJqIGwiVRaaKFfniZxTxawEpDnfBIl4JbKyTcAvcdbGFWNix/pub?start=false&loop=false&delayms=60000" }
                 ]
             }
         },
@@ -359,6 +217,9 @@
             title: "ASTRONOMY",
             sections: {
                 "Solar System": [
+                    { name: "Motion of the Earth", link: "https://docs.google.com/presentation/d/e/2PACX-1vTjPMzzM2E32bqsg9KCfqe8ZMAqSPqOOUgGQXN1UsXOg1ehNeCM7Qw9EVTfkEHv7rcj_9c8EGPbcwE2/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Motion of the Moon", link: "https://docs.google.com/presentation/d/e/2PACX-1vTIhfvHuDvgeFNIYR9td7n4KR6hC2DEa17i7F8mM6qYWEVELFvyWuGNfM4wBikr_-3_c9v5cSMzeNz6/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Moons and Satellites", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ2LD3TBgER2C3OcRfcO2PkWoc0wUuJkmPOpbjtnOkIiQFlYKRqaiBzAa10ms_D8xoETcDXIilrCV0U/pub?start=false&loop=false&delayms=60000" },
                     { name: "Bodies of the Solar System", link: "https://docs.google.com/presentation/d/e/2PACX-1vT1iTE8RopIZrICoeFA03PBi08vnQSMEH0CoU7wxpHMqH1WQEP1wkF9WhN8qVI7hiHdXzau3n881zVX/pub?start=false&loop=false&delayms=60000" },
                     { name: "Orbital Speed", link: "https://docs.google.com/presentation/d/e/2PACX-1vSdtABKLagXiwIMzHi7PhQhSrLE5MKtjGuLau-FbzkN3ErZAos71hRzsiJlHrjYrP8uNovTQ2hDgZ9e/pub?start=false&loop=false&delayms=60000" }
                 ],
@@ -371,41 +232,364 @@
                     { name: "Star Colour", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ9d6pEG4OM9UqJdYZeQQeaHgc-x2acf3iNThsGV64w3LTs8LKhLVMHSiUWz2FqeOyA7-551bpNhDSO/pub?start=false&loop=false&delayms=60000" }
                 ]
             }
+        },
+        "THERMODYNAMICS": {
+            title: "THERMODYNAMICS",
+            sections: {
+                "Thermal Physics": [
+                    { name: "Thermal Expansion", link: "https://docs.google.com/presentation/d/e/2PACX-1vSZJkpxddQzi2kpunQ-0pWMUb0dXTvX2gqqLPUb8tFrIPaAowQUXndmbYKh2BxBp53TjAVzK-XX4nOU/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Heat Capacity", link: "https://docs.google.com/presentation/d/e/2PACX-1vTFHkoUah8lomZ-gKAJIr88i_MgUTir1mReh1MPylebyvjScUubfJQ-qpUC__h4ecgGrtHP8e5FC8lW/pub?start=false&loop=false&delayms=60000" },
+                    { name: "States of Matter", link: "https://docs.google.com/presentation/d/e/2PACX-1vS5hYuX5n3GXleoUAMmRF-9oRcJkY-tHyAMgp_hbDZkX0K7zosj8lsM7kAs7cKOaoULVb9KqMDFbKHT/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Changes of State", link: "https://docs.google.com/presentation/d/e/2PACX-1vReizD-UyPuELua0Tk90dCDl6tdST94ce0jo69op0Ep6hNV3pHm1jcuL2lgN7TzpiM3AFhQTjwsv4oq/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Latent Heat", link: "https://docs.google.com/presentation/d/e/2PACX-1vTEopFfPWhBVWduEJ5H3ACrpmbYsjpy4FnRnba34naDYEPSPuyVvX2DgsbLd3CEK3BtU6pEp6AlEtL6/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Evaporation", link: "https://docs.google.com/presentation/d/e/2PACX-1vTToyZERcQBNSwJ0xUUbq92war6FqhLThK1kwpxt53s9GISJDQY52lXTZxVvRQg4QRK5U2jNi65Cktz/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Heat": [
+                    { name: "Temperature and Heat", link: "https://docs.google.com/presentation/d/e/2PACX-1vSDq7JMIQYjQ-lrSECQHW23k3bsSc3gAuR3BdkJED6jytMiBiQ2t9MHQiLlFVhC-__80mZtgwNMF2Bk/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Measuring Temperature", link: "https://docs.google.com/presentation/d/e/2PACX-1vSWkhH9TB58BlJXrHoLGrcufSw635ygv1cmoEWaGTyvPi9I1PryIxGFwQZZYVeguubk6e6oimDT4Jt2/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Methods of Heat Transfer", link: "https://docs.google.com/presentation/d/e/2PACX-1vTkMu38Q2HgR81L_vJYjqg4aooyVVJjdvii4HkF5Ec9fSQsRy1B1dB1QhC0ftBmSO40ufH_HzzcrLnc/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Rate of Heat Transfer", link: "https://docs.google.com/presentation/d/e/2PACX-1vQSAlnAykVmoau8c0HxhiYgkt8GrXnioQitvS5F1TJ3nEgiaGusFmWpfc9b8QPBp0vOl6zyT4BGgLha/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Using Heat Transfer", link: "https://docs.google.com/presentation/d/e/2PACX-1vTpdjs29B3KASlZ0w-boojw-Rv0bgvQzPDs3g_wEh_c9M3enwg3sp_GasdcUUamEQkxmqjyeQudKY9Y/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Heat Transfer in Houses", link: "https://docs.google.com/presentation/d/e/2PACX-1vSXRBSOa8CtywXqUQpWML46XYnCEyAymLYqE8vDNXppVrO2zy2BZYkhAhJP-PJetROPqSvxQbbIgB5S/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Payback Time – Heat Losses", link: "https://docs.google.com/presentation/d/e/2PACX-1vR0zl5Gwn6lJWn8Z98XN5lcDD3NBxojJw8KJVZcUOYizsIjm3XrkcH9VgMsgdPxnkzAH18Ml5WtHC9b/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Energy": [
+                    { name: "Energy Stores and Transfers", link: "https://docs.google.com/presentation/d/e/2PACX-1vTZpxRf5kwZ9T9nr9di80ntbfuAKp-4-YE6em9qJM_5wzEzFQlXa25HxPSW1QHQxvmpG_7AaY_xzvwg/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Energy Changes", link: "https://docs.google.com/presentation/d/e/2PACX-1vSgxiY9CwUAWe7PkId7Ab-2ZpKMmxcWpDDUD3zv-mCZvp8EVl3-fAixX1po6HCSoh3oGOQTdIutuvzR/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Efficiency", link: "https://docs.google.com/presentation/d/1Dw7RIZ3Mxb4KM6-GfHmepXPJ-fEvGomb-rdyvXtRpts/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Sankey Diagrams", link: "https://docs.google.com/presentation/d/e/2PACX-1vTWcIXFYYZPbIT2bf6jQ-csLhxTJdKyRRW4Y9vbC655STwXj54mGPStMEPs25IeBtXbBLKZ81gWU--d/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Non Renewable Energy Resources", link: "https://docs.google.com/presentation/d/e/2PACX-1vS2UTMA1Vj9_BCLCnzJ-UBE89yhn5fxNQAmSRsaXYrS2dLBS9NrMdp4W4kvhkdQrKh5E3jViUNt-BvQ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Renewable Energy Resources", link: "https://docs.google.com/presentation/d/e/2PACX-1vRgJNflBJMeuHANhpm7O_IEQhCSEB_iebDxENQZAlRl7n-6w1eYM4pGe48egZ5IDygyXgCOO4bk1Up_/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Energy Payback Times", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ6O9bHG2UEZPrQVfFNy1UvDShAB3bZhIcwA9Lj4IZ7bbg0iaIrkE-ROuGtuy6CVQzDhwn1HfkQ519_/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Gases": [
+                    { name: "Brownian Motion", link: "https://docs.google.com/presentation/d/e/2PACX-1vStASnvFC7bQIM00O1hLujq6eiUVPYdCTMzsNA92v2TdaCx3ojZXl6Ezgtrgle0eKGyt8cusQEis6Jd/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Boyles’ Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vTfiJpFrkAshSV2vBpdMZJZf6VeexPJwdXDoqKAAk_ifVlONdzVcFpIVWZadgugD9zkREUy_KTbvsUE/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Charles’ Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vS0OYAcRWsuumAOAP0sNcRWPJHwN2t3xT8fVbcSLx1uI7sAJ-oEndtVHxDC1OpGYYmoEKNkH8PCPBRr/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Pressure Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vTuyNQlbsw1M_hKthaDF5bsRvZuCVTIj-a-39UUgu_ajxLfR2FQFDdb6MBjjX47Z6mRkUipxqiAKljm/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Gas Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vQDYhGUPdkb3JQQDxz7Af8aeUjJq4fDioG4m5pyVNs_r86piqz3pRwSUk3UKCzxMic0PQvqllbdIyGa/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "MECHANICS": {
+            title: "MECHANICS",
+            sections: {
+                "Forces": [
+                    { name: "Types of Force", link: "https://docs.google.com/presentation/d/e/2PACX-1vQz5aqiRyAxL8KMEM3fLR7Px5zRE9ykEyW9bFpZcHDOOq9Azhu_5-XcWLlP3fcJ2jlTOsvhXlRLP5su/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Free Body Diagrams", link: "https://docs.google.com/presentation/d/e/2PACX-1vRa2wQowQg4NaJw3scC6nxrmIppW5_XymVNrgb1wucNxfW_vkDENDXb9t1deTNTxi-LsZDyvF2HkGFh/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Resultant Force", link: "https://docs.google.com/presentation/d/e/2PACX-1vSIIkCsReMlMhtwTY7haev1EgLSY6PqaRfbCNunTV3Dn4Tv77ENtBH2LosNyAbq2rsnEsutq3gA042O/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Upthrust", link: "https://docs.google.com/presentation/d/e/2PACX-1vQStg3soreonpQShnajochozSNtcINxpkJi4fxuEXmsEMzSt94bPq7KVPOjEfvwFGIj9nmllqgaVPai/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Pressure": [
+                    { name: "Pressure in Solids", link: "https://docs.google.com/presentation/d/e/2PACX-1vQjuGyuJndVcB2YDlsK9sYkjAynO4pds5PZ10-IorVmB1wXUuEtM0TQ0X43gLPUzHD7yco7lU9xrJjR/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Pressure in Liquids", link: "https://docs.google.com/presentation/d/e/2PACX-1vTJv-eANzAH09VsJ5rnw19imkh219Si-0th1aJM1TNw_NOG_ELP2cO-cokO8GXklrCm4Qksjv4PCccQ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Hydraulics", link: "https://docs.google.com/presentation/d/e/2PACX-1vTcMuG-D1Fv7vaYDOFwKK9Ba5ymceN-cJsiSr8XDTFGePvz2V8r_f_01AXHBmA_8LkC1s7hxgjauadb/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Atmospheric Pressure", link: "https://docs.google.com/presentation/d/e/2PACX-1vTWJzqdQil7DpwGzEUh7HUS0Bcd-UBJ6efkVvwcT2YA-UF4Po61bRQipBFdMD-ceG6ovVVu5MPLsSQe/pub?start=false&loop=false&delayms=60000" },
+                    { name: "High Pressure Applications", link: "https://docs.google.com/presentation/d/e/2PACX-1vR_AW5EBLiLqA9l1XcgeN8yzgG8h1jKk_GdBamCSWERnMS-JcqAYB5eQ0snX2TwZ9qN7726jUh-phVe/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Dynamics": [
+                    { name: "Speed and Velocity", link: "https://docs.google.com/presentation/d/e/2PACX-1vT3h_VrofUlSpEsqBjUlueFhOFI5p7Q7hPsRYSWkDFRpWu-37wp-lyrZPvtujX_Yp_5rXXLX4IBbV-r/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Acceleration", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ9vDC9ksNDLvjLYlRo8ZqVBMrQT8Dqby5fYn6xHk8tuCWZrPHx9gsCBR77yfrj4OCE0BKI6ganvPId/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Distance-Time Graphs", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ1PZ8-LnKs02PiBi70F-uz5iiixJb0xormiQk6qJBDXLsPN59zNkOrEPXW4yhOdVM_wrQXfUco30uY/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Velocity-Time Graphs", link: "https://docs.google.com/presentation/d/e/2PACX-1vQnVYFtq6mv0xc3Sj_Sq9lYmKagA3OQ9t2PaDbga90mN8zsvTw1NaJDyhXoRtimanEck_AZNE2Uuj7t/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Force and Motion": [
+                    { name: "Newton's First Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vTOz3Zx9MQrlE_06bWrsF7w3bToZH8NvyC51gefKRYvClWWOFiqqjS0SCIx3GMutLVunW0Rsg3nWsdY/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Newton's Second Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vSjWyISZxuhjzPX8l9Ta58ilj44f6DHrOFxUjj_yJTInBDuPUzNSNZiEU2q0FHkft3a86-uXfNk6pyQ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Newton's Third Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vROAh15onHZAhRg4Hx2BxhKZRxKFBua78bBCqEAV8PTFQ4iYqVYznPc28P3E1Qm5_pZhTrt6H35jKz9/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Circular Motion", link: "https://docs.google.com/presentation/d/e/2PACX-1vQOi-jWgRLU-4Ec_NQVOXR7SlJnwoLCR_9jeaWlJTs3Rf03tuLv0tn6uC9s9UTmlC3dXC9P2FAgMYn0/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Mass, Weight and Inertia", link: "https://docs.google.com/presentation/d/e/2PACX-1vStNV6x1lf2P0zKQ5sU-3z92Vg5Ok-u4y4JhTd1O1__hONdCi_xQvhc6M9H_eMU_gSmY-gZ2kViAoRL/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Freefall and Terminal Velocity", link: "https://docs.google.com/presentation/d/e/2PACX-1vRTablNCgElvGx5XHvvpSg2nBjNWWfq53XUa_9xL9ZlIkKSBvp9KLI5mNur8CECL4jFC_3rfk-xfsYS/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Forces on the Road", link: "https://docs.google.com/presentation/d/e/2PACX-1vT33JPfqpnDkr5Up0F34n3ccW_5ybtIFpEfvILsP7gz4OQlJDmMoiDu_NT94_Ydqq5kKIj0dMrPGAsF/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Materials": [
+                    { name: "Density", link: "https://docs.google.com/presentation/d/e/2PACX-1vQlolHM6Nf6fXFtXcrZo2RGuwgFHYO25ovahe49tfaXy2BFO7ZQ-pzpnAQgs0KfBN-y_Alt4EBWY7NU/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Stretching Materials", link: "https://docs.google.com/presentation/d/e/2PACX-1vQF08SbkJl4jODVgtv2BaWq165I-xuoPBBQ6ujNGBeSvfrvnVtmwo6vjWoEdcYSIvEtXav6ETOvXNkN/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Hooke’s Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vTMj06oGvE5eSBpNgeD5HtjSxeZgRVWhysKRg3ETevEU3pX4pZcB7UcWMBNw4sME6ZI37UCx4n285CB/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Elastic Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vSfeAP7R_w34hbAUmNxlfofBbUNQF2kwr17ZX8gkDqm520rJb668OpWLi8XMdOcUTmBIhO2HypkE7ej/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Mechanical Energy": [
+                    { name: "Work Done", link: "https://docs.google.com/presentation/d/e/2PACX-1vRs1i7O87KQom0Z7s6kJ1XUUFaZv6yAgnNrQwYHKwVco1Co31NQaCo4CwI26cYydfKF3yirNKXoKjMG/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Kinetic Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vSSrjHY6Rlc64XVv1QcXe0edd-K0VPYflDyPXjlZVd_0j-aPnmk9Nyo-nGDNpj383blXAiQQW2buZl_/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Gravitational Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vQCZwQs6FBS_qoM6lzNrge3R5eiHn1fs2Sx0vc1sLLsaNe6tTMeKKkl1ttyWcmAUJEYpCM7rlHnAsEb/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Elastic Potential Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vSiMTegRO4yDWaYUG7sXf0G8M-priLiFRUrOTvg3MWtaJaOUk60HTQ0PQwcgSXrMPUPmrDRT2bVG4CN/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Mechanical Power", link: "https://docs.google.com/presentation/d/e/2PACX-1vTu8Ti16emdU5mvU_ZqNrL523z-svzWFuGZuFeIvemXBgKuudCiL1FUxNs0FRY8NYU7BJ8iB9q_2eSE/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Momentum": [
+                    { name: "Calculating Momentum", link: "https://docs.google.com/presentation/d/1zT2PAnRmf-VZxdPJoAb5cTKqqFJEuR4YTVkkOhf988I/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Conservation of Momentum", link: "https://docs.google.com/presentation/d/e/2PACX-1vS4X2HKOE4Jw6dnqafF8DwOqPiWc_lHMAIY0eBj3ZnrWZBxtX3ZmTcitgcS91sFjlm4pXXIFJJeUKT7/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Elastic Collisions", link: "https://docs.google.com/presentation/d/e/2PACX-1vTpTuJoAcYNgb9PMc1KdDlIKdbw65xb9DtV7tg5xwG7HQMYYFJPr00cCMA-g514XCJio-mlYb6BrivA/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Force and Momentum", link: "https://docs.google.com/presentation/d/e/2PACX-1vTDaBj20AskQhYVsC9nItlS7s7XBBE-FUkuKpk2DEn_712SKdHmxXHJSKkXvKKSEPJ0dp7h4LRowGz3/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Force-Time Graphs", link: "https://docs.google.com/presentation/d/e/2PACX-1vQVv7sDNRFTPdIoc4IbtQrURtftFE4E9OpSznupQOuMDp02uSOU1r5m83V-5k_o9qG8ujkseF4cc7v5/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Momentum and Cars", link: "https://docs.google.com/presentation/d/e/2PACX-1vQVv7sDNRFTPdIoc4IbtQrURtftFE4E9OpSznupQOuMDp02uSOU1r5m83V-5k_o9qG8ujkseF4cc7v5/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Turning Forces": [
+                    { name: "Centre of Mass and Stability", link: "https://docs.google.com/presentation/d/e/2PACX-1vSi16TjAHFUeeOIb8vtJ-zuDPSy6_gzC5dwGya-ApEiFHp36PFIKgvUfHl-J9w6oqVVvMn3mLpsCsHw/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Levers", link: "https://docs.google.com/presentation/d/e/2PACX-1vS42M-9Hm1uNjD9rTkIulMPcvuBn7Qr7FnRE2woB3DYJSwjkf0wIIa7gLXEjLbWEfjFIMZjDfb9HhhF/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Moments", link: "https://docs.google.com/presentation/d/e/2PACX-1vQnlYJyu3_lV_7n3D6yRqsh1J3xJXUO8JFNnSfb7xJb1JqDuecLttibLEtTN-cnwmhFx3YS1twwmOS4/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Moments in Equilibrium", link: "https://docs.google.com/presentation/d/e/2PACX-1vQfVz2F9_CfvGM9vZZp7r59Lo98ncuyWnNBzxdyCxJ3d9uIpOZinbRAUT08FhwK_oLHTmZn10l2UZBL/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Moments and Gears", link: "https://docs.google.com/presentation/d/e/2PACX-1vRkXMurpcTcvuO5o3geuikpz2hJbsViJYuKtGmR5uWj_T-fQHq7ETvggCF8wjydJbJJD9MBR6wT_bBK/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "ELECTRICITY": {
+            title: "ELECTRICITY",
+            sections: {
+                "Charges": [
+                    { name: "Electric Fields", link: "https://docs.google.com/presentation/d/e/2PACX-1vQkqnTt3zpJ8-lRy_9dX5I_Zd89jUsufYTgQA-6spTlIMYoJewW-2HboYbCvoqB52BkE3U7_uXpTrHi/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Static Electricity", link: "https://docs.google.com/presentation/d/e/2PACX-1vRc6H9e0BpeH3KkznXustK5Ok6HcMAoTsKvfu_Q66UiIqV9NbrRc_hGEGtGz43JKTm6XRTzrVWXz-qT/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Gold Leaf Electroscope", link: "https://docs.google.com/presentation/d/e/2PACX-1vSlrXfczfSZhmiz8gzNYInB41ukkA460EzOZoI3nrnw1EWI6hBJx1zml7DMb9WY1A0J8JtadFketPO_/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Moving Charges", link: "https://docs.google.com/presentation/d/e/2PACX-1vSjSN9X2lUm0RzABXwfNIo6POnhTTNW-REajS6757GloczARKCUiL_l0ZSdQhPWx0C-eI_zkJ1bRDfp/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Van der Graaf Generator", link: "https://docs.google.com/presentation/d/11NVvyrXCa0CU2WXu6juKKa_Ovv2OBVU9fvIcZvhfY_Y/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Uses of Static Electricity", link: "https://docs.google.com/presentation/d/1Tw5Zi_tRQV3SSDbYVFTDOXFd5lohwDZiDtoC3FdaQkw/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Dangers of Static Electricity", link: "https://docs.google.com/presentation/d/e/2PACX-1vSJkvftDMBtkDQyF73V5TPfFwH7GJVrdvfZqizexZApBTmn5yH2qHTjWq5Vd9QBM9b6ilMO5d8NDSMv/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Circuits": [
+                    { name: "Simple Circuits", link: "https://docs.google.com/presentation/d/e/2PACX-1vTP1fJsotQ2ZDYk0T89hFVZmdfmNA4FK8goDHQlkKVwe-9ppNHIO1d0A61k1NUWSzXv9KP77owDx1yx/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electrons Atoms and Energy", link: "https://docs.google.com/presentation/d/e/2PACX-1vTq0_s_vi5XkFwSzuwh5WneEHhnBUuvgXFfZWNs5s5GohqXLGbkA_vGjZ2_narCkvjxpTAyNO8aPZT8/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Voltage and Current", link: "https://docs.google.com/presentation/d/e/2PACX-1vTRLw3qXa1w5S4P6gMSlrzEzF5NCeeXmj0ugqM5OfOYkiAayl-WlIfpGTIuO3YswrDMT9d6y0eWazj6/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Resistance", link: "https://docs.google.com/presentation/d/e/2PACX-1vT87vTAI8TyhCdiz7ee69CcraJQKZuOzEGyAdqkrjBOXaUdYHZjQiUUmRi4DMRl0rj4rDU0JspqDkAW/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Kirchhoff's Laws", link: "https://docs.google.com/presentation/d/e/2PACX-1vSIdIvb5dT9dOhMDWLLZLOFfFii3Fi-EML5O7JGcHUP6zTsd_WztQarilgILpVsUcwAIZPfiZiYoyXE/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Investigating Circuit Rules", link: "https://docs.google.com/presentation/d/e/2PACX-1vQSEhqFp_8O66bYR5OrHhMVbuTO56i4zbkDxbdeuYanOkbJfAzUsKx5w_dPJSyqgCEvVwgjQqmyFnhK/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Advanced Circuits", link: "https://docs.google.com/presentation/d/e/2PACX-1vRK9nGHap2JpLQQe4PLj1FROtYp7ff4r8qgduljM1jgUChF-8Pb-7aNGknkliQF3maGBCelVCb3cl5W/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Electrical Components": [
+                    { name: "Circuit Symbols", link: "https://docs.google.com/presentation/d/e/2PACX-1vQse0bvJFxlmYuiWLVYGaShquAi0h8wlxWYvluEhCCreLrxofNiHD9_jORG33xaOCGvi54RTkKnUr8x/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Resistive Devices", link: "https://docs.google.com/presentation/d/e/2PACX-1vSLN0dzoVbASobQUhIxYKN2lN94wkDMguobprYQ2LjYgS5UNLneQP_kf7e1OxnRVKPLOl_QtCTsSvUD/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Potential Divider", link: "https://docs.google.com/presentation/d/e/2PACX-1vSE3UxqysKi05eXkWxEANBH9_LL0qYaOmJct2Ib_mFpeUkUAOTjs4wWMhzvvCTJ6QwpuKyJr0-VGo31/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Relay Switch", link: "https://docs.google.com/presentation/d/e/2PACX-1vS-vKNtMYCNv5yX9ZSiII_RUQomxsaPRihQ0z1c81z0c0Opb7kUIis2BNBvC7EferRmHMoz0TiInLIw/pub?start=false&loop=false&delayms=60000" },
+                    { name: "I-V Graphs", link: "https://docs.google.com/presentation/d/e/2PACX-1vQdCVq8y46dKmikEHRLqClQangsKJ7Ce4l--NP0GhKKcMZJdioJyteedciE5At161hlAxFP62MqLkKG/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Domestic Electricity": [
+                    { name: "National Grid", link: "https://docs.google.com/presentation/d/e/2PACX-1vRXY0ImdYu2Y4ZvAd98OODmcV9I4FhKng2tx2_EI2-i_OQRgqTHUEZa3qC1TQyeLnqCkJoCasxIbAX2/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Mains Electricity", link: "https://docs.google.com/presentation/d/e/2PACX-1vQpf1vE6PTcIpasTwB8OKwTK-uVlrgPKgTIVozie6OOW42_AUJDOyXxPPaXx11dYFOVkZdXeal1j_3d/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Measuring Alternating Current", link: "https://docs.google.com/presentation/d/e/2PACX-1vRdHt7_jZwTiyTX8XksOvK26vPcwcT8aWtWibEZkapiTfaewIuRBSNPOcKfMC5Dl1Actlq8FmuEUvTF/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Cables and Plugs", link: "https://docs.google.com/presentation/d/e/2PACX-1vRmGNIVa6_v1nUGtnzCUwMMxWH-aH4oyGCF8o68koAfnj1kySrLDVxO3X0jsvkASilEY3PE2KTOm_AI/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electrical Safety", link: "https://docs.google.com/presentation/d/e/2PACX-1vT-_o733zXrGAfitwAaozMvj2UFYi3ctMImYW4qzUDrctgyqkZdkmoDziLvlFTVzu3gjuA3uKvsweR8/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electrical Power", link: "https://docs.google.com/presentation/d/e/2PACX-1vQRNTZw4sWwUMy_k06hfAW2JfD5OP3lrf7UU3zarIf9DdjqFc4XnkK13kPM2JzWn2Nflw0cBn4Mcx0R/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Cost of Electricity", link: "https://docs.google.com/presentation/d/e/2PACX-1vQz9nXHX-HtoABkv8t_oS3unm9_WTFeHkFjhYcNAOH0Lx7WuTx67GzP8MKtJLQ9oXc9aUGHYohwAQjd/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Electronics": [
+                    { name: "Analogue and Digital", link: "https://docs.google.com/presentation/d/e/2PACX-1vQePKCPs1Jd7eg3ChfJYme-By7R6LlP23u4_87WGaXCuLmiKC4v5NoWkrIfDQrS5-RLKBdJX9gtqlLl/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Logic Circuits", link: "https://docs.google.com/presentation/d/e/2PACX-1vT-A6WMwfaJHNaDVOzZFmwNFqJgbTgO2Z3rpjy1KFAddclZdTu41JtYboKHUTcqW4XvI1h9HcWWkhp4/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "MAGNETIC EFFECTS": {
+            title: "MAGNETIC EFFECTS",
+            sections: {
+                "Magnetism & Electromagnetism": [
+                    { name: "Magnetism", link: "https://docs.google.com/presentation/d/e/2PACX-1vS2HLhqOEVv26uHOtiwShbPHd1gvgCZBz4PCVnCDNEDSZI6-2R74AeUnelevqz_4TYTtPX-6p4l2wYQ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electromagnetism", link: "https://docs.google.com/presentation/d/e/2PACX-1vQe4Mb8Uqj9rygNt6NM2hWdtUjr9gXkCTrSBJN1gOuBN6ANx_5exkkOt0QYdXs07gcMr2XjQWTQcKba/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Using Electromagnets", link: "https://docs.google.com/presentation/d/e/2PACX-1vQk747rr8cAJTrBwAbs19I2H5KkAj31Sx8d6WOhAeAQF8B-Soj7-vEtnjESYNzDwnEJtZBp4knA2BFr/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Motor Effect", link: "https://docs.google.com/presentation/d/e/2PACX-1vTM7opCnC5VzTss_zAjxQ1_983Y892oqcrbouE6lAqvC0oZIpGCIzCKQ4x43y39iKGEDwRYUynyrhyQ/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electric Motor", link: "https://docs.google.com/presentation/d/e/2PACX-1vTfDn1_Ck6zHhVbqyyBrXi_BDxYrcfCBAtLe287v8k8TZ3OLT1Yxb4hnUdyxy1nrkx4Q7L_rMAMHm_7/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Electromagnetic Induction", link: "https://docs.google.com/presentation/d/e/2PACX-1vTaiZGoob7y4Q-FP1W2fId2pIIk-nJRf85ZBFQE__vM_mGwzZ7ggc9R4bEMrxDsmbox9QGFZBQZnZOo/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Transformers", link: "https://docs.google.com/presentation/d/e/2PACX-1vQHVJZmE-NLzc5PYtlTYuCROpvIqxk2taJzEI5aCPVb-IjSV2r8Di5lPhBaL5UwUMNyD0ucOPmJFpbL/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "WAVES": {
+            title: "WAVES & OPTICS",
+            sections: {
+                "Describing Waves": [
+                    { name: "Wave Types", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ5xgnlAKEl0gvDeM9VsHRbtueQF1TeiMpjxOGMp52XH9hb6JqLy-YjA0p-APY7eaobfmk0h2B7hFUp/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Wave Properties", link: "https://docs.google.com/presentation/d/e/2PACX-1vSrroqzZ1C4VbjGqp6FEY3dyyIncRIECH8PPD0bmO5uRPcTH7hPfickvABufvRzZ3KGTiLXdAxVqB4_/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Wave Characteristics", link: "https://docs.google.com/presentation/d/e/2PACX-1vR11C7Pas3AZxEE-3Ly34Wu2XRm3sChTNxIMn8Vj1fBrwn2-Kvn3AsnU0CwwhuSXWQ4x7Je6soeWyMD/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Wave Speed", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9wNqea3NJkafxE9XG9EJnbWlB274Q5R5giJGE65PqsE2L-gRXBv0X-jfUqrFqBIAdrUtsWI5iDhyk/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Water Waves", link: "https://docs.google.com/presentation/d/e/2PACX-1vTm8X3tql2eFbiGEHnXQOcqmRTkUStQEZYFfmCHR5gy7uM2MsDz7G52x51wnTiFTpr-pOmqC3IqXjwW/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Electromagnetic Waves": [
+                    { name: "EM Spectrum", link: "https://docs.google.com/presentation/d/e/2PACX-1vRXCAAJ5QWfZ2WKQfsAb73kMGczug4sJ2ODBI3V0PcV5UaODpmNxjo5I-M1RDlMCgN_MPOnZECCtQeP/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Uses of EM Waves", link: "https://docs.google.com/presentation/d/e/2PACX-1vTk11s0aVmbxM_5xZ7fuBu-gC6mutHL-XEqh-bsnwXxJN7sQ9KLRnkpffctMK9j6XuwiW2OQLPHuDXG/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Dangers of EM Waves", link: "https://docs.google.com/presentation/d/e/2PACX-1vS0Xp-O9Y9V5__kTHWSVrrwlvlOVKulNxFggDSrDIQBkvwH6e8gxOEfICHiBWZhgG7ku4IFELeksrFE/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Imaging with X-Rays", link: "https://docs.google.com/presentation/d/e/2PACX-1vTr-bxtGGkdODQ8i8aio7B8L1n7TBhWv1-Bck2zf42Tzw81xDDDba1R3_Nhgi7lC5eTdt--k-RrkF6i/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Radio Communications", link: "https://docs.google.com/presentation/d/e/2PACX-1vRDXvvFKvistfRZa2vikRf4JpfOb2MgxUanVzLK1qhPacFRAyYJKj-G0AtHVJW5QbA3To_JoOUyos6s/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Sound Waves": [
+                    { name: "Properties of Sound", link: "https://docs.google.com/presentation/d/e/2PACX-1vTySU8H7j1EClectftqyJkVL-0DmnoyrJ0ylDVydyBHe0Fg22QO-21TAGJfocRjuyvn60Bb6mygOI3R/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Speed of Sound", link: "https://docs.google.com/presentation/d/e/2PACX-1vQHBG0_dul4OTat9jjFA2YNm0ExcsF1bHdWaYYPVux2qFV1Qjs87t24CXfZTBwOoAhprjuUyOkFPsFN/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Measuring Sound", link: "https://docs.google.com/presentation/d/e/2PACX-1vRlDuranJ6QdfqKm-zJ3twUemUz0aEeW40vZ4CCmKkxS33LLB8NtA-wk5uLX7u7t1Gd4Li9BGQ_IdgF/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Ultrasound", link: "https://docs.google.com/presentation/d/e/2PACX-1vQIgM2MYV9BR_eb357hyqg71b4q4Fb4DMgCZkhZia8pnlid9HCCu8inUdQ-D5_8QBs53BwpHF9q4JSl/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Optics": [
+                    { name: "Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9aWEzxrHmfQFN2PPmt6C4zNXyouDAEFEZEWOLtSg6sQ1D_3H6qkIAliuHHceMkELfB0wVuJUTyWoe/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Curved Mirrors", link: "https://docs.google.com/presentation/d/e/2PACX-1vQeUkiDwqrh30Q6gYvU5Edh5cJ6Ez3H9MJJQAxgmbbBPUgPpI_ZnkLPnSTy7RlS6ePYPBkX5zgJ0iTU/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Refraction of Light", link: "https://docs.google.com/presentation/d/e/2PACX-1vTc4v_Ps5mWhr4H8BJ7e8neL2IJyrZi2lV6fLwKwT6GnnaUAXEUcywaxt_ZWXGCZf8vCuhWjxmmE32U/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Snell's Law", link: "https://docs.google.com/presentation/d/e/2PACX-1vSUIZgdn-EWXkPAATfQlti0amHR-iNYVwLq2N1nQcYpIpjKyTvHfQdR0KBVgLDmWcB99ydEx61woriV/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Total Internal Reflection", link: "https://docs.google.com/presentation/d/e/2PACX-1vS3nkc4z8uEmPff_lZCT76smHothjxzK0d85BwDUsGHKLqCiyJmsMFy6a8iP4-ARCOPcvDc8SNiXBr9/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Lenses", link: "https://docs.google.com/presentation/d/e/2PACX-1vT9El3s-ixqFyPsKUPRCngfNCQPBusxht_SN4gDR0z-yRSklvTjVuknr0zyL-GoWc212jETw2EaWc4H/pub?start=false&loop=false&delayms=60000" },
+                    { name: "The Camera and Eye", link: "https://docs.google.com/presentation/d/e/2PACX-1vSUIZgdn-EWXkPAATfQlti0amHR-iNYVwLq2N1nQcYpIpjKyTvHfQdR0KBVgLDmWcB99ydEx61woriV/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
+        },
+        "NUCLEAR": {
+            title: "NUCLEAR CORE: RADIOACTIVITY",
+            sections: {
+                "Atomic Structure": [
+                    { name: "Atomic Structure", link: "https://docs.google.com/presentation/d/e/2PACX-1vQ-lxA1kdRmFq0MI1bbLLFHzsVgMYb2-BY0B-FekIwYvKhMSsJQG8LI12ScQnirDHOFN6_afr39EOZL/pub?start=false&loop=false&delayms=60000" },
+                    { name: "The Nucleus", link: "https://docs.google.com/presentation/d/e/2PACX-1vS0xUJ8U43qkH8G3lSNycapQXCYnpM2gJdy8Mb5oU8CYptfCZG8mpawoteXtouAQ5Opb5D3LQ-KhymD/pub?start=false&loop=false&delayms=60000" }
+                ],
+                "Radioactivity": [
+                    { name: "Types of Radiation", link: "https://docs.google.com/presentation/d/e/2PACX-1vSCIXLrwtulO1JAsPxuf9gkLsHG2ZziD01ECOi39JVWFPW2pVACaMX5URilEsjXwTaVEv4Ybf5YEm9c/pub?start=false&loop=false&delayms=60000" },
+                    { name: "Nuclear Fusion", link: "https://docs.google.com/presentation/d/e/2PACX-1vSkjNrX6_5TyOLSu7fqa7C1jD2EqkspI0n76EQiRk2uhaRAppKut8HlzIScVGEIwC-P2Taj86skeqFW/pub?start=false&loop=false&delayms=60000" }
+                ]
+            }
         }
     };
 
     // --- PROCEDURAL MCQ GENERATOR ---
     function generateSlideQuestions(topicName) {
-        // (Simplified logic to generate random questions based on the topic name)
-        const questions = [
-            {
-                q: `What is the primary concept behind ${topicName}?`,
-                options: ["Conservation of Energy", "Newton's Third Law", "Wave-Particle Duality", "The Standard Model"],
-                correct: Math.floor(Math.random() * 4)
-            },
-            {
-                q: `In the context of ${topicName}, what unit is typically used?`,
-                options: ["Joules (J)", "Newtons (N)", "Amperes (A)", "Metres per second (m/s)"],
-                correct: Math.floor(Math.random() * 4)
-            },
-            {
-                q: "Which variable is constant in this scenario?",
-                options: ["Time", "Mass", "Velocity", "Acceleration"],
-                correct: Math.floor(Math.random() * 4)
-            }
-        ];
+        let questions = [];
+        let t = topicName.toLowerCase();
+
+        // 1. MATHS & STANDARD FORM
+        if (t.includes('standard') || t.includes('significant') || t.includes('rearranging') || t.includes('algebra')) {
+            questions = [
+                { q: "Convert 4500 into Standard Form.", options: ["4.5 x 10³", "4.5 x 10²", "45 x 10²", "0.45 x 10⁴"], correct: 0 },
+                { q: "How many significant figures in 0.00340?", options: ["2", "3", "4", "5"], correct: 1 },
+                { q: "Rearrange F = ma to find a.", options: ["a = F/m", "a = m/F", "a = F - m", "a = F x m"], correct: 0 },
+                { q: "What is 3.2 x 10² multiplied by 2?", options: ["6.4 x 10²", "6.4 x 10³", "3.2 x 10⁴", "6400"], correct: 0 },
+                { q: "Round 5.678 to 2 significant figures.", options: ["5.6", "5.7", "5.68", "6.0"], correct: 1 },
+                { q: "Convert 250 mA to Amps.", options: ["25 A", "2.5 A", "0.25 A", "0.025 A"], correct: 2 },
+                { q: "Which of these is a Scalar quantity?", options: ["Velocity", "Force", "Displacement", "Mass"], correct: 3 },
+                { q: "Calculate (2 x 10³) + (3 x 10³).", options: ["5 x 10⁶", "5 x 10³", "6 x 10³", "500"], correct: 1 },
+                { q: "Rearrange V = IR to find R.", options: ["R = V/I", "R = I/V", "R = V x I", "R = V - I"], correct: 0 },
+                { q: "What is the standard prefix for 10⁻³?", options: ["Kilo", "Micro", "Milli", "Nano"], correct: 2 }
+            ];
+        }
+        // 2. DENSITY & MATTER
+        else if (t.includes('density') || t.includes('matter') || t.includes('states') || t.includes('particle')) {
+            questions = [
+                { q: "What is the formula for Density?", options: ["Density = Mass / Volume", "Density = Volume / Mass", "Density = Mass x Volume", "Density = Weight / Volume"], correct: 0 },
+                { q: "Which state of matter has fixed shape and volume?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 0 },
+                { q: "What happens to the density of a gas if volume decreases (mass constant)?", options: ["Increases", "Decreases", "Stays the same", "Becomes zero"], correct: 0 },
+                { q: "What is the unit of Density?", options: ["kg/m³", "N/m²", "J/kg", "m/s²"], correct: 0 },
+                { q: "Why does ice float on water?", options: ["Ice is less dense than water", "Ice is heavier than water", "Ice has more volume", "Ice is colder"], correct: 0 },
+                { q: "Which method measures the volume of an irregular solid?", options: ["Displacement can", "Ruler", "Balance", "Thermometer"], correct: 0 },
+                { q: "What is Sublimation?", options: ["Solid to Gas directly", "Gas to Liquid", "Liquid to Solid", "Solid to Liquid"], correct: 0 },
+                { q: "Particles in a liquid are...", options: ["Close together but random", "Far apart and fast", "Regularly arranged", "Stationary"], correct: 0 },
+                { q: "Calculate mass if Density=5g/cm³ and Volume=10cm³.", options: ["50 g", "2 g", "0.5 g", "15 g"], correct: 0 },
+                { q: "What causes gas pressure?", options: ["Particles colliding with walls", "Particles hitting each other", "Heat energy", "Gravity"], correct: 0 }
+            ];
+        }
+        // 3. FORCES & MOTION
+        else if (t.includes('force') || t.includes('newton') || t.includes('velocity') || t.includes('acceleration')) {
+            questions = [
+                { q: "What is the unit of Force?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 0 },
+                { q: "What is Newton's First Law?", options: ["Objects stay at rest unless acted on", "F = ma", "Action = Reaction", "Gravity pulls down"], correct: 0 },
+                { q: "Calculate Force if m=10kg and a=2m/s².", options: ["20 N", "5 N", "12 N", "0.2 N"], correct: 0 },
+                { q: "What is the difference between Speed and Velocity?", options: ["Velocity has direction", "Speed has direction", "They are the same", "Velocity is always faster"], correct: 0 },
+                { q: "What is the gradient of a Distance-Time graph?", options: ["Speed", "Acceleration", "Force", "Distance"], correct: 0 },
+                { q: "Terminal velocity occurs when...", options: ["Weight equals Air Resistance", "Weight is greater than Air Resistance", "There is no Air Resistance", "Acceleration is maximum"], correct: 0 },
+                { q: "Hooke's Law states that Force is proportional to...", options: ["Extension", "Length", "Mass", "Spring Constant"], correct: 0 },
+                { q: "What is the unit of Acceleration?", options: ["m/s²", "m/s", "N/kg", "kg m/s"], correct: 0 },
+                { q: "Which force opposes motion?", options: ["Friction", "Thrust", "Weight", "Tension"], correct: 0 },
+                { q: "Weight is calculated by...", options: ["Mass x Gravity", "Mass / Gravity", "Mass + Gravity", "Gravity / Mass"], correct: 0 }
+            ];
+        }
+        // 4. ENERGY & THERMAL
+        else if (t.includes('energy') || t.includes('heat') || t.includes('thermal') || t.includes('work')) {
+            questions = [
+                { q: "What is the unit of Energy?", options: ["Joule", "Newton", "Watt", "Ampere"], correct: 0 },
+                { q: "Which energy store is in a moving object?", options: ["Kinetic", "Gravitational", "Elastic", "Thermal"], correct: 0 },
+                { q: "Calculate Work Done if Force=10N and Distance=5m.", options: ["50 J", "2 J", "15 J", "0.5 J"], correct: 0 },
+                { q: "Conduction mainly happens in...", options: ["Solids", "Liquids", "Gases", "Vacuum"], correct: 0 },
+                { q: "Dark matt surfaces are good...", options: ["Absorbers of radiation", "Reflectors of radiation", "Conductors", "Insulators"], correct: 0 },
+                { q: "Formula for Efficiency?", options: ["Useful Output / Total Input", "Total Input / Useful Output", "Input x Output", "Output - Input"], correct: 0 },
+                { q: "Power is defined as...", options: ["Rate of doing work", "Force x Distance", "Energy x Time", "Voltage x Resistance"], correct: 0 },
+                { q: "Gravitational Potential Energy depends on...", options: ["Mass, Gravity, Height", "Mass, Speed", "Force, Distance", "Spring Constant"], correct: 0 },
+                { q: "Which is a renewable energy source?", options: ["Wind", "Coal", "Gas", "Nuclear"], correct: 0 },
+                { q: "Conservation of Energy means...", options: ["Energy cannot be created or destroyed", "Energy is always lost", "Energy increases over time", "Energy equals Mass"], correct: 0 }
+            ];
+        }
+        // 5. ELECTRICITY
+        else if (t.includes('circuit') || t.includes('current') || t.includes('voltage') || t.includes('resistance')) {
+            questions = [
+                { q: "What is the unit of Current?", options: ["Ampere", "Volt", "Ohm", "Coulomb"], correct: 0 },
+                { q: "State Ohm's Law formula.", options: ["V = I x R", "I = V x R", "R = V x I", "V = I / R"], correct: 0 },
+                { q: "In a Series circuit, Current is...", options: ["The same everywhere", "Split between components", "Zero", "Double the voltage"], correct: 0 },
+                { q: "What measures Potential Difference?", options: ["Voltmeter", "Ammeter", "Resistor", "Fuse"], correct: 0 },
+                { q: "What is the colour of the Live wire?", options: ["Brown", "Blue", "Green/Yellow", "Black"], correct: 0 },
+                { q: "Calculate Power if V=10V and I=2A.", options: ["20 W", "5 W", "12 W", "0.2 W"], correct: 0 },
+                { q: "The function of a fuse is to...", options: ["Melt if current is too high", "Regulate voltage", "Store charge", "Increase resistance"], correct: 0 },
+                { q: "Resistance is measured in...", options: ["Ohms", "Watts", "Amps", "Volts"], correct: 0 },
+                { q: "In parallel circuits, Voltage is...", options: ["The same across each branch", "Split between branches", "Zero", "Dependent on current"], correct: 0 },
+                { q: "AC stands for...", options: ["Alternating Current", "Anti Current", "Active Current", "Ampere Current"], correct: 0 }
+            ];
+        }
+        // 6. WAVES & LIGHT
+        else if (t.includes('wave') || t.includes('light') || t.includes('sound') || t.includes('spectrum')) {
+            questions = [
+                { q: "What is the wave equation?", options: ["v = f x λ", "v = f / λ", "f = v x λ", "λ = v x f"], correct: 0 },
+                { q: "Sound waves are...", options: ["Longitudinal", "Transverse", "Electromagnetic", "Radio"], correct: 0 },
+                { q: "Which EM wave has the highest frequency?", options: ["Gamma Rays", "Radio Waves", "Visible Light", "X-Rays"], correct: 0 },
+                { q: "Light bending when entering glass is called...", options: ["Refraction", "Reflection", "Diffraction", "Incidence"], correct: 0 },
+                { q: "The angle of incidence is equal to...", options: ["The angle of reflection", "The angle of refraction", "90 degrees", "The critical angle"], correct: 0 },
+                { q: "Frequency is measured in...", options: ["Hertz (Hz)", "Meters (m)", "Seconds (s)", "Decibels (dB)"], correct: 0 },
+                { q: "What type of wave is Light?", options: ["Transverse", "Longitudinal", "Mechanical", "Sonic"], correct: 0 },
+                { q: "Which colour has the longest wavelength?", options: ["Red", "Violet", "Blue", "Green"], correct: 0 },
+                { q: "Ultrasound is sound above...", options: ["20,000 Hz", "20 Hz", "2,000 Hz", "200 Hz"], correct: 0 },
+                { q: "The Critical Angle is related to...", options: ["Total Internal Reflection", "Diffraction", "Interference", "Dispersion"], correct: 0 }
+            ];
+        }
+        // 7. SPACE
+        else if (t.includes('space') || t.includes('star') || t.includes('orbit') || t.includes('planet')) {
+            questions = [
+                { q: "Which galaxy is our Solar System in?", options: ["Milky Way", "Andromeda", "Triangulum", "Sombrero"], correct: 0 },
+                { q: "The force keeping planets in orbit is...", options: ["Gravity", "Magnetism", "Friction", "Tension"], correct: 0 },
+                { q: "What is a Light Year measuring?", options: ["Distance", "Time", "Speed", "Brightness"], correct: 0 },
+                { q: "The Big Bang theory explains...", options: ["The origin of the Universe", "The death of stars", "Formation of planets", "Black holes"], correct: 0 },
+                { q: "What is the fuel for stars?", options: ["Hydrogen", "Oxygen", "Iron", "Carbon"], correct: 0 },
+                { q: "Red Shift provides evidence for...", options: ["Expanding Universe", "Shrinking Universe", "Static Universe", "Spinning Universe"], correct: 0 },
+                { q: "Which planet is closest to the Sun?", options: ["Mercury", "Venus", "Mars", "Earth"], correct: 0 },
+                { q: "A geostationary satellite...", options: ["Orbits every 24 hours", "Orbits every 90 mins", "Stays at the North Pole", "Orbits the Moon"], correct: 0 },
+                { q: "What is a Supernova?", options: ["Explosion of a massive star", "Birth of a star", "Collision of planets", "A black hole"], correct: 0 },
+                { q: "Our Sun is currently a...", options: ["Main Sequence Star", "Red Giant", "White Dwarf", "Neutron Star"], correct: 0 }
+            ];
+        }
+        // 8. RADIOACTIVITY
+        else if (t.includes('radio') || t.includes('nuclear') || t.includes('atom')) {
+            questions = [
+                { q: "What are Alpha particles?", options: ["Helium nuclei", "Electrons", "EM waves", "Neutrons"], correct: 0 },
+                { q: "Which radiation is most penetrating?", options: ["Gamma", "Beta", "Alpha", "Infrared"], correct: 0 },
+                { q: "What is an Isotope?", options: ["Same protons, different neutrons", "Same neutrons, different protons", "Different electrons", "Different element"], correct: 0 },
+                { q: "Beta particles are...", options: ["High speed electrons", "Protons", "Neutrons", "Waves"], correct: 0 },
+                { q: "What is Half-Life?", options: ["Time for activity to halve", "Half the total time", "Time to decay completely", "Half the mass"], correct: 0 },
+                { q: "Which device detects radiation?", options: ["Geiger-Muller Tube", "Voltmeter", "Barometer", "Thermometer"], correct: 0 },
+                { q: "Nuclear Fission involves...", options: ["Splitting a nucleus", "Joining nuclei", "Burning atoms", "Chemical reaction"], correct: 0 },
+                { q: "Nuclear Fusion powers...", options: ["The Sun", "Nuclear power stations", "Batteries", "X-ray machines"], correct: 0 },
+                { q: "Background radiation comes from...", options: ["Rocks and Space", "Only hospitals", "Only power plants", "Only microwaves"], correct: 0 },
+                { q: "The unit of Activity is...", options: ["Becquerel (Bq)", "Sievert (Sv)", "Count", "Hertz (Hz)"], correct: 0 }
+            ];
+        }
+        // DEFAULT FALLBACK
+        else {
+            questions = [
+                { q: "Which variable goes on the x-axis?", options: ["Independent", "Dependent", "Control", "Random"], correct: 0 },
+                { q: "What is an anomaly?", options: ["A result that doesn't fit the pattern", "The correct result", "The average", "A prediction"], correct: 0 },
+                { q: "How do you improve reliability?", options: ["Repeat and average", "Use better equipment", "Change the method", "Guess"], correct: 0 },
+                { q: "What is the SI unit for Time?", options: ["Seconds", "Minutes", "Hours", "Days"], correct: 0 },
+                { q: "Which line is the line of best fit?", options: ["Smooth curve/line through points", "Dot to dot", "Zig zag", "Straight line only"], correct: 0 },
+                { q: "What is precision?", options: ["Closeness to the mean", "Closeness to true value", "Correctness", "Zero error"], correct: 0 },
+                { q: "What is accuracy?", options: ["Closeness to true value", "Smallest scale division", "Repeated results", "No errors"], correct: 0 },
+                { q: "A hypothesis is...", options: ["A scientific prediction", "A fact", "A conclusion", "A graph"], correct: 0 },
+                { q: "What is the SI unit for Mass?", options: ["Kilogram", "Gram", "Pound", "Tonne"], correct: 0 },
+                { q: "To measure liquid volume accurately use a...", options: ["Measuring Cylinder", "Beaker", "Flask", "Test tube"], correct: 0 }
+            ];
+        }
+
         return questions;
     }
 
     // --- APP LOGIC ---
+    
+    // 1. Module Nav Builder
     const navContainer = document.getElementById('module-nav-container');
-    const uplinkBtn = document.getElementById('uplink-btn');
-
-    // Insert database items BEFORE the comms button
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        card.className = 'topic-card px-2 md:px-4 py-2 md:py-3 rounded-sm font-bold text-xs md:text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
-        card.innerHTML = `<span class="opacity-50 mr-2 text-[10px]">◢</span> ${key}`;
+        card.className = 'topic-card px-4 py-3 rounded-sm font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
+        card.innerHTML = `<span class="opacity-50 mr-2 text-xs">◢</span> ${key}`;
         card.setAttribute('data-key', key);
         card.addEventListener('click', () => {
             playClickSound();
@@ -413,36 +597,33 @@
             card.classList.add('active');
             revealContent(key);
         });
-        navContainer.insertBefore(card, uplinkBtn);
+        navContainer.appendChild(card);
     });
 
-    // Content Display Logic
+    // 2. Content Display
     const contentPlaceholder = document.getElementById('content-placeholder');
     const topicContentArea = document.getElementById('topic-content-area');
-    const uploadContentArea = document.getElementById('upload-content-area');
-
+    
     function revealContent(topicKey) {
-        uploadContentArea.classList.add('hidden');
-        contentPlaceholder.classList.add('hidden');
-        topicContentArea.classList.remove('hidden');
-
         const data = DATABASE[topicKey];
         if (!data) return;
+        contentPlaceholder.classList.add('hidden');
+        topicContentArea.classList.remove('hidden');
         
         let html = `
-            <div class="mb-4 md:mb-6 border-b border-red-900 pb-2">
-                <h2 class="text-2xl md:text-3xl font-black text-cyan-400 font-orbitron tracking-tighter">${data.title}</h2>
-                <p class="text-[10px] md:text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
+            <div class="mb-6 border-b border-red-900 pb-2">
+                <h2 class="text-3xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
+                <p class="text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
             </div>
         `;
         
         for (const [sectionName, items] of Object.entries(data.sections)) {
             html += `
-                <div class="mb-8 md:mb-10">
-                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyan-500 pl-3">
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyan-500 pl-3">
                         ${sectionName.toUpperCase()}
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
@@ -451,33 +632,16 @@
         topicContentArea.innerHTML = html;
     }
 
-    // UPLINK (Contact Form) Logic
-    function showUplink() {
-        playClickSound();
-        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
-        uplinkBtn.classList.add('active');
-        contentPlaceholder.classList.add('hidden');
-        topicContentArea.classList.add('hidden');
-        uploadContentArea.classList.remove('hidden');
-    }
-
     // Embed Creator
     const createSlideEmbed = (url, name) => {
-        // Handle various google slide url formats
-        let embedUrl = url;
-        if(url.includes('/pub')) {
-            embedUrl = url.replace('/pub', '/embed');
-        } else if(url.includes('/edit')) {
-             embedUrl = url.replace(/\/edit.*$/, '/embed?start=false&loop=false&delayms=60000');
-        }
-
+        const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
         const safeName = name.replace(/'/g, "\\'");
         
         return `
             <div class="group flex flex-col h-full bg-[#111] border border-[#333] hover:border-red-500 transition-all duration-300 shadow-lg">
-                <div class="p-2 md:p-3 border-b border-[#222]">
+                <div class="p-3 border-b border-[#222]">
                      <a href="${url}" target="_blank" class="text-xs text-cyan-500 font-orbitron font-bold tracking-wider truncate hover:underline hover:text-white transition-colors block" title="OPEN FULLSCREEN">
-                    ${name.toUpperCase()} ↗
+                   ${name.toUpperCase()} ↗
                 </a>
                 </div>
                 <div class="slide-embed-container bg-black">
@@ -492,7 +656,7 @@
         `;
     };
 
-    // MCQ MODAL LOGIC
+    // --- MCQ MODAL LOGIC ---
     const questionModal = document.getElementById('question-modal');
     
     function openQuestions(topicName) {
@@ -504,38 +668,49 @@
         contentDiv.innerHTML = '';
         
         questions.forEach((qObj, idx) => {
+            // Create container for one question
             const qDiv = document.createElement('div');
-            qDiv.className = "border-b border-gray-800 pb-4 md:pb-6 last:border-0";
+            qDiv.className = "border-b border-gray-800 pb-6 last:border-0";
             
+            // Question Text
             const qTitle = document.createElement('h3');
-            qTitle.className = "text-white font-bold mb-3 flex gap-2 font-orbitron text-sm md:text-base";
+            qTitle.className = "text-white font-bold mb-3 flex gap-2 font-orbitron";
             qTitle.innerHTML = `<span class="text-cyan-500">0${idx+1}</span> ${qObj.q}`;
             qDiv.appendChild(qTitle);
             
+            // Options Container
             const optContainer = document.createElement('div');
             optContainer.className = "grid grid-cols-1 md:grid-cols-2 gap-2";
             
             qObj.options.forEach((optText, optIdx) => {
                 const btn = document.createElement('button');
-                btn.className = "mcq-option p-2 md:p-3 bg-gray-900 border border-gray-700 rounded-sm text-xs md:text-sm text-gray-300 font-mono";
+                btn.className = "mcq-option p-3 bg-gray-900 border border-gray-700 rounded-sm text-sm text-gray-300 font-mono";
                 btn.innerText = optText;
+                
+                // Click Event
                 btn.onclick = function() {
+                    // Disable all buttons in this question group
                     const siblings = optContainer.querySelectorAll('button');
                     siblings.forEach(b => b.disabled = true);
+                    
+                    // Check Answer
                     if(optIdx === qObj.correct) {
                         btn.classList.add('mcq-correct');
                         btn.innerHTML += " ✓";
                     } else {
                         btn.classList.add('mcq-wrong');
                         btn.innerHTML += " ✕";
+                        // Highlight correct one
                         siblings[qObj.correct].classList.add('mcq-correct');
                     }
                 };
                 optContainer.appendChild(btn);
             });
+            
             qDiv.appendChild(optContainer);
             contentDiv.appendChild(qDiv);
         });
+        
         questionModal.classList.remove('hidden');
     }
 
