@@ -17,8 +17,8 @@
             background-color: var(--theme-black);
             color: #e0e0e0;
             font-family: 'Rajdhani', sans-serif;
-            overflow-x: hidden;
-            position: relative;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            width: 100%;
         }
 
         /* CRT SCANLINE EFFECT */
@@ -49,15 +49,17 @@
             cursor: default;
         }
 
-        /* HEADER */
+        /* HEADER - FULL WIDTH */
         header {
             background: linear-gradient(90deg, var(--theme-red) 0%, #8b0000 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 80%, 98% 100%, 0 100%);
+            /* Simplified clip-path to ensure it looks good full width */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
             border-bottom: 2px solid white;
+            width: 100%;
         }
 
         /* NAV & CARDS */
-        .topic-card, .quiz-btn {
+        .topic-card {
             background: var(--theme-dark);
             border: 1px solid #333;
             transition: 0.3s;
@@ -66,9 +68,11 @@
             overflow: hidden;
             z-index: 60;
             white-space: nowrap;
+            flex-grow: 1; /* Auto fill space */
+            text-align: center;
         }
 
-        .topic-card:hover, .quiz-btn:hover {
+        .topic-card:hover {
             border-color: var(--theme-red);
             transform: translateY(-2px);
             box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
@@ -80,32 +84,7 @@
             color: var(--theme-red);
         }
 
-        /* QUIZ STYLES */
-        .quiz-option {
-            background: #0f0f0f;
-            border: 1px solid #333;
-            padding: 15px;
-            transition: all 0.2s;
-            cursor: pointer;
-            color: #d1d5db;
-        }
-        .quiz-option:hover {
-            background: #1a1a1a;
-            border-color: var(--theme-cyan);
-            color: var(--theme-cyan);
-        }
-        .quiz-option.correct {
-            border-color: #00ff00;
-            color: #00ff00;
-            background: rgba(0,255,0,0.1);
-        }
-        .quiz-option.incorrect {
-            border-color: var(--theme-red);
-            color: var(--theme-red);
-            background: rgba(255,0,0,0.1);
-        }
-
-        /* EMBEDS */
+        /* EMBEDS - RESPONSIVE 16:9 */
         .slide-embed-container {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -114,6 +93,7 @@
             border: 1px solid #444;
             background: #000;
             z-index: 40;
+            width: 100%;
         }
         .slide-embed-container iframe {
             position: absolute;
@@ -133,114 +113,62 @@
 
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col w-full">
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<header class="p-4 sticky top-0 z-50 shadow-lg">
-    <div class="w-full max-w-[95%] mx-auto flex flex-col md:flex-row justify-between items-center">
-        <h1 class="text-2xl md:text-3xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
-        <div class="text-xs font-mono text-white opacity-70 mt-2 md:mt-0">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v5.8
+<header class="p-6 sticky top-0 z-50 shadow-lg w-full">
+    <div class="w-full flex flex-col md:flex-row justify-between items-center px-4">
+        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white glitch-effect text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
+        <div class="text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded">
+            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v6.0
         </div>
     </div>
 </header>
 
-<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[72px] z-40 overflow-x-auto">
-    <div class="w-full max-w-[95%] mx-auto p-4 flex gap-4 items-center min-w-max">
-        <div id="module-nav-container" class="flex gap-4">
+<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[88px] z-40 w-full shadow-2xl">
+    <div class="w-full p-4">
+        <div id="module-nav-container" class="flex flex-wrap gap-2 justify-center w-full">
             </div>
-        
-        <div class="h-6 w-px bg-gray-700 mx-2"></div>
-
-        <div id="quiz-trigger" class="quiz-btn px-6 py-2 rounded-md font-bold text-sm tracking-widest uppercase text-cyan-500 border border-cyan-900 hover:bg-cyan-900/20">
-            <span class="mr-2">⚠</span> TACTICAL EXAMS
-        </div>
     </div>
 </nav>
 
-<div class="w-full max-w-[95%] mx-auto p-6 z-30 relative flex-grow">
+<div class="w-full px-4 md:px-8 py-6 z-30 relative flex-grow">
     
     <main class="w-full min-h-[600px] relative">
         
-        <div id="content-placeholder" class="h-96 flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center mt-10">
+        <div id="content-placeholder" class="h-96 flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center mt-10 w-full">
             <div class="text-5xl mb-4 opacity-20">◢◤</div>
-            <p class="text-gray-500 font-mono">ESTABLISHING UPLINK... SELECT MODULE FROM TOP BAR.</p>
+            <p class="text-gray-500 font-mono text-lg">ESTABLISHING UPLINK... SELECT MODULE ABOVE.</p>
         </div>
 
-        <div id="topic-content-area" class="hidden w-full">
+        <div id="topic-content-area" class="hidden w-full transition-all duration-500">
             </div>
-
-        <div id="quiz-interface" class="hidden bg-[#0a0a0a] p-8 border border-gray-800 rounded-lg h-full relative flex flex-col mt-4">
-            <div id="quiz-stage-select" class="text-center flex-1 flex flex-col justify-center">
-                <h2 class="text-3xl font-orbitron text-white mb-8">SELECT CLEARANCE LEVEL</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto w-full">
-                    <button onclick="selectStage('KS3')" class="quiz-btn p-6 text-xl font-bold text-cyber-neon-pink">LEVEL 1: KS3</button>
-                    <button onclick="selectStage('KS4')" class="quiz-btn p-6 text-xl font-bold text-cyber-electric-blue">LEVEL 2: KS4 (GCSE)</button>
-                    <button onclick="selectStage('KS5')" class="quiz-btn p-6 text-xl font-bold text-white">LEVEL 3: KS5 (A-LEVEL)</button>
-                </div>
-            </div>
-
-            <div id="quiz-topic-select" class="hidden text-center flex-1 flex flex-col justify-center">
-                <h2 class="text-2xl font-orbitron text-white mb-2">TARGET SUBJECT</h2>
-                <p id="selected-stage-display" class="text-xs text-gray-500 mb-8 font-mono"></p>
-                <div id="quiz-topic-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto"></div>
-                <button onclick="resetQuizUI()" class="mt-8 text-xs text-red-500 hover:text-white uppercase font-mono tracking-widest">[ ABORT ]</button>
-            </div>
-
-            <div id="quiz-active-area" class="hidden flex-1 flex flex-col max-w-4xl mx-auto w-full">
-                <div class="flex justify-between items-end border-b border-gray-800 pb-4 mb-6">
-                    <div>
-                        <h3 class="text-xs font-mono text-cyan-500 mb-1">LIVE_EXAM_SESSION</h3>
-                        <div class="text-2xl font-orbitron font-bold text-white" id="quiz-topic-title">TOPIC_NAME</div>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-3xl font-black text-gray-700" id="question-counter">01<span class="text-sm">/40</span></div>
-                        <div class="text-xs font-mono text-gray-500">SCORE: <span id="current-score" class="text-white">0</span></div>
-                    </div>
-                </div>
-                <div class="mb-8 flex-grow">
-                    <p id="question-text" class="text-lg md:text-xl font-bold leading-relaxed text-white"></p>
-                </div>
-                <div id="answer-options" class="grid grid-cols-1 gap-3 mb-8"></div>
-                <div id="quiz-feedback" class="hidden p-4 mb-4 font-mono text-sm text-center border"></div>
-                <button id="next-btn" onclick="nextQuestion()" class="hidden w-full py-4 bg-gray-900 hover:bg-white hover:text-black border border-white font-bold tracking-widest transition uppercase">PROCEED TO NEXT DATA POINT</button>
-            </div>
-
-            <div id="quiz-results" class="hidden text-center flex-1 flex flex-col justify-center items-center">
-                <div class="text-6xl mb-4">🏁</div>
-                <h2 class="text-3xl font-orbitron text-white mb-2">SESSION COMPLETE</h2>
-                <p class="text-gray-500 font-mono mb-8">UPLOADING RESULTS TO SERVER...</p>
-                <div class="text-5xl font-black text-cyber-neon-pink mb-2" id="final-score-display">0/40</div>
-                <p class="text-sm text-cyan-500 font-mono mb-10" id="final-percent">0% ACCURACY RATING</p>
-                <button onclick="resetQuizUI()" class="px-8 py-3 border border-gray-600 hover:border-white hover:text-white text-gray-400 transition font-mono uppercase text-sm">RESTART SIMULATION</button>
-            </div>
-        </div>
 
     </main>
 </div>
 
 <div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
-    <div class="bg-black border-2 border-cyan-500 w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col shadow-[0_0_30px_rgba(0,255,255,0.2)]">
+    <div class="bg-black border-2 border-cyan-500 w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
         
-        <div class="bg-cyan-900/30 p-4 border-b border-cyan-700 flex justify-between items-center">
+        <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center">
             <div>
-                <h2 class="text-xl font-orbitron text-white tracking-wider" id="modal-title">CLASSIFIED QUESTIONS</h2>
-                <p class="text-[10px] text-cyan-400 font-mono">ACCESS_LEVEL: GRANTED</p>
+                <h2 class="text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
+                <div class="h-1 w-20 bg-cyan-500 mt-1"></div>
             </div>
-            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white font-bold text-xl px-2">X</button>
+            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition">✕</button>
         </div>
 
-        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm text-gray-300 space-y-4" id="modal-content">
+        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm md:text-base text-gray-300 space-y-4" id="modal-content">
             </div>
 
-        <div class="p-4 border-t border-gray-800 bg-gray-900 text-right">
-             <button onclick="closeQuestions()" class="text-xs uppercase tracking-widest text-red-500 hover:text-white border border-red-900 hover:bg-red-900 px-4 py-2 transition">Close Terminal</button>
+        <div class="p-4 border-t border-gray-800 bg-gray-900 flex justify-end">
+             <button onclick="closeQuestions()" class="text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-6 py-3 font-bold transition rounded-sm">Close Terminal</button>
         </div>
     </div>
 </div>
 
-<footer class="mt-auto border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30">
+<footer class="mt-auto border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30 w-full">
     <p>© 2025 AHMED ACADEMY. ALL RIGHTS RESERVED.</p>
 </footer>
 
@@ -250,7 +178,7 @@
     function playClickSound() {
         if(clickSound) {
             clickSound.currentTime = 0;
-            clickSound.volume = 0.3; 
+            clickSound.volume = 0.2; 
             clickSound.play().catch(e => {});
         }
     }
@@ -503,122 +431,133 @@
         }
     };
 
-    const QUIZ_TOPICS = {
-        "KS3": ["Forces", "Energy", "Electricity", "Matter"],
-        "KS4": ["Motion", "Waves", "Radioactivity", "Electromagnetism"],
-        "KS5": ["Particles", "Quantum Physics", "Fields", "Thermodynamics"]
-    };
-
-    const PATOIS_REASSURANCE = [
-        "Nuh worry yuhself, man. You got dis next time!",
-        "Small ting! Shake it off and gwaan.",
-        "Jus a likkle stumble, don't pree it.",
-        "No vibes lost, bredren. Try di next one.",
-        "Everything criss, jus focus up.",
-        "Chambley! But yuh head good, gwaan again."
-    ];
-
-    // --- PROCEDURAL QUESTION GENERATOR (ENSURES ALL SLIDES HAVE 10 Qs) ---
+    // --- PROCEDURAL QUESTION GENERATOR (FIXED FOR CONSISTENCY) ---
     function generateSlideQuestions(topicName) {
         let questions = [];
         let t = topicName.toLowerCase();
         
         // 1. DENSITY / MASS / VOLUME
         if (t.includes('density') || t.includes('matter')) {
-            for(let i=0; i<4; i++) {
-                let m = Math.floor(Math.random()*100)+10;
-                let v = Math.floor(Math.random()*10)+2;
-                questions.push(`Calculate the density if Mass is ${m}g and Volume is ${v}cm³.`)
-            }
-            questions.push("Define density in words.", "What are the standard units for density?", "Explain how to find the volume of an irregular solid.", "Why does ice float on water?", "Convert 1 g/cm³ to kg/m³.", "Describe the particle arrangement in a solid vs gas.");
+            questions = [
+                "Define 'Density' and state its SI unit.",
+                "Calculate the density if Mass = 100g and Volume = 20cm³.",
+                "How does the density of a solid compare to a gas?",
+                "Explain how to measure the volume of an irregular stone.",
+                "Why does ice float on water?",
+                "Convert 5 g/cm³ into kg/m³.",
+                "What happens to the density of a gas when it is heated in a fixed volume?",
+                "Calculate the mass of a block with Density = 8g/cm³ and Volume = 5cm³.",
+                "Draw the particle arrangement for a solid, liquid, and gas.",
+                "Explain why gases are easy to compress."
+            ];
         }
         // 2. FORCES / NEWTON / WEIGHT
-        else if (t.includes('force') || t.includes('newton') || t.includes('weight')) {
-            for(let i=0; i<3; i++) {
-                let m = Math.floor(Math.random()*50)+5;
-                let a = Math.floor(Math.random()*10)+2;
-                questions.push(`Calculate the Resultant Force if Mass is ${m}kg and Acceleration is ${a}m/s².`)
-            }
-            questions.push("State Newton's First Law.", "State Newton's Third Law.", "Define 'Inertia'.", "What is the difference between Mass and Weight?", "Draw a free body diagram for a falling object.", "What is terminal velocity?", "Calculate the weight of a 10kg mass on Earth (g=10).");
+        else if (t.includes('force') || t.includes('newton') || t.includes('weight') || t.includes('elastic') || t.includes('hooke')) {
+            questions = [
+                "State Newton's First Law of Motion.",
+                "Calculate the Resultant Force if Mass = 50kg and Acceleration = 2m/s².",
+                "What is the difference between Mass and Weight?",
+                "Calculate the weight of a 70kg astronaut on Earth (g=10N/kg).",
+                "State Hooke's Law.",
+                "What does the limit of proportionality mean?",
+                "Define 'Inertia'.",
+                "If forces are balanced, what is the acceleration of the object?",
+                "Calculate the spring constant if Force = 10N and Extension = 0.5m.",
+                "State Newton's Third Law with an example."
+            ];
         }
         // 3. ENERGY / WORK / POWER
-        else if (t.includes('energy') || t.includes('work') || t.includes('power')) {
-            for(let i=0; i<3; i++) {
-                let m = Math.floor(Math.random()*10)+1;
-                let v = Math.floor(Math.random()*20)+5;
-                questions.push(`Calculate Kinetic Energy if Mass=${m}kg and Velocity=${v}m/s.`)
-            }
-            questions.push("State the Principle of Conservation of Energy.", "What is the formula for Gravitational Potential Energy?", "Define 'Work Done'.", "What are the units for Power?", "Name three non-renewable energy sources.", "Explain how a wind turbine generates electricity.", "What is efficiency?");
+        else if (t.includes('energy') || t.includes('work') || t.includes('power') || t.includes('heat') || t.includes('efficien')) {
+            questions = [
+                "State the Principle of Conservation of Energy.",
+                "Calculate Kinetic Energy if Mass = 10kg and Velocity = 4m/s.",
+                "Calculate Gravitational Potential Energy if Mass = 5kg, g = 10, Height = 10m.",
+                "Define 'Work Done' and give its unit.",
+                "Calculate Power if Work Done = 1000J and Time = 20s.",
+                "What is the formula for Efficiency?",
+                "Name three renewable energy resources.",
+                "Explain how conduction transfers heat.",
+                "What colour is the best absorber of thermal radiation?",
+                "Calculate the efficiency if Input Energy = 200J and Useful Output = 50J."
+            ];
         }
         // 4. ELECTRICITY / CIRCUITS
-        else if (t.includes('circuit') || t.includes('electric') || t.includes('voltage') || t.includes('current')) {
-            for(let i=0; i<3; i++) {
-                let i_curr = Math.floor(Math.random()*10)+1;
-                let r = Math.floor(Math.random()*10)+2;
-                questions.push(`Calculate Voltage if Current is ${i_curr}A and Resistance is ${r}Ω.`)
-            }
-            questions.push("What is Ohm's Law?", "Define 'Current'.", "What is the difference between Series and Parallel circuits?", "Draw the symbol for a diode.", "What is the function of a fuse?", "Calculate Power if V=230V and I=5A.", "Explain the IV characteristic of a filament lamp.");
+        else if (t.includes('circuit') || t.includes('electric') || t.includes('voltage') || t.includes('current') || t.includes('resistance')) {
+            questions = [
+                "State Ohm's Law.",
+                "Calculate Voltage if Current = 2A and Resistance = 10Ω.",
+                "What is the difference between a Series and Parallel circuit?",
+                "What happens to current in a series circuit?",
+                "Draw the circuit symbol for a variable resistor.",
+                "Calculate Electrical Power if Voltage = 230V and Current = 5A.",
+                "What is the function of a fuse?",
+                "Define 'Alternating Current' (AC).",
+                "Calculate Charge if Current = 5A and Time = 10s.",
+                "Explain the I-V characteristic of a diode."
+            ];
         }
         // 5. WAVES / LIGHT / SOUND
-        else if (t.includes('wave') || t.includes('sound') || t.includes('light') || t.includes('optic')) {
-            for(let i=0; i<2; i++) {
-                let f = Math.floor(Math.random()*100)+50;
-                let lam = Math.floor(Math.random()*5)+1;
-                questions.push(`Calculate Wave Speed if Frequency=${f}Hz and Wavelength=${lam}m.`)
-            }
-            questions.push("Define Frequency and Period.", "What is the difference between Transverse and Longitudinal waves?", "State the law of reflection.", "What happens when light enters a denser medium?", "List the EM spectrum in order of increasing frequency.", "What are the dangers of UV radiation?", "How is ultrasound used in medicine?", "What is the critical angle?");
+        else if (t.includes('wave') || t.includes('sound') || t.includes('light') || t.includes('optic') || t.includes('spectrum')) {
+            questions = [
+                "Define 'Frequency' and state its unit.",
+                "Calculate Wave Speed if Frequency = 50Hz and Wavelength = 2m.",
+                "What is the difference between Transverse and Longitudinal waves?",
+                "List the Electromagnetic Spectrum in order of increasing frequency.",
+                "Which EM wave is used for satellite communication?",
+                "State the Law of Reflection.",
+                "What happens to light when it enters a denser medium?",
+                "What is the critical angle?",
+                "What range of frequencies can humans hear?",
+                "Explain how Ultrasound is used for imaging."
+            ];
         }
         // 6. SPACE / ASTRONOMY
-        else if (t.includes('space') || t.includes('solar') || t.includes('star') || t.includes('orbit')) {
-             questions = [
-                "List the planets in our solar system in order.",
-                "What is the difference between a planet and a star?",
-                "Explain the life cycle of a star like our Sun.",
-                "What causes day and night on Earth?",
-                "What causes the seasons?",
-                "What is a light year?",
-                "Explain the Big Bang theory.",
-                "What is Red Shift?",
-                "Define 'orbital speed'.",
-                "What keeps satellites in orbit?"
+        else if (t.includes('space') || t.includes('solar') || t.includes('star') || t.includes('orbit') || t.includes('universe')) {
+            questions = [
+                "List the planets in our solar system in order from the Sun.",
+                "What force keeps planets in orbit?",
+                "Describe the life cycle of a star similar to our Sun.",
+                "What is a 'Light Year'?",
+                "Explain what 'Red Shift' tells us about the Universe.",
+                "What is the Big Bang Theory?",
+                "What is the difference between a geostationary and polar orbit?",
+                "Why do we have seasons?",
+                "What is a nebula?",
+                "How is a black hole formed?"
             ];
         }
         // 7. RADIOACTIVITY
-        else if (t.includes('radio') || t.includes('atom') || t.includes('nuclear')) {
+        else if (t.includes('radio') || t.includes('atom') || t.includes('nuclear') || t.includes('fusion')) {
             questions = [
                 "Describe the structure of an atom.",
-                "What is an isotope?",
-                "What are the three types of nuclear radiation?",
-                "Which type of radiation is most ionising?",
-                "Which type of radiation is most penetrating?",
-                "What materials stop Alpha, Beta, and Gamma radiation?",
+                "What is an Isotope?",
+                "List the three types of nuclear radiation.",
+                "Which radiation is stopped by a sheet of paper?",
+                "Which radiation is the most ionising?",
                 "Define 'Half-Life'.",
+                "If a sample has a count rate of 100, what is it after 2 half-lives?",
                 "What is Nuclear Fission?",
                 "What is Nuclear Fusion?",
-                "Name one use of radioactivity in medicine."
+                "Name a safety precaution when handling radioactive sources."
             ];
         }
         // FALLBACK (If no keyword match)
         else {
             questions = [
                 `Define the key terms associated with ${topicName}.`,
-                `Describe an experiment to investigate ${topicName}.`,
                 "What are the standard units used in this topic?",
+                "Describe an experiment to investigate this concept.",
                 "Draw a diagram representing the main concept.",
                 "Explain how this concept applies to real life.",
-                "What safety precautions should be taken when studying this?",
+                "What safety precautions should be taken here?",
                 "Summarise the main points of the slide.",
-                "Create a revision card for this topic.",
                 "What equations are relevant to this section?",
+                "Create a calculation question based on this topic.",
                 "Explain this concept to a non-scientist."
             ];
         }
 
-        // Fill up to 10 if generated list is short
-        while(questions.length < 10) {
-            questions.push(`Review calculation practice question #${questions.length+1}.`);
-        }
-        return questions.slice(0, 10);
+        return questions;
     }
 
     // --- APP LOGIC ---
@@ -627,12 +566,12 @@
     const navContainer = document.getElementById('module-nav-container');
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        card.className = 'topic-card px-4 py-2 rounded-md font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center';
+        // Removed fixed widths, added flex-grow for auto scale
+        card.className = 'topic-card px-4 py-3 rounded-sm font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
         card.innerHTML = `<span class="opacity-50 mr-2 text-xs">◢</span> ${key}`;
         card.setAttribute('data-key', key);
         card.addEventListener('click', () => {
             playClickSound();
-            hideQuiz(); 
             document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
             card.classList.add('active');
             revealContent(key);
@@ -660,10 +599,10 @@
         for (const [sectionName, items] of Object.entries(data.sections)) {
             html += `
                 <div class="mb-10">
-                    <h3 class="text-xl font-bold mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyber-electric-blue pl-3">
+                    <h3 class="text-xl font-bold mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyan-500 pl-3">
                         ${sectionName.toUpperCase()}
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
@@ -672,23 +611,24 @@
         topicContentArea.innerHTML = html;
     }
 
-    // UPDATED: Now includes question button
+    // UPDATED: Slide Embed with Question Button
     const createSlideEmbed = (url, name) => {
         const embedUrl = url.includes('/pub') ? url.replace('/pub', '/embed') : url;
-        // Escape name for onclick
         const safeName = name.replace(/'/g, "\\'");
         
         return `
-            <div class="group flex flex-col h-full">
-                <a href="${url}" target="_blank" class="text-[12px] text-cyan-500 mb-2 font-orbitron font-bold tracking-wider truncate hover:underline hover:text-white transition-colors block" title="OPEN SLIDES: ${name}">
-                   // ${name.toUpperCase()} ↗
+            <div class="group flex flex-col h-full bg-[#111] border border-[#333] hover:border-red-500 transition-all duration-300 shadow-lg">
+                <div class="p-3 border-b border-[#222]">
+                     <a href="${url}" target="_blank" class="text-xs text-cyan-500 font-orbitron font-bold tracking-wider truncate hover:underline hover:text-white transition-colors block" title="OPEN FULLSCREEN">
+                   ${name.toUpperCase()} ↗
                 </a>
-                <div class="slide-embed-container shadow-xl flex-grow border border-[#333] group-hover:border-red-500 transition">
+                </div>
+                <div class="slide-embed-container bg-black">
                     <iframe src="${embedUrl}" frameborder="0" loading="lazy" allowfullscreen="true"></iframe>
                 </div>
-                <div class="mt-2 text-right">
-                    <button onclick="openQuestions('${safeName}')" class="text-[10px] uppercase font-bold tracking-widest text-gray-500 hover:text-cyber-neon-pink transition flex items-center justify-end w-full group-hover:text-cyan-400">
-                        <span class="mr-1">>></span> ACCESS QUESTION BANK
+                <div class="p-2 bg-[#0a0a0a]">
+                    <button onclick="openQuestions('${safeName}')" class="w-full py-2 text-[10px] uppercase font-bold tracking-widest text-gray-400 hover:text-white hover:bg-gray-800 border border-gray-800 hover:border-cyan-500 transition flex items-center justify-center rounded-sm">
+                        <span>[?] ACCESS QUESTION BANK</span>
                     </button>
                 </div>
             </div>
@@ -708,10 +648,10 @@
         
         questions.forEach((q, idx) => {
             const row = document.createElement('div');
-            row.className = "flex gap-4 p-2 border-b border-gray-800 hover:bg-gray-900";
+            row.className = "flex gap-4 p-3 border-b border-gray-800 hover:bg-gray-900/50 transition rounded-sm";
             row.innerHTML = `
-                <span class="text-cyan-600 font-bold select-none">0${idx+1}</span>
-                <p class="text-gray-300 leading-relaxed">${q}</p>
+                <span class="text-cyan-600 font-bold font-orbitron select-none text-lg">0${idx+1}</span>
+                <p class="text-gray-300 leading-relaxed font-semibold">${q}</p>
             `;
             contentDiv.appendChild(row);
         });
@@ -722,58 +662,6 @@
     function closeQuestions() {
         playClickSound();
         questionModal.classList.add('hidden');
-    }
-
-    // --- QUIZ LOGIC (Unchanged from before) ---
-    // (This part uses generateQuestions() from previous code, 
-    //  but for the slide specific questions we use generateSlideQuestions above)
-    //  ... [Retaining Quiz Logic for Functionality] ...
-
-    const quizInterface = document.getElementById('quiz-interface');
-    const quizStageSelect = document.getElementById('quiz-stage-select');
-    const quizTopicSelect = document.getElementById('quiz-topic-select');
-    const quizActiveArea = document.getElementById('quiz-active-area');
-    const quizResults = document.getElementById('quiz-results');
-    let currentQuizData = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-
-    document.getElementById('quiz-trigger').addEventListener('click', () => {
-        playClickSound();
-        contentPlaceholder.classList.add('hidden');
-        topicContentArea.classList.add('hidden');
-        quizInterface.classList.remove('hidden');
-        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
-        resetQuizUI();
-    });
-
-    function hideQuiz() { quizInterface.classList.add('hidden'); }
-    function resetQuizUI() {
-        quizStageSelect.classList.remove('hidden');
-        quizTopicSelect.classList.add('hidden');
-        quizActiveArea.classList.add('hidden');
-        quizResults.classList.add('hidden');
-        currentQuestionIndex = 0; score = 0;
-    }
-    
-    // (Helper for quiz - simplified for brevity in this display, 
-    // in real file include the generateQuestions function from previous step)
-    function selectStage(stage) {
-        playClickSound();
-        quizStageSelect.classList.add('hidden');
-        quizTopicSelect.classList.remove('hidden');
-        document.getElementById('selected-stage-display').innerText = `SELECTED_PROTOCOL: ${stage}`;
-        const list = document.getElementById('quiz-topic-list');
-        list.innerHTML = '';
-        (QUIZ_TOPICS[stage] || []).forEach(topic => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-btn p-4 text-white font-bold border border-gray-600 hover:border-cyan-500';
-            btn.innerText = topic.toUpperCase();
-            // Re-using the quiz generator from previous prompt would go here
-            // For now just logging
-            btn.onclick = () => console.log("Start quiz logic would trigger here");
-            list.appendChild(btn);
-        });
     }
 
 </script>
