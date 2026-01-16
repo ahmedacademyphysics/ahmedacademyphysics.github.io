@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AHMED ACADEMY | Physics Terminal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
         body::before {
             content: " ";
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 50;
@@ -53,8 +53,10 @@
             overflow: hidden;
             z-index: 60;
             white-space: nowrap;
-            flex-grow: 1;
             text-align: center;
+            /* Scale logic */
+            flex: 1 1 auto; 
+            min-width: 120px;
         }
 
         .topic-card:hover {
@@ -69,7 +71,7 @@
             color: var(--theme-red);
         }
 
-        /* EMBEDS - RESPONSIVE 16:9 */
+        /* EMBEDS - RESPONSIVE 16:9 SCALING */
         .slide-embed-container {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -124,29 +126,30 @@
 
 <audio id="ui-click-sound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<header class="p-6 sticky top-0 z-50 shadow-lg w-full">
-    <div class="w-full flex flex-col md:flex-row justify-between items-center px-4">
-        <h1 class="text-2xl md:text-4xl font-black tracking-tighter font-orbitron text-white text-center md:text-left">AHMED ACADEMY - PHYSICS</h1>
-        <div class="text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded">
-            SYSTEM_STATUS: ONLINE // DB_ACADEMY_v6.1
+<header class="p-4 md:p-6 sticky top-0 z-50 shadow-lg w-full">
+    <div class="max-w-[1800px] mx-auto w-full flex flex-col md:flex-row justify-between items-center px-2 md:px-4">
+        <h1 class="text-xl md:text-3xl lg:text-4xl font-black tracking-tighter font-orbitron text-white text-center md:text-left truncate w-full md:w-auto">
+            AHMED ACADEMY
+        </h1>
+        <div class="text-[10px] md:text-xs font-mono text-white opacity-80 mt-2 md:mt-0 bg-black/20 px-2 py-1 rounded hidden sm:block">
+            SYSTEM_STATUS: ONLINE // DB_v6.2
         </div>
     </div>
 </header>
 
-<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[88px] z-40 w-full shadow-2xl">
-    <div class="w-full p-4">
+<nav class="bg-[#0f0f0f] border-b border-gray-800 sticky top-[70px] md:top-[88px] z-40 w-full shadow-2xl">
+    <div class="max-w-[1800px] mx-auto w-full p-2 md:p-4">
         <div id="module-nav-container" class="flex flex-wrap gap-2 justify-center w-full">
             </div>
     </div>
 </nav>
 
-<div class="w-full px-4 md:px-8 py-6 z-30 relative flex-grow">
-    
-    <main class="w-full min-h-[600px] relative">
+<div class="w-full flex-grow relative z-30">
+    <main class="w-full max-w-[1800px] mx-auto px-3 md:px-6 py-6 min-h-[600px]">
         
-        <div id="content-placeholder" class="h-96 flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-12 text-center mt-10 w-full">
-            <div class="text-5xl mb-4 opacity-20">◢◤</div>
-            <p class="text-gray-500 font-mono text-lg">ESTABLISHING UPLINK... SELECT MODULE ABOVE.</p>
+        <div id="content-placeholder" class="h-[50vh] flex flex-col items-center justify-center border-2 border-dashed border-gray-800 rounded-lg p-4 md:p-12 text-center mt-4 md:mt-10 w-full">
+            <div class="text-4xl md:text-6xl mb-4 opacity-20 animate-pulse">◢◤</div>
+            <p class="text-gray-500 font-mono text-sm md:text-lg">ESTABLISHING UPLINK... SELECT MODULE ABOVE.</p>
         </div>
 
         <div id="topic-content-area" class="hidden w-full transition-all duration-500">
@@ -155,28 +158,28 @@
     </main>
 </div>
 
-<div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
-    <div class="bg-black border-2 border-cyan-500 w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
+<div id="question-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-2 md:p-4">
+    <div class="bg-black border-2 border-cyan-500 w-[98%] md:w-3/4 max-w-5xl h-[90vh] md:max-h-[85vh] flex flex-col shadow-[0_0_50px_rgba(0,255,255,0.15)] rounded-sm relative">
         
-        <div class="bg-cyan-900/40 p-5 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
-            <div>
-                <h2 class="text-xl md:text-2xl font-orbitron text-white tracking-widest" id="modal-title">CLASSIFIED QUESTIONS</h2>
+        <div class="bg-cyan-900/40 p-4 border-b border-cyan-700 flex justify-between items-center flex-shrink-0">
+            <div class="overflow-hidden">
+                <h2 class="text-lg md:text-2xl font-orbitron text-white tracking-widest truncate" id="modal-title">CLASSIFIED</h2>
                 <div class="h-1 w-20 bg-cyan-500 mt-1"></div>
             </div>
-            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition">✕</button>
+            <button onclick="closeQuestions()" class="text-cyan-500 hover:text-white hover:bg-cyan-900/50 rounded-full w-10 h-10 flex-shrink-0 flex items-center justify-center font-bold text-xl transition ml-2">✕</button>
         </div>
 
-        <div class="p-6 overflow-y-auto flex-grow font-mono text-sm md:text-base text-gray-300 space-y-8" id="modal-content">
+        <div class="p-4 md:p-6 overflow-y-auto flex-grow font-mono text-xs md:text-sm text-gray-300 space-y-6 md:space-y-8" id="modal-content">
             </div>
 
-        <div class="p-4 border-t border-gray-800 bg-gray-900 flex justify-end flex-shrink-0">
-             <button onclick="closeQuestions()" class="text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-6 py-3 font-bold transition rounded-sm">Close Terminal</button>
+        <div class="p-3 md:p-4 border-t border-gray-800 bg-gray-900 flex justify-end flex-shrink-0">
+             <button onclick="closeQuestions()" class="text-[10px] md:text-xs uppercase tracking-widest text-white bg-red-600 hover:bg-red-700 px-4 md:px-6 py-2 md:py-3 font-bold transition rounded-sm">Close Terminal</button>
         </div>
     </div>
 </div>
 
-<footer class="mt-auto border-t border-gray-900 p-8 text-center text-xs font-mono text-gray-600 relative z-30 w-full">
-    <p>© 2025 AHMED ACADEMY. ALL RIGHTS RESERVED.</p>
+<footer class="mt-auto border-t border-gray-900 p-6 md:p-8 text-center text-[10px] md:text-xs font-mono text-gray-600 relative z-30 w-full">
+    <p>© 2025 AHMED ACADEMY. SCALABLE VECTOR GRAPHICS.</p>
 </footer>
 
 <script>
@@ -190,7 +193,7 @@
         }
     }
 
-    // --- FULL SLIDE DATABASE ---
+    // --- FULL SLIDE DATABASE (SAME DATA) ---
     const DATABASE = {
         "PHYSICS 101": {
             title: "PHYSICS 101: FOUNDATIONS",
@@ -588,8 +591,9 @@
     const navContainer = document.getElementById('module-nav-container');
     Object.keys(DATABASE).forEach(key => {
         const card = document.createElement('div');
-        card.className = 'topic-card px-4 py-3 rounded-sm font-bold text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
-        card.innerHTML = `<span class="opacity-50 mr-2 text-xs">◢</span> ${key}`;
+        // Scalable Text and Padding
+        card.className = 'topic-card px-2 md:px-4 py-2 md:py-3 rounded-sm font-bold text-xs md:text-sm tracking-widest uppercase border border-gray-800 flex items-center justify-center';
+        card.innerHTML = `<span class="opacity-50 mr-2 text-[10px]">◢</span> ${key}`;
         card.setAttribute('data-key', key);
         card.addEventListener('click', () => {
             playClickSound();
@@ -611,19 +615,19 @@
         topicContentArea.classList.remove('hidden');
         
         let html = `
-            <div class="mb-6 border-b border-red-900 pb-2">
-                <h2 class="text-3xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
-                <p class="text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
+            <div class="mb-4 md:mb-6 border-b border-red-900 pb-2">
+                <h2 class="text-2xl md:text-3xl font-black text-cyber-neon-pink font-orbitron tracking-tighter">${data.title}</h2>
+                <p class="text-[10px] md:text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">AHMED ACADEMY // SECURE_CLEARANCE_ENABLED</p>
             </div>
         `;
         
         for (const [sectionName, items] of Object.entries(data.sections)) {
             html += `
-                <div class="mb-10">
-                    <h3 class="text-xl font-bold mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyan-500 pl-3">
+                <div class="mb-8 md:mb-10">
+                    <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4 text-white font-orbitron tracking-tight flex items-center border-l-4 border-cyan-500 pl-3">
                         ${sectionName.toUpperCase()}
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
                         ${items.map(item => createSlideEmbed(item.link, item.name)).join('')}
                     </div>
                 </div>
@@ -639,7 +643,7 @@
         
         return `
             <div class="group flex flex-col h-full bg-[#111] border border-[#333] hover:border-red-500 transition-all duration-300 shadow-lg">
-                <div class="p-3 border-b border-[#222]">
+                <div class="p-2 md:p-3 border-b border-[#222]">
                      <a href="${url}" target="_blank" class="text-xs text-cyan-500 font-orbitron font-bold tracking-wider truncate hover:underline hover:text-white transition-colors block" title="OPEN FULLSCREEN">
                    ${name.toUpperCase()} ↗
                 </a>
@@ -670,11 +674,11 @@
         questions.forEach((qObj, idx) => {
             // Create container for one question
             const qDiv = document.createElement('div');
-            qDiv.className = "border-b border-gray-800 pb-6 last:border-0";
+            qDiv.className = "border-b border-gray-800 pb-4 md:pb-6 last:border-0";
             
             // Question Text
             const qTitle = document.createElement('h3');
-            qTitle.className = "text-white font-bold mb-3 flex gap-2 font-orbitron";
+            qTitle.className = "text-white font-bold mb-3 flex gap-2 font-orbitron text-sm md:text-base";
             qTitle.innerHTML = `<span class="text-cyan-500">0${idx+1}</span> ${qObj.q}`;
             qDiv.appendChild(qTitle);
             
@@ -684,7 +688,7 @@
             
             qObj.options.forEach((optText, optIdx) => {
                 const btn = document.createElement('button');
-                btn.className = "mcq-option p-3 bg-gray-900 border border-gray-700 rounded-sm text-sm text-gray-300 font-mono";
+                btn.className = "mcq-option p-2 md:p-3 bg-gray-900 border border-gray-700 rounded-sm text-xs md:text-sm text-gray-300 font-mono";
                 btn.innerText = optText;
                 
                 // Click Event
