@@ -458,148 +458,656 @@
     };
 
     // --- PROCEDURAL MCQ GENERATOR ---
-    function generateSlideQuestions(topicName) {
-        let questions = [];
-        let t = topicName.toLowerCase();
-
-        // 1. MATHS & STANDARD FORM
-        if (t.includes('standard') || t.includes('significant') || t.includes('rearranging') || t.includes('algebra')) {
-            questions = [
-                { q: "Convert 4500 into Standard Form.", options: ["4.5 x 10³", "4.5 x 10²", "45 x 10²", "0.45 x 10⁴"], correct: 0 },
-                { q: "How many significant figures in 0.00340?", options: ["2", "3", "4", "5"], correct: 1 },
-                { q: "Rearrange F = ma to find a.", options: ["a = F/m", "a = m/F", "a = F - m", "a = F x m"], correct: 0 },
-                { q: "What is 3.2 x 10² multiplied by 2?", options: ["6.4 x 10²", "6.4 x 10³", "3.2 x 10⁴", "6400"], correct: 0 },
-                { q: "Round 5.678 to 2 significant figures.", options: ["5.6", "5.7", "5.68", "6.0"], correct: 1 },
-                { q: "Convert 250 mA to Amps.", options: ["25 A", "2.5 A", "0.25 A", "0.025 A"], correct: 2 },
-                { q: "Which of these is a Scalar quantity?", options: ["Velocity", "Force", "Displacement", "Mass"], correct: 3 },
-                { q: "Calculate (2 x 10³) + (3 x 10³).", options: ["5 x 10⁶", "5 x 10³", "6 x 10³", "500"], correct: 1 },
-                { q: "Rearrange V = IR to find R.", options: ["R = V/I", "R = I/V", "R = V x I", "R = V - I"], correct: 0 },
-                { q: "What is the standard prefix for 10⁻³?", options: ["Kilo", "Micro", "Milli", "Nano"], correct: 2 }
-            ];
-        }
-        // 2. DENSITY & MATTER
-        else if (t.includes('density') || t.includes('matter') || t.includes('states') || t.includes('particle')) {
-            questions = [
-                { q: "What is the formula for Density?", options: ["Density = Mass / Volume", "Density = Volume / Mass", "Density = Mass x Volume", "Density = Weight / Volume"], correct: 0 },
-                { q: "Which state of matter has fixed shape and volume?", options: ["Solid", "Liquid", "Gas", "Plasma"], correct: 0 },
-                { q: "What happens to the density of a gas if volume decreases (mass constant)?", options: ["Increases", "Decreases", "Stays the same", "Becomes zero"], correct: 0 },
-                { q: "What is the unit of Density?", options: ["kg/m³", "N/m²", "J/kg", "m/s²"], correct: 0 },
-                { q: "Why does ice float on water?", options: ["Ice is less dense than water", "Ice is heavier than water", "Ice has more volume", "Ice is colder"], correct: 0 },
-                { q: "Which method measures the volume of an irregular solid?", options: ["Displacement can", "Ruler", "Balance", "Thermometer"], correct: 0 },
-                { q: "What is Sublimation?", options: ["Solid to Gas directly", "Gas to Liquid", "Liquid to Solid", "Solid to Liquid"], correct: 0 },
-                { q: "Particles in a liquid are...", options: ["Close together but random", "Far apart and fast", "Regularly arranged", "Stationary"], correct: 0 },
-                { q: "Calculate mass if Density=5g/cm³ and Volume=10cm³.", options: ["50 g", "2 g", "0.5 g", "15 g"], correct: 0 },
-                { q: "What causes gas pressure?", options: ["Particles colliding with walls", "Particles hitting each other", "Heat energy", "Gravity"], correct: 0 }
-            ];
-        }
-        // 3. FORCES & MOTION
-        else if (t.includes('force') || t.includes('newton') || t.includes('velocity') || t.includes('acceleration')) {
-            questions = [
-                { q: "What is the unit of Force?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 0 },
-                { q: "What is Newton's First Law?", options: ["Objects stay at rest unless acted on", "F = ma", "Action = Reaction", "Gravity pulls down"], correct: 0 },
-                { q: "Calculate Force if m=10kg and a=2m/s².", options: ["20 N", "5 N", "12 N", "0.2 N"], correct: 0 },
-                { q: "What is the difference between Speed and Velocity?", options: ["Velocity has direction", "Speed has direction", "They are the same", "Velocity is always faster"], correct: 0 },
-                { q: "What is the gradient of a Distance-Time graph?", options: ["Speed", "Acceleration", "Force", "Distance"], correct: 0 },
-                { q: "Terminal velocity occurs when...", options: ["Weight equals Air Resistance", "Weight is greater than Air Resistance", "There is no Air Resistance", "Acceleration is maximum"], correct: 0 },
-                { q: "Hooke's Law states that Force is proportional to...", options: ["Extension", "Length", "Mass", "Spring Constant"], correct: 0 },
-                { q: "What is the unit of Acceleration?", options: ["m/s²", "m/s", "N/kg", "kg m/s"], correct: 0 },
-                { q: "Which force opposes motion?", options: ["Friction", "Thrust", "Weight", "Tension"], correct: 0 },
-                { q: "Weight is calculated by...", options: ["Mass x Gravity", "Mass / Gravity", "Mass + Gravity", "Gravity / Mass"], correct: 0 }
-            ];
-        }
-        // 4. ENERGY & THERMAL
-        else if (t.includes('energy') || t.includes('heat') || t.includes('thermal') || t.includes('work')) {
-            questions = [
-                { q: "What is the unit of Energy?", options: ["Joule", "Newton", "Watt", "Ampere"], correct: 0 },
-                { q: "Which energy store is in a moving object?", options: ["Kinetic", "Gravitational", "Elastic", "Thermal"], correct: 0 },
-                { q: "Calculate Work Done if Force=10N and Distance=5m.", options: ["50 J", "2 J", "15 J", "0.5 J"], correct: 0 },
-                { q: "Conduction mainly happens in...", options: ["Solids", "Liquids", "Gases", "Vacuum"], correct: 0 },
-                { q: "Dark matt surfaces are good...", options: ["Absorbers of radiation", "Reflectors of radiation", "Conductors", "Insulators"], correct: 0 },
-                { q: "Formula for Efficiency?", options: ["Useful Output / Total Input", "Total Input / Useful Output", "Input x Output", "Output - Input"], correct: 0 },
-                { q: "Power is defined as...", options: ["Rate of doing work", "Force x Distance", "Energy x Time", "Voltage x Resistance"], correct: 0 },
-                { q: "Gravitational Potential Energy depends on...", options: ["Mass, Gravity, Height", "Mass, Speed", "Force, Distance", "Spring Constant"], correct: 0 },
-                { q: "Which is a renewable energy source?", options: ["Wind", "Coal", "Gas", "Nuclear"], correct: 0 },
-                { q: "Conservation of Energy means...", options: ["Energy cannot be created or destroyed", "Energy is always lost", "Energy increases over time", "Energy equals Mass"], correct: 0 }
-            ];
-        }
-        // 5. ELECTRICITY
-        else if (t.includes('circuit') || t.includes('current') || t.includes('voltage') || t.includes('resistance')) {
-            questions = [
-                { q: "What is the unit of Current?", options: ["Ampere", "Volt", "Ohm", "Coulomb"], correct: 0 },
-                { q: "State Ohm's Law formula.", options: ["V = I x R", "I = V x R", "R = V x I", "V = I / R"], correct: 0 },
-                { q: "In a Series circuit, Current is...", options: ["The same everywhere", "Split between components", "Zero", "Double the voltage"], correct: 0 },
-                { q: "What measures Potential Difference?", options: ["Voltmeter", "Ammeter", "Resistor", "Fuse"], correct: 0 },
-                { q: "What is the colour of the Live wire?", options: ["Brown", "Blue", "Green/Yellow", "Black"], correct: 0 },
-                { q: "Calculate Power if V=10V and I=2A.", options: ["20 W", "5 W", "12 W", "0.2 W"], correct: 0 },
-                { q: "The function of a fuse is to...", options: ["Melt if current is too high", "Regulate voltage", "Store charge", "Increase resistance"], correct: 0 },
-                { q: "Resistance is measured in...", options: ["Ohms", "Watts", "Amps", "Volts"], correct: 0 },
-                { q: "In parallel circuits, Voltage is...", options: ["The same across each branch", "Split between branches", "Zero", "Dependent on current"], correct: 0 },
-                { q: "AC stands for...", options: ["Alternating Current", "Anti Current", "Active Current", "Ampere Current"], correct: 0 }
-            ];
-        }
-        // 6. WAVES & LIGHT
-        else if (t.includes('wave') || t.includes('light') || t.includes('sound') || t.includes('spectrum')) {
-            questions = [
-                { q: "What is the wave equation?", options: ["v = f x λ", "v = f / λ", "f = v x λ", "λ = v x f"], correct: 0 },
-                { q: "Sound waves are...", options: ["Longitudinal", "Transverse", "Electromagnetic", "Radio"], correct: 0 },
-                { q: "Which EM wave has the highest frequency?", options: ["Gamma Rays", "Radio Waves", "Visible Light", "X-Rays"], correct: 0 },
-                { q: "Light bending when entering glass is called...", options: ["Refraction", "Reflection", "Diffraction", "Incidence"], correct: 0 },
-                { q: "The angle of incidence is equal to...", options: ["The angle of reflection", "The angle of refraction", "90 degrees", "The critical angle"], correct: 0 },
-                { q: "Frequency is measured in...", options: ["Hertz (Hz)", "Meters (m)", "Seconds (s)", "Decibels (dB)"], correct: 0 },
-                { q: "What type of wave is Light?", options: ["Transverse", "Longitudinal", "Mechanical", "Sonic"], correct: 0 },
-                { q: "Which colour has the longest wavelength?", options: ["Red", "Violet", "Blue", "Green"], correct: 0 },
-                { q: "Ultrasound is sound above...", options: ["20,000 Hz", "20 Hz", "2,000 Hz", "200 Hz"], correct: 0 },
-                { q: "The Critical Angle is related to...", options: ["Total Internal Reflection", "Diffraction", "Interference", "Dispersion"], correct: 0 }
-            ];
-        }
-        // 7. SPACE
-        else if (t.includes('space') || t.includes('star') || t.includes('orbit') || t.includes('planet')) {
-            questions = [
-                { q: "Which galaxy is our Solar System in?", options: ["Milky Way", "Andromeda", "Triangulum", "Sombrero"], correct: 0 },
-                { q: "The force keeping planets in orbit is...", options: ["Gravity", "Magnetism", "Friction", "Tension"], correct: 0 },
-                { q: "What is a Light Year measuring?", options: ["Distance", "Time", "Speed", "Brightness"], correct: 0 },
-                { q: "The Big Bang theory explains...", options: ["The origin of the Universe", "The death of stars", "Formation of planets", "Black holes"], correct: 0 },
-                { q: "What is the fuel for stars?", options: ["Hydrogen", "Oxygen", "Iron", "Carbon"], correct: 0 },
-                { q: "Red Shift provides evidence for...", options: ["Expanding Universe", "Shrinking Universe", "Static Universe", "Spinning Universe"], correct: 0 },
-                { q: "Which planet is closest to the Sun?", options: ["Mercury", "Venus", "Mars", "Earth"], correct: 0 },
-                { q: "A geostationary satellite...", options: ["Orbits every 24 hours", "Orbits every 90 mins", "Stays at the North Pole", "Orbits the Moon"], correct: 0 },
-                { q: "What is a Supernova?", options: ["Explosion of a massive star", "Birth of a star", "Collision of planets", "A black hole"], correct: 0 },
-                { q: "Our Sun is currently a...", options: ["Main Sequence Star", "Red Giant", "White Dwarf", "Neutron Star"], correct: 0 }
-            ];
-        }
-        // 8. RADIOACTIVITY
-        else if (t.includes('radio') || t.includes('nuclear') || t.includes('atom')) {
-            questions = [
-                { q: "What are Alpha particles?", options: ["Helium nuclei", "Electrons", "EM waves", "Neutrons"], correct: 0 },
-                { q: "Which radiation is most penetrating?", options: ["Gamma", "Beta", "Alpha", "Infrared"], correct: 0 },
-                { q: "What is an Isotope?", options: ["Same protons, different neutrons", "Same neutrons, different protons", "Different electrons", "Different element"], correct: 0 },
-                { q: "Beta particles are...", options: ["High speed electrons", "Protons", "Neutrons", "Waves"], correct: 0 },
-                { q: "What is Half-Life?", options: ["Time for activity to halve", "Half the total time", "Time to decay completely", "Half the mass"], correct: 0 },
-                { q: "Which device detects radiation?", options: ["Geiger-Muller Tube", "Voltmeter", "Barometer", "Thermometer"], correct: 0 },
-                { q: "Nuclear Fission involves...", options: ["Splitting a nucleus", "Joining nuclei", "Burning atoms", "Chemical reaction"], correct: 0 },
-                { q: "Nuclear Fusion powers...", options: ["The Sun", "Nuclear power stations", "Batteries", "X-ray machines"], correct: 0 },
-                { q: "Background radiation comes from...", options: ["Rocks and Space", "Only hospitals", "Only power plants", "Only microwaves"], correct: 0 },
-                { q: "The unit of Activity is...", options: ["Becquerel (Bq)", "Sievert (Sv)", "Count", "Hertz (Hz)"], correct: 0 }
-            ];
-        }
-        // DEFAULT FALLBACK
-        else {
-            questions = [
-                { q: "Which variable goes on the x-axis?", options: ["Independent", "Dependent", "Control", "Random"], correct: 0 },
-                { q: "What is an anomaly?", options: ["A result that doesn't fit the pattern", "The correct result", "The average", "A prediction"], correct: 0 },
-                { q: "How do you improve reliability?", options: ["Repeat and average", "Use better equipment", "Change the method", "Guess"], correct: 0 },
-                { q: "What is the SI unit for Time?", options: ["Seconds", "Minutes", "Hours", "Days"], correct: 0 },
-                { q: "Which line is the line of best fit?", options: ["Smooth curve/line through points", "Dot to dot", "Zig zag", "Straight line only"], correct: 0 },
-                { q: "What is precision?", options: ["Closeness to the mean", "Closeness to true value", "Correctness", "Zero error"], correct: 0 },
-                { q: "What is accuracy?", options: ["Closeness to true value", "Smallest scale division", "Repeated results", "No errors"], correct: 0 },
-                { q: "A hypothesis is...", options: ["A scientific prediction", "A fact", "A conclusion", "A graph"], correct: 0 },
-                { q: "What is the SI unit for Mass?", options: ["Kilogram", "Gram", "Pound", "Tonne"], correct: 0 },
-                { q: "To measure liquid volume accurately use a...", options: ["Measuring Cylinder", "Beaker", "Flask", "Test tube"], correct: 0 }
-            ];
-        }
-
-        return questions;
-    }
+function generateSlideQuestions(topicName) {
+    const questionBank = {
+        // PHYSICS 101 - MATHEMATICAL SKILLS
+        "Standard Form": [
+            { q: "Express 45,000 in standard form.", options: ["4.5 × 10⁴", "45 × 10³", "4.5 × 10³", "0.45 × 10⁵"], correct: 0 },
+            { q: "What is 3.2 × 10³ as an ordinary number?", options: ["3200", "320", "32000", "0.32"], correct: 0 },
+            { q: "Express 0.00056 in standard form.", options: ["5.6 × 10⁻⁴", "5.6 × 10⁴", "56 × 10⁻⁵", "5.6 × 10⁻³"], correct: 0 },
+            { q: "Calculate (2 × 10³) × (3 × 10²).", options: ["6 × 10⁵", "6 × 10⁶", "5 × 10⁵", "6 × 10⁴"], correct: 0 },
+            { q: "What is 7.5 × 10⁻² as an ordinary number?", options: ["0.075", "75", "0.0075", "7.5"], correct: 0 },
+            { q: "Express 250,000,000 in standard form.", options: ["2.5 × 10⁸", "25 × 10⁷", "2.5 × 10⁷", "2.5 × 10⁹"], correct: 0 },
+            { q: "Calculate (8 × 10⁴) ÷ (2 × 10²).", options: ["4 × 10²", "4 × 10⁶", "16 × 10²", "4 × 10³"], correct: 0 },
+            { q: "Which is larger: 3.5 × 10⁴ or 4.2 × 10³?", options: ["3.5 × 10⁴", "4.2 × 10³", "They are equal", "Cannot determine"], correct: 0 },
+            { q: "Express 0.0000091 in standard form.", options: ["9.1 × 10⁻⁶", "9.1 × 10⁶", "91 × 10⁻⁷", "9.1 × 10⁻⁵"], correct: 0 },
+            { q: "Add (5 × 10³) + (2 × 10³) in standard form.", options: ["7 × 10³", "7 × 10⁶", "10 × 10³", "3 × 10³"], correct: 0 }
+        ],
+        
+        "Significant Figures": [
+            { q: "How many significant figures are in 4500?", options: ["2", "3", "4", "1"], correct: 0 },
+            { q: "Round 3.4567 to 3 significant figures.", options: ["3.46", "3.45", "3.457", "3.5"], correct: 0 },
+            { q: "How many significant figures are in 0.00450?", options: ["3", "2", "5", "4"], correct: 0 },
+            { q: "Round 0.08234 to 2 significant figures.", options: ["0.082", "0.08", "0.0823", "0.1"], correct: 0 },
+            { q: "What is 567.89 to 4 significant figures?", options: ["567.9", "568.0", "567.8", "5679"], correct: 0 },
+            { q: "How many significant figures are in 1.200?", options: ["4", "2", "3", "5"], correct: 0 },
+            { q: "Round 9876 to 2 significant figures.", options: ["9900", "9800", "10000", "99"], correct: 0 },
+            { q: "Calculate 5.2 × 3.14 to 2 sig figs.", options: ["16", "16.3", "16.33", "17"], correct: 0 },
+            { q: "How many significant figures are in 50.00?", options: ["4", "2", "3", "1"], correct: 0 },
+            { q: "Round 0.003456 to 2 significant figures.", options: ["0.0035", "0.003", "0.0034", "0.004"], correct: 0 }
+        ],
+        
+        "Scalars and Vectors": [
+            { q: "Which of these is a vector quantity?", options: ["Velocity", "Speed", "Mass", "Temperature"], correct: 0 },
+            { q: "Which is a scalar quantity?", options: ["Distance", "Displacement", "Force", "Acceleration"], correct: 0 },
+            { q: "What property do vectors have that scalars don't?", options: ["Direction", "Magnitude", "Units", "Mass"], correct: 0 },
+            { q: "If you walk 5m North then 3m South, what is your displacement?", options: ["2m North", "8m", "2m South", "5m North"], correct: 0 },
+            { q: "Which is a vector: weight or mass?", options: ["Weight", "Mass", "Both", "Neither"], correct: 0 },
+            { q: "Two forces of 3N and 4N act at right angles. What is the resultant?", options: ["5N", "7N", "1N", "12N"], correct: 0 },
+            { q: "Is energy a scalar or vector?", options: ["Scalar", "Vector", "Both", "Neither"], correct: 0 },
+            { q: "What is the resultant of 10N East and 10N West?", options: ["0N", "20N", "10N East", "10N West"], correct: 0 },
+            { q: "Which quantity requires direction: momentum or kinetic energy?", options: ["Momentum", "Kinetic energy", "Both", "Neither"], correct: 0 },
+            { q: "Is pressure a scalar or vector?", options: ["Scalar", "Vector", "Both", "Neither"], correct: 0 }
+        ],
+        
+        "Length Area Volume Units": [
+            { q: "Convert 2.5m to cm.", options: ["250 cm", "25 cm", "2500 cm", "0.25 cm"], correct: 0 },
+            { q: "What is the area of a 5cm × 3cm rectangle in m²?", options: ["0.0015 m²", "15 m²", "0.15 m²", "1.5 m²"], correct: 0 },
+            { q: "How many mm³ in 1 cm³?", options: ["1000", "100", "10", "10000"], correct: 0 },
+            { q: "Convert 500 mm to metres.", options: ["0.5 m", "5 m", "50 m", "0.05 m"], correct: 0 },
+            { q: "What is the volume of a 2m × 3m × 4m box?", options: ["24 m³", "9 m³", "12 m³", "240 m³"], correct: 0 },
+            { q: "Convert 0.05 m² to cm².", options: ["500 cm²", "50 cm²", "5 cm²", "5000 cm²"], correct: 0 },
+            { q: "How many litres in 2000 cm³?", options: ["2 L", "20 L", "0.2 L", "200 L"], correct: 0 },
+            { q: "What is 1 km in metres?", options: ["1000 m", "100 m", "10000 m", "10 m"], correct: 0 },
+            { q: "Convert 3 m³ to cm³.", options: ["3,000,000 cm³", "300,000 cm³", "30,000 cm³", "3000 cm³"], correct: 0 },
+            { q: "Area of a circle with radius 5cm (use π=3.14)?", options: ["78.5 cm²", "31.4 cm²", "15.7 cm²", "157 cm²"], correct: 0 }
+        ],
+        
+        "Rearranging Formula": [
+            { q: "Rearrange v = u + at to find a.", options: ["a = (v - u)/t", "a = v - u + t", "a = t(v - u)", "a = v/u - t"], correct: 0 },
+            { q: "Rearrange E = mc² to find m.", options: ["m = E/c²", "m = E - c²", "m = Ec²", "m = √(E/c)"], correct: 0 },
+            { q: "If F = ma, what is m?", options: ["m = F/a", "m = Fa", "m = a/F", "m = F - a"], correct: 0 },
+            { q: "Rearrange V = IR to find I.", options: ["I = V/R", "I = VR", "I = R/V", "I = V - R"], correct: 0 },
+            { q: "If P = E/t, what is t?", options: ["t = E/P", "t = PE", "t = P/E", "t = E - P"], correct: 0 },
+            { q: "Rearrange s = vt to find v.", options: ["v = s/t", "v = st", "v = t/s", "v = s - t"], correct: 0 },
+            { q: "If density = mass/volume, what is volume?", options: ["volume = mass/density", "volume = mass × density", "volume = density/mass", "volume = mass - density"], correct: 0 },
+            { q: "Rearrange KE = ½mv² to find v.", options: ["v = √(2KE/m)", "v = 2KE/m", "v = KE/2m", "v = (2KE/m)²"], correct: 0 },
+            { q: "If a = (v-u)/t, what is u?", options: ["u = v - at", "u = (v-a)/t", "u = vt - a", "u = at - v"], correct: 0 },
+            { q: "Rearrange p = mv to find m.", options: ["m = p/v", "m = pv", "m = v/p", "m = p - v"], correct: 0 }
+        ],
+        
+        // MEASUREMENT
+        "S.I. Units": [
+            { q: "What is the SI unit for mass?", options: ["kilogram (kg)", "gram (g)", "pound (lb)", "newton (N)"], correct: 0 },
+            { q: "What is the SI unit for length?", options: ["metre (m)", "centimetre (cm)", "foot (ft)", "kilometre (km)"], correct: 0 },
+            { q: "What is the SI unit for time?", options: ["second (s)", "minute (min)", "hour (h)", "day (d)"], correct: 0 },
+            { q: "What is the SI unit for electric current?", options: ["ampere (A)", "volt (V)", "ohm (Ω)", "watt (W)"], correct: 0 },
+            { q: "What is the SI unit for temperature?", options: ["kelvin (K)", "celsius (°C)", "fahrenheit (°F)", "joule (J)"], correct: 0 },
+            { q: "What is the SI unit for force?", options: ["newton (N)", "joule (J)", "pascal (Pa)", "watt (W)"], correct: 0 },
+            { q: "What is the SI unit for energy?", options: ["joule (J)", "watt (W)", "newton (N)", "calorie (cal)"], correct: 0 },
+            { q: "What is the SI unit for power?", options: ["watt (W)", "joule (J)", "newton (N)", "volt (V)"], correct: 0 },
+            { q: "What is the SI unit for pressure?", options: ["pascal (Pa)", "newton (N)", "bar", "atmosphere (atm)"], correct: 0 },
+            { q: "What is the SI unit for frequency?", options: ["hertz (Hz)", "second (s)", "watt (W)", "metre (m)"], correct: 0 }
+        ],
+        
+        "Standard Prefixes": [
+            { q: "What does the prefix 'kilo' mean?", options: ["× 10³", "× 10⁶", "× 10⁻³", "× 10²"], correct: 0 },
+            { q: "What does the prefix 'milli' mean?", options: ["× 10⁻³", "× 10³", "× 10⁻⁶", "× 10⁶"], correct: 0 },
+            { q: "What does the prefix 'mega' mean?", options: ["× 10⁶", "× 10³", "× 10⁹", "× 10⁻⁶"], correct: 0 },
+            { q: "What does the prefix 'micro' mean?", options: ["× 10⁻⁶", "× 10⁻³", "× 10⁶", "× 10⁻⁹"], correct: 0 },
+            { q: "Convert 5000 m to km.", options: ["5 km", "0.5 km", "50 km", "500 km"], correct: 0 },
+            { q: "Convert 250 mA to A.", options: ["0.25 A", "2.5 A", "25 A", "0.025 A"], correct: 0 },
+            { q: "What is 3 MW in W?", options: ["3,000,000 W", "300,000 W", "30,000 W", "3000 W"], correct: 0 },
+            { q: "Convert 500 μm to mm.", options: ["0.5 mm", "5 mm", "50 mm", "0.05 mm"], correct: 0 },
+            { q: "What does the prefix 'nano' mean?", options: ["× 10⁻⁹", "× 10⁻⁶", "× 10⁹", "× 10⁶"], correct: 0 },
+            { q: "Convert 2.5 GHz to Hz.", options: ["2,500,000,000 Hz", "2,500,000 Hz", "250,000,000 Hz", "25,000 Hz"], correct: 0 }
+        ],
+        
+        "Scientific Definitions": [
+            { q: "What is a hypothesis?", options: ["A testable prediction", "A proven fact", "The final conclusion", "An observation"], correct: 0 },
+            { q: "What is a variable?", options: ["Something that can change", "A constant value", "The result", "The equipment"], correct: 0 },
+            { q: "What is the independent variable?", options: ["The one you change", "The one you measure", "The one you keep constant", "The result"], correct: 0 },
+            { q: "What is the dependent variable?", options: ["The one you measure", "The one you change", "The one you keep constant", "The hypothesis"], correct: 0 },
+            { q: "What is a control variable?", options: ["One kept constant", "One you change", "One you measure", "The hypothesis"], correct: 0 },
+            { q: "What is precision?", options: ["How close repeated measurements are", "How close to the true value", "The smallest division", "No errors"], correct: 0 },
+            { q: "What is accuracy?", options: ["How close to the true value", "How close repeated measurements are", "The smallest division", "No random errors"], correct: 0 },
+            { q: "What is resolution?", options: ["The smallest measurable change", "How accurate it is", "How precise it is", "The range"], correct: 0 },
+            { q: "What is a fair test?", options: ["Only one variable changes", "All variables change", "No variables change", "Two variables change"], correct: 0 },
+            { q: "What is repeatability?", options: ["Same person gets similar results", "Different people get similar results", "Different methods get similar results", "One measurement only"], correct: 0 }
+        ],
+        
+        "Types of Variables": [
+            { q: "In testing spring extension with mass, what is the independent variable?", options: ["Mass added", "Extension", "Spring constant", "Temperature"], correct: 0 },
+            { q: "When investigating reaction time, what do you measure?", options: ["Time taken", "Distance", "Mass", "Force"], correct: 0 },
+            { q: "Which is a continuous variable?", options: ["Temperature", "Type of metal", "On/off switch", "Colour"], correct: 0 },
+            { q: "Which is a categoric variable?", options: ["Type of material", "Length", "Mass", "Time"], correct: 0 },
+            { q: "In a circuit experiment, what would you control?", options: ["Wire length and type", "Current", "Voltage", "Resistance"], correct: 0 },
+            { q: "What makes data more reliable?", options: ["Repeating measurements", "Using bigger equipment", "Doing it once carefully", "Guessing"], correct: 0 },
+            { q: "Which is a discrete variable?", options: ["Number of batteries", "Temperature", "Volume", "Time"], correct: 0 },
+            { q: "In a pendulum experiment, what do you keep constant?", options: ["Mass and length (except when testing)", "Nothing", "Everything", "Time"], correct: 0 },
+            { q: "What is an anomaly?", options: ["A result that doesn't fit the pattern", "The average", "A prediction", "The control"], correct: 0 },
+            { q: "How do you improve validity?", options: ["Control all other variables", "Repeat many times", "Use bigger equipment", "Measure quickly"], correct: 0 }
+        ],
+        
+        "Measuring Equipment": [
+            { q: "What equipment measures volume of liquid accurately?", options: ["Measuring cylinder", "Beaker", "Test tube", "Flask"], correct: 0 },
+            { q: "What measures small lengths accurately?", options: ["Vernier calipers", "Ruler", "Tape measure", "Trundle wheel"], correct: 0 },
+            { q: "What measures mass?", options: ["Balance", "Newton meter", "Ruler", "Thermometer"], correct: 0 },
+            { q: "What measures force?", options: ["Newton meter", "Balance", "Ruler", "Ammeter"], correct: 0 },
+            { q: "What measures current?", options: ["Ammeter", "Voltmeter", "Ohmmeter", "Thermometer"], correct: 0 },
+            { q: "What measures potential difference?", options: ["Voltmeter", "Ammeter", "Ohmmeter", "Wattmeter"], correct: 0 },
+            { q: "What measures temperature?", options: ["Thermometer", "Barometer", "Ammeter", "Ruler"], correct: 0 },
+            { q: "What measures time accurately for experiments?", options: ["Stopwatch", "Clock", "Sundial", "Phone"], correct: 0 },
+            { q: "What measures atmospheric pressure?", options: ["Barometer", "Thermometer", "Manometer", "Ruler"], correct: 0 },
+            { q: "What measures small masses accurately?", options: ["Electronic balance", "Spring balance", "Ruler", "Beaker"], correct: 0 }
+        ],
+        
+        "Types of Errors": [
+            { q: "What is a systematic error?", options: ["Consistent error in the same direction", "Random variation", "A mistake", "An anomaly"], correct: 0 },
+            { q: "What is a random error?", options: ["Unpredictable variation", "Consistent error", "Zero error", "A mistake"], correct: 0 },
+            { q: "What is zero error?", options: ["Instrument reading when it should be zero", "No error", "Random error", "Human error"], correct: 0 },
+            { q: "How do you reduce random errors?", options: ["Take repeat readings and average", "Use better equipment", "Calibrate equipment", "Work faster"], correct: 0 },
+            { q: "How do you reduce systematic errors?", options: ["Calibrate equipment", "Repeat readings", "Work faster", "Ignore them"], correct: 0 },
+            { q: "Parallax error is what type of error?", options: ["Systematic", "Random", "Zero", "Neither"], correct: 0 },
+            { q: "What causes parallax error?", options: ["Reading scale from wrong angle", "Equipment fault", "Random variation", "Calculation mistake"], correct: 0 },
+            { q: "Which error affects accuracy?", options: ["Systematic error", "Random error", "Both equally", "Neither"], correct: 0 },
+            { q: "Which error affects precision?", options: ["Random error", "Systematic error", "Both equally", "Neither"], correct: 0 },
+            { q: "A ruler worn at the zero mark causes what?", options: ["Systematic error", "Random error", "Parallax error", "No error"], correct: 0 }
+        ],
+        
+        "Presenting Data": [
+            { q: "Which graph for two continuous variables?", options: ["Line graph", "Bar chart", "Pie chart", "Pictogram"], correct: 0 },
+            { q: "Which graph for categoric data?", options: ["Bar chart", "Line graph", "Scatter graph", "Histogram"], correct: 0 },
+            { q: "What goes on the x-axis?", options: ["Independent variable", "Dependent variable", "Control variable", "Results"], correct: 0 },
+            { q: "What goes on the y-axis?", options: ["Dependent variable", "Independent variable", "Control variable", "Title"], correct: 0 },
+            { q: "What is a line of best fit?", options: ["Smooth line through pattern", "Joining all points dot-to-dot", "Horizontal line", "Vertical line"], correct: 0 },
+            { q: "Should a line of best fit go through all points?", options: ["No, through the trend", "Yes, always", "Only anomalies", "Never"], correct: 0 },
+            { q: "How do you show anomalies on a graph?", options: ["Circle them", "Cross them out", "Ignore them", "Join them"], correct: 0 },
+            { q: "What does a straight line through origin show?", options: ["Direct proportion", "Inverse proportion", "No relationship", "Random"], correct: 0 },
+            { q: "What relationship does a curve show?", options: ["Non-linear", "Direct proportion", "No relationship", "Inverse proportion"], correct: 0 },
+            { q: "What should graph axes always have?", options: ["Labels with units", "Just numbers", "Just labels", "Nothing"], correct: 0 }
+        ],
+        
+        // ASTRONOMY
+        "Motion of the Earth": [
+            { q: "How long does Earth take to rotate once?", options: ["24 hours", "365 days", "30 days", "12 hours"], correct: 0 },
+            { q: "How long does Earth take to orbit the Sun?", options: ["365 days", "24 hours", "30 days", "7 days"], correct: 0 },
+            { q: "What causes day and night?", options: ["Earth's rotation", "Earth's orbit", "Moon's orbit", "Sun's movement"], correct: 0 },
+            { q: "What causes seasons?", options: ["Earth's tilted axis", "Distance from Sun", "Moon's orbit", "Sun's temperature"], correct: 0 },
+            { q: "Earth rotates in which direction?", options: ["West to East", "East to West", "North to South", "South to North"], correct: 0 },
+            { q: "What angle is Earth's axis tilted?", options: ["23.5°", "45°", "90°", "0°"], correct: 0 },
+            { q: "When is the Northern Hemisphere tilted toward Sun?", options: ["Summer", "Winter", "Spring", "Autumn"], correct: 0 },
+            { q: "What shape is Earth's orbit?", options: ["Ellipse", "Circle", "Square", "Random"], correct: 0 },
+            { q: "Why don't we feel Earth spinning?", options: ["We move with it", "It spins too slowly", "Gravity stops us", "It doesn't spin"], correct: 0 },
+            { q: "What keeps Earth in orbit around Sun?", options: ["Gravity", "Magnetism", "Air pressure", "Friction"], correct: 0 }
+        ],
+        
+        "Motion of the Moon": [
+            { q: "How long does the Moon take to orbit Earth?", options: ["28 days", "24 hours", "365 days", "12 hours"], correct: 0 },
+            { q: "What causes Moon phases?", options: ["Different amounts of sunlit side visible", "Earth's shadow", "Moon's rotation", "Sun's movement"], correct: 0 },
+            { q: "What is a lunar eclipse?", options: ["Earth's shadow on Moon", "Moon's shadow on Earth", "Moon blocking Sun", "Sun blocking Earth"], correct: 0 },
+            { q: "What is a solar eclipse?", options: ["Moon blocking Sun", "Earth blocking Sun", "Sun blocking Moon", "Moon's shadow on itself"], correct: 0 },
+            { q: "Why do we see the same side of the Moon?", options: ["Moon's rotation matches its orbit", "Moon doesn't rotate", "Earth blocks the other side", "Moon is too far"], correct: 0 },
+            { q: "What causes tides on Earth?", options: ["Moon's gravity", "Sun's heat", "Earth's rotation", "Wind"], correct: 0 },
+            { q: "When are tides highest?", options: ["Full and new Moon", "First quarter", "Any time", "Never"], correct: 0 },
+            { q: "What keeps Moon in orbit around Earth?", options: ["Gravity", "Magnetism", "Air pressure", "Friction"], correct: 0 },
+            { q: "Does the Moon produce its own light?", options: ["No, reflects sunlight", "Yes, it glows", "Sometimes", "Only at full moon"], correct: 0 },
+            { q: "What is a new Moon?", options: ["Moon between Earth and Sun", "Earth between Moon and Sun", "Full sunlit side visible", "Moon far from Earth"], correct: 0 }
+        ],
+        
+        "Moons and Satellites": [
+            { q: "What is a natural satellite?", options: ["Moon orbiting a planet", "Human-made orbiter", "A star", "A comet"], correct: 0 },
+            { q: "What is an artificial satellite?", options: ["Human-made orbiter", "Natural moon", "A planet", "A star"], correct: 0 },
+            { q: "What is a geostationary satellite?", options: ["Orbits in 24 hours above equator", "Orbits poles", "Doesn't orbit", "Orbits in 12 hours"], correct: 0 },
+            { q: "What are geostationary satellites used for?", options: ["Communications and weather", "GPS", "Photography", "Space exploration"], correct: 0 },
+            { q: "What is a polar orbit satellite used for?", options: ["Monitoring whole Earth", "Communications", "One location only", "Moon observation"], correct: 0 },
+            { q: "How many moons does Jupiter have?", options: ["Over 75", "1", "0", "2"], correct: 0 },
+            { q: "What keeps satellites in orbit?", options: ["Gravity providing centripetal force", "Engines", "Magnetism", "Air pressure"], correct: 0 },
+            { q: "Why don't satellites fall down?", options: ["Constant sideways motion", "They float", "Engines keep them up", "Magnetism"], correct: 0 },
+            { q: "What is orbital speed?", options: ["Speed needed to stay in orbit", "Speed of Earth's rotation", "Speed of light", "Escape velocity"], correct: 0 },
+            { q: "Do all satellites orbit at the same height?", options: ["No, different orbits for different purposes", "Yes, all same", "Only weather satellites vary", "Only GPS vary"], correct: 0 }
+        ],
+        
+        "Bodies of the Solar System": [
+            { q: "What is at the center of our Solar System?", options: ["The Sun", "Earth", "Jupiter", "A black hole"], correct: 0 },
+            { q: "Which planet is closest to the Sun?", options: ["Mercury", "Venus", "Earth", "Mars"], correct: 0 },
+            { q: "Which is the largest planet?", options: ["Jupiter", "Saturn", "Earth", "Neptune"], correct: 0 },
+            { q: "What is an asteroid?", options: ["Rocky body orbiting Sun", "Icy body with tail", "A star", "A moon"], correct: 0 },
+            { q: "What is a comet?", options: ["Icy body with tail when near Sun", "Rocky body", "A star", "A planet"], correct: 0 },
+            { q: "Where is the asteroid belt?", options: ["Between Mars and Jupiter", "Between Earth and Mars", "Beyond Neptune", "Around Saturn"], correct: 0 },
+            { q: "What is a dwarf planet? (e.g. Pluto)", options: ["Small body that cleared some orbit", "Failed star", "Large moon", "Small asteroid"], correct: 0 },
+            { q: "What are the inner planets made of?", options: ["Rock", "Gas", "Ice", "Liquid"], correct: 0 },
+            { q: "What are the outer planets mainly made of?", options: ["Gas", "Rock", "Water", "Metal"], correct: 0 },
+            { q: "What makes Saturn distinctive?", options: ["Visible ring system", "Red spot", "Biggest size", "Most moons"], correct: 0 }
+        ],
+        
+        "Orbital Speed": [
+            { q: "What provides the centripetal force for planets?", options: ["Gravity from Sun", "Magnetism", "Air pressure", "Friction"], correct: 0 },
+            { q: "Planets closer to Sun orbit how?", options: ["Faster", "Slower", "Same speed", "Backwards"], correct: 0 },
+            { q: "What is orbital speed?", options: ["Speed to maintain circular orbit", "Speed of light", "Escape velocity", "Speed of rotation"], correct: 0 },
+            { q: "If orbit radius increases, what happens to orbital speed?", options: ["Decreases", "Increases", "Stays same", "Becomes zero"], correct: 0 },
+            { q: "What would happen if Earth suddenly stopped?", options: ["It would fall into Sun", "Continue in straight line", "Orbit faster", "Nothing"], correct: 0 },
+            { q: "What direction is centripetal force?", options: ["Toward center", "Away from center", "Tangential", "Random"], correct: 0 },
+            { q: "Mercury orbits faster than Earth because it is?", options: ["Closer to Sun", "Smaller", "Hotter", "Rocky"], correct: 0 },
+            { q: "What is the formula for orbital speed?", options: ["v = 2πr/T", "v = r/T", "v = 2r/T", "v = πr/T"], correct: 0 },
+            { q: "Increasing mass of Sun would do what to Earth's orbit?", options: ["Increase orbital speed needed", "Decrease orbital speed", "No effect", "Stop orbit"], correct: 0 },
+            { q: "What happens to satellites in low orbit?", options: ["Eventually fall due to air resistance", "Orbit forever", "Speed up", "Escape"], correct: 0 }
+        ],
+        
+        "Looking into Space": [
+            { q: "What do optical telescopes detect?", options: ["Visible light", "Radio waves", "X-rays", "Sound"], correct: 0 },
+            { q: "What do radio telescopes detect?", options: ["Radio waves", "Visible light", "Sound", "Heat"], correct: 0 },
+            { q: "Why are space telescopes better?", options: ["No atmosphere to absorb light", "Closer to stars", "Bigger", "Use more power"], correct: 0 },
+            { q: "What does a larger telescope aperture allow?", options: ["More light collected, better resolution", "See further only", "See colors better", "See faster"], correct: 0 },
+            { q: "What is light pollution?", options: ["Artificial light interfering with observations", "Clouds", "Air pollution", "Space dust"], correct: 0 },
+            { q: "Why build telescopes on mountains?", options: ["Above most atmosphere", "Closer to space", "Better weather", "Cheaper"], correct: 0 },
+            { q: "What is the Hubble Space Telescope?", options: ["Optical telescope in Earth orbit", "Radio telescope", "Telescope on Moon", "Ground telescope"], correct: 0 },
+            { q: "What limits ground-based optical telescopes?", options: ["Atmospheric distortion", "Size", "Cost", "Power"], correct: 0 },
+            { q: "What information do we get from light from stars?", options: ["Temperature, composition, motion", "Just brightness", "Just color", "Nothing"], correct: 0 },
+            { q: "What is a spectrometer used for?", options: ["Analyzing light wavelengths", "Measuring distance", "Taking photos", "Detecting sound"], correct: 0 }
+        ],
+        
+        "Life of Stars": [
+            { q: "What are stars mainly made of?", options: ["Hydrogen and helium", "Rock", "Iron", "Carbon"], correct: 0 },
+            { q: "What process produces energy in stars?", options: ["Nuclear fusion", "Nuclear fission", "Combustion", "Friction"], correct: 0 },
+            { q: "What is a protostar?", options: ["Cloud of gas contracting", "Dead star", "Planet forming", "Black hole"], correct: 0 },
+            { q: "What is a main sequence star?", options: ["Stable star fusing hydrogen", "Expanding star", "Exploding star", "Dead star"], correct: 0 },
+            { q: "What happens to stars like our Sun eventually?", options: ["Red giant then white dwarf", "Supernova then neutron star", "Black hole", "Planet"], correct: 0 },
+            { q: "What happens to very massive stars?", options: ["Supernova then neutron star or black hole", "Just white dwarf", "Planet", "Disappear"], correct: 0 },
+            { q: "What is a supernova?", options: ["Massive star explosion", "Star birth", "Planet collision", "Normal star"], correct: 0 },
+            { q: "What is a neutron star?", options: ["Very dense star remnant", "Normal star", "Planet", "Gas cloud"], correct: 0 },
+            { q: "What is a black hole?", options: ["Region where gravity prevents light escaping", "Dark star", "Empty space", "Planet"], correct: 0 },
+            { q: "Where are heavier elements than iron formed?", options: ["In supernovae", "In main sequence stars", "In planets", "In space clouds"], correct: 0 }
+        ],
+        
+        "Universe": [
+            { q: "What is a galaxy?", options: ["Collection of billions of stars", "A single star", "A planet", "A constellation"], correct: 0 },
+            { q: "What galaxy do we live in?", options: ["Milky Way", "Andromeda", "Triangulum", "Whirlpool"], correct: 0 },
+            { q: "What shape is our galaxy?", options: ["Spiral", "Elliptical", "Irregular", "Spherical"], correct: 0 },
+            { q: "Approximately how many stars in our galaxy?", options: ["100 billion", "1 million", "1 billion", "1 trillion"], correct: 0 },
+            { q: "What is the universe?", options: ["All space, matter and energy", "Our galaxy", "The Solar System", "Planet Earth"], correct: 0 },
+            { q: "How old is the universe?", options: ["About 13.8 billion years", "6000 years", "1 billion years", "Infinite"], correct: 0 },
+            { q: "What is the Big Bang theory?", options: ["Universe began from a singularity", "Stars exploding", "Galaxies colliding", "Earth forming"], correct: 0 },
+            { q: "What is cosmic microwave background radiation?", options: ["Radiation left over from Big Bang", "Light from stars", "Radio signals", "Heat from Sun"], correct: 0 },
+            { q: "What evidence supports the Big Bang?", options: ["Red shift and CMB radiation", "Just red shift", "Just CMB", "No evidence"], correct: 0 },
+            { q: "Are galaxies moving apart?", options: ["Yes, universe is expanding", "No, staying still", "Moving together", "Random movement"], correct: 0 }
+        ],
+        
+        "Expanding Universe": [
+            { q: "What is red shift?", options: ["Light stretched to longer wavelengths", "Light getting brighter", "Light turning red", "Light disappearing"], correct: 0 },
+            { q: "What does red shift tell us about galaxies?", options: ["They are moving away", "They are moving closer", "They are stationary", "They are rotating"], correct: 0 },
+            { q: "The further away a galaxy, what happens to red shift?", options: ["Increases", "Decreases", "Stays same", "Disappears"], correct: 0 },
+            { q: "What is blue shift?", options: ["Object moving toward us", "Object moving away", "Very hot object", "Very cold object"], correct: 0 },
+            { q: "What does expanding universe mean?", options: ["Space itself is stretching", "Galaxies flying through space", "Everything getting bigger", "Nothing"], correct: 0 },
+            { q: "Will the universe expand forever?", options: ["Unknown, depends on dark energy", "Yes definitely", "No definitely", "It's not expanding"], correct: 0 },
+            { q: "What is dark energy?", options: ["Unknown energy causing accelerated expansion", "Energy in black holes", "Energy in dark matter", "Nonexistent"], correct: 0 },
+            { q: "What percentage of universe is dark energy?", options: ["About 68%", "5%", "27%", "90%"], correct: 0 },
+            { q: "Is expansion speeding up or slowing down?", options: ["Speeding up", "Slowing down", "Constant", "Stopped"], correct: 0 },
+            { q: "What evidence shows universe is expanding?", options: ["Red shift of distant galaxies", "Temperature changes", "Gravity", "Magnetism"], correct: 0 }
+        ],
+        
+        "Hubble's Law": [
+            { q: "What does Hubble's law state?", options: ["Recession velocity proportional to distance", "All galaxies same speed", "Galaxies getting smaller", "Stars getting dimmer"], correct: 0 },
+            { q: "What is the equation for Hubble's law?", options: ["v = H₀ × d", "v = d/H₀", "v = H₀/d", "v = H₀ + d"], correct: 0 },
+            { q: "What is H₀ called?", options: ["Hubble constant", "Speed of light", "Universal constant", "Gravitational constant"], correct: 0 },
+            { q: "Hubble's law helps estimate what?", options: ["Age of universe", "Size of galaxies", "Mass of stars", "Temperature of planets"], correct: 0 },
+            { q: "If a galaxy is twice as far, it moves?", options: ["Twice as fast away", "Half as fast", "Same speed", "Four times as fast"], correct: 0 },
+            { q: "What units is recession velocity measured in?", options: ["km/s", "m/s", "mph", "light years"], correct: 0 },
+            { q: "What did Hubble discover?", options: ["Universe is expanding", "Earth orbits Sun", "Stars are far away", "Planets exist"], correct: 0 },
+            { q: "How do we measure galaxy distances?", options: ["Cepheid variables and supernovae", "Ruler", "Radar", "Direct measurement"], correct: 0 },
+            { q: "What does a larger Hubble constant mean?", options: ["Younger universe", "Older universe", "No effect on age", "Static universe"], correct: 0 },
+            { q: "Hubble observed galaxies using what?", options: ["Red shift in spectra", "Brightness", "Temperature", "Size"], correct: 0 }
+        ],
+        
+        "Star Colour": [
+            { q: "What color are the hottest stars?", options: ["Blue", "Red", "Yellow", "White"], correct: 0 },
+            { q: "What color are the coolest stars?", options: ["Red", "Blue", "White", "Yellow"], correct: 0 },
+            { q: "What color is our Sun?", options: ["Yellow/White", "Red", "Blue", "Orange"], correct: 0 },
+            { q: "What does star color indicate?", options: ["Surface temperature", "Age", "Distance", "Size"], correct: 0 },
+            { q: "Temperature range of red stars?", options: ["Below 3500K", "Above 10000K", "5000-6000K", "7000-8000K"], correct: 0 },
+            { q: "Temperature range of blue stars?", options: ["Above 10000K", "Below 3500K", "5000-6000K", "3500-5000K"], correct: 0 },
+            { q: "What type of star will our Sun become?", options: ["Red giant", "Blue giant", "Stay same", "Black hole"], correct: 0 },
+            { q: "What is a blue supergiant?", options: ["Very hot, massive star", "Cool, small star", "Dead star", "Planet"], correct: 0 },
+            { q: "What produces a star's light?", options: ["Nuclear fusion", "Combustion", "Reflection", "Electricity"], correct: 0 },
+            { q: "How do we analyze star colors?", options: ["Spectroscopy", "Photography", "Brightness", "Size"], correct: 0 }
+        ],
+        
+        // THERMODYNAMICS
+        "Thermal Expansion": [
+            { q: "What happens to particles when heated?", options: ["Vibrate more, move faster", "Stop moving", "Get smaller", "Disappear"], correct: 0 },
+            { q: "Which expands most when heated?", options: ["Gases", "Liquids", "Solids", "All equal"], correct: 0 },
+            { q: "Why do solids expand when heated?", options: ["Particles vibrate more, need more space", "Particles get bigger", "Particles multiply", "Particles merge"], correct: 0 },
+            { q: "What is a bimetallic strip?", options: ["Two metals bonded that expand differently", "One metal bent", "Two separate metals", "Painted metal"], correct: 0 },
+            { q: "How does a bimetallic strip work?", options: ["Different expansion rates cause bending", "Magnetism", "Electricity", "Gravity"], correct: 0 },
+            { q: "Where are bimetallic strips used?", options: ["Thermostats", "Rulers", "Batteries", "Lenses"], correct: 0 },
+            { q: "Why are expansion gaps left in bridges?", options: ["Allow expansion in heat", "Save money", "Look nice", "For drainage"], correct: 0 },
+            { q: "What happens to liquid in a thermometer when heated?", options: ["Expands up tube", "Contracts", "Evaporates", "Freezes"], correct: 0 },
+            { q: "Do all materials expand at same rate?", options: ["No, different expansion coefficients", "Yes, all same", "Only metals differ", "Only gases differ"], correct: 0 },
+            { q: "Why don't we notice air expanding?", options: ["It can expand freely", "It doesn't expand", "Too small to see", "Only liquids expand"], correct: 0 }
+        ],
+        
+        "Heat Capacity": [
+            { q: "What is specific heat capacity?", options: ["Energy to raise 1kg by 1°C", "Total energy in object", "Temperature of object", "Mass of object"], correct: 0 },
+            { q: "What is the unit of specific heat capacity?", options: ["J/kg°C", "J", "°C", "kg"], correct: 0 },
+            { q: "Which has higher specific heat capacity: water or metal?", options: ["Water", "Metal", "Same", "Neither"], correct: 0 },
+            { q: "What is the formula for energy transferred?", options: ["E = mcΔθ", "E = mc", "E = mθ", "E = cΔθ"], correct: 0 },
+            { q: "Calculate energy to heat 2kg water by 5°C (c=4200J/kg°C).", options: ["42000 J", "4200 J", "21000 J", "8400 J"], correct: 0 },
+            { q: "Why do coastal areas have milder climates?", options: ["Water's high specific heat capacity", "Wind", "Salt", "Waves"], correct: 0 },
+            { q: "Material with low specific heat capacity does what?", options: ["Heats up quickly", "Heats up slowly", "Doesn't heat up", "Cools slowly"], correct: 0 },
+            { q: "Why are metals good for cooking pans?", options: ["Low specific heat capacity, heat quickly", "High specific heat capacity", "They're shiny", "They're strong"], correct: 0 },
+            { q: "What does 'm' represent in E=mcΔθ?", options: ["Mass", "Temperature", "Energy", "Specific heat capacity"], correct: 0 },
+            { q: "If specific heat capacity doubles, energy needed?", options: ["Doubles", "Halves", "Stays same", "Quadruples"], correct: 0 }
+        ],
+        
+        "States of Matter": [
+            { q: "In a solid, how are particles arranged?", options: ["Regular pattern, close together", "Random, far apart", "Random, close together", "Regular, far apart"], correct: 0 },
+            { q: "In a liquid, how do particles move?", options: ["Random movement, can slide past", "Vibrate only", "Completely free", "Don't move"], correct: 0 },
+            { q: "In a gas, how are particles?", options: ["Far apart, move randomly and fast", "Close together", "In fixed positions", "In patterns"], correct: 0 },
+            { q: "Which state is incompressible?", options: ["Solids and liquids", "Only gases", "Only solids", "All are"], correct: 0 },
+            { q: "Which state has definite volume but no definite shape?", options: ["Liquid", "Solid", "Gas", "None"], correct: 0 },
+            { q: "Why can gases be compressed?", options: ["Large spaces between particles", "Particles are small", "Particles are soft", "No forces between particles"], correct: 0 },
+            { q: "What holds particles together in solids?", options: ["Strong forces", "Weak forces", "No forces", "Magnetism"], correct: 0 },
+            { q: "Particle arrangement in solids allows what property?", options: ["Fixed shape", "Flow", "Compression", "Expansion"], correct: 0 },
+            { q: "Why do liquids flow?", options: ["Particles can move past each other", "No forces", "Particles far apart", "Particles vibrate"], correct: 0 },
+            { q: "Gas pressure is caused by?", options: ["Particles hitting container walls", "Particle size", "Gravity", "Temperature only"], correct: 0 }
+        ],
+        
+        "Changes of State": [
+            { q: "What is melting?", options: ["Solid to liquid", "Liquid to gas", "Gas to liquid", "Liquid to solid"], correct: 0 },
+            { q: "What is freezing?", options: ["Liquid to solid", "Solid to liquid", "Liquid to gas", "Gas to solid"], correct: 0 },
+            { q: "What is boiling?", options: ["Liquid to gas throughout", "Liquid to solid", "Solid to gas", "Surface evaporation"], correct: 0 },
+            { q: "What is condensation?", options: ["Gas to liquid", "Liquid to gas", "Solid to liquid", "Liquid to solid"], correct: 0 },
+            { q: "What is sublimation?", options: ["Solid directly to gas", "Gas to solid", "Solid to liquid", "Liquid to gas"], correct: 0 },
+            { q: "Example of sublimation?", options: ["Dry ice (CO₂)", "Water freezing", "Water boiling", "Ice melting"], correct: 0 },
+            { q: "During melting, temperature does what?", options: ["Stays constant", "Increases", "Decreases", "Varies randomly"], correct: 0 },
+            { q: "What happens to particle energy during melting?", options: ["Increases but temperature constant", "Decreases", "Stays same", "Temperature increases"], correct: 0 },
+            { q: "What is the melting point of ice?", options: ["0°C", "100°C", "50°C", "-10°C"], correct: 0 },
+            { q: "What is the boiling point of water?", options: ["100°C", "0°C", "50°C", "212°C"], correct: 0 }
+        ],
+        
+        "Latent Heat": [
+            { q: "What is latent heat?", options: ["Energy for state change without temperature change", "Energy to increase temperature", "Temperature energy", "Lost energy"], correct: 0 },
+            { q: "What is specific latent heat of fusion?", options: ["Energy to melt 1kg", "Energy to boil 1kg", "Energy to freeze 1kg", "Energy to cool 1kg"], correct: 0 },
+            { q: "What is specific latent heat of vaporization?", options: ["Energy to boil 1kg", "Energy to melt 1kg", "Energy to freeze 1kg", "Energy to condense 1kg"], correct: 0 },
+            { q: "Formula for latent heat energy?", options: ["E = mL", "E = mcΔθ", "E = mc", "E = Lθ"], correct: 0 },
+            { q: "During boiling, where does energy go?", options: ["Breaking bonds between particles", "Increasing temperature", "Lost to surroundings", "Creating new particles"], correct: 0 },
+            { q: "Why does temperature not change during melting?", options: ["Energy used to overcome bonds", "No energy added", "Energy lost", "Thermometer broken"], correct: 0 },
+            { q: "Which requires more energy: melting or boiling 1kg water?", options: ["Boiling", "Melting", "Same", "Neither"], correct: 0 },
+            { q: "What are units of specific latent heat?", options: ["J/kg", "J/kg°C", "J", "°C"], correct: 0 },
+            { q: "Calculate energy to melt 2kg ice (L=334000J/kg).", options: ["668000 J", "334000 J", "167000 J", "1336000 J"], correct: 0 },
+            { q: "When steam condenses on skin, why is it dangerous?", options: ["Releases lots of latent heat", "It's hot", "It's wet", "Steam is toxic"], correct: 0 }
+        ],
+        
+        "Evaporation": [
+            { q: "What is evaporation?", options: ["Liquid to gas at surface only", "Liquid to gas throughout", "Solid to gas", "Gas to liquid"], correct: 0 },
+            { q: "Evaporation occurs at what temperature?", options: ["Any temperature", "Only at boiling point", "Only above 50°C", "Only below 0°C"], correct: 0 },
+            { q: "Which particles evaporate?", options: ["Fastest, most energetic", "Slowest", "All equally", "Coldest"], correct: 0 },
+            { q: "Why does evaporation cause cooling?", options: ["Fastest particles leave, average KE decreases", "Air blows", "Water is cold", "Energy is created"], correct: 0 },
+            { q: "What increases rate of evaporation?", options: ["Higher temperature, larger surface area, wind", "Lower temperature", "Small surface area", "High pressure"], correct: 0 },
+            { q: "Why does wind increase evaporation?", options: ["Removes vapor particles", "Heats liquid", "Cools liquid", "Adds energy"], correct: 0 },
+            { q: "Why do puddles dry faster on hot days?", options: ["More particles have enough energy to escape", "Wind only", "Gravity", "Less water"], correct: 0 },
+            { q: "Sweating cools you because?", options: ["Evaporation takes energy from skin", "Sweat is cold", "Water is cold", "Air is cold"], correct: 0 },
+            { q: "What's the difference between boiling and evaporation?", options: ["Boiling throughout, evaporation at surface", "No difference", "Temperature only", "Boiling is slower"], correct: 0 },
+            { q: "Why do clothes dry faster when spread out?", options: ["Larger surface area", "Warmer", "Less weight", "Cleaner"], correct: 0 }
+        ],
+        
+        "Temperature and Heat": [
+            { q: "What is temperature?", options: ["Measure of average particle kinetic energy", "Total energy", "Heat energy", "Particle number"], correct: 0 },
+            { q: "What is heat?", options: ["Energy transferred due to temperature difference", "Same as temperature", "Stored energy", "Work done"], correct: 0 },
+            { q: "Heat flows from?", options: ["Hot to cold", "Cold to hot", "Doesn't flow", "Both directions equally"], correct: 0 },
+            { q: "What is thermal equilibrium?", options: ["No net heat flow, same temperature", "No heat at all", "Maximum heat", "Different temperatures"], correct: 0 },
+            { q: "Can a cold object contain heat energy?", options: ["Yes, particles still moving", "No, cold means no energy", "Only if above 0°C", "Only solids"], correct: 0 },
+            { q: "Celsius scale: water freezes at?", options: ["0°C", "32°C", "100°C", "-273°C"], correct: 0 },
+            { q: "Celsius scale: water boils at?", options: ["100°C", "0°C", "212°C", "373°C"], correct: 0 },
+            { q: "What is absolute zero?", options: ["-273°C, particles have minimum energy", "0°C", "-100°C", "Impossible temperature"], correct: 0 },
+            { q: "Kelvin scale: 0K equals?", options: ["-273°C", "0°C", "100°C", "-100°C"], correct: 0 },
+            { q: "Convert 27°C to Kelvin.", options: ["300 K", "273 K", "327 K", "27 K"], correct: 0 }
+        ],
+        
+        "Measuring Temperature": [
+            { q: "What property does a liquid thermometer use?", options: ["Thermal expansion of liquid", "Color change", "Electrical resistance", "Magnetism"], correct: 0 },
+            { q: "What liquid is commonly used in thermometers?", options: ["Alcohol or mercury", "Water", "Oil", "Glycerol"], correct: 0 },
+            { q: "Why is mercury good for thermometers?", options: ["Expands evenly, visible, wide range", "Cheap", "Safe", "Colorful"], correct: 0 },
+            { q: "What's an advantage of alcohol over mercury?", options: ["Safer, lower freezing point", "More accurate", "More expensive", "Heavier"], correct: 0 },
+            { q: "What is a clinical thermometer used for?", options: ["Measuring body temperature", "Cooking", "Weather", "Industry"], correct: 0 },
+            { q: "What is a thermocouple?", options: ["Two different metals creating voltage with temperature", "One metal", "Liquid thermometer", "Digital display"], correct: 0 },
+            { q: "Advantage of digital thermometers?", options: ["Quick, easy to read, accurate", "Cheaper", "Bigger", "Use mercury"], correct: 0 },
+            { q: "What is an infrared thermometer?", options: ["Measures IR radiation from object", "Measures visible light", "Contact thermometer", "Very slow"], correct: 0 },
+            { q: "Why must thermometer bulb be small?", options: ["Quick response, minimal heat capacity", "Looks better", "Cheaper", "Easier to read"], correct: 0 },
+            { q: "What does a thermistor do?", options: ["Resistance changes with temperature", "Produces heat", "Stores heat", "Reflects heat"], correct: 0 }
+        ],
+        
+        "Methods of Heat Transfer": [
+            { q: "What is conduction?", options: ["Heat transfer through materials by particle vibration", "Heat transfer by fluid movement", "Heat transfer by waves", "No heat transfer"], correct: 0 },
+            { q: "What is convection?", options: ["Heat transfer by fluid movement", "Heat transfer through solids", "Heat transfer by radiation", "No heat transfer"], correct: 0 },
+            { q: "What is radiation?", options: ["Heat transfer by electromagnetic waves", "Heat transfer through solids", "Heat transfer by fluid movement", "No heat transfer"], correct: 0 },
+            { q: "Which method works in a vacuum?", options: ["Radiation only", "Conduction only", "Convection only", "None"], correct: 0 },
+            { q: "Metals are good conductors because?", options: ["Free electrons transfer energy quickly", "They're shiny", "They're dense", "They're magnetic"], correct: 0 },
+            { q: "Why is wood a poor conductor?", options: ["No free electrons", "Too light", "Too dark", "Too rough"], correct: 0 },
+            { q: "Convection occurs in?", options: ["Liquids and gases", "Solids only", "Vacuum", "Metals only"], correct: 0 },
+            { q: "Why does hot air rise?", options: ["Less dense than cold air", "Magnetism", "Wind", "Pressure"], correct: 0 },
+            { q: "Which surfaces emit most radiation?", options: ["Dark, matt surfaces", "Shiny, light surfaces", "Smooth surfaces", "Rough surfaces"], correct: 0 },
+            { q: "How does Sun's heat reach Earth?", options: ["Radiation through space", "Conduction", "Convection", "Wind"], correct: 0 }
+        ],
+        
+        "Rate of Heat Transfer": [
+            { q: "What increases rate of heat transfer?", options: ["Larger temperature difference", "Smaller temperature difference", "Same temperature", "Lower temperature"], correct: 0 },
+            { q: "How does surface area affect heat transfer?", options: ["Larger area, faster transfer", "Smaller area, faster transfer", "No effect", "Opposite for different methods"], correct: 0 },
+            { q: "How does thickness affect conduction?", options: ["Thicker, slower transfer", "Thicker, faster transfer", "No effect", "Depends on material"], correct: 0 },
+            { q: "What is thermal conductivity?", options: ["Measure of how well material conducts heat", "Temperature", "Heat energy", "Specific heat capacity"], correct: 0 },
+            { q: "Which has highest thermal conductivity?", options: ["Copper", "Wood", "Plastic", "Air"], correct: 0 },
+            { q: "What is an insulator?", options: ["Material with low thermal conductivity", "Material with high conductivity", "Heat producer", "Heat destroyer"], correct: 0 },
+            { q: "Why is air a good insulator?", options: ["Low density, poor conductor", "High density", "Good conductor", "No particles"], correct: 0 },
+            { q: "Double glazing works because?", options: ["Air gap insulates", "Glass is thick", "Glass is shiny", "Two layers conduct better"], correct: 0 },
+            { q: "Fiberglass insulation works by?", options: ["Trapping air pockets", "Being dense", "Conducting well", "Reflecting heat"], correct: 0 },
+            { q: "What is a U-value?", options: ["Rate of heat transfer through material", "Temperature", "Thickness", "Cost"], correct: 0 }
+        ],
+        
+        "Using Heat Transfer": [
+            { q: "How does a radiator heat a room?", options: ["Convection currents in air", "Conduction only", "Radiation only", "Evaporation"], correct: 0 },
+            { q: "Why are saucepans metal with plastic handles?", options: ["Metal conducts, plastic insulates", "Cheaper", "Looks better", "Lighter"], correct: 0 },
+            { q: "Why are cooling fins on engines?", options: ["Increase surface area for heat loss", "Look good", "Protect engine", "Reduce weight"], correct: 0 },
+            { q: "How does a vacuum flask keep drinks hot?", options: ["Vacuum prevents conduction/convection, shiny prevents radiation", "Just vacuum", "Just shiny surface", "Thick walls"], correct: 0 },
+            { q: "Why are survival blankets shiny?", options: ["Reflect radiation back to body", "Look visible", "Waterproof", "Warm themselves"], correct: 0 },
+            { q: "Car radiators use which heat transfer method?", options: ["Convection in coolant and air", "Conduction only", "Radiation only", "None"], correct: 0 },
+            { q: "Why paint central heating radiators black?", options: ["Better radiation emission", "Looks better", "Cheaper paint", "Lasts longer"], correct: 0 },
+            { q: "Fridge cooling uses?", options: ["Evaporation of refrigerant", "Conduction only", "Convection only", "Radiation"], correct: 0 },
+            { q: "Why are ovens shiny inside?", options: ["Reflect radiation inward", "Easy to clean", "Cheaper", "Stronger"], correct: 0 },
+            { q: "How does sweating cool you?", options: ["Evaporation takes energy", "Sweat is cold", "Conduction to air", "Radiation"], correct: 0 }
+        ],
+        
+        "Heat Transfer in Houses": [
+            { q: "Where is most heat lost from a house?", options: ["Roof", "Floor", "Walls", "Doors"], correct: 0 },
+            { q: "Why is loft insulation effective?", options: ["Hot air rises and is trapped", "Cheap", "Easy to install", "Looks good"], correct: 0 },
+            { q: "How do cavity walls reduce heat loss?", options: ["Air gap insulates", "Double thickness conducts less", "Looks better", "Cheaper"], correct: 0 },
+            { q: "What can be pumped into cavity walls?", options: ["Foam insulation", "Water", "Air only", "Concrete"], correct: 0 },
+            { q: "How does double glazing work?", options: ["Air/vacuum gap insulates", "Twice as thick", "Shiny glass", "Colored glass"], correct: 0 },
+            { q: "Why put carpet/underlay on floors?", options: ["Insulates and traps air", "Looks good", "Cheaper than tiles", "Easier to clean"], correct: 0 },
+            { q: "Draft excluders work by?", options: ["Preventing convection currents", "Blocking radiation", "Increasing conduction", "Looking decorative"], correct: 0 },
+            { q: "Shiny foil behind radiators does what?", options: ["Reflects radiation into room", "Looks good", "Protects wall", "Conducts better"], correct: 0 },
+            { q: "Why lag hot water tanks?", options: ["Reduce heat loss", "Look better", "Protect tank", "Increase pressure"], correct: 0 },
+            { q: "Most cost-effective insulation usually?", options: ["Loft insulation", "Double glazing", "Cavity walls", "New boiler"], correct: 0 }
+        ],
+        
+        "Payback Time – Heat Losses": [
+            { q: "What is payback time?", options: ["Time to save cost of installation", "Time to install", "Time insulation lasts", "Time to heat house"], correct: 0 },
+            { q: "Formula for payback time?", options: ["Installation cost / Annual saving", "Annual saving / Installation cost", "Installation cost × Annual saving", "Installation cost - Annual saving"], correct: 0 },
+            { q: "Insulation costs £500, saves £100/year. Payback time?", options: ["5 years", "10 years", "2.5 years", "50 years"], correct: 0 },
+            { q: "What factors affect payback time?", options: ["Installation cost and annual savings", "Just installation cost", "Just annual savings", "Neither"], correct: 0 },
+            { q: "After payback time, what happens?", options: ["Save money", "Break even", "Lose money", "Nothing"], correct: 0 },
+            { q: "Which usually has shortest payback?", options: ["Loft insulation", "Solar panels", "New boiler", "Double glazing"], correct: 0 },
+            { q: "Which usually has longest payback?", options: ["Double glazing", "Loft insulation", "Draft excluders", "Curtains"], correct: 0 },
+            { q: "Why consider payback time?", options: ["Make cost-effective decisions", "Just for fun", "Legal requirement", "Doesn't matter"], correct: 0 },
+            { q: "If fuel prices rise, payback time?", options: ["Decreases", "Increases", "Stays same", "Becomes negative"], correct: 0 },
+            { q: "What else should be considered besides payback?", options: ["Environmental impact, comfort", "Just cost", "Just time", "Nothing"], correct: 0 }
+        ],
+        
+        // ENERGY
+        "Energy Stores and Transfers": [
+            { q: "What is kinetic energy?", options: ["Energy in moving objects", "Stored energy", "Heat energy", "Light energy"], correct: 0 },
+            { q: "What is gravitational potential energy?", options: ["Energy due to position in gravitational field", "Movement energy", "Heat energy", "Chemical energy"], correct: 0 },
+            { q: "What is elastic potential energy?", options: ["Energy stored in stretched/compressed objects", "Movement energy", "Height energy", "Heat energy"], correct: 0 },
+            { q: "What is chemical energy?", options: ["Energy stored in chemical bonds", "Movement energy", "Heat energy", "Position energy"], correct: 0 },
+            { q: "What is thermal energy?", options: ["Energy due to temperature", "Movement energy", "Chemical energy", "Position energy"], correct: 0 },
+            { q: "Energy is measured in?", options: ["Joules (J)", "Watts (W)", "Newtons (N)", "Kilograms (kg)"], correct: 0 },
+            { q: "What is the principle of conservation of energy?", options: ["Energy cannot be created or destroyed", "Energy can be created", "Energy can be destroyed", "Energy stays in same form"], correct: 0 },
+            { q: "When a ball falls, GPE is transferred to?", options: ["Kinetic energy", "Chemical energy", "Nuclear energy", "Nothing"], correct: 0 },
+            { q: "What energy does food contain?", options: ["Chemical energy", "Kinetic energy", "GPE", "Elastic"], correct: 0 },
+            { q: "Battery stores energy as?", options: ["Chemical energy", "Kinetic energy", "GPE", "Elastic"], correct: 0 }
+        ],
+        
+        "Energy Changes": [
+            { q: "When you lift an object, what energy increases?", options: ["Gravitational potential energy", "Kinetic energy", "Elastic energy", "Chemical energy"], correct: 0 },
+            { q: "When brakes are applied, kinetic energy changes to?", options: ["Thermal energy", "GPE", "Chemical energy", "Elastic energy"], correct: 0 },
+            { q: "In a light bulb, electrical energy changes to?", options: ["Light and thermal energy", "Just light", "Just heat", "Chemical energy"], correct: 0 },
+            { q: "In photosynthesis, light energy changes to?", options: ["Chemical energy", "Kinetic energy", "Thermal energy", "Electrical energy"], correct: 0 },
+            { q: "Eating food and running: chemical energy changes to?", options: ["Kinetic and thermal energy", "Just kinetic", "Just thermal", "GPE"], correct: 0 },
+            { q: "In a generator, kinetic energy changes to?", options: ["Electrical energy", "Chemical energy", "Light energy", "GPE"], correct: 0 },
+            { q: "Burning fuel: chemical energy changes to?", options: ["Thermal and light energy", "Just thermal", "Just light", "Kinetic"], correct: 0 },
+            { q: "Stretching a spring stores what energy?", options: ["Elastic potential energy", "Kinetic energy", "Chemical energy", "Thermal energy"], correct: 0 },
+            { q: "Solar panel: light energy changes to?", options: ["Electrical energy", "Chemical energy", "Kinetic energy", "Thermal energy"], correct: 0 },
+            { q: "What is wasted energy usually?", options: ["Thermal energy and sound", "All useful", "Chemical energy", "GPE"], correct: 0 }
+        ],
+        
+        "Efficiency": [
+            { q: "What is efficiency?", options: ["Useful energy out / Total energy in", "Total energy / Useful energy", "Wasted energy / Total energy", "Time / Energy"], correct: 0 },
+            { q: "Efficiency formula as percentage?", options: ["(Useful output / Total input) × 100%", "(Total input / Useful output) × 100%", "(Wasted / Total) × 100%", "Output + Input"], correct: 0 },
+            { q: "Device uses 1000J, 800J useful. Efficiency?", options: ["80%", "20%", "125%", "800%"], correct: 0 },
+            { q: "Can efficiency be more than 100%?", options: ["No, breaks conservation of energy", "Yes, if very good", "Sometimes", "Always"], correct: 0 },
+            { q: "How to increase efficiency?", options: ["Reduce wasted energy", "Increase input", "Use more fuel", "Work faster"], correct: 0 },
+            { q: "LED bulb: 10W in, 8W light out. Efficiency?", options: ["80%", "20%", "125%", "10%"], correct: 0 },
+            { q: "Why can't we have 100% efficiency?", options: ["Some energy always wasted as heat", "Not tried hard enough", "Impossible to measure", "Too expensive"], correct: 0 },
+            { q: "Motor has 50% efficiency. Input 2000J. Useful output?", options: ["1000J", "2000J", "4000J", "500J"], correct: 0 },
+            { q: "What units for efficiency?", options: ["No units or percentage", "Joules", "Watts", "Newtons"], correct: 0 },
+            { q: "Efficiency can also be calculated using?", options: ["Power out / Power in", "Time", "Distance", "Speed"], correct: 0 }
+        ],
+        
+        "Sankey Diagrams": [
+            { q: "What does a Sankey diagram show?", options: ["Energy transfers and proportions", "Circuit diagrams", "Forces", "Velocity"], correct: 0 },
+            { q: "Width of arrows in Sankey diagram represents?", options: ["Amount of energy", "Time", "Distance", "Temperature"], correct: 0 },
+            { q: "In Sankey diagram, useful energy goes?", options: ["Straight on", "Down", "Up", "Backwards"], correct: 0 },
+            { q: "In Sankey diagram, wasted energy usually goes?", options: ["Downwards or upwards", "Straight", "Backwards", "Nowhere"], correct: 0 },
+            { q: "Total width in equals?", options: ["Total width out", "Useful only", "Wasted only", "Efficiency"], correct: 0 },
+            { q: "Sankey diagram input=100, useful=70, wasted=?", options: ["30", "70", "100", "170"], correct: 0 },
+            { q: "What does wider wasted energy arrow mean?", options: ["Lower efficiency", "Higher efficiency", "No effect", "Error"], correct: 0 },
+            { q: "Sankey diagrams are useful for?", options: ["Visualizing efficiency", "Calculating force", "Measuring speed", "Finding mass"], correct: 0 },
+            { q: "In most devices, wasted energy is usually?", options: ["Thermal and sound", "All light", "All kinetic", "All chemical"], correct: 0 },
+            { q: "Can you calculate efficiency from Sankey diagram?", options: ["Yes, useful/total", "No, impossible", "Only sometimes", "Need more info"], correct: 0 }
+        ],
+        
+        "Non Renewable Energy Resources": [
+            { q: "Which are fossil fuels?", options: ["Coal, oil, gas", "Wind, solar, hydro", "Nuclear, biomass", "Geothermal"], correct: 0 },
+            { q: "Why are fossil fuels non-renewable?", options: ["Take millions of years to form", "Run out quickly", "Bad for environment only", "Too expensive"], correct: 0 },
+            { q: "Fossil fuels release what when burned?", options: ["CO₂ and other pollutants", "Just oxygen", "Just water", "Nothing"], correct: 0 },
+            { q: "What is the main greenhouse gas from fossil fuels?", options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"], correct: 0 },
+            { q: "Fossil fuels originally came from?", options: ["Dead plants and animals", "Rocks", "Water", "Air"], correct: 0 },
+            { q: "Advantage of fossil fuels?", options: ["Reliable, high energy density", "Renewable", "Clean", "Free"], correct: 0 },
+            { q: "Disadvantage of fossil fuels?", options: ["Cause pollution and climate change", "Too expensive", "Not enough energy", "Too heavy"], correct: 0 },
+            { q: "Nuclear power uses what fuel?", options: ["Uranium", "Coal", "Oil", "Gas"], correct: 0 },
+            { q: "Nuclear power is non-renewable because?", options: ["Uranium is finite", "Causes pollution", "Too expensive", "Too dangerous"], correct: 0 },
+            { q: "Nuclear waste is a problem because?", options: ["Radioactive for thousands of years", "Too heavy", "Takes up space", "Expensive"], correct: 0 }
+        ],
+        
+        "Renewable Energy Resources": [
+            { q: "Which is renewable?", options: ["Wind power", "Coal", "Oil", "Natural gas"], correct: 0 },
+            { q: "Why is solar power renewable?", options: ["Sun won't run out in human timescale", "Panels last forever", "Free", "No pollution"], correct: 0 },
+            { q: "How does wind turbine generate electricity?", options: ["Wind turns blades, generator produces electricity", "Burns wind", "Stores wind", "Wind is electricity"], correct: 0 },
+            { q: "Advantage of renewable energy?", options: ["Won't run out, less pollution", "More efficient", "Cheaper to build", "Always available"], correct: 0 },
+            { q: "Disadvantage of wind power?", options: ["Unreliable, depends on weather", "Pollutes", "Runs out", "Too efficient"], correct: 0 },
+            { q: "Hydroelectric power uses?", options: ["Falling water to turn turbines", "Coal", "Nuclear reactions", "Wind"], correct: 0 },
+            { q: "Tidal power is renewable because?", options: ["Tides caused by Moon's gravity", "Sea won't run out", "Free", "Clean"], correct: 0 },
+            { q: "Geothermal energy comes from?", options: ["Heat inside Earth", "Sun", "Moon", "Wind"], correct: 0 },
+            { q: "Bio-fuel is renewable because?", options: ["Can regrow crops", "Burns cleanly", "Very efficient", "Cheap"], correct: 0 },
+            { q: "Problem with renewable energy?", options: ["Often unreliable and weather-dependent", "Causes pollution", "Too efficient", "Too cheap"], correct: 0 }
+        ],
+        
+        "Energy Payback Times": [
+            { q: "What is energy payback time?", options: ["Time to generate energy used in manufacture", "Time to pay for installation", "Time device lasts", "Time to break"], correct: 0 },
+            { q: "Solar panel energy payback time is typically?", options: ["1-4 years", "50 years", "6 months", "Never pays back"], correct: 0 },
+            { q: "Why is short payback time good?", options: ["Quickly becomes net energy producer", "Cheaper", "Lasts longer", "More efficient"], correct: 0 },
+            { q: "What affects energy payback time?", options: ["Manufacturing energy and efficiency", "Just cost", "Just size", "Color"], correct: 0 },
+            { q: "After energy payback, device is?", options: ["Generating net useful energy", "Broken", "Inefficient", "Costly"], correct: 0 },
+            { q: "Wind turbine typical lifespan?", options: ["20-25 years", "5 years", "50 years", "100 years"], correct: 0 },
+            { q: "If payback is 2 years, lifespan 20 years, how long producing net energy?", options: ["18 years", "20 years", "2 years", "22 years"], correct: 0 },
+            { q: "Why consider energy payback?", options: ["Environmental impact assessment", "Just for cost", "Legal requirement", "Not important"], correct: 0 },
+            { q: "Fossil fuel power station has what energy payback?", options: ["Never pays back (uses non-renewable)", "1 year", "Instant", "5 years"], correct: 0 },
+            { q: "Better technology does what to payback time?", options: ["Reduces it", "Increases it", "No effect", "Makes it negative"], correct: 0 }
+        ],
+        
+        // GASES
+        "Brownian Motion": [
+            { q: "What is Brownian motion?", options: ["Random movement of particles in fluid", "Organized particle flow", "No movement", "Circular motion"], correct: 0 },
+            { q: "What causes Brownian motion?", options: ["Collisions with smaller, invisible molecules", "Wind", "Gravity", "Magnetism"], correct: 0 },
+            { q: "Brownian motion provides evidence for?", options: ["Particle nature of matter", "Wave nature of light", "Evolution", "Gravity"], correct: 0 },
+            { q: "Who first observed Brownian motion?", options: ["Robert Brown", "Isaac Newton", "Albert Einstein", "Galileo"], correct: 0 },
+            { q: "In which states can Brownian motion be observed?", options: ["Liquids and gases", "Solids only", "Vacuum", "Plasma only"], correct: 0 },
+            { q: "Smoke cell experiment shows?", options: ["Random motion of smoke particles", "Smoke rising", "Smoke dispersing only", "Nothing"], correct: 0 },
+            { q: "Why don't we see individual air molecules in smoke cell?", options: ["Too small", "Too slow", "Transparent", "Don't exist"], correct: 0 },
+            { q: "Brownian motion is faster when?", options: ["Temperature is higher", "Temperature is lower", "Pressure is higher", "Never changes"], correct: 0 },
+            { q: "The smoke particles move because?", options: ["Bombarded by air molecules", "Gravity", "Wind in apparatus", "They're alive"], correct: 0 },
+            { q: "What does more vigorous Brownian motion indicate?", options: ["Higher temperature", "Lower temperature", "Higher pressure only", "Lower pressure"], correct: 0 }
+        ],
+        
+        "Boyles' Law": [
+            { q: "What does Boyle's Law state?", options: ["Pressure × Volume = constant (at constant temp)", "Pressure / Volume = constant", "Pressure + Volume = constant", "Pressure = Volume"], correct: 0 },
+            { q: "Boyle's Law applies when?", options: ["Temperature is constant", "Pressure is constant", "Volume is constant", "Everything changes"], correct: 0 },
+            { q: "If volume halves, pressure?", options: ["Doubles", "Halves", "Stays same", "Quadruples"], correct: 0 },
+            { q: "Formula for Boyle's Law?", options: ["P₁V₁ = P₂V₂", "P₁/V₁ = P₂/V₂", "P₁ + V₁ = P₂ + V₂", "P = V"], correct: 0 },
+            { q: "Graph of P vs V for Boyle's Law?", options: ["Hyperbola (inverse curve)", "Straight line", "Circle", "Random"], correct: 0 },
+            { q: "Gas at 100kPa, 2m³. Compress to 1m³. New pressure?", options: ["200 kPa", "50 kPa", "100 kPa", "400 kPa"], correct: 0 },
+            { q: "Why does pressure increase when volume decreases?", options: ["More frequent collisions with walls", "Molecules get bigger", "Molecules multiply", "Gravity increases"], correct: 0 },
+            { q: "Boyle's Law only works for?", options: ["Ideal gases", "Liquids", "Solids", "Plasma"], correct: 0 },
+            { q: "What must be kept constant for Boyle's Law?", options: ["Temperature and mass of gas", "Just temperature", "Just pressure", "Nothing"], correct: 0 },
+            { q: "If volume triples, pressure?", options: ["Divides by 3", "Triples", "Stays same", "Divides by 9"], correct: 0 }
+        ],
+        
+        "Charles' Law": [
+            { q: "What does Charles' Law state?", options: ["Volume proportional to temperature (constant P)", "Volume inversely proportional to temperature", "Pressure proportional to temperature", "No relationship"], correct: 0 },
+            { q: "Charles' Law applies when?", options: ["Pressure is constant", "Volume is constant", "Temperature is constant", "Nothing constant"], correct: 0 },
+            { q: "If temperature doubles (in Kelvin), volume?", options: ["Doubles", "Halves", "Stays same", "Quadruples"], correct: 0 },
+            { q: "Formula for Charles' Law?", options: ["V₁/T₁ = V₂/T₂", "V₁T₁ = V₂T₂", "V₁ + T₁ = V₂ + T₂", "V = T"], correct: 0 },
+            { q: "Temperature must be in?", options: ["Kelvin", "Celsius", "Fahrenheit", "Any units"], correct: 0 },
+            { q: "Why does volume increase with temperature?", options: ["Particles move faster, more collisions", "Particles expand", "Particles multiply", "Pressure increases"], correct: 0 },
+            { q: "Graph of V vs T (Kelvin) is?", options: ["Straight line through origin", "Curve", "Horizontal line", "Vertical line"], correct: 0 },
+            { q: "Gas at 300K has volume 2m³. At 600K, volume is?", options: ["4 m³", "1 m³", "2 m³", "8 m³"], correct: 0 },
+            { q: "Convert 27°C to Kelvin.", options: ["300 K", "273 K", "27 K", "327 K"], correct: 0 },
+            { q: "At absolute zero, volume would theoretically be?", options: ["Zero", "Maximum", "Same", "Infinite"], correct: 0 }
+        ],
+        
+        "Pressure Law": [
+            { q: "What does Pressure Law state?", options: ["Pressure proportional to temperature (constant V)", "Pressure inversely proportional to temperature", "Volume proportional to temperature", "No relationship"], correct: 0 },
+            { q: "Pressure Law applies when?", options: ["Volume is constant", "Pressure is constant", "Temperature is constant", "Mass changes"], correct: 0 },
+            { q: "If temperature doubles (Kelvin), pressure?", options: ["Doubles", "Halves", "Stays same", "Quadruples"], correct: 0 },
+            { q: "Formula for Pressure Law?", options: ["P₁/T₁ = P₂/T₂", "P₁T₁ = P₂T₂", "P₁ + T₁ = P₂ + T₂", "P = T"], correct: 0 },
+            { q: "Why does pressure increase with temperature?", options: ["Particles move faster, harder collisions", "Particles expand", "Particles multiply", "Volume increases"], correct: 0 },
+            { q: "Graph of P vs T (Kelvin) is?", options: ["Straight line through origin", "Curve", "Horizontal line", "Vertical line"], correct: 0 },
+            { q: "Gas at 300K has pressure 100kPa. At 600K, pressure is?", options: ["200 kPa", "50 kPa", "100 kPa", "400 kPa"], correct: 0 },
+            { q: "Temperature must be measured in?", options: ["Kelvin", "Celsius", "Fahrenheit", "Any units"], correct: 0 },
+            { q: "Aerosol cans explode in fire because?", options: ["Pressure increases with temperature", "Volume increases", "They melt", "Chemical reaction"], correct: 0 },
+            { q: "What must be constant for Pressure Law?", options: ["Volume and mass of gas", "Just volume", "Just mass", "Nothing"], correct: 0 }
+        ],
+        
+        "Gas Laws": [
+            { q: "Combined gas law formula?", options: ["P₁V₁/T₁ = P₂V₂/T₂", "P₁V₁T₁ = P₂V₂T₂", "P₁ + V₁ + T₁ = P₂ + V₂ + T₂", "PVT = constant"], correct: 0 },
+            { q: "Ideal gas equation?", options: ["PV = nRT", "PV = RT", "P = VT", "V = PT"], correct: 0 },
+            { q: "In PV = nRT, what is n?", options: ["Number of moles", "Temperature", "Pressure", "Volume"], correct: 0 },
+            { q: "In PV = nRT, what is R?", options: ["Gas constant", "Pressure", "Radius", "Density"], correct: 0 },
+            { q: "Real gases behave like ideal gases when?", options: ["Low pressure, high temperature", "High pressure, low temperature", "Always", "Never"], correct: 0 },
+            { q: "Assumptions of ideal gas?", options: ["No forces between particles, negligible volume", "Particles stick together", "Particles are large", "Particles don't move"], correct: 0 },
+            { q: "If you increase temperature and decrease volume?", options: ["Pressure increases significantly", "Pressure decreases", "Pressure stays same", "Gas liquefies"], correct: 0 },
+            { q: "Kelvin temperature is?", options: ["Celsius + 273", "Celsius - 273", "Celsius × 273", "Celsius / 273"], correct: 0 },
+            { q: "Absolute zero is?", options: ["-273°C or 0K", "0°C", "-100°C", "-459°F"], correct: 0 },
+            { q: "At constant temperature, P increases means V?", options: ["Decreases", "Increases", "Stays same", "Becomes zero"], correct: 0 }
+        ],
+        
+        // DEFAULT/FALLBACK QUESTIONS
+        "Default": [
+            { q: "What is the SI unit for mass?", options: ["kilogram (kg)", "gram (g)", "newton (N)", "pound (lb)"], correct: 0 },
+            { q: "What is a hypothesis?", options: ["A testable prediction", "A proven fact", "The conclusion", "An observation"], correct: 0 },
+            { q: "What is the independent variable?", options: ["The one you change", "The one you measure", "The one kept constant", "The result"], correct: 0 },
+            { q: "How do you improve reliability?", options: ["Repeat measurements and average", "Use bigger equipment", "Work faster", "Guess"], correct: 0 },
+            { q: "What is an anomaly?", options: ["A result that doesn't fit the pattern", "The average", "A prediction", "The control"], correct: 0 },
+            { q: "Which variable goes on the x-axis?", options: ["Independent variable", "Dependent variable", "Control variable", "Results"], correct: 0 },
+            { q: "What is precision?", options: ["How close repeated measurements are", "How close to true value", "Smallest division", "No errors"], correct: 0 },
+            { q: "What is accuracy?", options: ["How close to true value", "How close repeats are", "Smallest division", "No systematic errors"], correct: 0 },
+            { q: "What does a line of best fit show?", options: ["The trend in the data", "Exact points only", "Errors", "Nothing"], correct: 0 },
+            { q: "Energy is measured in?", options: ["Joules (J)", "Watts (W)", "Newtons (N)", "Volts (V)"], correct: 0 }
+        ]
+    };
+    
+    // Return questions for this topic, or default questions if topic not found
+    return questionBank[topicName] || questionBank["Default"];
+}
 
     // --- APP LOGIC ---
     
